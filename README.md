@@ -84,3 +84,9 @@ Python 工具需要 Python 3.11+。服务器检查仅允许绑定本机、随机
 本项目的源码和模组资源采用 [MIT License](LICENSE)。项目维护者已确认原作者开放授权，并允许将整个项目按 MIT 授权。你可以按照 MIT 条款使用、修改和分发本项目，分发时请保留版权及许可声明。原作者来源及第三方材料声明见 [NOTICE.md](NOTICE.md)。历史报告中的旧许可证描述不代表本导出的当前许可。
 
 原作者和贡献者：MrBlackGoo、CrishNate、elix_x、VanderCat、Sanic。移植署名沿用 MFQM Team；MIT 版权行使用 MFQM contributors。
+
+## 下载 0.6.0 预发布版
+
+前往 [GitHub Release](https://github.com/luochenYukitsune/MFQM_HL/releases/tag/v0.6.0) 下载 `MFQM-neoforge-1.21.11-0.6.0.jar`，放入 Minecraft 1.21.11 / NeoForge 21.11.45 或兼容后续版本实例的 `mods` 文件夹。Release 同时提供源码压缩包。
+
+维护者已认可当前状态，并提供 JAR 供使用；该版本保持 Pre-release 标记。已有适配差异和验证边界见上文。JAR 内包含 MIT 许可及原作者声明。

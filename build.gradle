@@ -75,3 +75,8 @@ tasks.named('processResources', ProcessResources) {
         expand metadata
     }
 }
+
+// Include permission and attribution notices in distributed binaries.
+tasks.named('processResources', ProcessResources) {
+    from(project.files('LICENSE', 'NOTICE.md')) { into 'META-INF' }
+}

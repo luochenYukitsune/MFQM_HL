@@ -1,6 +1,6 @@
 # 更新记录
 
-## 0.6.0
+## 0.6.0（预发布）
 
 首个 MFQM_HL 仓库版本，基于 More Fun Quicksand Mod 的 Minecraft 1.21.11 / NeoForge 移植。
 
@@ -12,3 +12,9 @@
 - 项目采用 MIT License；第三方材料声明见 NOTICE.md。
 
 历史移植验证记录见 README 中的报告链接。0.6.0 的主要变化是整理源码发布、版本标识和许可证；现代玩法适配与原版的差异见 README。
+
+### 二进制发布
+
+- 提供 `MFQM-neoforge-1.21.11-0.6.0.jar`，可从 GitHub Release 下载。
+- JAR 包含 MIT 许可和原作者声明。
+- 维护者已认可当前状态；Release 保持预发布标记。
