@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:hook",
+    "count": 1
+  },
+  "pattern": [
+    " i ",
+    "iri",
+    "i i"
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "r": "minecraft:redstone"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "hook"
+    }
+  ]
+}

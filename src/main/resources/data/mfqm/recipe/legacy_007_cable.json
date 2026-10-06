@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:cable",
+    "count": 1
+  },
+  "pattern": [
+    "x",
+    "x",
+    "x"
+  ],
+  "key": {
+    "x": "minecraft:iron_ingot"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "cable"
+    }
+  ]
+}

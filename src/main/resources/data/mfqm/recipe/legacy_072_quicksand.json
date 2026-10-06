@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:quicksand",
+    "count": 4
+  },
+  "pattern": [
+    "wsw",
+    "sws",
+    "wsw"
+  ],
+  "key": {
+    "s": "minecraft:sand",
+    "w": "minecraft:water_bucket"
+  }
+}

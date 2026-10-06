@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "mfqm:block/vore_hole"
+    },
+    "variant=1": {
+      "model": "mfqm:block/vore_hole_1"
+    },
+    "variant=2": {
+      "model": "mfqm:block/vore_hole_2"
+    },
+    "variant=3": {
+      "model": "mfqm:block/vore_hole_3"
+    },
+    "variant=4": {
+      "model": "mfqm:block/vore_hole_4"
+    },
+    "variant=5": {
+      "model": "mfqm:block/vore_hole_5"
+    },
+    "variant=6": {
+      "model": "mfqm:block/vore_hole_6"
+    },
+    "variant=7": {
+      "model": "mfqm:block/vore_hole_7"
+    },
+    "variant=8": {
+      "model": "mfqm:block/vore_hole_8"
+    },
+    "variant=9": {
+      "model": "mfqm:block/vore_hole_9"
+    },
+    "variant=10": {
+      "model": "mfqm:block/vore_hole_10"
+    },
+    "variant=11": {
+      "model": "mfqm:block/vore_hole_11"
+    },
+    "variant=12": {
+      "model": "mfqm:block/vore_hole_12"
+    },
+    "variant=13": {
+      "model": "mfqm:block/vore_hole_13"
+    },
+    "variant=14": {
+      "model": "mfqm:block/vore_hole_14"
+    },
+    "variant=15": {
+      "model": "mfqm:block/vore_hole_15"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:grappling_hook",
+    "count": 1
+  },
+  "ingredients": [
+    "mfqm:broken_grappling_hook",
+    "mfqm:hook",
+    "mfqm:cable"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "grappling_hook"
+    }
+  ]
+}

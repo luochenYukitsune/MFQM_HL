@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:corrupted_sand",
+    "count": 4
+  },
+  "pattern": [
+    "cdc",
+    "dpd",
+    "cdc"
+  ],
+  "key": {
+    "d": "minecraft:dirt",
+    "c": "minecraft:soul_sand",
+    "p": "mfqm:sinking_potion"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:tall_leather_boots",
+    "count": 1
+  },
+  "pattern": [
+    "i i",
+    "i i",
+    "i i"
+  ],
+  "key": {
+    "i": "minecraft:leather"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "tall_leather_boots"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "mfqm:block/wax_wood"
+    },
+    "variant=1": {
+      "model": "mfqm:block/wax_wood_1"
+    },
+    "variant=2": {
+      "model": "mfqm:block/wax_wood_2"
+    },
+    "variant=3": {
+      "model": "mfqm:block/wax_wood_3"
+    },
+    "variant=4": {
+      "model": "mfqm:block/wax_wood_4"
+    },
+    "variant=5": {
+      "model": "mfqm:block/wax_wood_5"
+    },
+    "variant=6": {
+      "model": "mfqm:block/wax_wood_6"
+    },
+    "variant=7": {
+      "model": "mfqm:block/wax_wood_7"
+    },
+    "variant=8": {
+      "model": "mfqm:block/wax_wood_8"
+    },
+    "variant=9": {
+      "model": "mfqm:block/wax_wood_9"
+    },
+    "variant=10": {
+      "model": "mfqm:block/wax_wood_10"
+    },
+    "variant=11": {
+      "model": "mfqm:block/wax_wood_11"
+    },
+    "variant=12": {
+      "model": "mfqm:block/wax_wood_12"
+    },
+    "variant=13": {
+      "model": "mfqm:block/wax_wood_13"
+    },
+    "variant=14": {
+      "model": "mfqm:block/wax_wood_14"
+    },
+    "variant=15": {
+      "model": "mfqm:block/wax_wood_15"
+    }
+  }
+}

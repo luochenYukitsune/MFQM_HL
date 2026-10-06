@@ -1,0 +1,77 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+version = mod_version
+group = 'com.mfqm.morefunquicksandmod'
+base { archivesName = "MFQM-neoforge-${minecraft_version}" }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+    exclude '.cache/**'
+}
+
+neoForge {
+    version = neo_version
+
+    runs {
+        configureEach {
+            gameDirectory = file("run/${minecraft_version}/${name}")
+        }
+        client {
+            client()
+            if (providers.gradleProperty('mfqmClientChecks').isPresent()) {
+                systemProperty 'mfqm.clientChecks', 'true'
+                programArguments.addAll '--quickPlaySingleplayer', 'mfqm-port-checks'
+            }
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            if (providers.gradleProperty('mfqmPortChecks').isPresent()) systemProperty 'mfqm.portChecks', 'true'
+        }
+        data {
+            clientData()
+            programArguments.addAll '--mod', 'mfqm', '--all',
+                    '--output', file('src/generated/resources').absolutePath,
+                    '--existing', file('src/main/resources').absolutePath
+        }
+    }
+
+    mods {
+        mfqm { sourceSet sourceSets.main }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('runServer', JavaExec) {
+    standardInput = System.in
+}
+
+// The motion suite is a plain Java assertion program; it has no JUnit dependency.
+tasks.register('verifySinkingMotion', JavaExec) {
+    dependsOn tasks.named('testClasses')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.mfqm.morefunquicksandmod.gameplay.SinkingMotionTest'
+}
+tasks.named('test', Test) { failOnNoDiscoveredTests = false }
+tasks.named('check') { dependsOn tasks.named('verifySinkingMotion') }
+
+tasks.named('processResources', ProcessResources) {
+    def metadata = [mod_version: mod_version, neo_version: neo_version,
+                    minecraft_version_range: minecraft_version_range]
+    inputs.properties metadata
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand metadata
+    }
+}

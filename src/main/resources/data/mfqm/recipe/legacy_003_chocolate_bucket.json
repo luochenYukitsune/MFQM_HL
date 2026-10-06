@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": "mfqm:chocolate_powder_bucket",
+  "result": {
+    "id": "mfqm:chocolate_bucket",
+    "count": 1
+  },
+  "experience": 0.0,
+  "cookingtime": 200
+}

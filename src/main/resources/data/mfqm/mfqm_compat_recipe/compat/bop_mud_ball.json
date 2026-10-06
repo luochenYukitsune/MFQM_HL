@@ -1,0 +1,11 @@
+{
+  "source_line": 2447,
+  "integration": "bop",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "building",
+    "pattern": ["MM", "MM"],
+    "key": {"M": "#mfqm:compat/bop/mud_ball"},
+    "result": {"id": "mfqm:mud", "count": 1}
+  }
+}

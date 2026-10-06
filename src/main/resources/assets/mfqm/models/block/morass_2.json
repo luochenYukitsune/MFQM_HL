@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "mfqm:blocks/moor_side0",
+    "top": "mfqm:blocks/moor1",
+    "bottom": "mfqm:blocks/moor_side1"
+  }
+}

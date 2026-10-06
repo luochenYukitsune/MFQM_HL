@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:chocolate_donut",
+    "count": 4
+  },
+  "pattern": [
+    "sxc",
+    "xbx",
+    "cxs"
+  ],
+  "key": {
+    "x": "minecraft:wheat",
+    "c": "minecraft:cocoa_beans",
+    "b": "mfqm:chocolate_bucket",
+    "s": "minecraft:sugar"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "source_line": 2410,
+  "integration": "aoa",
+  "result_tag": "mfqm:compat/aoa/face_mask",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "pattern": [" t ", "sgs", "   "],
+    "key": {"g": "mfqm:gas_mask", "s": "#mfqm:compat/aoa/doomstone", "t": "#mfqm:compat/aoa/toxic_lump"},
+    "result": {"count": 1}
+  }
+}

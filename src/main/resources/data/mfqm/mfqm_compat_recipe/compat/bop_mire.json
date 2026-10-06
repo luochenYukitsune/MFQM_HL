@@ -1,0 +1,11 @@
+{
+  "source_line": 2363,
+  "integration": "bop",
+  "recipe": {
+    "type": "minecraft:crafting_shaped",
+    "category": "building",
+    "pattern": ["mwm", "wmw", "mwm"],
+    "key": {"m": "#mfqm:compat/bop/mud", "w": "minecraft:water_bucket"},
+    "result": {"id": "mfqm:mire", "count": 4}
+  }
+}

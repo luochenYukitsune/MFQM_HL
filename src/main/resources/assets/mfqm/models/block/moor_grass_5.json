@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "mfqm:blocks/bog_grass_cberry"
+  },
+  "render_type": "minecraft:cutout"
+}

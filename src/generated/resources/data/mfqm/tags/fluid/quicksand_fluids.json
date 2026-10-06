@@ -1,0 +1,30 @@
+{
+  "values": [
+    "mfqm:bog",
+    "mfqm:flowing_bog",
+    "mfqm:dry_quicksand",
+    "mfqm:flowing_dry_quicksand",
+    "mfqm:jungle_quicksand",
+    "mfqm:flowing_jungle_quicksand",
+    "mfqm:liquid_mire",
+    "mfqm:flowing_liquid_mire",
+    "mfqm:stable_liquid_mire",
+    "mfqm:flowing_stable_liquid_mire",
+    "mfqm:sinky_liquid",
+    "mfqm:flowing_sinky_liquid",
+    "mfqm:sinking_slime",
+    "mfqm:flowing_sinking_slime",
+    "mfqm:mucus",
+    "mfqm:flowing_mucus",
+    "mfqm:tar",
+    "mfqm:flowing_tar",
+    "mfqm:acid",
+    "mfqm:flowing_acid",
+    "mfqm:slurry",
+    "mfqm:flowing_slurry",
+    "mfqm:honey",
+    "mfqm:flowing_honey",
+    "mfqm:liquid_chocolate",
+    "mfqm:flowing_liquid_chocolate"
+  ]
+}

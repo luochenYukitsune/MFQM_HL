@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#mfqm:muddy_blob_spawnable",
+  "spawners": {
+    "type": "mfqm:vore_slime",
+    "weight": 12,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}

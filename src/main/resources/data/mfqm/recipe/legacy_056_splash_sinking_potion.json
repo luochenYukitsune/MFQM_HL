@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:splash_sinking_potion",
+    "count": 1
+  },
+  "ingredients": [
+    "mfqm:sinking_potion",
+    "minecraft:gunpowder"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "splash_sinking_potion"
+    }
+  ]
+}

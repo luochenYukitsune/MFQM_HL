@@ -1,0 +1,14 @@
+{
+    "mob.bee.hurt": {
+        "subtitle": "sound.mfqm.mob.bee.hurt",
+        "sounds": [
+            "mfqm:mob/bee/hurt"
+        ]
+    },
+    "mob.bee.say": {
+        "subtitle": "sound.mfqm.mob.bee.say",
+        "sounds": [
+            "mfqm:mob/bee/say"
+        ]
+    }
+}

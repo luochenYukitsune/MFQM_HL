@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:sinking_potion",
+    "count": 1
+  },
+  "ingredients": [
+    {
+      "neoforge:ingredient_type": "neoforge:components",
+      "items": "minecraft:potion",
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:water"
+        }
+      },
+      "strict": false
+    },
+    "mfqm:corrupted_sand"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "sinking_potion"
+    }
+  ]
+}

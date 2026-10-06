@@ -1,0 +1,64 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:mud_variant_1",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:mud",
+                  "properties": {
+                    "variant": "1"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:mud_variant_2",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:mud",
+                  "properties": {
+                    "variant": "2"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:mud_variant_3",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:mud",
+                  "properties": {
+                    "variant": "3"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:mud"
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

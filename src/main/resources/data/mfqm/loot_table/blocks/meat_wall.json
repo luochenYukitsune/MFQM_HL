@@ -1,0 +1,155 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_1",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "1"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_2",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "2"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_3",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "3"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_4",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "4"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_5",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "5"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_6",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "6"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_7",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "7"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_8",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "8"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_9",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "9"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall_variant_10",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:meat_wall",
+                  "properties": {
+                    "variant": "10"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:meat_wall"
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

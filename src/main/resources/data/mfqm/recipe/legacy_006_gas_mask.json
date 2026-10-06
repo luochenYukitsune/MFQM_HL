@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:gas_mask",
+    "count": 1
+  },
+  "pattern": [
+    "lll",
+    "lgl",
+    "fif"
+  ],
+  "key": {
+    "f": "mfqm:filter",
+    "l": "minecraft:leather",
+    "g": "minecraft:glass_pane",
+    "i": "minecraft:iron_ingot"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "gas_mask"
+    }
+  ]
+}

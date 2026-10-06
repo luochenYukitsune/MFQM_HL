@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:brown_clay",
+    "count": 4
+  },
+  "pattern": [
+    "cwc",
+    "wdw",
+    "cwc"
+  ],
+  "key": {
+    "c": "minecraft:clay",
+    "d": "minecraft:dirt",
+    "w": "minecraft:water_bucket"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:sinking_rug_variant_1",
+    "count": 7
+  },
+  "ingredients": [
+    "minecraft:orange_wool",
+    "minecraft:orange_wool",
+    "minecraft:orange_wool",
+    "minecraft:orange_wool",
+    "minecraft:orange_wool",
+    "minecraft:orange_wool",
+    "minecraft:orange_wool",
+    "mfqm:sinking_potion"
+  ]
+}

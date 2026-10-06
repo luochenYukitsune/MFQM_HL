@@ -1,0 +1,12 @@
+{
+  "source_line": 2317,
+  "integration": "bop",
+  "recipe": {
+    "type": "minecraft:smelting",
+    "category": "misc",
+    "ingredient": "#mfqm:compat/bop/empty_honeycomb",
+    "result": {"id": "mfqm:wax_piece", "count": 3},
+    "experience": 0.1,
+    "cookingtime": 200
+  }
+}

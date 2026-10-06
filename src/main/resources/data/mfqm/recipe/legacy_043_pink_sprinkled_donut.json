@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:pink_sprinkled_donut",
+    "count": 4
+  },
+  "pattern": [
+    "cxs",
+    "xax",
+    "sxv"
+  ],
+  "key": {
+    "x": "minecraft:wheat",
+    "a": "minecraft:pink_dye",
+    "c": "minecraft:yellow_dye",
+    "v": "minecraft:lapis_lazuli",
+    "s": "minecraft:sugar"
+  }
+}

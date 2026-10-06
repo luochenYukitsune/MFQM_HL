@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "mfqm:blocks/tent2"
+  },
+  "render_type": "minecraft:cutout"
+}

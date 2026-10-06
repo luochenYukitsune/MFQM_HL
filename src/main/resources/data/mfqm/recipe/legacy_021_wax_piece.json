@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:wax_piece",
+    "count": 9
+  },
+  "pattern": [
+    "hhh",
+    "w  "
+  ],
+  "key": {
+    "h": "#minecraft:wool",
+    "w": "minecraft:water_bucket"
+  }
+}

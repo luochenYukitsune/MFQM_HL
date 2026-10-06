@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:sinking_potion",
+    "count": 1
+  },
+  "ingredients": [
+    "mfqm:bottle_of_mire",
+    "minecraft:soul_sand"
+  ],
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "sinking_potion"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:mud_variant_3",
+    "count": 4
+  },
+  "pattern": [
+    " m ",
+    "mwm",
+    " m "
+  ],
+  "key": {
+    "m": "mfqm:mud_variant_2",
+    "w": "minecraft:water_bucket"
+  }
+}

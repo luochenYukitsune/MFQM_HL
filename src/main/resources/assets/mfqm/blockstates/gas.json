@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "mfqm:block/gas"
+    },
+    "variant=1": {
+      "model": "mfqm:block/gas_1"
+    },
+    "variant=2": {
+      "model": "mfqm:block/gas_2"
+    },
+    "variant=3": {
+      "model": "mfqm:block/gas_3"
+    },
+    "variant=4": {
+      "model": "mfqm:block/gas_4"
+    },
+    "variant=5": {
+      "model": "mfqm:block/gas_5"
+    },
+    "variant=6": {
+      "model": "mfqm:block/gas_6"
+    },
+    "variant=7": {
+      "model": "mfqm:block/gas_7"
+    },
+    "variant=8": {
+      "model": "mfqm:block/gas_8"
+    },
+    "variant=9": {
+      "model": "mfqm:block/gas_9"
+    },
+    "variant=10": {
+      "model": "mfqm:block/gas_10"
+    },
+    "variant=11": {
+      "model": "mfqm:block/gas_11"
+    },
+    "variant=12": {
+      "model": "mfqm:block/gas_12"
+    },
+    "variant=13": {
+      "model": "mfqm:block/gas_13"
+    },
+    "variant=14": {
+      "model": "mfqm:block/gas_14"
+    },
+    "variant=15": {
+      "model": "mfqm:block/gas_15"
+    }
+  }
+}

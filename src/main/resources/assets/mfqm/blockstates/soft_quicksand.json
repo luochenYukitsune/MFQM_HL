@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "mfqm:block/soft_quicksand"
+    },
+    "variant=1": {
+      "model": "mfqm:block/soft_quicksand_1"
+    },
+    "variant=2": {
+      "model": "mfqm:block/soft_quicksand_2"
+    },
+    "variant=3": {
+      "model": "mfqm:block/soft_quicksand_3"
+    },
+    "variant=4": {
+      "model": "mfqm:block/soft_quicksand_4"
+    },
+    "variant=5": {
+      "model": "mfqm:block/soft_quicksand_5"
+    },
+    "variant=6": {
+      "model": "mfqm:block/soft_quicksand_6"
+    },
+    "variant=7": {
+      "model": "mfqm:block/soft_quicksand_7"
+    },
+    "variant=8": {
+      "model": "mfqm:block/soft_quicksand_8"
+    },
+    "variant=9": {
+      "model": "mfqm:block/soft_quicksand_9"
+    },
+    "variant=10": {
+      "model": "mfqm:block/soft_quicksand_10"
+    },
+    "variant=11": {
+      "model": "mfqm:block/soft_quicksand_11"
+    },
+    "variant=12": {
+      "model": "mfqm:block/soft_quicksand_12"
+    },
+    "variant=13": {
+      "model": "mfqm:block/soft_quicksand_13"
+    },
+    "variant=14": {
+      "model": "mfqm:block/soft_quicksand_14"
+    },
+    "variant=15": {
+      "model": "mfqm:block/soft_quicksand_15"
+    }
+  }
+}

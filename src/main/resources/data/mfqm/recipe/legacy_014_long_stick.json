@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:long_stick",
+    "count": 1
+  },
+  "pattern": [
+    "  t",
+    " s ",
+    "t  "
+  ],
+  "key": {
+    "t": "minecraft:stick",
+    "s": "minecraft:slime_ball"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "long_stick"
+    }
+  ]
+}

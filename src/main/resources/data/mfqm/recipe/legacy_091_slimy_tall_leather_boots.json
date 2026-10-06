@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:slimy_tall_leather_boots",
+    "count": 1
+  },
+  "pattern": [
+    "sss",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "i": "mfqm:tall_leather_boots",
+    "s": "minecraft:slime_ball"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "slimy_tall_leather_boots"
+    }
+  ]
+}

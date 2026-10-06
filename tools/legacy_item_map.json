@@ -1,0 +1,324 @@
+{
+  "bog_bucket": {
+    "texture": "bucketofliquidbog",
+    "legacy_key": "item.BucketOfLiquidBog.name",
+    "en_us": "Bucket of Liquid Bog",
+    "ru_ru": "Ведро жидкого болота",
+    "legacy_variable": "BogBucketItem"
+  },
+  "brown_clay_bucket": {
+    "texture": "bucketofbrownclay",
+    "legacy_key": "item.BucketOfClay.BucketofBrownClay.name",
+    "en_us": "Bucket of Brown Clay",
+    "ru_ru": "Ведро коричневой глины",
+    "legacy_variable": "ClayBucketItem"
+  },
+  "mineral_clay_bucket": {
+    "texture": "bucketofmineralclay",
+    "legacy_key": "item.BucketOfClay.BucketofMineralClay.name",
+    "en_us": "Bucket of Mineral Clay",
+    "ru_ru": "Ведро минеральной глины",
+    "legacy_variable": "MineralClayBucketItem"
+  },
+  "quicksand_bucket": {
+    "texture": "bucketofquicksand",
+    "legacy_key": "item.BucketOfQuicksand.name",
+    "en_us": "Bucket of Quicksand",
+    "ru_ru": "Ведро зыбучего песка",
+    "legacy_variable": "QuicksandBucketItem"
+  },
+  "sand_bucket": {
+    "texture": "bucketofsand",
+    "legacy_key": "item.BucketOfSand.name",
+    "en_us": "Bucket of Sand",
+    "ru_ru": "Ведро песка",
+    "legacy_variable": "SandBucketItem"
+  },
+  "mire_bucket": {
+    "texture": "bucketofmire",
+    "legacy_key": "item.BucketOfMire.name",
+    "en_us": "Bucket of Mire",
+    "ru_ru": "Ведро жидкой грязи",
+    "legacy_variable": "MireBucketItem"
+  },
+  "slime_bucket": {
+    "texture": "bucketofslime",
+    "legacy_key": "item.BucketOfSlime.name",
+    "en_us": "Bucket of Slime",
+    "ru_ru": "Ведро слизи",
+    "legacy_variable": "SlimeBucketItem"
+  },
+  "mucus_bucket": {
+    "texture": "bucketofmucus",
+    "legacy_key": "item.BucketOfMucus.name",
+    "en_us": "Bucket of Mucus",
+    "ru_ru": "Ведро ферментного сока",
+    "legacy_variable": "MucusBucketItem"
+  },
+  "tar_bucket": {
+    "texture": "bucketoftar",
+    "legacy_key": "item.BucketOfTar.name",
+    "en_us": "Bucket of Tar",
+    "ru_ru": "Ведро дегтя",
+    "legacy_variable": "TarBucketItem"
+  },
+  "acid_bucket": {
+    "texture": "bucketofacid",
+    "legacy_key": "item.BucketOfAcid.name",
+    "en_us": "Bucket of Acid",
+    "ru_ru": "Ведро кислоты",
+    "legacy_variable": "AcidBucketItem"
+  },
+  "chocolate_bucket": {
+    "texture": "bucketofchocolate",
+    "legacy_key": "item.BucketOfChocolate.name",
+    "en_us": "Bucket of Chocolate",
+    "ru_ru": "Ведро шоколада",
+    "legacy_variable": "ChocolateBucketItem"
+  },
+  "chocolate_powder_bucket": {
+    "texture": "bucketofchocolatepowder",
+    "legacy_key": "item.BucketOfChocolatePowder.name",
+    "en_us": "Bucket of Chocolate Powder",
+    "ru_ru": "Ведро шоколадного порошка",
+    "legacy_variable": "ChocolatePowderBucketItem"
+  },
+  "honey_bucket": {
+    "texture": "bucketofhoney",
+    "legacy_key": "item.BucketOfHoney.name",
+    "en_us": "Bucket of Honey",
+    "ru_ru": "Ведро меда",
+    "legacy_variable": "HoneyBucketItem"
+  },
+  "slurry_bucket": {
+    "texture": "bucketofslurry",
+    "legacy_key": "item.BucketOfSlurry.name",
+    "en_us": "Bucket of Slurry",
+    "ru_ru": "Ведро шламовой жижи",
+    "legacy_variable": "SlurryBucketItem"
+  },
+  "fertilizer": {
+    "texture": "fertilizer",
+    "legacy_key": "item.Fertilizer.name",
+    "en_us": "Fertilizer",
+    "ru_ru": "Удобрение",
+    "legacy_variable": "FertilizerItem"
+  },
+  "long_stick": {
+    "texture": "longstick",
+    "legacy_key": "item.LongStick.name",
+    "en_us": "Long Stick",
+    "ru_ru": "Удлиненная палка",
+    "legacy_variable": "LongStickItem"
+  },
+  "rescuing": {
+    "texture": "rescue",
+    "legacy_key": "item.Rescuing.name",
+    "en_us": "Rescuing",
+    "ru_ru": "Спасение",
+    "legacy_variable": "RescueItem"
+  },
+  "rope": {
+    "texture": "rope1",
+    "legacy_key": "item.Rope.name",
+    "en_us": "Rope",
+    "ru_ru": "Верёвка",
+    "legacy_variable": "RopeItem"
+  },
+  "cable": {
+    "texture": "cable",
+    "legacy_key": "item.Cable.name",
+    "en_us": "Cable",
+    "ru_ru": "Трос",
+    "legacy_variable": "CableItem"
+  },
+  "coil": {
+    "texture": "coil",
+    "legacy_key": "item.Coil.name",
+    "en_us": "Coil",
+    "ru_ru": "Катушка",
+    "legacy_variable": "CoilItem"
+  },
+  "hook": {
+    "texture": "hook",
+    "legacy_key": "item.Hook.name",
+    "en_us": "Hook",
+    "ru_ru": "Крюк",
+    "legacy_variable": "HookItem"
+  },
+  "filter": {
+    "texture": "filter",
+    "legacy_key": "item.Filter.name",
+    "en_us": "Filter",
+    "ru_ru": "Фильтр",
+    "legacy_variable": "FilterItem"
+  },
+  "gas_mask": {
+    "texture": "gasmask",
+    "legacy_key": "item.GasMask.name",
+    "en_us": "Gas Mask",
+    "ru_ru": "Зацитная маска",
+    "legacy_variable": "GasMaskItem"
+  },
+  "grappling_hook": {
+    "texture": "grapplinghook",
+    "legacy_key": "item.GrapplingHook.name",
+    "en_us": "Grappling Hook",
+    "ru_ru": "Абордажный крюк",
+    "legacy_variable": "GrapplingHookItem"
+  },
+  "broken_grappling_hook": {
+    "texture": "grapplinghookbroken",
+    "legacy_key": "item.GrapplingHookBRK.name",
+    "en_us": "Grappling Hook Broken",
+    "ru_ru": "Сломаный абордажный крюк",
+    "legacy_variable": "GrapplingHookBRKItem"
+  },
+  "liquid_gun": {
+    "texture": "liqgun",
+    "legacy_key": "item.LiqGunItem.name",
+    "en_us": "Liquid Gun",
+    "ru_ru": "Водяная пушка",
+    "legacy_variable": "LiqGunItem"
+  },
+  "wax_piece": {
+    "texture": "wax",
+    "legacy_key": "item.WaxPiece.name",
+    "en_us": "Wax",
+    "ru_ru": "Воск",
+    "legacy_variable": "WaxItem"
+  },
+  "life_jacket": {
+    "texture": "lifejacket",
+    "legacy_key": "item.LifeJacket.name",
+    "en_us": "Life Jacket",
+    "ru_ru": "Спасательный жилет",
+    "legacy_variable": "LifeJacketItem"
+  },
+  "peat_item": {
+    "texture": "peat",
+    "legacy_key": "item.PeatItem.name",
+    "en_us": "Peat",
+    "ru_ru": "Торф",
+    "legacy_variable": "PeatItem"
+  },
+  "raw_larva": {
+    "texture": "larvaraw",
+    "legacy_key": "item.LarvaRaw.name",
+    "en_us": "Larva Raw",
+    "ru_ru": "Личинка",
+    "legacy_variable": "LarvaRawItem"
+  },
+  "cooked_larva": {
+    "texture": "larvacooked",
+    "legacy_key": "item.LarvaCooked.name",
+    "en_us": "Larva Cooked",
+    "ru_ru": "Приготовленная личинка",
+    "legacy_variable": "LarvaCookedItem"
+  },
+  "cranberry": {
+    "texture": "cranberry",
+    "legacy_key": "item.Cranberry.name",
+    "en_us": "Cranberry",
+    "ru_ru": "Клюква",
+    "legacy_variable": "CberryItem"
+  },
+  "donut": {
+    "texture": "donut0",
+    "legacy_key": "item.Donut0.name",
+    "en_us": "Donut",
+    "ru_ru": "Пончик",
+    "legacy_variable": "DonutItem0"
+  },
+  "glazed_donut": {
+    "texture": "donut1",
+    "legacy_key": "item.Donut1.name",
+    "en_us": "Glazed Donut",
+    "ru_ru": "Глазированный пончик",
+    "legacy_variable": "DonutItem1"
+  },
+  "sprinkled_donut": {
+    "texture": "donut2",
+    "legacy_key": "item.Donut2.name",
+    "en_us": "Glazed Donut With Sprinkles",
+    "ru_ru": "Глазированный пончик с посыпкой",
+    "legacy_variable": "DonutItem2"
+  },
+  "pink_sprinkled_donut": {
+    "texture": "donut3",
+    "legacy_key": "item.Donut3.name",
+    "en_us": "Pink Donut With Sprinkles",
+    "ru_ru": "Розовый пончик с посыпкой",
+    "legacy_variable": "DonutItem3"
+  },
+  "chocolate_donut": {
+    "texture": "donut4",
+    "legacy_key": "item.Donut4.name",
+    "en_us": "Chocolate Donut",
+    "ru_ru": "Шоколадный пончик",
+    "legacy_variable": "DonutItem4"
+  },
+  "bottle_of_mire": {
+    "texture": "potion_mud",
+    "legacy_key": "item.Potion.BottleofMire.name",
+    "en_us": "Bottle of Mire",
+    "ru_ru": "Колба жидкой грязи",
+    "legacy_variable": "MyPotionItem"
+  },
+  "sinking_potion": {
+    "texture": "potion_sinking",
+    "legacy_key": "item.Potion.SinkingPotion.name",
+    "en_us": "Sinking Potion",
+    "ru_ru": "Зелье зыбучести",
+    "legacy_variable": "SinkingPotionItem"
+  },
+  "hot_chocolate": {
+    "texture": "hotchocolate",
+    "legacy_key": "item.Potion.HotChocolate.name",
+    "en_us": "Hot Chocolate",
+    "ru_ru": "Горячий шоколад",
+    "legacy_variable": "HotChocolateItem"
+  },
+  "splash_sinking_potion": {
+    "texture": "spotion",
+    "legacy_key": "item.SPotion.name",
+    "en_us": "Throwable Sinking Potion",
+    "ru_ru": "Кидаемое Зелье зыбучести",
+    "legacy_variable": "ThrPotionItem"
+  },
+  "empty_honeycomb": {
+    "texture": "emptyhoneycomb",
+    "legacy_key": "item.Emptycomb.name",
+    "en_us": "Empty Honeycomb",
+    "ru_ru": "Соты",
+    "legacy_variable": "EmptycombItem"
+  },
+  "filled_honeycomb": {
+    "texture": "filledhoneycomb",
+    "legacy_key": "item.HoneycombItem.name",
+    "en_us": "Filled Honeycomb",
+    "ru_ru": "Медовые соты",
+    "legacy_variable": "HoneycombItem"
+  },
+  "wading_boots": {
+    "texture": "wadingboots",
+    "legacy_key": "item.wadingBoots.name",
+    "en_us": "Wading Boots",
+    "ru_ru": "Болотные сапоги",
+    "legacy_variable": "WadingBoots"
+  },
+  "tall_leather_boots": {
+    "texture": "prewadingboots0",
+    "legacy_key": "item.preWadingBoots0.name",
+    "en_us": "Tall Leather Boots",
+    "ru_ru": "Высокие кожаные сапоги",
+    "legacy_variable": "PreWadingBoots0"
+  },
+  "slimy_tall_leather_boots": {
+    "texture": "prewadingboots1",
+    "legacy_key": "item.preWadingBoots1.name",
+    "en_us": "Slimy Tall Leather Boots",
+    "ru_ru": "Сапоги со слоем слизи",
+    "legacy_variable": "PreWadingBoots1"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "purpose": "Isolated validation fixture only; these are not production compatibility mappings.",
+  "tags": {
+    "mfqm:compat/bop/hive": ["minecraft:bee_nest"],
+    "mfqm:compat/bop/empty_honeycomb": ["minecraft:honeycomb"],
+    "mfqm:compat/bop/filled_honeycomb": ["minecraft:honey_bottle"],
+    "mfqm:compat/bop/mud": ["minecraft:clay"],
+    "mfqm:compat/bop/mud_ball": ["minecraft:clay_ball"],
+    "mfqm:compat/aoa/face_mask": ["minecraft:leather_helmet"],
+    "mfqm:compat/aoa/doomstone": ["minecraft:obsidian"],
+    "mfqm:compat/aoa/toxic_lump": ["minecraft:slime_ball"],
+    "mfqm:compat/ic2/fertilizer": ["minecraft:bone_meal"]
+  }
+}

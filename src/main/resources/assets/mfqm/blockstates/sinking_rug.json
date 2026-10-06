@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "mfqm:block/sinking_rug"
+    },
+    "variant=1": {
+      "model": "mfqm:block/sinking_rug_1"
+    },
+    "variant=2": {
+      "model": "mfqm:block/sinking_rug_2"
+    },
+    "variant=3": {
+      "model": "mfqm:block/sinking_rug_3"
+    },
+    "variant=4": {
+      "model": "mfqm:block/sinking_rug_4"
+    },
+    "variant=5": {
+      "model": "mfqm:block/sinking_rug_5"
+    },
+    "variant=6": {
+      "model": "mfqm:block/sinking_rug_6"
+    },
+    "variant=7": {
+      "model": "mfqm:block/sinking_rug_7"
+    },
+    "variant=8": {
+      "model": "mfqm:block/sinking_rug_8"
+    },
+    "variant=9": {
+      "model": "mfqm:block/sinking_rug_9"
+    },
+    "variant=10": {
+      "model": "mfqm:block/sinking_rug_10"
+    },
+    "variant=11": {
+      "model": "mfqm:block/sinking_rug_11"
+    },
+    "variant=12": {
+      "model": "mfqm:block/sinking_rug_12"
+    },
+    "variant=13": {
+      "model": "mfqm:block/sinking_rug_13"
+    },
+    "variant=14": {
+      "model": "mfqm:block/sinking_rug_14"
+    },
+    "variant=15": {
+      "model": "mfqm:block/sinking_rug_15"
+    }
+  }
+}

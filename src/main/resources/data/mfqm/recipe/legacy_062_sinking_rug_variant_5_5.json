@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:sinking_rug_variant_5",
+    "count": 5
+  },
+  "ingredients": [
+    "minecraft:lime_wool",
+    "minecraft:lime_wool",
+    "minecraft:lime_wool",
+    "minecraft:lime_wool",
+    "minecraft:lime_wool",
+    "mfqm:sinking_potion"
+  ]
+}

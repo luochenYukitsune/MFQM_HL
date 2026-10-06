@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:rope",
+    "count": 1
+  },
+  "pattern": [
+    "xx ",
+    "xxs",
+    "xxs"
+  ],
+  "key": {
+    "x": "minecraft:string",
+    "s": "minecraft:slime_ball"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "rope"
+    }
+  ]
+}

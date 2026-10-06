@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:sprinkled_donut",
+    "count": 1
+  },
+  "ingredients": [
+    "mfqm:glazed_donut",
+    "minecraft:sugar",
+    "minecraft:red_dye"
+  ]
+}

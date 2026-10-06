@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "minecraft:slime_ball",
+    "count": 4
+  },
+  "ingredients": [
+    "mfqm:slime_bucket"
+  ]
+}

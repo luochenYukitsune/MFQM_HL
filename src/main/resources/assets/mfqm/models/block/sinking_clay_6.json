@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "mfqm:blocks/clay4",
+    "top": "mfqm:blocks/clay2",
+    "bottom": "mfqm:blocks/clay3"
+  }
+}

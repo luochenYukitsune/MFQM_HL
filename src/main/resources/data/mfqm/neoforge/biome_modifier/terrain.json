@@ -1,0 +1,5 @@
+{
+  "type": "mfqm:terrain_membership",
+  "surface_feature": "mfqm:terrain_overworld",
+  "nether_feature": "mfqm:terrain_nether"
+}

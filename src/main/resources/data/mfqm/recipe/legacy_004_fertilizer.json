@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:fertilizer",
+    "count": 4
+  },
+  "ingredients": [
+    "mfqm:slurry_bucket"
+  ]
+}

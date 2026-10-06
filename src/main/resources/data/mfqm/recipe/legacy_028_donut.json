@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:donut",
+    "count": 4
+  },
+  "pattern": [
+    " x ",
+    "xsx",
+    " x "
+  ],
+  "key": {
+    "x": "minecraft:wheat",
+    "s": "minecraft:sugar"
+  }
+}

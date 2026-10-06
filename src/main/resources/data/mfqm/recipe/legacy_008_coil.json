@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:coil",
+    "count": 1
+  },
+  "pattern": [
+    "x",
+    "s",
+    "x"
+  ],
+  "key": {
+    "x": "minecraft:iron_ingot",
+    "s": "minecraft:obsidian"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "coil"
+    }
+  ]
+}

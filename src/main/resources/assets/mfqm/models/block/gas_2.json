@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mfqm:blocks/gas2"
+  },
+  "render_type": "minecraft:translucent"
+}

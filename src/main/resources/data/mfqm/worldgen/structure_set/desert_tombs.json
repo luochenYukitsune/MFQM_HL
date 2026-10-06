@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "mfqm:desert_tomb",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 170111854,
+    "spacing": 32,
+    "separation": 12
+  }
+}

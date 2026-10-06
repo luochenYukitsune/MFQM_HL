@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:soft_gravel_variant_1",
+    "count": 4
+  },
+  "pattern": [
+    "cmc",
+    "mwm",
+    "cmc"
+  ],
+  "key": {
+    "c": "minecraft:clay_ball",
+    "m": "mfqm:soft_gravel",
+    "w": "minecraft:water_bucket"
+  }
+}

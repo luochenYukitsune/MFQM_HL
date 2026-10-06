@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:mire",
+    "count": 4
+  },
+  "pattern": [
+    "mwm",
+    "wdw",
+    "mwm"
+  ],
+  "key": {
+    "m": [
+      "mfqm:mud",
+      "mfqm:mud_variant_1",
+      "mfqm:mud_variant_2",
+      "mfqm:mud_variant_3"
+    ],
+    "w": "minecraft:water_bucket",
+    "d": "minecraft:dirt"
+  }
+}

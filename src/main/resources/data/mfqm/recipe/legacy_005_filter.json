@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:filter",
+    "count": 2
+  },
+  "pattern": [
+    " w ",
+    "ici",
+    " w "
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "w": "#minecraft:wool",
+    "c": "minecraft:charcoal"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "filter"
+    }
+  ]
+}

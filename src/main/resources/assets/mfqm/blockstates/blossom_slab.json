@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "mfqm:block/blossom_slab"
+    },
+    "variant=1": {
+      "model": "mfqm:block/blossom_slab_1"
+    },
+    "variant=2": {
+      "model": "mfqm:block/blossom_slab_2"
+    },
+    "variant=3": {
+      "model": "mfqm:block/blossom_slab_3"
+    },
+    "variant=4": {
+      "model": "mfqm:block/blossom_slab_4"
+    },
+    "variant=5": {
+      "model": "mfqm:block/blossom_slab_5"
+    },
+    "variant=6": {
+      "model": "mfqm:block/blossom_slab_6"
+    },
+    "variant=7": {
+      "model": "mfqm:block/blossom_slab_7"
+    },
+    "variant=8": {
+      "model": "mfqm:block/blossom_slab_8"
+    },
+    "variant=9": {
+      "model": "mfqm:block/blossom_slab_9"
+    },
+    "variant=10": {
+      "model": "mfqm:block/blossom_slab_10"
+    },
+    "variant=11": {
+      "model": "mfqm:block/blossom_slab_11"
+    },
+    "variant=12": {
+      "model": "mfqm:block/blossom_slab_12"
+    },
+    "variant=13": {
+      "model": "mfqm:block/blossom_slab_13"
+    },
+    "variant=14": {
+      "model": "mfqm:block/blossom_slab_14"
+    },
+    "variant=15": {
+      "model": "mfqm:block/blossom_slab_15"
+    }
+  }
+}

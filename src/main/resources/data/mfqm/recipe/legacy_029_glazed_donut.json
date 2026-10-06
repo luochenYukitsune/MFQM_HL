@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:glazed_donut",
+    "count": 1
+  },
+  "ingredients": [
+    "mfqm:donut",
+    "mfqm:chocolate_bucket"
+  ]
+}

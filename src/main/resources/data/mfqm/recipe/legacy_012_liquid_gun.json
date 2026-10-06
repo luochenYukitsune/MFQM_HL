@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:liquid_gun",
+    "count": 1
+  },
+  "pattern": [
+    "ipl",
+    "gge",
+    "g  "
+  ],
+  "key": {
+    "i": "minecraft:water_bucket",
+    "p": "minecraft:piston",
+    "g": "minecraft:gold_ingot",
+    "l": "minecraft:lapis_lazuli",
+    "e": "minecraft:emerald"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "liquid_gun"
+    }
+  ]
+}

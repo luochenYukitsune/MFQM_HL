@@ -1,0 +1,7 @@
+{
+  "type": "mfqm:desert_tomb",
+  "biomes": "#mfqm:spawns_quicksand_desert",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

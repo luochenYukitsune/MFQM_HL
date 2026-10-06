@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:grappling_hook",
+    "count": 1
+  },
+  "pattern": [
+    "ri ",
+    "csh",
+    "ii "
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "r": "minecraft:redstone",
+    "c": "mfqm:coil",
+    "s": "mfqm:cable",
+    "h": "mfqm:hook"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "grappling_hook"
+    }
+  ]
+}

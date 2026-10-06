@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "mfqm:block/tangleroot_moss"
+    },
+    "variant=1": {
+      "model": "mfqm:block/tangleroot_moss_1"
+    },
+    "variant=2": {
+      "model": "mfqm:block/tangleroot_moss_2"
+    },
+    "variant=3": {
+      "model": "mfqm:block/tangleroot_moss_3"
+    },
+    "variant=4": {
+      "model": "mfqm:block/tangleroot_moss_4"
+    },
+    "variant=5": {
+      "model": "mfqm:block/tangleroot_moss_5"
+    },
+    "variant=6": {
+      "model": "mfqm:block/tangleroot_moss_6"
+    },
+    "variant=7": {
+      "model": "mfqm:block/tangleroot_moss_7"
+    },
+    "variant=8": {
+      "model": "mfqm:block/tangleroot_moss_8"
+    },
+    "variant=9": {
+      "model": "mfqm:block/tangleroot_moss_9"
+    },
+    "variant=10": {
+      "model": "mfqm:block/tangleroot_moss_10"
+    },
+    "variant=11": {
+      "model": "mfqm:block/tangleroot_moss_11"
+    },
+    "variant=12": {
+      "model": "mfqm:block/tangleroot_moss_12"
+    },
+    "variant=13": {
+      "model": "mfqm:block/tangleroot_moss_13"
+    },
+    "variant=14": {
+      "model": "mfqm:block/tangleroot_moss_14"
+    },
+    "variant=15": {
+      "model": "mfqm:block/tangleroot_moss_15"
+    }
+  }
+}

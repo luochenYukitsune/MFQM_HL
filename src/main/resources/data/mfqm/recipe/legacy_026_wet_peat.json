@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:wet_peat",
+    "count": 3
+  },
+  "pattern": [
+    " p ",
+    "www",
+    "   "
+  ],
+  "key": {
+    "p": "mfqm:peat",
+    "w": "minecraft:water_bucket"
+  }
+}

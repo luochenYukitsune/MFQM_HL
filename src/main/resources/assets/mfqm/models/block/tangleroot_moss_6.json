@@ -1,0 +1,42 @@
+{
+  "textures": {
+    "side": "mfqm:blocks/moss_front",
+    "top": "mfqm:blocks/moss_up",
+    "particle": "mfqm:blocks/moss_front"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        -12.8,
+        0
+      ],
+      "to": [
+        16,
+        0,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#top"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        }
+      }
+    }
+  ],
+  "render_type": "minecraft:cutout"
+}

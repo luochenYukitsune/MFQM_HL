@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:life_jacket",
+    "count": 1
+  },
+  "pattern": [
+    "l l",
+    "wlw",
+    "nln"
+  ],
+  "key": {
+    "l": "minecraft:leather",
+    "w": "mfqm:wax_piece",
+    "n": "minecraft:string"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "mfqm:item_enabled",
+      "item": "life_jacket"
+    }
+  ]
+}

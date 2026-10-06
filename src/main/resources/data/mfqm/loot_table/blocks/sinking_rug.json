@@ -1,0 +1,220 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_1",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "1"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_2",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "2"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_3",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "3"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_4",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "4"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_5",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "5"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_6",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "6"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_7",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "7"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_8",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "8"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_9",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "9"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_10",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "10"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_11",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "11"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_12",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "12"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_13",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "13"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_14",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "14"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug_variant_15",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "mfqm:sinking_rug",
+                  "properties": {
+                    "variant": "15"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "mfqm:sinking_rug"
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

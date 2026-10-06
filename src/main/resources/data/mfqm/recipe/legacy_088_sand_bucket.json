@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "result": {
+    "id": "mfqm:sand_bucket",
+    "count": 1
+  },
+  "ingredients": [
+    "minecraft:bucket",
+    "minecraft:sand"
+  ]
+}

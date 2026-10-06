@@ -1,0 +1,1353 @@
+{
+  "legacy_call_sites": 94,
+  "generated": [
+    {
+      "id": "legacy_001_chocolate_powder_bucket",
+      "source_line": 1287,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_002_chocolate_powder_bucket",
+      "source_line": 1291,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_003_chocolate_bucket",
+      "source_line": 1294,
+      "kind": "addSmelting",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_004_fertilizer",
+      "source_line": 1304,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_005_filter",
+      "source_line": 1331,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_006_gas_mask",
+      "source_line": 1335,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_007_cable",
+      "source_line": 1348,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_008_coil",
+      "source_line": 1349,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_009_hook",
+      "source_line": 1350,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_010_grappling_hook",
+      "source_line": 1351,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_011_grappling_hook",
+      "source_line": 1355,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_012_liquid_gun",
+      "source_line": 1364,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_013_wax",
+      "source_line": 1387,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_014_long_stick",
+      "source_line": 1389,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_015_rope",
+      "source_line": 1393,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_016_rope",
+      "source_line": 1394,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_017_rope",
+      "source_line": 1395,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_018_wax_piece",
+      "source_line": 1398,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_019_wax_piece",
+      "source_line": 1399,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_020_wax_piece",
+      "source_line": 1400,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_021_wax_piece",
+      "source_line": 1401,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_022_wax_piece",
+      "source_line": 1402,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_023_life_jacket",
+      "source_line": 1407,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_024_peat",
+      "source_line": 1415,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_025_wet_peat",
+      "source_line": 1416,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_026_wet_peat",
+      "source_line": 1417,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_027_cooked_larva",
+      "source_line": 1432,
+      "kind": "addSmelting",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_028_donut",
+      "source_line": 1445,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_029_glazed_donut",
+      "source_line": 1452,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_030_glazed_donut",
+      "source_line": 1453,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_031_glazed_donut",
+      "source_line": 1454,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_032_glazed_donut",
+      "source_line": 1455,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_033_glazed_donut",
+      "source_line": 1456,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_034_glazed_donut",
+      "source_line": 1459,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_035_glazed_donut",
+      "source_line": 1462,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_036_glazed_donut",
+      "source_line": 1465,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_037_sprinkled_donut",
+      "source_line": 1475,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_038_sprinkled_donut",
+      "source_line": 1476,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_039_sprinkled_donut",
+      "source_line": 1477,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_040_pink_sprinkled_donut",
+      "source_line": 1484,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_041_pink_sprinkled_donut",
+      "source_line": 1502,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_042_pink_sprinkled_donut",
+      "source_line": 1520,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_043_pink_sprinkled_donut",
+      "source_line": 1538,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_044_pink_sprinkled_donut",
+      "source_line": 1556,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_045_pink_sprinkled_donut",
+      "source_line": 1574,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_046_pink_sprinkled_donut",
+      "source_line": 1592,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_047_pink_sprinkled_donut",
+      "source_line": 1610,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_048_pink_sprinkled_donut",
+      "source_line": 1628,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_049_pink_sprinkled_donut",
+      "source_line": 1646,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_050_pink_sprinkled_donut",
+      "source_line": 1664,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_051_pink_sprinkled_donut",
+      "source_line": 1682,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_052_chocolate_donut",
+      "source_line": 1706,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_053_slime_ball",
+      "source_line": 1709,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_054_sinking_potion",
+      "source_line": 1717,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_055_sinking_potion",
+      "source_line": 1720,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_056_splash_sinking_potion",
+      "source_line": 1721,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_057_hot_chocolate",
+      "source_line": 1727,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_058_sinking_rug_0",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 0
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_1_1",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 1
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_2_2",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 2
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_3_3",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 3
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_4_4",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 4
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_5_5",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 5
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_6_6",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 6
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_7_7",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 7
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_8_8",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 8
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_9_9",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 9
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_10_10",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 10
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_11_11",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 11
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_12_12",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 12
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_13_13",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 13
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_14_14",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 14
+    },
+    {
+      "id": "legacy_058_sinking_rug_variant_15_15",
+      "source_line": 1732,
+      "kind": "addShapelessRecipe",
+      "loop_color": 15
+    },
+    {
+      "id": "legacy_059_sinking_rug_0",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 0
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_1_1",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 1
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_2_2",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 2
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_3_3",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 3
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_4_4",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 4
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_5_5",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 5
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_6_6",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 6
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_7_7",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 7
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_8_8",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 8
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_9_9",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 9
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_10_10",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 10
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_11_11",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 11
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_12_12",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 12
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_13_13",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 13
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_14_14",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 14
+    },
+    {
+      "id": "legacy_059_sinking_rug_variant_15_15",
+      "source_line": 1733,
+      "kind": "addShapelessRecipe",
+      "loop_color": 15
+    },
+    {
+      "id": "legacy_060_sinking_rug_0",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 0
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_1_1",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 1
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_2_2",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 2
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_3_3",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 3
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_4_4",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 4
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_5_5",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 5
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_6_6",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 6
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_7_7",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 7
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_8_8",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 8
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_9_9",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 9
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_10_10",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 10
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_11_11",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 11
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_12_12",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 12
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_13_13",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 13
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_14_14",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 14
+    },
+    {
+      "id": "legacy_060_sinking_rug_variant_15_15",
+      "source_line": 1734,
+      "kind": "addShapelessRecipe",
+      "loop_color": 15
+    },
+    {
+      "id": "legacy_061_sinking_rug_0",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 0
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_1_1",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 1
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_2_2",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 2
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_3_3",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 3
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_4_4",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 4
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_5_5",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 5
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_6_6",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 6
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_7_7",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 7
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_8_8",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 8
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_9_9",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 9
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_10_10",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 10
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_11_11",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 11
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_12_12",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 12
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_13_13",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 13
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_14_14",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 14
+    },
+    {
+      "id": "legacy_061_sinking_rug_variant_15_15",
+      "source_line": 1735,
+      "kind": "addShapelessRecipe",
+      "loop_color": 15
+    },
+    {
+      "id": "legacy_062_sinking_rug_0",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 0
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_1_1",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 1
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_2_2",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 2
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_3_3",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 3
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_4_4",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 4
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_5_5",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 5
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_6_6",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 6
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_7_7",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 7
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_8_8",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 8
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_9_9",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 9
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_10_10",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 10
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_11_11",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 11
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_12_12",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 12
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_13_13",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 13
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_14_14",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 14
+    },
+    {
+      "id": "legacy_062_sinking_rug_variant_15_15",
+      "source_line": 1736,
+      "kind": "addShapelessRecipe",
+      "loop_color": 15
+    },
+    {
+      "id": "legacy_063_sinking_rug_0",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 0
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_1_1",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 1
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_2_2",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 2
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_3_3",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 3
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_4_4",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 4
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_5_5",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 5
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_6_6",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 6
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_7_7",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 7
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_8_8",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 8
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_9_9",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 9
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_10_10",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 10
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_11_11",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 11
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_12_12",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 12
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_13_13",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 13
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_14_14",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 14
+    },
+    {
+      "id": "legacy_063_sinking_rug_variant_15_15",
+      "source_line": 1737,
+      "kind": "addShapelessRecipe",
+      "loop_color": 15
+    },
+    {
+      "id": "legacy_064_sinking_rug_0",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 0
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_1_1",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 1
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_2_2",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 2
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_3_3",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 3
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_4_4",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 4
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_5_5",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 5
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_6_6",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 6
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_7_7",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 7
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_8_8",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 8
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_9_9",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 9
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_10_10",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 10
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_11_11",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 11
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_12_12",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 12
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_13_13",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 13
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_14_14",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 14
+    },
+    {
+      "id": "legacy_064_sinking_rug_variant_15_15",
+      "source_line": 1738,
+      "kind": "addShapelessRecipe",
+      "loop_color": 15
+    },
+    {
+      "id": "legacy_065_sinking_rug_0",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 0
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_1_1",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 1
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_2_2",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 2
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_3_3",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 3
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_4_4",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 4
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_5_5",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 5
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_6_6",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 6
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_7_7",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 7
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_8_8",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 8
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_9_9",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 9
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_10_10",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 10
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_11_11",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 11
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_12_12",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 12
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_13_13",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 13
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_14_14",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 14
+    },
+    {
+      "id": "legacy_065_sinking_rug_variant_15_15",
+      "source_line": 1741,
+      "kind": "addShapelessRecipe",
+      "loop_color": 15
+    },
+    {
+      "id": "legacy_070_wax_piece",
+      "source_line": 2327,
+      "kind": "addSmelting",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_071_wax_piece",
+      "source_line": 2334,
+      "kind": "addSmelting",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_072_quicksand",
+      "source_line": 2350,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_073_quicksand_bucket",
+      "source_line": 2351,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_077_mud",
+      "source_line": 2369,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_078_mud_variant_1",
+      "source_line": 2370,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_079_mud_variant_2",
+      "source_line": 2371,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_080_mud_variant_3",
+      "source_line": 2372,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_081_mire_bucket",
+      "source_line": 2373,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_082_mire",
+      "source_line": 2376,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_083_brown_clay",
+      "source_line": 2379,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_084_soft_quicksand",
+      "source_line": 2383,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_085_soft_gravel",
+      "source_line": 2387,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_086_soft_gravel_variant_1",
+      "source_line": 2391,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_087_corrupted_sand",
+      "source_line": 2395,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_088_sand_bucket",
+      "source_line": 2399,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_089_sand",
+      "source_line": 2402,
+      "kind": "addShapelessRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_090_tall_leather_boots",
+      "source_line": 2404,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_091_slimy_tall_leather_boots",
+      "source_line": 2405,
+      "kind": "addRecipe",
+      "loop_color": null
+    },
+    {
+      "id": "legacy_092_wading_boots",
+      "source_line": 2406,
+      "kind": "addSmelting",
+      "loop_color": null
+    }
+  ],
+  "optional_dependency_calls": [
+    {
+      "source_line": 2279,
+      "kind": "addShapelessRecipe",
+      "reason": "optional dependency or unresolved expression IC2FertilizerItem",
+      "arguments": [
+        "new ItemStack(IC2FertilizerItem, 1)",
+        "new Object[]{new ItemStack(FertilizerItem)}"
+      ]
+    },
+    {
+      "source_line": 2313,
+      "kind": "addSmelting",
+      "reason": "optional dependency or unresolved expression HiveBlock",
+      "arguments": [
+        "HiveBlock",
+        "new ItemStack(WaxItem, 9)",
+        "0.1F"
+      ]
+    },
+    {
+      "source_line": 2317,
+      "kind": "addSmelting",
+      "reason": "optional dependency or unresolved expression FleshItem",
+      "arguments": [
+        "new ItemStack(FleshItem, 1, 2)",
+        "new ItemStack(WaxItem, 3)",
+        "0.1F"
+      ]
+    },
+    {
+      "source_line": 2321,
+      "kind": "addSmelting",
+      "reason": "optional dependency or unresolved expression FoodItem",
+      "arguments": [
+        "new ItemStack(FoodItem, 1, 9)",
+        "new ItemStack(WaxItem, 3)",
+        "0.1F"
+      ]
+    },
+    {
+      "source_line": 2356,
+      "kind": "addRecipe",
+      "reason": "optional dependency or unresolved expression BOPMudBlock",
+      "arguments": [
+        "new ItemStack(MudBlock, 4, 1)",
+        "new Object[]{\" m \", \"mwm\", \" m \", 'm', new ItemStack(BOPMudBlock, 1, 0), 'w', Items.field_151131_as}"
+      ]
+    },
+    {
+      "source_line": 2359,
+      "kind": "addRecipe",
+      "reason": "optional dependency or unresolved expression BOPMudBlock",
+      "arguments": [
+        "new ItemStack(MireBucketItem, 1)",
+        "new Object[]{\"wmw\", \"mbm\", \"wmw\", 'm', new ItemStack(BOPMudBlock, 1, 0), 'w', Items.field_151131_as, 'b', Items.field_151133_ar}"
+      ]
+    },
+    {
+      "source_line": 2363,
+      "kind": "addRecipe",
+      "reason": "optional dependency or unresolved expression BOPMudBlock",
+      "arguments": [
+        "new ItemStack(MireBlock, 4)",
+        "new Object[]{\"mwm\", \"wmw\", \"mwm\", 'm', new ItemStack(BOPMudBlock, 1, 0), 'w', Items.field_151131_as, 'd', Blocks.field_150346_d}"
+      ]
+    },
+    {
+      "source_line": 2410,
+      "kind": "addRecipe",
+      "reason": "optional dependency or unresolved expression AOAFaceMaskItem",
+      "arguments": [
+        "new ItemStack(AOAFaceMaskItem)",
+        "new Object[]{\" t \", \"sgs\", \"   \", 'g', GasMaskItem, 's', AOADoomStoneItem, 't', AOAToxicLumpItem}"
+      ]
+    },
+    {
+      "source_line": 2447,
+      "kind": "addRecipe",
+      "reason": "optional dependency or unresolved expression MudBall",
+      "arguments": [
+        "new ItemStack(MudBlock, 1)",
+        "new Object[]{\"MM\", \"MM\", 'M', MudBall}"
+      ]
+    }
+  ],
+  "fixed_undefined_air_symbols": [
+    {
+      "line": 1389,
+      "undefined_air_symbols": [
+        "x"
+      ]
+    },
+    {
+      "line": 1407,
+      "undefined_air_symbols": [
+        "x"
+      ]
+    },
+    {
+      "line": 1416,
+      "undefined_air_symbols": [
+        "x"
+      ]
+    },
+    {
+      "line": 1417,
+      "undefined_air_symbols": [
+        "x"
+      ]
+    },
+    {
+      "line": 1445,
+      "undefined_air_symbols": [
+        "_"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source_line": 2279,
+  "integration": "ic2",
+  "result_tag": "mfqm:compat/ic2/fertilizer",
+  "recipe": {
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": ["mfqm:fertilizer"],
+    "result": {"count": 1}
+  }
+}

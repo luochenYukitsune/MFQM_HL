@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "mfqm:block/soft_snow"
+    },
+    "variant=1": {
+      "model": "mfqm:block/soft_snow_1"
+    },
+    "variant=2": {
+      "model": "mfqm:block/soft_snow_2"
+    },
+    "variant=3": {
+      "model": "mfqm:block/soft_snow_3"
+    },
+    "variant=4": {
+      "model": "mfqm:block/soft_snow_4"
+    },
+    "variant=5": {
+      "model": "mfqm:block/soft_snow_5"
+    },
+    "variant=6": {
+      "model": "mfqm:block/soft_snow_6"
+    },
+    "variant=7": {
+      "model": "mfqm:block/soft_snow_7"
+    },
+    "variant=8": {
+      "model": "mfqm:block/soft_snow_8"
+    },
+    "variant=9": {
+      "model": "mfqm:block/soft_snow_9"
+    },
+    "variant=10": {
+      "model": "mfqm:block/soft_snow_10"
+    },
+    "variant=11": {
+      "model": "mfqm:block/soft_snow_11"
+    },
+    "variant=12": {
+      "model": "mfqm:block/soft_snow_12"
+    },
+    "variant=13": {
+      "model": "mfqm:block/soft_snow_13"
+    },
+    "variant=14": {
+      "model": "mfqm:block/soft_snow_14"
+    },
+    "variant=15": {
+      "model": "mfqm:block/soft_snow_15"
+    }
+  }
+}
