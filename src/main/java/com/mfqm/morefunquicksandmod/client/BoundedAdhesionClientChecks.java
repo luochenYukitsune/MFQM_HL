@@ -130,7 +130,7 @@ public final class BoundedAdhesionClientChecks {
                 case 9->{
                     if(sample==null)return;
                     double escape=sample.position().subtract(baseline.position()).horizontalDistance();
-                    require(escape>5 && sample.bonds()==0,"weakened board permits ordinary escape");
+                    require(escape>5 && sample.bonds()==0,"weakened board permits ordinary escape distance="+escape+" baseline="+baseline+" sample="+sample+" client="+game.player.position());
                     MFQM.LOGGER.info("MFQM_BOUNDED_BOARD_STRUGGLE_ESCAPE_COMPLETE realF={} effort={} walkAfterRelease={} bonds={}",presses,sample.effort(),escape,sample.bonds());
                     ready=false;phase=10;ticks=0;execute(game,player->{teleport(player,164.5,253.0625,.5,0,0);ready=true;});
                 }

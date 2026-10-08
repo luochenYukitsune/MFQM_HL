@@ -34,7 +34,8 @@ public final class ModNetworking {
     }
     public static void register(IEventBus bus) { bus.addListener(ModNetworking::payloads); }
     private static void payloads(RegisterPayloadHandlersEvent event) {
-        var registrar = event.registrar("5");
+        // Connected boards add block states; reject older clients before incompatible state IDs arrive.
+        var registrar = event.registrar("7");
         registrar.playToServer(InputPayload.TYPE, InputPayload.CODEC, (data, context) -> {
             if (context.player() instanceof ServerPlayer player && player.isAlive()) QuicksandPhysics.setInput(player, data.jump(), data.sneak(), data.moving());
         });

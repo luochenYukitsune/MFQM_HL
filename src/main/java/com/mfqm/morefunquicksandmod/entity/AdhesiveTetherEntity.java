@@ -19,6 +19,7 @@ public final class AdhesiveTetherEntity extends Entity {
     private static final EntityDataAccessor<String> MATERIAL = SynchedEntityData.defineId(AdhesiveTetherEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Float> STRENGTH = SynchedEntityData.defineId(AdhesiveTetherEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Long> BREAK_TICK = SynchedEntityData.defineId(AdhesiveTetherEntity.class, EntityDataSerializers.LONG);
+    private static final EntityDataAccessor<Boolean> CUFF = SynchedEntityData.defineId(AdhesiveTetherEntity.class, EntityDataSerializers.BOOLEAN);
     private long refreshed;
     private Vec3 breakAnkle,breakShin;
     public AdhesiveTetherEntity(EntityType<? extends AdhesiveTetherEntity> type, Level level) { super(type, level); setNoGravity(true); }
@@ -31,6 +32,8 @@ public final class AdhesiveTetherEntity extends Entity {
     public String material() { return entityData.get(MATERIAL); }
     public int side() { return entityData.get(SIDE); }
     public float strength() { return entityData.get(STRENGTH); }
+    public void cuff(boolean value){entityData.set(CUFF,value);}
+    public boolean cuff(){return entityData.get(CUFF);}
     /** Controller removes the physical anchor first; this keeps only a short cosmetic recoil. */
     public void beginBreak() { if(!breaking())entityData.set(BREAK_TICK,level().getGameTime()); }
     public boolean breaking() { return entityData.get(BREAK_TICK)!=Long.MIN_VALUE; }
@@ -43,6 +46,7 @@ public final class AdhesiveTetherEntity extends Entity {
     @Override protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(TARGET,-1); builder.define(SIDE,0); builder.define(MATERIAL,""); builder.define(STRENGTH,1F);
         builder.define(BREAK_TICK,Long.MIN_VALUE);
+        builder.define(CUFF,false);
     }
     @Override public void tick() {
         super.tick();

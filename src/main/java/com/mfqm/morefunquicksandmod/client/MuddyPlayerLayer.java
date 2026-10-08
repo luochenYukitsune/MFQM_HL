@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.context.ContextKey;
 
 public final class MuddyPlayerLayer extends RenderLayer<AvatarRenderState,PlayerModel> {
-    private final LegacyCoatingModel model;
     private final boolean slim;
+    private static long firstPersonBodies,hiddenHeads;
+    static long firstPersonBodies(){return firstPersonBodies;}
+    static long hiddenHeads(){return hiddenHeads;}
     public static final ContextKey<Coating> COATING = new ContextKey<>(Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"coating"));
     public record Coating(int level,int ticks,String material) {
         public static Coating snapshot(SinkingState state){return new Coating(state.coatingLevel,state.coatingTicks,state.coatingType);}
@@ -32,22 +32,20 @@ public final class MuddyPlayerLayer extends RenderLayer<AvatarRenderState,Player
             return (Mth.clamp((int)(255*Math.min(1,ticks/1000F)),0,255)<<24)|rgb;
         }
     }
-    public MuddyPlayerLayer(RenderLayerParent<AvatarRenderState,PlayerModel> parent,boolean slim){super(parent);this.slim=slim;model=new LegacyCoatingModel(slim);}
+    public MuddyPlayerLayer(RenderLayerParent<AvatarRenderState,PlayerModel> parent,boolean slim){super(parent);this.slim=slim;}
     @Override public void submit(PoseStack pose,SubmitNodeCollector collector,int light,AvatarRenderState state,float yaw,float pitch){
         Coating coat=state.getRenderData(COATING);
         if(coat==null || coat.level<=0 || coat.ticks<=50 || state.isInvisible || state.isSpectator || !ModConfig.CLIENT.coverPlayerWithMud.get())return;
-        if(coat.glue()) {
-            var parent=getParentModel();boolean detailed=state.distanceToCameraSq<256;
-            GlueCoatingRenderer.submit(parent.head,"head",slim,coat,pose,collector,light,false,detailed,parent.hat);
-            GlueCoatingRenderer.submit(parent.body,"body",slim,coat,pose,collector,light,false,detailed,parent.jacket);
-            GlueCoatingRenderer.submit(parent.leftArm,"left_arm",slim,coat,pose,collector,light,false,detailed,parent.leftSleeve);
-            GlueCoatingRenderer.submit(parent.rightArm,"right_arm",slim,coat,pose,collector,light,false,detailed,parent.rightSleeve);
-            GlueCoatingRenderer.submit(parent.leftLeg,"left_leg",slim,coat,pose,collector,light,false,detailed,parent.leftPants);
-            GlueCoatingRenderer.submit(parent.rightLeg,"right_leg",slim,coat,pose,collector,light,false,detailed,parent.rightPants);
-            return;
-        }
-        pose.pushPose();pose.scale(1.002F,1.002F,1.002F);
-        collector.order(1).submitModel(model,state,pose,RenderTypes.entityTranslucent(coat.texture()),light,OverlayTexture.NO_OVERLAY,coat.color(),null,state.outlineColor,null);
-        pose.popPose();
+        var parent=getParentModel();boolean detailed=state.distanceToCameraSq<256;
+        FirstPersonTetherProof.body(pose,parent,state);
+        // The native model has already run setupAnim for this exact render state.
+        // In particular, FirstPersonModel can move/hide its head and selected arms.
+        if(FirstPersonCompatibility.camera(state)){firstPersonBodies++;if(!parent.head.visible)hiddenHeads++;}
+        else GlueCoatingRenderer.submit(parent.head,"head",slim,coat,pose,collector,light,false,detailed,parent.hat);
+        GlueCoatingRenderer.submit(parent.body,"body",slim,coat,pose,collector,light,false,detailed,parent.jacket);
+        GlueCoatingRenderer.submit(parent.leftArm,"left_arm",slim,coat,pose,collector,light,false,detailed,parent.leftSleeve);
+        GlueCoatingRenderer.submit(parent.rightArm,"right_arm",slim,coat,pose,collector,light,false,detailed,parent.rightSleeve);
+        GlueCoatingRenderer.submit(parent.leftLeg,"left_leg",slim,coat,pose,collector,light,false,detailed,parent.leftPants);
+        GlueCoatingRenderer.submit(parent.rightLeg,"right_leg",slim,coat,pose,collector,light,false,detailed,parent.rightPants);
     }
 }

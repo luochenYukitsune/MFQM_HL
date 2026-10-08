@@ -11,7 +11,7 @@ displayName = "更多趣味流沙（MFQM）"
 logoFile = "assets/mfqm/logo.png"
 authors = "MrBlackGoo（原作者），MFQM Team（移植）"
 credits = "原模组贡献者：MrBlackGoo、CrishNate、elix_x、VanderCat、Sanic"
-description = "面向 Minecraft 1.21.11 的 More Fun Quicksand Mod 开发版。移植原 1.1.1 的沉陷地形、黏性流体、救援工具、装备、生物和遗迹；新增乳白半透明胶水、可重复涂胶的粘鼠板、腿脚黏膜与拉丝、F 键挣扎和留靴回收。"
+description = "面向 Minecraft 1.21.11 的 More Fun Quicksand Mod 预发布版。移植原 1.1.1 的沉陷地形、黏性流体、救援工具、装备、生物和遗迹；支持乳白半透明胶水、可拼接和重复涂胶的粘鼠板、浓密立体黏丝、全材质立体残留、F 键挣扎和留靴回收。"
 
 [[dependencies.mfqm]]
 modId = "neoforge"

@@ -21,6 +21,10 @@ public final class CoatingVoxels {
         public Mesh { quads=List.copyOf(quads); }
     }
     public static Mesh build(List<Face> faces,Mask mask) {
+        return build(faces,mask,1);
+    }
+    public static Mesh build(List<Face> faces,Mask mask,double thickness) {
+        if(!Double.isFinite(thickness) || thickness<=0 || thickness>9)throw new IllegalArgumentException("Invalid coating thickness");
         var quads=new ArrayList<Quad>();int pixels=0;
         for(var f:faces) {
             if(f.width<1 || f.height<1 || f.width>64 || f.height>64)throw new IllegalArgumentException("Invalid UV face");
@@ -33,7 +37,7 @@ public final class CoatingVoxels {
                 // The mask owns opacity; do not turn a thin translucent patch
                 // into dense white paint when switching to voxel geometry.
                 colors[y][x]=color;
-                heights[y][x]=.12+.04*((f.u+x)*37+(f.v+y)*17&3);
+                heights[y][x]=thickness*(.06+.02*((f.u+x)*37+(f.v+y)*17&3));
             }
             for(int y=0;y<f.height;y++)for(int x=0;x<f.width;x++) {
                 double h=heights[y][x];if(h==0)continue;

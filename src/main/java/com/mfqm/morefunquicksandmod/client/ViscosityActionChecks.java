@@ -97,6 +97,12 @@ public final class ViscosityActionChecks {
             switch(phase) {
                 case 0->{
                     if(!serverReady || ticks<70)return;
+                    // The isolated action run builds this chunk for the first time.
+                    // Server task completion does not mean its bulk block updates
+                    // have reached the client's movement simulation yet.
+                    for(int y=249;y<=253;y++)if(!game.level.getBlockState(new BlockPos(104,y,8)).is(ModBlocks.byId("glue")))return;
+                    if(Math.abs(game.player.getY()-253)>.005 || !game.player.onGround())return;
+                    MFQM.LOGGER.info("MFQM_VISCOSITY_ACTION_FIXTURE_READY ticks={} clientY={} clientVelocity={} glueColumn=true",ticks,game.player.getY(),game.player.getDeltaMovement());
                     serverReady=false;phase=1;ticks=0;observation=null;
                     execute(game,player->{player.teleportTo(player.level(),104.5,GLUE_Y,8.5,Set.of(),0,0,false);
                         player.setDeltaMovement(Vec3.ZERO);serverReady=true;});
@@ -107,6 +113,7 @@ public final class ViscosityActionChecks {
                     baseline=observation;baselineClientY=game.player.getY();
                     require(baseline.material().equals("glue") && baseline.depth()>1,"actual deep glue contact");
                     require(baseline.position().y-249>2 && !game.player.onGround(),"glue test body is suspended more than two blocks above floor");
+                    MFQM.LOGGER.info("MFQM_VISCOSITY_ACTION_BASELINE server={} clientY={} clientContact={} clientGravity={}",baseline,baselineClientY,QuicksandPhysics.findContact(game.player,game.level),game.player.getAttributeValue(Attributes.GRAVITY));
                     close(baseline.position().y,GLUE_Y,.005,"server has no passive glue sinking before baseline");
                     close(baselineClientY,GLUE_Y,.02,"client has no passive glue sinking before baseline");
                     require(baseline.effort()==0,"new naturally reset episode starts without effort");

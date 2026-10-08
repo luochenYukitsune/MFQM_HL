@@ -1,0 +1,219 @@
+INSTALLED_ARTIFACT=C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\coating-client\mods\MFQM-neoforge-1.21.11-0.6.7-dev.jar
+SHA256=d3efa82f58f0311e79acddbcee5e1c913931b37f396045bf2deb112ad7856c6d
+SCREENSHOTS=2
+2026-10-08T14:25:07.442459300Z main WARN Advanced terminal features are not available in this environment
+[22:25:07] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 343ms
+[22:25:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 10.0.36 (CLIENT in DEV)
+[22:25:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\coating-client
+[22:25:07] [main/WARN] [ne.ne.fm.lo.FMLConfig/CORE]: Configuration file C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\coating-client\config\fml.toml is not correct. Correcting
+[22:25:07] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 107) in 44ms
+[22:25:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[22:25:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/10.0.36/dbd0e11d545443f602addede111c39d9639708f9/earlydisplay-10.0.36.jar
+[22:25:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/10.0.36/f72ab4d3e755fe736829883d90430a281527aca/loader-10.0.36.jar
+[22:25:07] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because splash screen is disabled
+[22:25:07] [ForkJoinPool.commonPool-worker-8/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[22:25:08] [ForkJoinPool.commonPool-worker-8/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 4 dependencies adding them to mods collection
+[22:25:08] [ForkJoinPool.commonPool-worker-8/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		3d-Skin-Layers 1.11.3 (skinlayers3d)
+		FirstPerson 2.7.3 (firstperson)
+		Minecraft 1.21.11 (minecraft)
+		NeoForge 21.11.45 (neoforge)
+		NotEnoughAnimations 1.12.6 (notenoughanimations)
+		TRansition 1.0.25 (transition)
+		TRender 1.0.17 (trender)
+		更多趣味流沙（MFQM） 0.6.7-dev (mfqm)
+[22:25:08] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/80fc3a9f592673cea87f4cd702f87991c6c9fe4d/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=FML Env=CLIENT
+[22:25:08] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[22:25:08] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > net.neoforged.neoforge-coremods-21.11.45.jar
+[22:25:08] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - firstperson (jar(mods/firstperson-neoforge-2.7.3-mc1.21.11.jar))
+ - mfqm (jar(mods/MFQM-neoforge-1.21.11-0.6.7-dev.jar))
+ - minecraft (composite(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45-client-extra-aka-minecraft-resources.jar), filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - mixinextras.neoforge (jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+ - notenoughanimations (jar(mods/notenoughanimations-neoforge-1.12.6-mc1.21.11.jar))
+ - skinlayers3d (jar(mods/skinlayers3d-neoforge-1.11.3-mc1.21.11.jar))
+ - transition (jar(mods/notenoughanimations-neoforge-1.12.6-mc1.21.11.jar > TRansition-1.0.25-1.21.11-neoforge-SNAPSHOT.jar))
+ - trender (jar(mods/notenoughanimations-neoforge-1.12.6-mc1.21.11.jar > TRender-1.0.17-1.21.11-neoforge-SNAPSHOT.jar))
+[22:25:08] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 49ms
+[22:25:08] [main/WARN] [mixin/]: Reference map 'skinlayers3d.refmap.mixins.json' for skinlayers3d.mixins.json could not be read. If this is a development environment you can ignore this message
+[22:25:09] [main/WARN] [mixin/]: Error loading class: traben/entity_model_features/models/parts/EMFModelPart (java.lang.ClassNotFoundException: traben.entity_model_features.models.parts.EMFModelPart)
+[22:25:10] [Datafixer Bootstrap/INFO] [mojang/DataFixerBuilder]: 290 Datafixer optimizations took 565 milliseconds
+[22:25:11] [pool-13-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[22:25:18] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[22:25:18] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[22:25:18] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[22:25:18] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[22:25:18] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[22:25:18] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[22:25:18] [modloading-worker-0/INFO] [MFQM/]: MFQM initializing...
+[TRender] Initializing Client...
+[22:25:18] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.11.45, for MC 1.21.11
+[22:25:18] [modloading-worker-0/INFO] [MFQM/]: MFQM initialized.
+[22:25:19] [Render thread/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[22:25:19] [Render thread/INFO] [minecraft/Minecraft]: Setting user: Dev
+[22:25:19] [Render thread/INFO] [minecraft/Minecraft]: Backend library: LWJGL version 3.3.3+5
+[22:25:20] [Render thread/INFO] [minecraft/Minecraft]: Using optional rendering extensions: GL_ARB_buffer_storage, GL_KHR_debug, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
+[22:25:21] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources, mod/firstperson, mod/trender, mod/skinlayers3d, mod/mfqm, mod/notenoughanimations, mod/neoforge, mod/transition
+[22:25:22] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
+[22:25:22] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
+[22:25:22] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
+[22:25:22] [resourceLoad/INFO] [FirstPersonModel/]: Loading FirstPerson Mod
+[22:25:23] [Render thread/INFO] [mojang/Library]: OpenAL initialized on device OpenAL Soft on 扬声器 (Realtek(R) Audio)
+[22:25:23] [Render thread/INFO] [minecraft/SoundEngine]: Sound engine started
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/beds.png-atlas
+[22:25:23] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
+[22:25:24] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[22:25:24] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[22:25:24] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/signs.png-atlas
+[22:25:24] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
+[22:25:24] [Render thread/INFO] [ne.ne.ne.cl.en.an.js.AnimationLoader/]: Loaded 0 entity animations
+[22:25:24] [Render thread/WARN] [ne.ne.ne.co.CommonHooks/WP]: The following mods have version differences that were not resolved:
+mfqm (version 0.6.6-dev -> 0.6.7-dev)
+Things may not work well.
+[22:25:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/firstperson pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/trender pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/skinlayers3d pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/notenoughanimations pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/transition pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:27] [Render thread/INFO] [minecraft/RecipeManager]: Loaded 1677 recipes
+[22:25:27] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 1584 advancements
+[22:25:27] [Render thread/INFO] [ne.ne.ne.co.cr.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[22:25:27] [Server thread/INFO] [minecraft/IntegratedServer]: Starting integrated minecraft server version 1.21.11
+[22:25:27] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[22:25:28] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[22:25:28] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[22:25:28] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[22:25:28] [Render thread/INFO] [FirstPersonModel/]: PlayerAnimator not found!
+[22:25:28] [Render thread/INFO] [FirstPersonModel/]: Loaded Vanilla Hands items: []
+[22:25:28] [Render thread/INFO] [FirstPersonModel/]: Loaded Auto Disable items: []
+[22:25:28] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/firstperson pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:28] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/trender pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:28] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/skinlayers3d pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:28] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/notenoughanimations pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:28] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/transition pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+KNOWN_UPSTREAM_PACK_METADATA_ERROR_RECORDED
+[22:25:29] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 48 chunks for player spawn...
+[22:25:29] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[22:25:29] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[22:25:29] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[22:25:30] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[22:25:30] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[22:25:31] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：30%
+[22:25:31] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[22:25:32] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[22:25:32] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[22:25:33] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[22:25:33] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[22:25:34] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：60%
+[22:25:34] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 6178 ms
+[22:25:34] [Server thread/INFO] [minecraft/PlayerList]: Dev[local:E:01d8d6e5] logged in with entity id 26 at (-59.5, 79.0, 98.5)
+[22:25:34] [Server thread/INFO] [minecraft/MinecraftServer]: Dev加入了游戏
+[22:25:35] [Render thread/WARN] [minecraft/ClientPacketListener]: Ignoring chat session from Dev due to missing Services public key
+[22:25:35] [Server thread/INFO] [minecraft/IntegratedServer]: Changing view distance to 12, from 10
+[22:25:35] [Server thread/INFO] [minecraft/IntegratedServer]: Changing simulation distance to 12, from 0
+[22:25:35] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[22:25:35] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 2 advancements
+[22:25:35] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[22:25:35] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[22:25:35] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 4 reached during a single frame. New capacity will be 16.
+[22:25:36] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 16 reached during a single frame. New capacity will be 32.
+[22:25:37] [Render thread/INFO] [MFQM/]: MFQM_INSTALLED_JAR_LOADED file:/C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/run/1.21.11/coating-client/mods/MFQM-neoforge-1.21.11-0.6.7-dev.jar
+[22:25:37] [Render thread/INFO] [MFQM/]: MFQM_CREATIVE_BOARD_VARIANTS_COMPLETE coated=粘鼠板（已涂胶） empty=粘鼠板底板（未涂胶） adjacent=true
+[22:25:37] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_VISUAL_CHECKS_COMPLETE modelCases=60
+[22:25:37] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_INPUT_CHECKS_COMPLETE shortTap=true repeat=false tetherSwap=false menuLeak=false
+[22:25:37] [Render thread/INFO] [MFQM/]: MFQM_CHINESE_CHECKS_COMPLETE englishKeys=570 chineseKeys=826 active=true configScreen=true formats=true registeredNames=true
+[22:25:37] [Render thread/INFO] [MFQM/]: MFQM_CLIENT_CHECKS_COMPLETE items=180 visible=165 blocks=51 fluids=14 entities=18
+[22:25:37] [Render thread/INFO] [MFQM/]: MFQM_COATING_MASKS_COMPLETE cases=600 legTiers1to3=true headDryThrough7=true fullBody=true
+[22:25:37] [Render thread/INFO] [MFQM/]: MFQM_COATING_CHECKS_START skinLayers=true actualModVersion=1.11.3 groundCamera=true
+[22:25:37] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 32 reached during a single frame. New capacity will be 64.
+[22:25:42] [Render thread/INFO] [MFQM/]: MFQM_SKIN_LAYERS_MESH_VERIFIED skin=WIDE visibleJacket=true dynamicSizing=true
+[22:25:42] [Render thread/INFO] [MFQM/]: MFQM_SKIN_LAYERS_MESH_VERIFIED skin=WIDE visibleJacket=true dynamicSizing=true
+[22:25:42] [Render thread/INFO] [MFQM/]: MFQM_SKIN_LAYERS_MESH_VERIFIED skin=SLIM visibleJacket=true dynamicSizing=true
+[22:25:42] [Render thread/INFO] [MFQM/]: MFQM_SKIN_LAYERS_MESH_VERIFIED skin=SLIM visibleJacket=true dynamicSizing=true
+[22:25:42] [Render thread/INFO] [MFQM/]: MFQM_COATING_CLOSE_FIT_COMPLETE hiddenPadding=.02 flatPadding=.27 defaultReliefMax=.12 anatomicalCoverageUnchanged=true
+[22:25:42] [Render thread/INFO] [MFQM/]: MFQM_COATING_BODY_COMPLETE wide=true slim=true fullCoverage=true detailedSubmissions=2700
+[22:25:42] [IO-Worker-1/INFO] [MFQM/]: MFQM_COATING_VISUAL_SAVED file=mfqm-glue-coating-skinlayers.png result=已将截图保存为mfqm-glue-coating-skinlayers.png
+[22:25:43] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources, mod/firstperson, mod/trender, mod/skinlayers3d, mod/mfqm, mod/notenoughanimations, mod/neoforge, mod/transition
+[22:25:43] [Server thread/INFO] [minecraft/IntegratedServer]: Saving and pausing game...
+[22:25:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:overworld
+[22:25:44] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_end
+[22:25:44] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_nether
+[22:25:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
+[22:25:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
+[22:25:44] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
+[22:25:45] [Render thread/INFO] [mojang/Library]: OpenAL initialized on device OpenAL Soft on 扬声器 (Realtek(R) Audio)
+[22:25:45] [Render thread/INFO] [minecraft/SoundEngine]: Sound engine started
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/beds.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/signs.png-atlas
+[22:25:45] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
+[22:25:45] [Render thread/INFO] [ne.ne.ne.cl.en.an.js.AnimationLoader/]: Loaded 0 entity animations
+[22:25:48] [Render thread/INFO] [MFQM/]: MFQM_COATING_MASKS_COMPLETE cases=600 legTiers1to3=true headDryThrough7=true fullBody=true
+[22:25:48] [Render thread/INFO] [MFQM/]: MFQM_COATING_RESOURCE_RELOAD_COMPLETE regenerated=true cacheBounded=true
+[22:25:49] [Render thread/INFO] [MFQM/]: MFQM_COATING_ARM_COMPLETE actualSkin=SLIM padding=0.77000004 flight=false
+[22:25:51] [Render thread/INFO] [MFQM/]: MFQM_ALL_MATERIAL_COATINGS_COMPLETE nativePose=true tint=true adjustable=true
+[22:25:53] [Render thread/INFO] [MFQM/]: MFQM_COATING_DISPLAY_CONTROLS_COMPLETE zeroOpacityHidden=true zeroThicknessFlat=true
+[22:25:54] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 64 reached during a single frame. New capacity will be 128.
+[22:25:54] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 128 reached during a single frame. New capacity will be 256.
+[22:25:54] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 256 reached during a single frame. New capacity will be 512.
+[22:25:56] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 10 advancements
+[22:25:56] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
+[22:25:58] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_MODEL_COMPLETE nativeBody=true hiddenHead=true vanillaHands=true crouchingHeldItem=true headLevel3Dry=true flight=false
+[22:25:58] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 512 reached during a single frame. New capacity will be 1024.
+[22:26:00] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage=standing samples=576 maxError=1.1920928955078125E-7
+[22:26:02] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage=crouching samples=442 maxError=1.3328003749250113E-7
+[22:26:05] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage=turned samples=496 maxError=1.341104507446289E-7
+[22:26:19] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage=glue64 samples=8855 maxError=1.3657139822709083E-7
+[22:26:19] [IO-Worker-11/INFO] [MFQM/]: MFQM_COATING_VISUAL_SAVED file=mfqm-firstperson-tethers.png result=已将截图保存为mfqm-firstperson-tethers.png
+[22:26:21] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHERS_COMPLETE standing=true crouching=true turned=true toggled=true glue64=true maxErrorBelow=.012 flight=false
+[22:26:21] [Render thread/INFO] [MFQM/]: MFQM_COMPACT_STRANDS_COMPLETE bundles=50 filaments=250 physical64=true horizontalNear=true rootsInside=true animations=true
+[22:26:21] [Render thread/INFO] [MFQM/]: MFQM_COATING_CHECKS_COMPLETE skinLayers=true firstPerson=true anatomicalHeightMasks=true originalPngUnchanged=true
+[22:26:21] [Render thread/INFO] [minecraft/Minecraft]: Stopping!
+[22:26:21] [Server thread/INFO] [minecraft/ServerGamePacketListenerImpl]: Dev lost connection: 连接中断
+[22:26:21] [Server thread/INFO] [minecraft/MinecraftServer]: Dev退出了游戏
+[22:26:21] [Server thread/INFO] [minecraft/ServerCommonPacketListenerImpl]: Stopping singleplayer server as player logged out
+[22:26:21] [IO-Worker-8/INFO] [MFQM/]: MFQM_COATING_VISUAL_SAVED file=mfqm-close-strands.png result=已将截图保存为mfqm-close-strands.png
+[22:26:21] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[22:26:21] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[22:26:21] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[22:26:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:overworld
+[22:26:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_end
+[22:26:23] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_nether
+[22:26:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (mfqm-port-checks): All chunks are saved
+[22:26:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[22:26:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[22:26:23] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved

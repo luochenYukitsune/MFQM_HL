@@ -78,7 +78,64 @@ public final class AdhesionPortChecks {
         results.addAll(verifyBoard(level,at.offset(0,0,5)));
         results.addAll(verifyDimension(level,at.offset(0,0,10)));
         results.addAll(verifyGlueJump(level,at.offset(0,0,15)));
+        results.addAll(verifyDynamic(level,at.offset(0,0,20)));
         return results;
+    }
+    private static List<String> verifyDynamic(ServerLevel level,BlockPos at) {
+        var saved=new LinkedHashMap<BlockPos,net.minecraft.world.level.block.state.BlockState>();
+        var data=(ServerLevelData)level.getLevelData();long clock=level.getGameTime(),base=((clock+199)/4)*4+1;
+        var pig=EntityType.PIG.create(level,EntitySpawnReason.TRIGGERED);
+        if(pig==null)throw new IllegalStateException("create dynamic adhesion probe");
+        try {
+            for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++)for(int y=-1;y<4;y++) {
+                var pos=at.offset(x,y,z);saved.put(pos,level.getBlockState(pos));
+                level.setBlock(pos,y<0?Blocks.STONE.defaultBlockState():y==0?ModBlocks.byId("glue").defaultBlockState():Blocks.AIR.defaultBlockState(),2);
+            }
+            pig.setNoAi(true);pig.setPos(at.getX()+.35,at.getY()+.03,at.getZ()+.5);level.addFreshEntity(pig);
+            data.setGameTime(base);QuicksandPhysics.tick(pig,level);var state=QuicksandPhysics.state(pig);
+            require(state.anchors.size()==2,"first contact creates a sole connection for each foot");
+            var oldest=state.anchors.getFirst().visual();var origin=state.adhesiveOrigin;
+            for(int i=1;i<=40;i++) {
+                data.setGameTime(base+i*4);pig.setPos(at.getX()+(i%2==0?.35:.65),at.getY()+.03,at.getZ()+.5);QuicksandPhysics.tick(pig,level);
+                require(state.anchors.size()<=64,"active contact cap respected during motion");
+                require(state.adhesiveOrigin.equals(origin),"refresh never resets horizontal origin");
+            }
+            require(state.anchors.size()==64,"same block motion reaches 64 live connections");
+            require(state.anchors.stream().noneMatch(a->a.visual().equals(oldest)),"full contact list replaces its oldest identity");
+            require(level.getEntity(oldest) instanceof AdhesiveTetherEntity e && e.breaking(),"replaced identity only retains cosmetic recoil");
+            require(state.anchors.stream().map(AdhesionController.Anchor::point).distinct().count()>30,"sole spreading produces many different roots");
+            var identities=state.anchors.stream().map(AdhesionController.Anchor::visual).toList();
+            data.setGameTime(base+164);QuicksandPhysics.tick(pig,level);
+            require(identities.equals(state.anchors.stream().map(AdhesionController.Anchor::visual).toList()),"standing does not add contacts");
+            for(var anchor:state.anchors) {
+                var p=anchor.point();var b=anchor.block();
+                require(p.x>b.getX() && p.x<b.getX()+1 && p.z>b.getZ() && p.z<b.getZ()+1 && p.y>b.getY() && p.y<b.getY()+1,"every root inside occupied volume");
+            }
+            var lower=ModBlocks.byId("glue").defaultBlockState().setValue(net.minecraft.world.level.block.LiquidBlock.LEVEL,7);
+            level.setBlock(at,lower,2);data.setGameTime(base+168);QuicksandPhysics.tick(pig,level);
+            require(state.anchors.size()==64 && state.anchors.stream().allMatch(a->a.point().y<at.getY()+lower.getFluidState().getHeight(level,at)),"existing 64 roots follow a falling fluid level without replacement");
+            require(identities.equals(state.anchors.stream().map(AdhesionController.Anchor::visual).toList()),"liquid height change preserves contact identities");
+            level.setBlock(at,ModBlocks.byId("glue").defaultBlockState(),2);base+=8;
+            pig.setPos(at.getX()+.35,at.getY()+3.7,at.getZ()+.5);data.setGameTime(base+168);QuicksandPhysics.tick(pig,level);
+            require(!state.anchors.isEmpty(),"glue connections survive more than three vertical blocks");
+            pig.setPos(at.getX()+.35,at.getY()+4.3,at.getZ()+.5);data.setGameTime(base+172);QuicksandPhysics.tick(pig,level);
+            require(state.anchors.isEmpty(),"vertical excess releases connections");
+            var thin=ModBlocks.byId("glue").defaultBlockState().setValue(net.minecraft.world.level.block.LiquidBlock.LEVEL,7);
+            level.setBlock(at,thin,2);
+            var root=AdhesiveSurface.root(level,at,"glue",new net.minecraft.world.phys.Vec3(at.getX()+1.1,at.getY()+1,at.getZ()-.1));
+            require(root!=null && root.y<at.getY()+thin.getFluidState().getHeight(level,at) && root.x<at.getX()+1 && root.z>at.getZ(),"thin flowing layer clamps height and edge");
+            level.setBlock(at,Blocks.AIR.defaultBlockState(),2);require(AdhesiveSurface.root(level,at,"glue",root)==null,"removed medium invalidates its root immediately");
+            base+=180;
+            for(String id:List.of("mud","bog","morass","mire","moor","wet_peat","brown_clay","sinking_clay","slurry","quicksand")) {
+                level.setBlock(at,ModBlocks.byId(id).defaultBlockState(),2);pig.setPos(at.getX()+.5,at.getY()+.03,at.getZ()+.5);
+                data.setGameTime(base+=4);state.lastTick=Long.MIN_VALUE;QuicksandPhysics.tick(pig,level);
+                require(state.anchors.isEmpty() && state.material.equals(id),"non adhesive medium preserves contact physics without strands: "+id);
+            }
+            return List.of("dynamic adhesion: same-cell 64 roots, FIFO recoil, stationary retention, stable origin, vertical distance, thin-fluid edges and non-adhesive contact pass");
+        } finally {
+            for(var helper:level.getEntitiesOfClass(AdhesiveTetherEntity.class,new net.minecraft.world.phys.AABB(at).inflate(12)))if(helper.target()==pig)helper.discard();
+            pig.discard();saved.forEach((pos,state)->level.setBlock(pos,state,3));data.setGameTime(clock);
+        }
     }
     private static List<String> verifyGlueJump(ServerLevel level,BlockPos at) {
         var saved=new LinkedHashMap<BlockPos,net.minecraft.world.level.block.state.BlockState>();

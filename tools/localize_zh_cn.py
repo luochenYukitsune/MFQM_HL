@@ -95,7 +95,12 @@ CONFIG = {
     "glueActivityRadius": "胶水受困活动半径", "honeyActivityRadius": "蜂蜜受困活动半径",
     "tarActivityRadius": "焦油受困活动半径", "slimeActivityRadius": "黏液受困活动半径",
     "mudActivityRadius": "泥潭受困活动半径", "boardActivityRadius": "粘鼠板受困活动半径",
-    "glueCoating3d": "立体胶水覆盖",
+    "glueCoating3d": "立体介质覆盖（全部材质）",
+    "coatingOpacity": "全局覆盖透明强度", "coatingThickness": "全局像素凸起厚度", "strandDisplayLimit": "每个角色黏丝束显示上限",
+    "strandDensity": "每个接触的独立黏丝数量",
+    "materialOpacity": "此材质覆盖透明强度", "materialThickness": "此材质像素凸起厚度", "materialStrands": "此材质黏丝束显示上限",
+    "glueVerticalDistance": "胶水黏丝竖向断裂距离", "honeyVerticalDistance": "蜂蜜黏丝竖向断裂距离",
+    "tarVerticalDistance": "焦油黏丝竖向断裂距离", "slimeVerticalDistance": "黏液黏丝竖向断裂距离", "boardVerticalDistance": "粘鼠板黏丝竖向断裂距离",
     "genGluePools": "生成胶水池", "genStickyBoards": "遗迹生成粘鼠板", "gluePoolChance": "胶水池候选间隔",
     "gluePoolShallowDepth": "浅胶水池深度", "gluePoolMinDeepDepth": "深胶水池最小深度", "gluePoolMaxDeepDepth": "深胶水池最大深度",
     "genMud": "生成泥潭", "genMire": "生成黏稠泥潭", "genDeepMud": "生成深泥潭", "genLiquidMire": "生成液态泥潭",
@@ -140,7 +145,8 @@ def build():
                 "%1$s 在逃离手持%3$s的%2$s时" + DEATHS[cause].replace("%1$s ", ""))
         elif key in previous:
             result[key] = previous[key]
-        elif key in ("container.mfqm.honey_chest", "tooltip.mfqm.life_jacket", "tooltip.mfqm.wading_boots"):
+        elif key in ("container.mfqm.honey_chest", "tooltip.mfqm.life_jacket", "tooltip.mfqm.wading_boots",
+                     "mfqm.configuration.strandDensity", "mfqm.configuration.strandDensity.tooltip"):
             continue  # Explicit translations below.
         else:
             result[key] = WORDS[value]  # Fail explicitly on a newly introduced untranslated value.
@@ -156,7 +162,7 @@ def build():
         **{"mfqm.configuration." + k: v for k, v in {"adhesive": "黏连与胶水", "worldgen": "世界生成", "mobs": "生物生成",
             "items": "工具获取", "options": "玩法与物理", "hud": "界面与视角", "rendering": "画面显示", "compat": "模组兼容"}.items()},
         "mfqm.configuration.creativeGroundPhysics.tooltip": "开启后，关闭飞行的创造玩家也会黏住、下陷并需要挣扎。飞行和旁观始终免疫；创造模式仍免受伤害。",
-        "mfqm.configuration.glueCoating3d.tooltip": "将白色半透明胶水覆盖显示为逐像素凸起，兼容 3D Skin Layers 的外层尺寸。关闭后显示平面覆盖，不影响黏力和水洗。",
+        "mfqm.configuration.glueCoating3d.tooltip": "将胶水、焦油、蜂蜜、黏液及泥沙等全部残留显示为逐像素凸起，适配 FirstPersonModel 与 3D Skin Layers。关闭后使用平面覆盖，不影响黏力和水洗。",
         "mfqm.configuration.gluePoolChance.tooltip": "适宜新区块平均每此数量尝试一个胶水池候选；值越小，候选越多，地形不适宜时仍不会生成。",
         "mfqm.configuration.bootLossChance.tooltip": "胶水或涂胶粘鼠板中奋力拔脚、挣断时的单次留靴概率。每次连续受困只检查一次；靴子的原有组件完整保留。",
         "mfqm.configuration.realisticSuffocation.tooltip": "开启时玩家耗尽沉陷空气量后才受窒息伤害；关闭时头部没入危险介质便可能受伤。",
@@ -177,6 +183,19 @@ def build():
         result[prefix + ".title"] = label
     for medium in ("glue", "honey", "tar", "slime", "mud", "board"):
         result["mfqm.configuration." + medium + "ActivityRadius.tooltip"] = "完整黏力时可实际走动的半径，单位为格。挣扎会扩大范围；黏丝接近边缘才回拉。断裂距离至少保留半径加 0.4 格，供转身和短跳。"
+    for family,label in (("glue","胶水与涂胶板"),("tar","焦油"),("honey","蜂蜜与蜂蜡"),("slime","黏液与其他软质残留"),("mud","泥沙与其他残留")):
+        result["mfqm.configuration."+family+"Visuals"]=label+"显示设置"
+    for field in ("coatingOpacity","materialOpacity"):
+        result["mfqm.configuration."+field+".tooltip"]="仅影响本机显示。1 为原始透明强度，0 隐藏覆盖；全局值与材质值相乘，不改变浸入高度、水洗或黏力。"
+    for field in ("coatingThickness","materialThickness"):
+        result["mfqm.configuration."+field+".tooltip"]="仅影响本机显示。1 为默认像素凸起厚度；全局值与材质值相乘，0 使用平面覆盖，不改变浸入高度和黏力。"
+    for field in ("strandDisplayLimit","materialStrands"):
+        result["mfqm.configuration."+field+".tooltip"]="每个角色可见接触组数量，默认 64，范围 0～64；每组有 1～8 根独立完整黏丝，由密度设置控制。取全局与材质上限中较小的值，优先显示脚边新连接；远处旧丝淡出，不影响服务器物理。"
+    result["mfqm.configuration.strandDensity.tooltip"]="每个接触显示的独立黏丝数量，默认 8，范围 1～8；64 个接触满额时最多约 512 根。每根有独立根部且不分叉，实际显示受距离和接触数量限制。调低可减少绘制开销，不改变物理黏力。"
+    for medium in ("glue","honey","tar","slime","board"):
+        result["mfqm.configuration."+medium+"VerticalDistance.tooltip"]="黏丝竖向延伸超过此距离时断开，单位为格。与水平活动半径独立；延长不会使角色飞行。服务器决定此值。"
+    for key in ("mudBondDistance","mudActivityRadius"):
+        result["mfqm.configuration."+key+".tooltip"]="保留的旧版配置项。泥潭等非黏性介质已不再生成黏丝，此项不再影响它们；下陷与挣扎仍生效。"
     source = (ROOT / "src/main/java/com/mfqm/morefunquicksandmod/ModConfig.java").read_text(encoding="utf-8")
     missing = set(re.findall(r'\.define(?:InRange)?\("([^"]+)"', source)) - CONFIG.keys()
     if missing:

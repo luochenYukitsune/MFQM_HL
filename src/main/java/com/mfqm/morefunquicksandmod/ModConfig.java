@@ -104,6 +104,7 @@ public final class ModConfig {
         public final ModConfigSpec.DoubleValue glueBondDistance, honeyBondDistance, tarBondDistance, slimeBondDistance, mudBondDistance;
         public final ModConfigSpec.DoubleValue glueActivityRadius, honeyActivityRadius, tarActivityRadius, slimeActivityRadius, mudActivityRadius, boardActivityRadius;
         public final ModConfigSpec.DoubleValue bootLossChance;
+        public final ModConfigSpec.DoubleValue glueVerticalDistance,honeyVerticalDistance,tarVerticalDistance,slimeVerticalDistance,boardVerticalDistance;
         public final ModConfigSpec.BooleanValue genGluePools, genStickyBoards;
         public final ModConfigSpec.IntValue gluePoolChance;
         public final ModConfigSpec.IntValue gluePoolShallowDepth, gluePoolMinDeepDepth, gluePoolMaxDeepDepth;
@@ -111,6 +112,11 @@ public final class ModConfig {
         ServerConfig(ModConfigSpec.Builder builder) {
             builder.push("adhesive");
             adhesiveBonds = builder.define("adhesiveBonds", true);
+            glueVerticalDistance=builder.defineInRange("glueVerticalDistance",4.,.25,16);
+            honeyVerticalDistance=builder.defineInRange("honeyVerticalDistance",2.7,.25,16);
+            slimeVerticalDistance=builder.defineInRange("slimeVerticalDistance",2.7,.25,16);
+            tarVerticalDistance=builder.defineInRange("tarVerticalDistance",2.,.25,16);
+            boardVerticalDistance=builder.defineInRange("boardVerticalDistance",2.,.25,16);
             creativeGroundPhysics = builder.comment("Apply trapping physics to grounded creative players; flying and spectator players remain exempt")
                     .define("creativeGroundPhysics", true);
             glueBondDistance = builder.defineInRange("glueBondDistance", 2.5, .25, 8);
@@ -221,6 +227,11 @@ public final class ModConfig {
         public final ModConfigSpec.BooleanValue tarTreadsEffect;
         public final ModConfigSpec.BooleanValue struggleAnimation, struggleCamera, adhesiveTethers;
         public final ModConfigSpec.BooleanValue glueCoating3d;
+        public final ModConfigSpec.DoubleValue coatingOpacity,coatingThickness;
+        public final ModConfigSpec.IntValue strandDisplayLimit,strandDensity;
+        public final java.util.Map<String,MaterialVisuals> materialVisuals;
+        public record MaterialVisuals(ModConfigSpec.DoubleValue opacity,ModConfigSpec.DoubleValue thickness,ModConfigSpec.IntValue strands){}
+        public MaterialVisuals visuals(String family){return materialVisuals.get(family);}
 
         ClientConfig(ModConfigSpec.Builder builder) {
             builder.push("hud");
@@ -236,8 +247,21 @@ public final class ModConfig {
             struggleAnimation = builder.define("struggleAnimation", true);
             struggleCamera = builder.comment("Subtle camera movement during accepted struggle actions").define("struggleCamera", true);
             adhesiveTethers = builder.define("adhesiveTethers", true);
-            glueCoating3d = builder.comment("Extrude glue coating pixels outside skin layers; disable for a flat coating")
+            // Keep the existing saved key; it now controls 3D residue for every material.
+            glueCoating3d = builder.comment("Extrude all residue pixels outside skin layers; disable for flat coatings")
                     .define("glueCoating3d", true);
+            coatingOpacity=builder.comment("Client only: source opacity multiplier; zero hides residue").defineInRange("coatingOpacity",1.,0,2);
+            coatingThickness=builder.comment("Client only: pixel relief multiplier; zero uses a flat surface").defineInRange("coatingThickness",1.,0,3);
+            strandDisplayLimit=builder.comment("Client only: maximum visible contact groups per target; each contains strandDensity independent strands, physics unchanged").defineInRange("strandDisplayLimit",64,0,64);
+            strandDensity=builder.comment("Client only: independent complete strands per contact; 8 allows up to 512 strands per target without extra physical entities").defineInRange("strandDensity",8,1,8);
+            var visuals=new java.util.LinkedHashMap<String,MaterialVisuals>();
+            for(String family:new String[]{"glue","tar","honey","slime","mud"}) {
+                builder.push(family+"Visuals");
+                visuals.put(family,new MaterialVisuals(builder.defineInRange("materialOpacity",1.,0,2),
+                        builder.defineInRange("materialThickness",1.,0,3),builder.defineInRange("materialStrands",64,0,64)));
+                builder.pop();
+            }
+            materialVisuals=java.util.Map.copyOf(visuals);
             builder.pop();
         }
     }

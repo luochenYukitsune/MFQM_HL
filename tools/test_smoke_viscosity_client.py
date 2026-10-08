@@ -81,6 +81,33 @@ class ViscosityLauncherTest(unittest.TestCase):
         self.assertFalse(upstream_skin_pack_metadata_error(line.replace("skinlayers3d", "mfqm"), True))
         self.assertFalse(upstream_skin_pack_metadata_error("[Render thread/ERROR] GPU rendering failed", True))
 
+    def test_first_person_is_explicit_and_clears_stale_flag(self):
+        stale="-Dmfqm.firstPersonExpected=true\n"
+        self.assertIn("-Dmfqm.firstPersonExpected=false\n",viscosity_vm(stale,True))
+        actual=viscosity_vm(stale,True,coating_only=True,first_person=True)
+        self.assertEqual(actual.count("-Dmfqm.firstPersonExpected="),1)
+        self.assertIn("-Dmfqm.firstPersonExpected=true\n",actual)
+
+    def test_dense_scene_and_image_are_explicit(self):
+        stale="-Dmfqm.dynamicAdhesionChecks=true\n-Dmfqm.dynamicVisual=true\n"
+        actual=viscosity_vm(stale,True)
+        self.assertIn("-Dmfqm.dynamicAdhesionChecks=false\n",actual)
+        self.assertIn("-Dmfqm.dynamicVisual=false\n",actual)
+        dense=viscosity_vm(stale,True,dynamic_only=True,dynamic_visual=True)
+        self.assertEqual(dense.count("-Dmfqm.dynamicVisual="),1)
+        self.assertIn("-Dmfqm.dynamicVisual=true\n",dense)
+
+    def test_animation_compatibility_is_explicit_and_exact(self):
+        stale="-Dmfqm.coatingAnimationsExpected=true\n"
+        self.assertIn("-Dmfqm.coatingAnimationsExpected=false\n",viscosity_vm(stale,True))
+        actual=viscosity_vm(stale,True,coating_only=True,first_person=True,animations=True)
+        self.assertEqual(actual.count("-Dmfqm.coatingAnimationsExpected="),1)
+        self.assertIn("-Dmfqm.coatingAnimationsExpected=true\n",actual)
+        line="[Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/notenoughanimations pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field."
+        self.assertFalse(upstream_skin_pack_metadata_error(line,True,True))
+        self.assertTrue(upstream_skin_pack_metadata_error(line,True,True,True))
+        self.assertFalse(upstream_skin_pack_metadata_error(line.replace("notenoughanimations","mfqm"),True,True,True))
+
 
 if __name__ == "__main__":
     unittest.main()

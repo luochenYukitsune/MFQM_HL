@@ -25,6 +25,9 @@ logs/
 !docs/superpowers/2026-10-06-adhesive-gameplay/*.log
 !docs/superpowers/2026-10-07-viscosity/*.log
 !docs/superpowers/2026-10-07-bounded-adhesion/*.log
+!docs/superpowers/2026-10-08-dynamic-adhesion/*.log
+!docs/superpowers/2026-10-08-compact-strands/*.log
+!docs/superpowers/2026-10-08-wet-adhesive/*.log
 classes/
 bin/
 

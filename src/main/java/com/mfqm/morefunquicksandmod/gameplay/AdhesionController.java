@@ -65,10 +65,13 @@ public final class AdhesionController {
         if(exempt(entity) || immune) { clear(entity,level,state);return; }
         // Removed medium or exhausted glue must release before native travel,
         // including a ground jump on the very first depleted-board tick.
-        boolean invalid=state.anchors.removeIf(anchor->{
-            if(valid(level,anchor))return false;
-            removeVisual(level,anchor);return true;
-        });
+        boolean invalid=false;
+        for(var iterator=state.anchors.listIterator();iterator.hasNext();) {
+            var anchor=iterator.next();
+            var root=valid(level,anchor)?AdhesiveSurface.root(level,anchor.block(),anchor.material(),anchor.point()):null;
+            if(root==null){removeVisual(level,anchor);iterator.remove();invalid=true;}
+            else if(!root.equals(anchor.point()))iterator.set(new Anchor(anchor.block(),root,anchor.material(),anchor.side(),anchor.created(),anchor.visual()));
+        }
         if(invalid) {
             state.adhesiveConnections=state.anchors.size();state.adhesiveForce=Vec3.ZERO;
             if(state.anchors.isEmpty()){state.adhesiveOrigin=null;state.adhesiveMaterial="";state.adhesiveJump=new AdhesiveMotion.Jump();}
@@ -128,15 +131,26 @@ public final class AdhesionController {
         if(!material.isEmpty() && ModConfig.SERVER.adhesiveBonds.get() && profile(material)!=null
                 && !(material.equals("tar") && !ModConfig.SERVER.tarTreads.get())
                 && !state.struggle.boardReleased(medium)) {
-            BlockPos block=board!=null?board:contact.pos();
-            double surface=board!=null?board.getY()+.065:Math.min(contact.surface(),entity.getY()+.1);
-            // Existing anchors remain fixed; only fresh contact can create replacements.
-            if(state.anchors.isEmpty()) {state.adhesiveOrigin=entity.position();state.adhesiveMaterial=material;state.adhesiveJump=new AdhesiveMotion.Jump();}
-            if(state.anchors.stream().noneMatch(a->a.block().equals(block) && a.material().equals(material)))for(int side=0;side<2 && state.anchors.size()<AdhesiveRules.MAX_BONDS;side++) {
-                Vec3 foot=foot(entity,side);Vec3 point=new Vec3(foot.x,surface,foot.z);
-                var visual=ModEntities.ADHESIVE_TETHER.get().create(level,EntitySpawnReason.TRIGGERED);
-                if(visual!=null){visual.configure(entity,point,material,side,1);if(!level.addFreshEntity(visual))visual=null;}
-                state.anchors.add(new Anchor(block.immutable(),point,material,side,tick,visual==null?null:visual.getUUID()));
+            boolean freshContact=state.anchors.isEmpty() || state.lastAnchorPosition==null || AdhesiveContact.fresh(tick,state.lastAnchorTick,entity.position().distanceToSqr(state.lastAnchorPosition));
+            if(freshContact) {
+                boolean added=false;
+                for(int side=0;side<2;side++) {
+                    // Spread contacts across the sole, instead of stacking every trail on one exact line.
+                    double phase=(tick+side*13)*2.399963229728653;
+                    var sample=AdhesiveSurface.find(level,foot(entity,side).add(.055*Math.cos(phase),0,.055*Math.sin(phase)),material);if(sample==null)continue;
+                    if(state.anchors.isEmpty()) {state.adhesiveOrigin=entity.position();state.adhesiveMaterial=material;state.adhesiveJump=new AdhesiveMotion.Jump();}
+                    // Retire the oldest physical connection before adding; recoil remains cosmetic for six ticks.
+                    for(int expired=AdhesiveContact.overflow(state.anchors.size(),1,AdhesiveRules.MAX_BONDS);expired>0;expired--) {
+                        var old=state.anchors.removeFirst();
+                        if(old.visual()!=null && level.getEntity(old.visual()) instanceof AdhesiveTetherEntity visual){visual.cuff(false);visual.beginBreak();}
+                    }
+                    for(var anchor:state.anchors)if(anchor.side()==side && anchor.visual()!=null
+                            && level.getEntity(anchor.visual()) instanceof AdhesiveTetherEntity visual)visual.cuff(false);
+                    var visual=ModEntities.ADHESIVE_TETHER.get().create(level,EntitySpawnReason.TRIGGERED);
+                    if(visual!=null){visual.configure(entity,sample.point(),material,side,1);visual.cuff(true);if(!level.addFreshEntity(visual))visual=null;}
+                    state.anchors.add(new Anchor(sample.block(),sample.point(),material,side,tick,visual==null?null:visual.getUUID()));added=true;
+                }
+                if(added){state.lastAnchorTick=tick;state.lastAnchorPosition=entity.position();}
             }
         }
         state.adhesiveStrength=state.struggle.adhesionScale(medium);
@@ -163,7 +177,14 @@ public final class AdhesionController {
             default->ModConfig.SERVER.mudBondDistance.get();
         };
         double radius=activityRadius(id);
-        return new AdhesiveRules.Profile(AdhesiveMotion.bondDistance(distance,radius),base.stiffness(),AdhesiveMotion.restLength(radius));
+        double vertical=switch(id) {
+            case "glue"->ModConfig.SERVER.glueVerticalDistance.get();
+            case "sticky_board"->ModConfig.SERVER.boardVerticalDistance.get();
+            case "tar"->ModConfig.SERVER.tarVerticalDistance.get();
+            case "honey"->ModConfig.SERVER.honeyVerticalDistance.get();
+            default->ModConfig.SERVER.slimeVerticalDistance.get();
+        };
+        return new AdhesiveRules.Profile(AdhesiveMotion.bondDistance(distance,radius),base.stiffness(),AdhesiveMotion.restLength(radius),vertical);
     }
     public static Vec3 foot(LivingEntity entity,int side) {
         double yaw=Math.toRadians(entity.yBodyRot),offset=side==0?-.16:.16;
@@ -189,7 +210,8 @@ public final class AdhesionController {
             } else {
                 if(anchor.visual()!=null && level.getEntity(anchor.visual()) instanceof AdhesiveTetherEntity visual)visual.beginBreak();
                 snapped=true;
-                if(valid && strength>0 && foot.distanceTo(anchor.point())>p.maxDistance() && medium(anchor.material())!=StruggleRules.Medium.OTHER)bootAnchor=anchor.block();
+                if(valid && strength>0 && p!=null && (foot.subtract(anchor.point()).horizontalDistance()>p.maxDistance()
+                        || Math.abs(foot.y-anchor.point().y)>p.verticalDistance()) && medium(anchor.material())!=StruggleRules.Medium.OTHER)bootAnchor=anchor.block();
             }
             if(bootAnchor==null && state.struggleResult!=null && state.struggleResult.acceptedPress() && state.struggle.effort()>=4
                     && medium(anchor.material())!=StruggleRules.Medium.OTHER)bootAnchor=anchor.block();
@@ -216,11 +238,11 @@ public final class AdhesionController {
     private static Vec3 vector(AdhesiveRules.Point p){return new Vec3(p.x(),p.y(),p.z());}
     private static void removeVisual(ServerLevel level,Anchor anchor){if(anchor.visual()!=null && level.getEntity(anchor.visual()) instanceof AdhesiveTetherEntity visual)visual.discard();}
     private static boolean valid(ServerLevel level,Anchor anchor) {
-        if(!level.hasChunkAt(anchor.block()) || anchor.material().equals("tar") && !ModConfig.SERVER.tarTreads.get())return false;
+        if(profile(anchor.material())==null || !level.hasChunkAt(anchor.block()) || anchor.material().equals("tar") && !ModConfig.SERVER.tarTreads.get())return false;
         var block=level.getBlockState(anchor.block());
         return anchor.material().equals("sticky_board")?com.mfqm.morefunquicksandmod.block.StickyBoardBlock.isCoated(block):QuicksandPhysics.id(block).equals(anchor.material());
     }
-    private static void clearAnchors(ServerLevel level,SinkingState state){state.anchors.forEach(a->removeVisual(level,a));state.anchors.clear();state.adhesiveConnections=0;state.adhesiveForce=Vec3.ZERO;state.adhesiveOrigin=null;state.adhesiveMaterial="";state.adhesiveJump=new AdhesiveMotion.Jump();}
+    private static void clearAnchors(ServerLevel level,SinkingState state){state.anchors.forEach(a->removeVisual(level,a));state.anchors.clear();state.adhesiveConnections=0;state.adhesiveForce=Vec3.ZERO;state.adhesiveOrigin=null;state.adhesiveMaterial="";state.adhesiveJump=new AdhesiveMotion.Jump();state.lastAnchorTick=Long.MIN_VALUE;state.lastAnchorPosition=null;}
     private static void removeBoardDrag(LivingEntity entity){var speed=entity.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);if(speed!=null)speed.removeModifier(BOARD_DRAG);}
     /** A ServerPlayer keeps this attachment across teleport, so clear the old world's helpers explicitly. */
     public static void changedDimension(LivingEntity entity,ServerLevel previous,ServerLevel current) {

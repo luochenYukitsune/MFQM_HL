@@ -56,6 +56,8 @@ public final class SinkingState implements ValueIOSerializable {
     /** Synchronized release snapshot; meaningful only for the same board and coating episode. */
     public boolean boardReleased;
     public final java.util.List<AdhesionController.Anchor> anchors = new java.util.ArrayList<>();
+    public long lastAnchorTick=Long.MIN_VALUE;
+    public net.minecraft.world.phys.Vec3 lastAnchorPosition;
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SinkingState> STREAM_CODEC = new StreamCodec<>() {
         @Override public SinkingState decode(RegistryFriendlyByteBuf buffer) {

@@ -16,7 +16,7 @@ public final class SkinLayerClearance {
     private static final Map<String,Field> FIELDS=new HashMap<>();
     public static boolean present(){return ModList.get().isLoaded("skinlayers3d");}
     public static float padding(String part,boolean firstPerson,ModelPart outer) {
-        if(outer!=null && (!outer.visible || !active(outer)))return part.equals("head")?.65F:.35F;
+        if(outer!=null && (!outer.visible || !active(outer)))return (float)CoatingAppearance.surfacePadding(part.equals("head"),outer.visible,0);
         return padding(part,firstPerson);
     }
     private static boolean active(ModelPart outer) {
@@ -33,7 +33,7 @@ public final class SkinLayerClearance {
         }
     }
     public static float padding(String part,boolean firstPerson) {
-        float vanilla=part.equals("head")?.65F:.35F;
+        float vanilla=(float)CoatingAppearance.surfacePadding(part.equals("head"),true,0);
         if(!present() || failed)return vanilla;
         try {
             if(!resolved) {
@@ -50,7 +50,7 @@ public final class SkinLayerClearance {
             float width=part.equals("body")?number(settings,"bodyVoxelWidthSize"):size;
             // One extruded voxel plus scale growth of the underlying part. Head
             // uses a larger allowance for the skin mod's separate pivot offset.
-            return Math.max(vanilla,Math.max((size-1)*2+size*.5F,(width-1)*half+size*.5F)+(part.equals("head")?.2F:.1F));
+            return (float)CoatingAppearance.surfacePadding(part.equals("head"),true,Math.max((size-1)*2+size*.5F,(width-1)*half+size*.5F));
         } catch(ReflectiveOperationException | RuntimeException | LinkageError e) {
             unavailable(e);
             return vanilla;

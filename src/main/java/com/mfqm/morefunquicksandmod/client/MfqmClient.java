@@ -7,7 +7,6 @@ import com.mfqm.morefunquicksandmod.registry.ModEntities;
 import com.mfqm.morefunquicksandmod.registry.ModParticles;
 import com.mfqm.morefunquicksandmod.registry.ModBlockEntities;
 import com.mfqm.morefunquicksandmod.entity.ConnectorEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.google.common.reflect.TypeToken;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
@@ -18,8 +17,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -89,10 +86,12 @@ public final class MfqmClient {
         event.registerEntityModifier(new TypeToken<AvatarRenderer<?>>() {},(Entity entity,AvatarRenderState state)-> {
             state.setRenderData(MuddyPlayerLayer.COATING,MuddyPlayerLayer.Coating.snapshot(QuicksandPhysics.state(entity)));
             StruggleClient.capture(entity,state);
+            FirstPersonCompatibility.capture(entity,state);
         });
     }
     @SubscribeEvent public static void struggleHand(RenderHandEvent event){StruggleClient.hand(event);}
     @SubscribeEvent public static void struggleCamera(ViewportEvent.ComputeCameraAngles event){StruggleClient.camera(event);}
+    @SubscribeEvent public static void renderFrame(net.neoforged.neoforge.client.event.RenderFrameEvent.Pre event){FirstPersonCompatibility.beginFrame();FirstPersonTetherProof.beginFrame();}
     @SubscribeEvent public static void adhesiveTooltip(net.neoforged.neoforge.event.entity.player.ItemTooltipEvent event) {
         var item=event.getItemStack().getItem();
         String id=net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item).getPath();
@@ -118,15 +117,9 @@ public final class MfqmClient {
         var model=event.getPlayer().getSkin().model()==net.minecraft.world.entity.player.PlayerModelType.SLIM?SLIM_COATING:WIDE_COATING;
         var arm=event.getArm()==HumanoidArm.RIGHT?model.rightArm:model.leftArm;
         arm.resetPose();arm.visible=true;arm.zRot=event.getArm()==HumanoidArm.RIGHT?0.1F:-0.1F;
-        if(coat.glue()) {
-            boolean slim=event.getPlayer().getSkin().model()==net.minecraft.world.entity.player.PlayerModelType.SLIM;
-            GlueCoatingRenderer.submit(arm,event.getArm()==HumanoidArm.RIGHT?"right_arm":"left_arm",slim,coat,
-                    event.getPoseStack(),event.getSubmitNodeCollector(),event.getPackedLight(),true,true);
-            return;
-        }
-        PoseStack pose=event.getPoseStack();pose.pushPose();pose.scale(1.003F,1.003F,1.003F);
-        event.getSubmitNodeCollector().order(1).submitModelPart(arm,pose,RenderTypes.entityTranslucent(coat.texture()),event.getPackedLight(),OverlayTexture.NO_OVERLAY,null,coat.color(),null);
-        pose.popPose();
+        boolean slim=event.getPlayer().getSkin().model()==net.minecraft.world.entity.player.PlayerModelType.SLIM;
+        GlueCoatingRenderer.submit(arm,event.getArm()==HumanoidArm.RIGHT?"right_arm":"left_arm",slim,coat,
+                event.getPoseStack(),event.getSubmitNodeCollector(),event.getPackedLight(),true,true);
     }
     @SubscribeEvent public static void beforeTick(ClientTickEvent.Pre event){
         var game=Minecraft.getInstance();

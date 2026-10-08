@@ -15,25 +15,39 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 
-/** Three sagging strands and an ankle/shin membrane per synchronized anchor. No physical force here. */
+/** Wet foot films and independent complete volumetric strands; physics is server-owned. */
 public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherEntity,AdhesiveTetherRenderer.State> {
     private static final Identifier TEXTURE=Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"textures/entity/adhesive_strand.png");
     private final AdhesiveFeetSampler feet;
+    record Filament(Vec3 root,Vec3 end,double width,double rootWidth){}
     public static final class State extends EntityRenderState {
         Vec3 foot=Vec3.ZERO,shin=Vec3.ZERO;
-        double width,radius;
         int color;
-        boolean visible;
+        boolean visible,cuff;
+        boolean local;
+        int segments,side;
+        java.util.List<Filament> filaments=java.util.List.of();
+        java.util.List<CoatingVoxels.Quad> membrane=java.util.List.of();
+        java.util.List<CoatingVoxels.Quad> strands=java.util.List.of();
+        WetAdhesiveStyle.Frame surface;
     }
-    public AdhesiveTetherRenderer(EntityRendererProvider.Context context) { super(context);feet=new AdhesiveFeetSampler(context); }
+    public AdhesiveTetherRenderer(EntityRendererProvider.Context context) { super(context);feet=new AdhesiveFeetSampler(context);FirstPersonCompatibility.sampler(feet); }
     public AdhesiveFeetSampler feet() { return feet; }
     @Override public State createRenderState() { return new State(); }
     @Override protected boolean affectedByCulling(AdhesiveTetherEntity entity) { return false; }
     @Override public void extractRenderState(AdhesiveTetherEntity entity,State state,float tick) {
         super.extractRenderState(entity,state,tick);
         var target=entity.target();state.visible=false;
+        state.local=target==net.minecraft.client.Minecraft.getInstance().getCameraEntity() && !entity.breaking();state.side=entity.side();
         if(target==null || !target.isAlive() || target.isInvisible() || target.isSpectator() || !ModConfig.CLIENT.adhesiveTethers.get()
                 || entity.material().equals("tar") && !ModConfig.CLIENT.tarTreadsEffect.get())return;
+        if(!AdhesiveDisplayBudget.visible(entity))return;
+        var original=entity.position();
+        var cell=net.minecraft.core.BlockPos.containing(original);
+        double surfaceHeight=RenderedAdhesiveSurface.minimumHeight(entity.level(),cell,entity.material());
+        var root=RenderedAdhesiveSurface.root(cell,surfaceHeight,original,WetAdhesiveStyle.width(0,entity.getId(),entity.material()),0,0,1);
+        if(root==null)return;
+        var base=root.point();
         // A surface anchor can be inside a dark block cell while the exposed leg is in daylight.
         // Sample both ends; preserve actual cave/night lighting rather than using emissive glue.
         int targetLight=net.minecraft.client.renderer.LevelRenderer.getLightColor(target.level(),net.minecraft.core.BlockPos.containing(target.getEyePosition()));
@@ -41,17 +55,43 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
                 Math.max(net.minecraft.client.renderer.LightTexture.block(state.lightCoords),net.minecraft.client.renderer.LightTexture.block(targetLight)),
                 Math.max(net.minecraft.client.renderer.LightTexture.sky(state.lightCoords),net.minecraft.client.renderer.LightTexture.sky(targetLight)));
         var sampled=feet.sample(target,entity.side(),tick);
-        Vec3 origin=new Vec3(state.x,state.y,state.z);
+        // Do not interpolate a sinking/flowing root above the newly lowered liquid surface.
+        state.x=base.x;state.y=base.y;state.z=base.z;Vec3 origin=base;
         state.foot=target.getPosition(tick).add(sampled.ankle()).subtract(origin);
         state.shin=target.getPosition(tick).add(sampled.shin()).subtract(origin);
-        double recoil=entity.breakProgress(tick);
+        double opacity=CompactStrandStyle.opacity(state.foot.horizontalDistance(),state.foot.y);
+        if(opacity<=0)return;
+        double recoil=entity.breakProgress(tick),remaining=entity.breaking()?WetAdhesiveStyle.contraction(recoil):1;
+        Vec3 endpointFoot=state.foot;
         if(entity.breaking()) {
-            double remaining=(1-recoil)*(1-recoil);
-            state.foot=entity.breakAnkle(state.foot).scale(remaining);
+            endpointFoot=entity.breakAnkle(state.foot);state.foot=endpointFoot.scale(remaining);
             state.shin=entity.breakShin(state.shin).scale(remaining);
         }
-        state.radius=Math.clamp(target.getBbWidth()*.23,.055,.19);
-        state.width=StrugglePose.width(entity.material(),state.foot.length());
+        state.cuff=entity.cuff() && !entity.breaking();state.segments=state.distanceToCameraSq>256?3:6;
+        var sampledSurface=sampled.surface();
+        state.surface=new WetAdhesiveStyle.Frame(vector(endpointFoot).add(sampledSurface.center().subtract(vector(sampled.ankle()))),
+                sampledSurface.up(),sampledSurface.right(),sampledSurface.front(),sampledSurface.halfWidth(),sampledSurface.halfDepth());
+        double depth=com.mfqm.morefunquicksandmod.gameplay.QuicksandPhysics.state(target).depth;
+        var membrane=new java.util.ArrayList<CoatingVoxels.Quad>();
+        if(state.cuff)appendFaded(membrane,WetAdhesiveStyle.film(state.surface,depth,entity.side()),opacity);
+        state.membrane=java.util.List.copyOf(membrane);
+        int density=ModConfig.CLIENT.strandDensity.get();
+        var filaments=new java.util.ArrayList<Filament>(density);var strands=new java.util.ArrayList<CoatingVoxels.Quad>();
+        for(int i=0;i<density;i++) {
+            long seed=((long)entity.getId()<<3)+i;
+            var anchor=RenderedAdhesiveSurface.root(cell,surfaceHeight,original,WetAdhesiveStyle.width(0,(int)seed,entity.material()),entity.getId(),i,density);
+            if(anchor==null)continue;
+            var localRoot=anchor.point().subtract(origin);
+            var attached=point(WetAdhesiveStyle.endpoint(state.surface,depth,seed,vector(localRoot)));
+            var end=localRoot.add(attached.subtract(localRoot).scale(remaining));
+            var delta=end.subtract(localRoot);double fade=CompactStrandStyle.opacity(delta.horizontalDistance(),delta.y);
+            if(fade<=0)continue;
+            double width=WetAdhesiveStyle.width(delta.length(),(int)seed,entity.material())*Math.max(.05,remaining);
+            double rootWidth=Math.min(width,anchor.radius());
+            filaments.add(new Filament(localRoot,end,width,rootWidth));
+            appendFaded(strands,WetAdhesiveStyle.tube(vector(localRoot),vector(end),state.segments,rootWidth,width),fade);
+        }
+        state.filaments=java.util.List.copyOf(filaments);state.strands=java.util.List.copyOf(strands);
         int rgb=switch(entity.material()) {
             case "glue","sticky_board"->0xf5f4ee;
             case "tar"->0x201711;
@@ -61,56 +101,32 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
         };
         float strength=entity.strength();
         int alpha=Float.isFinite(strength)?(int)(255*Math.clamp(strength,.2F,1F)*(1-recoil)):0;
-        state.color=alpha<<24|rgb;state.visible=alpha>0;
+        state.color=alpha<<24|rgb;state.visible=alpha>0 && (!strands.isEmpty() || !membrane.isEmpty());
+    }
+    private static void appendFaded(java.util.List<CoatingVoxels.Quad> output,java.util.List<CoatingVoxels.Quad> mesh,double opacity) {
+        for(var q:mesh)output.add(opacity>=1?q:new CoatingVoxels.Quad(q.a(),q.b(),q.c(),q.d(),q.normal(),CoatingAppearance.tint(q.color(),0xffffffff,opacity)));
     }
     @Override public void submit(State state,PoseStack pose,SubmitNodeCollector collector,CameraRenderState camera) {
         if(!state.visible)return;
+        FirstPersonTetherProof.tether(pose,state.foot,state.side,state.local);
         // Capture immutable values: a deferred callback must never retain the reused mutable render state.
-        Vec3 foot=state.foot,shin=state.shin;double width=state.width,radius=state.radius;
+        var strands=state.strands;var membrane=state.membrane;
         int light=state.lightCoords,color=state.color;
         collector.submitCustomGeometry(pose,RenderTypes.entityTranslucent(TEXTURE),(matrix,vertices)->{
-            for(int strand=0;strand<3;strand++) {
-                double offset=(strand-1)*radius*.75;
-                Vec3 start=new Vec3(offset,.008,(strand-1)*.03);
-                Vec3 end=foot.add(offset*.4,0,0);
-                Vec3 previous=start;
-                for(int segment=1;segment<=8;segment++) {
-                    double t=segment/8.;
-                    Vec3 next=start.lerp(end,t).add(0,-Math.min(.11,foot.length()*.04)*Math.sin(Math.PI*t),0);
-                    ribbon(vertices,matrix,previous,next,width,light,color);
-                    previous=next;
-                }
-            }
-            // A closed, translucent cuff follows the lifted foot and lower leg, with no torso endpoint.
-            Vec3 axis=shin.subtract(foot).normalize();
-            Vec3 across=axis.cross(new Vec3(1,0,0)).normalize();
-            if(across.lengthSqr()<1e-8)across=new Vec3(0,0,1);
-            Vec3 other=axis.cross(across).normalize();
-            for(int i=0;i<8;i++) {
-                double a=i*Math.PI/4,b=(i+1)*Math.PI/4;
-                Vec3 first=across.scale(Math.cos(a)*radius).add(other.scale(Math.sin(a)*radius));
-                Vec3 second=across.scale(Math.cos(b)*radius).add(other.scale(Math.sin(b)*radius));
-                vertex(vertices,matrix,foot.add(first),i/8F,0,light,color);
-                vertex(vertices,matrix,shin.add(first.scale(.82)),i/8F,1,light,color);
-                vertex(vertices,matrix,shin.add(second.scale(.82)),(i+1)/8F,1,light,color);
-                vertex(vertices,matrix,foot.add(second),(i+1)/8F,0,light,color);
-            }
+            for(var q:strands)quad(vertices,matrix,q,light,color);
+            for(var q:membrane)quad(vertices,matrix,q,light,color);
         });
         super.submit(state,pose,collector,camera);
     }
-    private static void ribbon(VertexConsumer vertices,PoseStack.Pose matrix,Vec3 start,Vec3 end,double width,int light,int color) {
-        Vec3 direction=end.subtract(start).normalize();
-        Vec3 across=new Vec3(-direction.z,0,direction.x).normalize().scale(width);
-        if(across.lengthSqr()<1e-8)across=new Vec3(width,0,0);
-        quad(vertices,matrix,start,end,across,light,color);
-        quad(vertices,matrix,start,end,direction.cross(across).normalize().scale(width),light,color);
+    private static void quad(VertexConsumer vertices,PoseStack.Pose matrix,CoatingVoxels.Quad q,int light,int color) {
+        int tint=CoatingAppearance.tint(q.color(),color,1);var normal=point(q.normal());
+        vertex(vertices,matrix,point(q.a()),0,0,light,tint,normal);vertex(vertices,matrix,point(q.b()),1,0,light,tint,normal);
+        vertex(vertices,matrix,point(q.c()),1,1,light,tint,normal);vertex(vertices,matrix,point(q.d()),0,1,light,tint,normal);
     }
-    private static void quad(VertexConsumer vertices,PoseStack.Pose matrix,Vec3 start,Vec3 end,Vec3 across,int light,int color) {
-        vertex(vertices,matrix,start.subtract(across),0,0,light,color);vertex(vertices,matrix,end.subtract(across),0,1,light,color);
-        vertex(vertices,matrix,end.add(across),1,1,light,color);vertex(vertices,matrix,start.add(across),1,0,light,color);
-    }
-    private static void vertex(VertexConsumer vertices,PoseStack.Pose matrix,Vec3 point,float u,float v,int light,int color) {
+    private static CoatingVoxels.Vec vector(Vec3 p){return new CoatingVoxels.Vec(p.x,p.y,p.z);}
+    private static Vec3 point(CoatingVoxels.Vec p){return new Vec3(p.x(),p.y(),p.z());}
+    private static void vertex(VertexConsumer vertices,PoseStack.Pose matrix,Vec3 point,float u,float v,int light,int color,Vec3 normal) {
         vertices.addVertex(matrix,(float)point.x,(float)point.y,(float)point.z).setColor(color).setUv(u,v)
-                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,0,1,0);
+                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,(float)normal.x,(float)normal.y,(float)normal.z);
     }
 }

@@ -4,17 +4,18 @@ import java.util.List;
 
 /** Pure adhesion physics: no Minecraft objects or global configuration. */
 public final class AdhesiveRules {
-    public static final int MAX_BONDS = 4;
+    public static final int MAX_BONDS = 64;
     public static final double MAX_TOTAL_FORCE = .045;
     private static final Profile GLUE = new Profile(2.5, .032, .2);
     private static final Profile BOARD = new Profile(1.1, .04, .12);
     private static final Profile TAR = new Profile(1.2, .028, .2);
     private static final Profile HONEY = new Profile(1.8, .018, .2);
     private static final Profile SLIME = new Profile(1.8, .022, .2);
-    private static final Profile MUD = new Profile(.8, .025, .12);
 
     /** Distances are blocks; stiffness adds velocity per tick for each block of extension. */
-    public record Profile(double maxDistance, double stiffness, double restLength) {}
+    public record Profile(double maxDistance, double stiffness, double restLength, double verticalDistance) {
+        public Profile(double maxDistance,double stiffness,double restLength){this(maxDistance,stiffness,restLength,maxDistance);}
+    }
 
     public record Point(double x, double y, double z) {
         public static final Point ZERO = new Point(0, 0, 0);
@@ -40,15 +41,13 @@ public final class AdhesiveRules {
             case "tar" -> TAR;
             case "honey" -> HONEY;
             case "sinking_slime", "mucus" -> SLIME;
-            case "mud", "bog", "morass", "mire", "moor", "wet_peat", "brown_clay", "sinking_clay", "slurry" ->
-                    MUD;
             default -> null;
         };
     }
     public static Result evaluate(List<Bond> bonds) { return evaluate(bonds, MAX_TOTAL_FORCE); }
 
     /**
-     * Keeps the first four valid connections in list order, counting invalid and surplus entries as broken.
+     * Keeps up to 64 valid connections in list order. The controller replaces oldest contacts before adding.
      * The caller owns anchor existence, lifetime and dimension checks and supplies them through Bond.valid.
      * The force points from feet toward anchors; summation precedes the norm cap so opposite pulls cancel.
      * A configured ceiling may reduce the hard limit but cannot increase it. Evaluation never mutates bonds.
@@ -72,18 +71,19 @@ public final class AdhesiveRules {
             largestComponent = Math.max(largestComponent,
                     Math.max(Math.abs(force.x()), Math.max(Math.abs(force.y()), Math.abs(force.z()))));
         }
+        // Preserve the original pair's feel: density is visual, never an extra source of drag.
         double ceiling = Math.min(MAX_TOTAL_FORCE, maxTotalForce);
-        return new Result(cappedSum(forces, active, largestComponent, ceiling), active, broken);
+        return new Result(cappedSum(forces, active, largestComponent, ceiling,active>2?2./active:1), active, broken);
     }
 
-    private static Point cappedSum(Point[] forces, int count, double largestComponent, double ceiling) {
+    private static Point cappedSum(Point[] forces, int count, double largestComponent, double ceiling,double weight) {
         if (largestComponent == 0 || ceiling == 0) return Point.ZERO;
-        // Scale before adding: even four enormous but finite forces cannot overflow into NaN velocity.
+        // Scale before adding: even 64 enormous finite forces cannot overflow into NaN velocity.
         double x = 0, y = 0, z = 0;
         for (int i = 0; i < count; i++) {
-            x += forces[i].x() / largestComponent;
-            y += forces[i].y() / largestComponent;
-            z += forces[i].z() / largestComponent;
+            x += forces[i].x() * weight / largestComponent;
+            y += forces[i].y() * weight / largestComponent;
+            z += forces[i].z() * weight / largestComponent;
         }
         double length = Math.hypot(Math.hypot(x, y), z);
         if (length == 0) return Point.ZERO;
@@ -102,7 +102,8 @@ public final class AdhesiveRules {
         double dz = bond.anchor().z() - bond.foot().z();
         Point offset = new Point(dx, dy, dz);
         double distance = offset.length();
-        if (!offset.isFinite() || !Double.isFinite(distance) || distance > bond.profile().maxDistance()) return null;
+        if (!offset.isFinite() || !Double.isFinite(distance) || Math.hypot(dx,dz)>bond.profile().maxDistance()
+                || Math.abs(dy)>bond.profile().verticalDistance()) return null;
         if (distance == 0) return Point.ZERO;
         double stretch = Math.max(0, distance - bond.profile().restLength());
         double magnitude = bond.profile().stiffness() * Math.min(1, bond.strength()) * stretch;
@@ -112,6 +113,7 @@ public final class AdhesiveRules {
 
     private static boolean valid(Profile profile) {
         return profile != null && Double.isFinite(profile.maxDistance()) && profile.maxDistance() > 0
+                && Double.isFinite(profile.verticalDistance()) && profile.verticalDistance()>0
                 && Double.isFinite(profile.stiffness()) && profile.stiffness() >= 0
                 && Double.isFinite(profile.restLength()) && profile.restLength() >= 0
                 && profile.restLength() <= profile.maxDistance();

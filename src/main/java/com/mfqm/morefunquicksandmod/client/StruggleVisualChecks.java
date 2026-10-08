@@ -126,6 +126,10 @@ public final class StruggleVisualChecks {
     }
     private static void finite(AdhesiveFeetSampler.Foot foot,String message) {
         require(Double.isFinite(foot.ankle().lengthSqr()) && Double.isFinite(foot.shin().lengthSqr()),message+" finite endpoints");
+        var frame=foot.surface();
+        require(frame.halfWidth()>0 && frame.halfWidth()<.6 && frame.halfDepth()>0 && frame.halfDepth()<.6,message+" wet film uses bounded native foot dimensions");
+        require(Math.abs(frame.up().length()-1)<1e-5 && Math.abs(frame.right().length()-1)<1e-5 && Math.abs(frame.front().length()-1)<1e-5,message+" wet film has normalized native axes");
+        require(Math.abs(frame.up().dot(frame.right()))<1e-5 && Math.abs(frame.up().dot(frame.front()))<1e-5 && Math.abs(frame.right().dot(frame.front()))<1e-5,message+" wet film follows the bone without skewing");
     }
     private static void require(boolean value,String message) { if(!value)throw new IllegalStateException("Struggle visual validation failed: "+message); }
     private StruggleVisualChecks() {}

@@ -1,28 +1,93 @@
 {
-  "variants": {
-    "charge=0": {
-      "model": "mfqm:block/sticky_board"
+  "multipart": [
+    {
+      "apply": {
+        "model": "mfqm:block/sticky_board"
+      }
     },
-    "charge=1": {
-      "model": "mfqm:block/sticky_board_coated"
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_center"
+      }
     },
-    "charge=2": {
-      "model": "mfqm:block/sticky_board_coated"
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7",
+        "north": "true"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_north"
+      }
     },
-    "charge=3": {
-      "model": "mfqm:block/sticky_board_coated"
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7",
+        "east": "true"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_east"
+      }
     },
-    "charge=4": {
-      "model": "mfqm:block/sticky_board_coated"
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7",
+        "south": "true"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_south"
+      }
     },
-    "charge=5": {
-      "model": "mfqm:block/sticky_board_coated"
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7",
+        "west": "true"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_west"
+      }
     },
-    "charge=6": {
-      "model": "mfqm:block/sticky_board_coated"
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7",
+        "north": "true",
+        "east": "true"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_north_east"
+      }
     },
-    "charge=7": {
-      "model": "mfqm:block/sticky_board_coated"
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7",
+        "south": "true",
+        "east": "true"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_south_east"
+      }
+    },
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_south_west"
+      }
+    },
+    {
+      "when": {
+        "charge": "1|2|3|4|5|6|7",
+        "north": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "mfqm:block/sticky_board_glue_north_west"
+      }
     }
-  }
+  ]
 }

@@ -14,6 +14,7 @@ public final class AdhesiveRulesTest {
         capAndCancellation();
         lifecycleAndLimits();
         invalidAndExtremeInputs();
+        independentVerticalDistance();
         System.out.println("AdhesiveRules: " + checks + " behavioral checks passed");
     }
 
@@ -26,7 +27,7 @@ public final class AdhesiveRulesTest {
         }
         for (String id : List.of("mud", "bog", "morass", "mire", "moor", "wet_peat",
                 "brown_clay", "sinking_clay", "slurry")) {
-            close(profile(id).maxDistance(), .8, "short viscous mud connection: " + id);
+            check(AdhesiveRules.profileFor(id)==null, "mud retains sinking without adhesive strands: " + id);
         }
         check(profile("glue").stiffness() > profile("tar").stiffness()
                         && profile("tar").stiffness() > profile("honey").stiffness(),
@@ -100,16 +101,16 @@ public final class AdhesiveRulesTest {
         var glue = profile("glue");
         var bonds = new ArrayList<AdhesiveRules.Bond>();
         bonds.add(new AdhesiveRules.Bond(AdhesiveRules.Point.ZERO, new AdhesiveRules.Point(1, 0, 0), glue, 1, false));
-        for (int i = 0; i < 6; i++) bonds.add(bond(1, glue));
+        for (int i = 0; i < 66; i++) bonds.add(bond(1, glue));
         var result = AdhesiveRules.evaluate(bonds);
-        check(result.activeBonds() == 4 && result.brokenBonds() == 3,
+        check(result.activeBonds() == 64 && result.brokenBonds() == 3,
                 "invalid anchor does not consume a slot; extra live anchors are dropped");
         var ordered = new ArrayList<AdhesiveRules.Bond>();
-        for (int i = 0; i < 4; i++) ordered.add(bond(.3, glue));
+        for (int i = 0; i < 64; i++) ordered.add(bond(.3, glue));
         ordered.add(bond(-2, glue));
-        close(AdhesiveRules.evaluate(ordered).force().x(), -.0128,
-                "surplus anchor cannot change the force of the four accepted anchors");
-        check(bonds.size() == 7, "pure evaluation does not mutate caller list");
+        close(AdhesiveRules.evaluate(ordered).force().x(), -.0064,
+                "surplus anchor cannot change normalized force of accepted anchors");
+        check(bonds.size() == 67, "pure evaluation does not mutate caller list");
         var invalid = AdhesiveRules.evaluate(List.of(new AdhesiveRules.Bond(AdhesiveRules.Point.ZERO,
                 new AdhesiveRules.Point(1, 0, 0), glue, 1, false)));
         check(invalid.activeBonds() == 0 && invalid.brokenBonds() == 1, "removed anchor immediately breaks");
@@ -124,6 +125,21 @@ public final class AdhesiveRulesTest {
         close(empty.force().length(), 0, "empty list has no pull");
         var absent = AdhesiveRules.evaluate(null);
         check(absent.activeBonds() == 0 && absent.brokenBonds() == 0, "absent connection list is empty");
+    }
+
+    private static void independentVerticalDistance() {
+        var p=new AdhesiveRules.Profile(2.5,.032,.2,4);
+        var high=new AdhesiveRules.Bond(AdhesiveRules.Point.ZERO,new AdhesiveRules.Point(1.2,4,0),p,1);
+        check(AdhesiveRules.evaluate(List.of(high)).activeBonds()==1,"vertical four blocks does not consume horizontal distance");
+        check(AdhesiveRules.evaluate(List.of(new AdhesiveRules.Bond(AdhesiveRules.Point.ZERO,
+                new AdhesiveRules.Point(0,Math.nextUp(4.),0),p,1))).activeBonds()==0,"vertical excess breaks");
+        check(AdhesiveRules.evaluate(List.of(new AdhesiveRules.Bond(AdhesiveRules.Point.ZERO,
+                new AdhesiveRules.Point(Math.nextUp(2.5),0,0),p,1))).activeBonds()==0,"horizontal excess still breaks");
+        var small=new AdhesiveRules.Profile(2.5,.001,.2,4);
+        var pair=List.of(bond(1,small),bond(1,small));
+        var many=new ArrayList<AdhesiveRules.Bond>();for(int i=0;i<64;i++)many.add(bond(1,small));
+        close(AdhesiveRules.evaluate(many).force().x(),AdhesiveRules.evaluate(pair).force().x(),"64 strands do not amplify drag relative to a pair");
+        rejected(bond(1,new AdhesiveRules.Profile(2,.03,.2,Double.NaN)),"invalid vertical distance");
     }
 
     private static void invalidAndExtremeInputs() {

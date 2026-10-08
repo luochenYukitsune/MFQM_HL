@@ -23,17 +23,19 @@ import java.util.Set;
 /** Cached pixel surfaces, submitted with immutable geometry and a snapshot of each native part's pose. */
 public final class GlueCoatingRenderer {
     private static final Identifier WHITE=Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"runtime/coating_white");
-    private record Key(Identifier texture,String part,boolean slim,float padding){}
+    private record Key(Identifier texture,String part,boolean slim,float padding,float thickness){}
     private record Geometry(ModelPart.Cube cube,CoatingVoxels.Mesh mesh){}
     private static final Map<Key,Geometry> CACHE=new LinkedHashMap<>(32,.75F,true);
     private static final Set<Identifier> FAILED=new java.util.HashSet<>();
     private static boolean whiteReady;
     private static long detailedSubmissions,flatSubmissions,armSubmissions;
+    private static final Map<String,Long> FAMILIES=new java.util.HashMap<>();
     public static void clear(){CACHE.clear();FAILED.clear();whiteReady=false;}
     public static int cachedMeshes(){return CACHE.size();}
     static long detailedSubmissions(){return detailedSubmissions;}
     static long flatSubmissions(){return flatSubmissions;}
     static long armSubmissions(){return armSubmissions;}
+    static long submissions(String family){return FAMILIES.getOrDefault(family,0L);}
 
     public static void submit(ModelPart part,String name,boolean slim,MuddyPlayerLayer.Coating coat,
                               PoseStack pose,SubmitNodeCollector collector,int light,boolean firstPerson,boolean detailed) {
@@ -42,36 +44,41 @@ public final class GlueCoatingRenderer {
     public static void submit(ModelPart part,String name,boolean slim,MuddyPlayerLayer.Coating coat,
                               PoseStack pose,SubmitNodeCollector collector,int light,boolean firstPerson,boolean detailed,ModelPart outer) {
         if(!part.visible || part.skipDraw)return;
+        var settings=ModConfig.CLIENT.visuals(CoatingAppearance.family(coat.material()));
+        double opacity=ModConfig.CLIENT.coatingOpacity.get()*settings.opacity().get();
+        if(opacity<=0)return;
+        float thickness=(float)(Math.round(ModConfig.CLIENT.coatingThickness.get()*settings.thickness().get()*16)/16.);
         float padding=SkinLayerClearance.padding(name,firstPerson,outer);
-        var geometry=geometry(coat.texture(),name,slim,padding);if(geometry==null)return;
+        var geometry=geometry(coat.texture(),name,slim,padding,Math.max(.0625F,thickness));if(geometry==null)return;
         if(geometry.mesh().pixels()==0)return;
         pose.pushPose();part.translateAndRotate(pose);
-        int fade=coat.color()>>>24;
-        if(ModConfig.CLIENT.glueCoating3d.get() && detailed) {
+        int tint=coat.color();
+        if(ModConfig.CLIENT.glueCoating3d.get() && detailed && thickness>0) {
             detailedSubmissions++;
+            FAMILIES.merge(CoatingAppearance.family(coat.material()),1L,Long::sum);
             if(firstPerson)armSubmissions++;
             white();var mesh=geometry.mesh();
             collector.order(1).submitCustomGeometry(pose,RenderTypes.entityTranslucent(WHITE),(matrix,vertices)->{
                 for(var q:mesh.quads()) {
-                    int color=((q.color()>>>24)*fade/255)<<24|(q.color()&0xffffff);
+                    int color=CoatingAppearance.tint(q.color(),tint,opacity);
                     vertex(vertices,matrix,q.a(),q.normal(),color,light);vertex(vertices,matrix,q.b(),q.normal(),color,light);
                     vertex(vertices,matrix,q.c(),q.normal(),color,light);vertex(vertices,matrix,q.d(),q.normal(),color,light);
                 }
             });
         } else {
             flatSubmissions++;
-            var cube=geometry.cube();int color=coat.color();
+            var cube=geometry.cube();int color=CoatingAppearance.tint(0xffffffff,tint,opacity);
             collector.order(1).submitCustomGeometry(pose,RenderTypes.entityTranslucent(coat.texture()),
                     (matrix,vertices)->cube.compile(matrix,vertices,light,OverlayTexture.NO_OVERLAY,color));
         }
         pose.popPose();
     }
     static CoatingVoxels.Mesh mesh(Identifier texture,String part,boolean slim,boolean firstPerson) {
-        var geometry=geometry(texture,part,slim,SkinLayerClearance.padding(part,firstPerson));
+        var geometry=geometry(texture,part,slim,SkinLayerClearance.padding(part,firstPerson),1);
         return geometry==null?new CoatingVoxels.Mesh(java.util.List.of(),0):geometry.mesh();
     }
-    private static Geometry geometry(Identifier texture,String part,boolean slim,float padding) {
-        var key=new Key(texture,part,slim,padding);var existing=CACHE.get(key);if(existing!=null)return existing;
+    private static Geometry geometry(Identifier texture,String part,boolean slim,float padding,float thickness) {
+        var key=new Key(texture,part,slim,padding,thickness);var existing=CACHE.get(key);if(existing!=null)return existing;
         if(FAILED.contains(texture))return null;
         try(var stream=Minecraft.getInstance().getResourceManager().getResourceOrThrow(texture).open();var image=NativeImage.read(stream)) {
             if(image.getWidth()<64 || image.getHeight()<32)throw new IOException("Coating UV image is too small");
@@ -88,12 +95,12 @@ public final class GlueCoatingRenderer {
             }
             // Average a complete native UV pixel, keeping the 128x64 refreshed mask
             // faithful to its original 64x32 coverage rather than sampling one corner.
-            var mesh=CoatingVoxels.build(faces,(u,v)->sample(image,u,v));
+            var mesh=CoatingVoxels.build(faces,(u,v)->sample(image,u,v),thickness);
             var result=new Geometry(cube,mesh);CACHE.put(key,result);
             if(CACHE.size()>96)CACHE.remove(CACHE.keySet().iterator().next());
             return result;
         } catch(IOException | RuntimeException e) {
-            if(FAILED.add(texture))MFQM.LOGGER.warn("Unable to build glue coating {}",texture,e);
+            if(FAILED.add(texture))MFQM.LOGGER.warn("Unable to build material coating {}",texture,e);
             return null;
         }
     }

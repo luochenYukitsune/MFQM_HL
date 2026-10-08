@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "glue": "mfqm:blocks/stickyboard_glue",
+    "particle": "mfqm:blocks/stickyboard_glue"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        1,
+        1
+      ],
+      "to": [
+        15,
+        1.1875,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#glue",
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ]
+        }
+      }
+    }
+  ]
+}
