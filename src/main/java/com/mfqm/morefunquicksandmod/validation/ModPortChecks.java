@@ -22,6 +22,8 @@ public final class ModPortChecks {
     public static void register(IEventBus bus) {
         bus.addListener(ModPortChecks::started);
         bus.addListener(ModPortChecks::reloaded);
+        bus.addListener(com.mfqm.morefunquicksandmod.entity.BootPersistenceChecks::tick);
+        bus.addListener(com.mfqm.morefunquicksandmod.worldgen.NaturalGlueChecks::tick);
     }
     private static void reloaded(net.neoforged.neoforge.event.OnDatapackSyncEvent event) {
         if (!initialChecksComplete || event.getPlayer() != null) return;
@@ -44,9 +46,15 @@ public final class ModPortChecks {
                 for (int x = 4; x <= 10; x++) for (int z = 4; z <= 7; z++) level.getChunk(x, z);
                 var results = new ArrayList<String>();
                 results.addAll(PhysicsPortChecks.verify(level, new BlockPos(80, 240, 80)));
+                results.addAll(com.mfqm.morefunquicksandmod.gameplay.CoatingPortChecks.verify(level,new BlockPos(84,240,84)));
+                results.addAll(com.mfqm.morefunquicksandmod.gameplay.ViscosityPortChecks.verify(level, new BlockPos(140, 240, 80)));
                 results.addAll(ItemPortChecks.verify(level, new BlockPos(96, 240, 80)));
+                results.addAll(com.mfqm.morefunquicksandmod.block.StickyBoardPortChecks.verify(level, new BlockPos(96, 240, 96)));
                 results.addAll(EntityPortChecks.verify(level, new BlockPos(112, 240, 80)));
+                results.addAll(com.mfqm.morefunquicksandmod.gameplay.AdhesionPortChecks.verify(level,new BlockPos(124,240,80)));
+                results.addAll(com.mfqm.morefunquicksandmod.entity.BootsPortChecks.verify(level, new BlockPos(112, 240, 96)));
                 results.addAll(worldgen(level));
+                results.addAll(com.mfqm.morefunquicksandmod.worldgen.GlueWorldgenPortChecks.verify(level));
                 results.addAll(com.mfqm.morefunquicksandmod.compat.CompatRecipeChecks.verify(level));
                 for (String result : results) MFQM.LOGGER.info("MFQM_PORT_PASS {}", result);
                 initialChecksComplete = true;

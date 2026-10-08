@@ -30,7 +30,7 @@ public final class ItemGameplayHooks {
             Map.entry("jungle_quicksand", "quicksand_bucket"), Map.entry("sinking_slime", "slime_bucket"),
             Map.entry("dry_quicksand", "sand_bucket"), Map.entry("tar", "tar_bucket"), Map.entry("acid", "acid_bucket"),
             Map.entry("mucus", "mucus_bucket"), Map.entry("liquid_chocolate", "chocolate_bucket"),
-            Map.entry("slurry", "slurry_bucket"), Map.entry("honey", "honey_bucket"));
+            Map.entry("slurry", "slurry_bucket"), Map.entry("honey", "honey_bucket"), Map.entry("glue", "glue_bucket"));
     public static void register(IEventBus bus) {
         bus.addListener(ItemGameplayHooks::onBlock);
         bus.addListener(ItemGameplayHooks::onItem);

@@ -1,5 +1,6 @@
 {
   "type": "mfqm:terrain_membership",
   "surface_feature": "mfqm:terrain_overworld",
-  "nether_feature": "mfqm:terrain_nether"
+  "nether_feature": "mfqm:terrain_nether",
+  "glue_feature": "mfqm:glue_pool"
 }

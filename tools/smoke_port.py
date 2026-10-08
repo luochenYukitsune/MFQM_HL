@@ -45,6 +45,7 @@ def write_fixture(fixture):
 
 
 def run(args, root=ROOT):
+    natural_glue = getattr(args, "natural_glue", False)
     folder = root / "run/1.21.11/server"
     config_path = folder / "smoke-world/serverconfig/mfqm-server.toml"
     fixture_parent = folder / "smoke-world/datapacks"
@@ -80,11 +81,19 @@ def run(args, root=ROOT):
         log_name = "gameplay-smoke-compat" if args.compat_fixture else "gameplay-smoke"
         if args.disable_long_stick:
             log_name += "-disabled"
+        if args.persistence_phase:
+            log_name += "-persistence-" + args.persistence_phase
+        if natural_glue:
+            log_name += "-natural-glue"
         logfile = root / ("run/1.21.11/validation/" + log_name + ".log")
         logfile.parent.mkdir(parents=True, exist_ok=True)
         environment = os.environ.copy()
         environment["JAVA_HOME"] = str(JAVA)
         command = [str(root / "gradlew.bat"), "runServer", "-PmfqmPortChecks", "--console=plain", "--max-workers=2"]
+        if args.persistence_phase:
+            command.append("-PmfqmPersistencePhase=" + args.persistence_phase)
+        if natural_glue:
+            command.append("-PmfqmNaturalGlueChecks")
         process = subprocess.Popen(command, cwd=root, env=environment, shell=True, stdin=subprocess.PIPE,
                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace",
                                    creationflags=subprocess.CREATE_NO_WINDOW)
@@ -98,8 +107,11 @@ def run(args, root=ROOT):
         complete = reload_complete = reload_requested = False
         fixture_disabled = fixture_removed_verified = False
         failed = stopped = False
+        persistence_complete = not args.persistence_phase
+        natural_complete = not natural_glue
         all_lines = []
-        deadline = time.monotonic() + 300
+        timeout = 900 if natural_glue else 300
+        deadline = time.monotonic() + timeout
         with logfile.open("w", encoding="utf-8") as log:
             while time.monotonic() < deadline:
                 try:
@@ -112,6 +124,10 @@ def run(args, root=ROOT):
                 if any(marker in line for marker in ("MFQM", "ERROR", "Exception", "Done (", "BUILD", "FAILED")):
                     print(line.rstrip(), flush=True)
                 complete |= "MFQM_PORT_CHECKS_COMPLETE" in line
+                persistence_complete |= "MFQM_PERSISTENCE_CHECKS_COMPLETE phase=" + str(args.persistence_phase) in line
+                failed |= "MFQM_PERSISTENCE_CHECKS_FAILED" in line
+                natural_complete |= "MFQM_NATURAL_GLUE_CHECKS_COMPLETE" in line
+                failed |= "MFQM_NATURAL_GLUE_CHECKS_FAILED" in line
                 if "MFQM_RELOAD_CHECKS_COMPLETE" in line:
                     if args.compat_fixture and fixture_disabled:
                         fixture_removed_verified = "compat=0" in line
@@ -128,12 +144,14 @@ def run(args, root=ROOT):
                     process.stdin.write("reload\n"); process.stdin.flush(); reload_requested = True
                 reload_done = not (args.reload or args.compat_fixture) or reload_complete
                 fixture_done = not args.compat_fixture or fixture_removed_verified
-                if (failed or complete and reload_done and fixture_done) and not stopped:
+                if (failed or complete and reload_done and fixture_done and persistence_complete and natural_complete) and not stopped:
                     process.stdin.write("stop\n"); process.stdin.flush(); stopped = True
             else:
-                raise TimeoutError("Gameplay validation exceeded 300 seconds")
+                raise TimeoutError(f"Gameplay validation exceeded {timeout} seconds")
         code = process.wait(timeout=20)
         assert complete and not failed, "Gameplay assertions did not all pass; inspect " + str(logfile)
+        assert persistence_complete, "Persistent world restart check did not complete"
+        assert natural_complete, "Natural glue sample did not complete; inspect " + str(logfile)
         assert not (args.reload or args.compat_fixture) or reload_complete, "Datapack reload assertions did not pass"
         assert not args.compat_fixture or fixture_removed_verified, "Disabling compatibility mapping left recipes active"
         assert code == 0, "Dedicated server did not exit normally"
@@ -164,6 +182,8 @@ def main():
     parser.add_argument("--disable-long-stick", action="store_true", help="Cold-start with the isolated world's acquisition setting disabled")
     parser.add_argument("--reload", action="store_true", help="Also verify recipe availability after the real reload command")
     parser.add_argument("--compat-fixture", action="store_true", help="Map all nine optional recipes in an isolated temporary pack, then disable it")
+    parser.add_argument("--persistence-phase", choices=["prepare", "recover"], help="Save footwear, then verify it in a separate server process")
+    parser.add_argument("--natural-glue", action="store_true", help="Observe glue in 256 untouched forest-area chunks; do not alter terrain or generation probability")
     run(parser.parse_args())
 
 

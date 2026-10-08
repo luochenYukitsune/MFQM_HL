@@ -4,6 +4,7 @@ Usage: python tools/verify_jar.py path/to/mod.jar (Python 3.11+).
 """
 
 import argparse
+import hashlib
 import json
 import struct
 import tomllib
@@ -46,6 +47,16 @@ def verify(jar_path: Path) -> list[str]:
             require(name in entries, f"Generated resource missing: {name}")
             if name in entries:
                 require(json.loads(jar.read(name)) == json.loads(path.read_text(encoding="utf-8")), f"Generated resource differs: {name}")
+
+        resources = Path(__file__).resolve().parents[1] / "src/main/resources"
+        for family in ("mudoverlay", "slimeoverlay", "taroverlay", "honeyoverlay", "glueoverlay"):
+            for level in range(10):
+                name = f"assets/mfqm/textures/entity/mudoverlays/{family}_height{level}.png"
+                require(name in entries, f"Missing anatomical overlay: {name}")
+                if name in entries:
+                    image = jar.read(name)
+                    require(len(image) >= 24 and image[:8] == b'\x89PNG\r\n\x1a\n' and struct.unpack('>II', image[16:24]) == (128, 64), f"Invalid coating UV dimensions: {name}")
+                    require(hashlib.sha256(image).digest() == hashlib.sha256((resources / name).read_bytes()).digest(), f"Coating differs from verified source: {name}")
 
         language = json.loads(jar.read("assets/mfqm/lang/en_us.json"))
         for name in names:

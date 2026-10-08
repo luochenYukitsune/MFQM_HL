@@ -38,6 +38,7 @@ public final class ModFluids {
         add("slurry", "slurry_bucket", 2000, 8500, 308, 30);
         add("honey", "honey_bucket", 3500, 9000, 303, 35);
         add("liquid_chocolate", "chocolate_bucket", 3500, 9000, 313, 35);
+        add("glue", "glue_bucket", 4000, 18000, 293, 45);
     }
 
     private static void add(String id, String bucket, int density, int viscosity, int temperature, int tickRate) {

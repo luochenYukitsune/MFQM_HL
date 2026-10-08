@@ -22,6 +22,9 @@ Thumbs.db
 run/
 logs/
 *.log
+!docs/superpowers/2026-10-06-adhesive-gameplay/*.log
+!docs/superpowers/2026-10-07-viscosity/*.log
+!docs/superpowers/2026-10-07-bounded-adhesion/*.log
 classes/
 bin/
 
@@ -30,6 +33,11 @@ src/generated/resources/.cache/
 
 # Python artifact validator cache
 __pycache__/
+
+# Local exports and agent runtime state (source lives in src/)
+exports/
+.codex/
+.agents/
 
 # Secrets
 *.env

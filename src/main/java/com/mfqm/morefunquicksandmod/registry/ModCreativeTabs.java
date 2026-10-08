@@ -19,6 +19,7 @@ public final class ModCreativeTabs {
                     .icon(() -> new ItemStack(ModItems.byId("grappling_hook")))
                     .displayItems((params, output) -> {
                         ModItems.entries().forEach((id, holder) -> {
+                            if(id.equals("sticky_board"))output.accept(com.mfqm.morefunquicksandmod.block.StickyBoardBlock.coatedStack(7));
                             if (ModItems.isCreativeVisible(id) && holder.get().isEnabled(params.enabledFeatures())) output.accept(holder.get());
                         });
                     })

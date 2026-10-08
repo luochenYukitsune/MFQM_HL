@@ -1,13 +1,17 @@
 license = "MIT"
 
+[[mixins]]
+config = "mfqm.mixins.json"
+
 [[mods]]
 modId = "mfqm"
+enumExtensions = "META-INF/enumextensions.json"
 version = "${mod_version}"
-displayName = "More Fun Quicksand Mod"
+displayName = "更多趣味流沙（MFQM）"
 logoFile = "assets/mfqm/logo.png"
-authors = "MrBlackGoo (original), Ported by MFQM Team"
-credits = "Original mod by MrBlackGoo, CrishNate, elix_x, VanderCat, Sanic"
-description = "More Fun Quicksand Mod for Minecraft 1.21.11: sinking terrain and fluids, rescue tools, equipment, creatures, hives and desert tombs. Based on the original 1.1.1 mod."
+authors = "MrBlackGoo（原作者），MFQM Team（移植）"
+credits = "原模组贡献者：MrBlackGoo、CrishNate、elix_x、VanderCat、Sanic"
+description = "面向 Minecraft 1.21.11 的 More Fun Quicksand Mod 开发版。移植原 1.1.1 的沉陷地形、黏性流体、救援工具、装备、生物和遗迹；新增乳白半透明胶水、可重复涂胶的粘鼠板、腿脚黏膜与拉丝、F 键挣扎和留靴回收。"
 
 [[dependencies.mfqm]]
 modId = "neoforge"

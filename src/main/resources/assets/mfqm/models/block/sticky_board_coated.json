@@ -1,0 +1,102 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "wood": "mfqm:blocks/stickyboard_wood",
+    "particle": "mfqm:blocks/stickyboard_wood",
+    "glue": "mfqm:blocks/stickyboard_glue"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        1,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#wood",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#wood",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "north": {
+          "texture": "#wood",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#wood",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#wood",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#wood",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        1,
+        1
+      ],
+      "to": [
+        15,
+        1.1875,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#glue",
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ]
+        }
+      }
+    }
+  ],
+  "render_type": "minecraft:cutout"
+}

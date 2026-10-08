@@ -1,0 +1,152 @@
+{
+  "outputs": {
+    "blocks/glue_still.png": {
+      "size": [
+        32,
+        1024
+      ],
+      "sha256": "676cbd05f503f33fd0cb01f8e7feca2cd2cd4b67285c1a8682c79bd82c081829",
+      "frame_size": 32,
+      "frames": 32,
+      "flowing": false,
+      "metadata_sha256": "1d7ae913ba1be07e1cca18dd6b0e309a44693afccd26e8b84eeda884a1721e63"
+    },
+    "blocks/glue_flow.png": {
+      "size": [
+        64,
+        2048
+      ],
+      "sha256": "7e6e5319e1de8702a67c61047e3f049586d1348414c29505e9113cecc2d70221",
+      "frame_size": 64,
+      "frames": 32,
+      "flowing": true,
+      "metadata_sha256": "1d7ae913ba1be07e1cca18dd6b0e309a44693afccd26e8b84eeda884a1721e63"
+    },
+    "blocks/stickyboard_wood.png": {
+      "size": [
+        32,
+        32
+      ],
+      "sha256": "3e1f9dc326a83dafc450c02d037e6feeca9341bd9e4a3b7e209b42985ac28b1c"
+    },
+    "blocks/stickyboard_glue.png": {
+      "size": [
+        32,
+        32
+      ],
+      "sha256": "46ff52d93b37ed3ec8836ff30225e35ae428c64b1115dcf3d34ddb45fad8c866"
+    },
+    "entity/adhesive_strand.png": {
+      "size": [
+        32,
+        32
+      ],
+      "sha256": "3da0875dd2299c1de886f0baa313f26a0fb17b5dd5d7fa4c0f6907d2c17965d4"
+    },
+    "items/bucketofglue.png": {
+      "size": [
+        32,
+        32
+      ],
+      "sha256": "e72a4344ef63d187389d75a853425415bb55ba9919027b69078bd0929f1753f3",
+      "liquid_pixels": 136
+    },
+    "entity/mudoverlays/glueoverlay0.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "46e3f265ac189518c66e696c9901b0ec7ac9ed0ca34bbd8d2a4c439350f2d855",
+      "mask_sha256": "46efe4ffe46288e0462653f3064960fcc13e6a3a84a937e329831699ec7dd9ba"
+    },
+    "entity/mudoverlays/glueoverlay1.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "3bc78529cac1c4b4def47fc73523709bfce592f013f53b7d2e9f585ca10defe9",
+      "mask_sha256": "a5a4c16356f6376520e77332de0c6e5421be91cc50308d74ced501abc9be1f5f"
+    },
+    "entity/mudoverlays/glueoverlay2.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "76d485be4d26335f72ebbef7238f8e1c4046e42605d362cdf281267d221f7a7c",
+      "mask_sha256": "f57305b416ca649b0af882e84d143ce30b3229a35df1577e4895d7c65a655b13"
+    },
+    "entity/mudoverlays/glueoverlay3.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "ba99585c82cb050b8523cd8bc80f7775d5761099ddf4ab080a91adf5ad7ed33e",
+      "mask_sha256": "76c240d1f83eaf0ee7d12194ee487a67910191b94499dbcb0cfd97691cea28dd"
+    },
+    "entity/mudoverlays/glueoverlay4.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "7c370117a3cf9cd3b2f6e2c17722b85831fc77817bc198ca68aa75ee4db25123",
+      "mask_sha256": "52fe0cd00cf5620efaa138fc52706d46580a28c6553b61780feb43fd03d4030e"
+    },
+    "entity/mudoverlays/glueoverlay5.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "4faa94808cb250b05724827f09ad701dc398beb59f85597514a6f583a551dd54",
+      "mask_sha256": "9b25fd70e3f49bd4681e76b1a3147fb8afa42418ff8a419f2fc0d318ad630ed8"
+    },
+    "entity/mudoverlays/glueoverlay6.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "f7dbd633e963d805f4824a972873a493511236947482fe4d4540daed4d2a851e",
+      "mask_sha256": "fe2951893bf1fe851f945175cac2a6db1e8826268d067dbac7af491c7c011d7d"
+    },
+    "entity/mudoverlays/glueoverlay7.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "0e7563281a0e93c3fa15228225c7e8f5a42650701c4b21ee214bd7abcd81c53f",
+      "mask_sha256": "231df67e19fd38b99f4713d30a0df21934ebf1aa29f4631408c20bdef8f51120"
+    },
+    "entity/mudoverlays/glueoverlay8.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "afe982766ef43e49501c8e88bf29da0c99b2be34eed5a2d276a3d56ce9e6b25e",
+      "mask_sha256": "48c13ab84bcb9b89c49c5b2fb0ed8bd4d207d6d2292edd6c80256e4e0a228389"
+    },
+    "entity/mudoverlays/glueoverlay9.png": {
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "1d24c0bd25ff06d217c15703dd7c2c3a5443b592e0bfd476bdd12f880a8440e1",
+      "mask_sha256": "0918a4e69fbc35802d281fb73142b8543b343fd0a32f6db97ce9cc41017ba13e"
+    }
+  },
+  "sources": {
+    "sources\\bucketofhoney-reference.png": "6d40ea7a96a4202dc35d38b67bfa13abc1bafb25db427eaa43266b637f9ac5bc",
+    "sources\\glue.png": "580f3e7b5a08d34936d1ffbc4f983a0a4066fa76378b59ca6baad065a929197d",
+    "sources\\masks\\slimeoverlay0.png": "46efe4ffe46288e0462653f3064960fcc13e6a3a84a937e329831699ec7dd9ba",
+    "sources\\masks\\slimeoverlay1.png": "a5a4c16356f6376520e77332de0c6e5421be91cc50308d74ced501abc9be1f5f",
+    "sources\\masks\\slimeoverlay2.png": "f57305b416ca649b0af882e84d143ce30b3229a35df1577e4895d7c65a655b13",
+    "sources\\masks\\slimeoverlay3.png": "76c240d1f83eaf0ee7d12194ee487a67910191b94499dbcb0cfd97691cea28dd",
+    "sources\\masks\\slimeoverlay4.png": "52fe0cd00cf5620efaa138fc52706d46580a28c6553b61780feb43fd03d4030e",
+    "sources\\masks\\slimeoverlay5.png": "9b25fd70e3f49bd4681e76b1a3147fb8afa42418ff8a419f2fc0d318ad630ed8",
+    "sources\\masks\\slimeoverlay6.png": "fe2951893bf1fe851f945175cac2a6db1e8826268d067dbac7af491c7c011d7d",
+    "sources\\masks\\slimeoverlay7.png": "231df67e19fd38b99f4713d30a0df21934ebf1aa29f4631408c20bdef8f51120",
+    "sources\\masks\\slimeoverlay8.png": "48c13ab84bcb9b89c49c5b2fb0ed8bd4d207d6d2292edd6c80256e4e0a228389",
+    "sources\\masks\\slimeoverlay9.png": "0918a4e69fbc35802d281fb73142b8543b343fd0a32f6db97ce9cc41017ba13e",
+    "sources\\wood.png": "b03d0a9d9fb9709112c56b5e60b41d9d651e1e44a0317367cf5221724e37155d"
+  },
+  "fluid_alpha_target": 180,
+  "overlay_alpha_scale": 180
+}

@@ -34,6 +34,8 @@ public enum SinkingMaterial {
     SLURRY("slurry", .018, .024, .12, .5, true, true),
     SOFT_GRAVEL("soft_gravel", .024, .006, .33, .5, false, true),
     HONEY("honey", .01, .028, .045, .45, true, true),
+    // AdhesionController owns struggle-dependent glue sinking; rest never sinks by this profile.
+    GLUE("glue", 0, 0, .03, 0, false, true),
     LIQUID_CHOCOLATE("liquid_chocolate", .01, .022, .12, .6, true, true),
     SINKING_RUG("sinking_rug", .016, .018, .1, .45, false, true),
     VORE_HOLE("vore_hole", .03, .045, .05, 0, false, false),
@@ -48,7 +50,7 @@ public enum SinkingMaterial {
     SinkingMaterial(String id, double still, double struggle, double mobility, double bootDepth,
                     boolean buoyancy, boolean air) {
         this.id = id;
-        this.motion = new SinkingMotion.Profile(still, struggle, mobility, bootDepth, buoyancy);
+        this.motion = new SinkingMotion.Profile(still, struggle, mobility, bootDepth, buoyancy, id.equals("glue") ? 0 : .71);
         this.usesAir = air;
     }
 

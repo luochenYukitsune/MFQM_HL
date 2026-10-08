@@ -2,6 +2,8 @@ package com.mfqm.morefunquicksandmod.item;
 
 import com.mfqm.morefunquicksandmod.registry.ModBlocks;
 import com.mfqm.morefunquicksandmod.registry.ModItems;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import com.mojang.authlib.GameProfile;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -50,6 +52,9 @@ public final class ItemPortChecks {
             level.setBlock(base, Blocks.STONE.defaultBlockState(), 2);
             verifyDrinks(level, player, passed);
             verifyGear(passed);
+            verifyGlueRegistration(passed);
+            verifyGlueRecipe(level, passed);
+            verifyGlueBucket(level, player, base.offset(0, 1, 3), passed);
             verifyGun(level, player, base.offset(0, 1, 3), passed);
             verifyBuckets(level, player, base.offset(0, 1, 3), passed);
             verifyFertilizer(level, player, base.offset(1, 1, 2), passed);
@@ -82,6 +87,82 @@ public final class ItemPortChecks {
         require(ModItems.byId("chocolate_donut").components().get(DataComponents.FOOD).nutrition() == 8, "Original chocolate donut nutrition is 8");
         require(ModItems.byId("cranberry").components().get(DataComponents.CONSUMABLE).consumeTicks() == 8, "Cranberries take 8 ticks to eat");
         passed.add("items: three drinks, original effect durations, bottle returns, food values");
+    }
+
+    private static void verifyGlueRegistration(List<String> passed) {
+        var source = BuiltInRegistries.FLUID.getValue(Identifier.fromNamespaceAndPath("mfqm", "glue"));
+        var flowing = BuiltInRegistries.FLUID.getValue(Identifier.fromNamespaceAndPath("mfqm", "flowing_glue"));
+        require(source != net.minecraft.world.level.material.Fluids.EMPTY, "Glue source fluid must be registered");
+        require(flowing != net.minecraft.world.level.material.Fluids.EMPTY && source != flowing,
+                "Glue flowing fluid must have a distinct registered identity");
+        var block = BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath("mfqm", "glue"));
+        require(block instanceof LiquidBlock && block.defaultBlockState().getFluidState().getType() == source,
+                "Glue liquid block must contain its source fluid");
+        var bucket = BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("mfqm", "glue_bucket"));
+        require(bucket instanceof LegacyBucketItem && source.getBucket() == bucket, "Glue source must expose its usable bucket");
+        passed.add("glue: distinct source/flowing registrations, source liquid block and usable bucket");
+    }
+
+    private static void verifyGlueRecipe(ServerLevel level, List<String> passed) {
+        var input = net.minecraft.world.item.crafting.CraftingInput.of(2, 2, List.of(
+                new ItemStack(Items.SLIME_BALL), new ItemStack(Items.WATER_BUCKET),
+                ItemStack.EMPTY, new ItemStack(Items.BONE_MEAL)));
+        var holder = level.recipeAccess().getRecipeFor(net.minecraft.world.item.crafting.RecipeType.CRAFTING, input, level)
+                .orElseThrow(() -> new IllegalStateException("Glue recipe must match slime, bone meal and water bucket"));
+        ItemStack result = holder.value().assemble(input, level.registryAccess());
+        require(result.is(ModItems.byId("glue_bucket")) && result.getCount() == 1, "Glue recipe produces exactly one glue bucket");
+        require(holder.value().getRemainingItems(input).stream().allMatch(ItemStack::isEmpty),
+                "Water bucket container transfers into glue output; cannot duplicate an empty bucket");
+        require(result.getCraftingRemainder().is(Items.BUCKET), "Using glue as a crafting ingredient returns its empty bucket");
+        var wrong = net.minecraft.world.item.crafting.CraftingInput.of(2, 2, List.of(
+                new ItemStack(Items.SLIME_BALL), new ItemStack(Items.BUCKET),
+                ItemStack.EMPTY, new ItemStack(Items.BONE_MEAL)));
+        require(!holder.value().matches(wrong, level), "Glue recipe rejects empty buckets");
+        passed.add("glue: actual shapeless crafting, exact ingredients, transferred container and later bucket remainder");
+    }
+
+    private static void verifyGlueBucket(ServerLevel level, FakePlayer player, BlockPos target, List<String> passed) {
+        level.setBlock(target, Blocks.STONE.defaultBlockState(), 2);
+        level.setBlock(target.north(), Blocks.AIR.defaultBlockState(), 2);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.byId("glue_bucket")));
+        require(player.getMainHandItem().getItem().use(level, player, InteractionHand.MAIN_HAND).consumesAction(),
+                "Glue bucket places a source");
+        var placed = level.getBlockState(target.north());
+        require(placed.is(ModBlocks.byId("glue")) && placed.getFluidState().isSource()
+                && player.getMainHandItem().is(Items.BUCKET), "Glue placement consumes content and returns one empty bucket");
+        var pickup = new PlayerInteractEvent.RightClickBlock(player, InteractionHand.MAIN_HAND, target.north(),
+                new BlockHitResult(Vec3.atCenterOf(target.north()), Direction.UP, target.north(), false));
+        NeoForge.EVENT_BUS.post(pickup);
+        require(pickup.isCanceled() && level.getBlockState(target.north()).isAir()
+                && player.getMainHandItem().is(ModItems.byId("glue_bucket")), "Glue source pickup restores a full bucket");
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BUCKET));
+        level.setBlock(target.north(), ModBlocks.byId("glue").defaultBlockState().setValue(LiquidBlock.LEVEL, 1), 2);
+        var flowing = new PlayerInteractEvent.RightClickBlock(player, InteractionHand.MAIN_HAND, target.north(),
+                new BlockHitResult(Vec3.atCenterOf(target.north()), Direction.UP, target.north(), false));
+        NeoForge.EVENT_BUS.post(flowing);
+        require(!flowing.isCanceled() && player.getMainHandItem().is(Items.BUCKET)
+                && level.getBlockState(target.north()).getValue(LiquidBlock.LEVEL) == 1, "Flowing glue cannot refill a bucket");
+        FakePlayer denied = new FakePlayer(level, new GameProfile(PROFILE, "[MFQM Denied]")) {
+            @Override public boolean mayUseItemAt(BlockPos pos, Direction direction, ItemStack stack) { return false; }
+        };
+        try {
+            denied.setPos(player.getX(), player.getY(), player.getZ());
+            denied.setYRot(player.getYRot()); denied.setXRot(player.getXRot());
+            level.setBlock(target.north(), Blocks.AIR.defaultBlockState(), 2);
+            denied.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.byId("glue_bucket")));
+            require(!denied.getMainHandItem().getItem().use(level, denied, InteractionHand.MAIN_HAND).consumesAction()
+                    && level.getBlockState(target.north()).isAir() && denied.getMainHandItem().is(ModItems.byId("glue_bucket")),
+                    "Denied placement preserves world and glue bucket");
+            level.setBlock(target.north(), ModBlocks.byId("glue").defaultBlockState(), 2);
+            denied.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BUCKET));
+            var blocked = new PlayerInteractEvent.RightClickBlock(denied, InteractionHand.MAIN_HAND, target.north(),
+                    new BlockHitResult(Vec3.atCenterOf(target.north()), Direction.UP, target.north(), false));
+            NeoForge.EVENT_BUS.post(blocked);
+            require(!blocked.isCanceled() && denied.getMainHandItem().is(Items.BUCKET)
+                    && level.getBlockState(target.north()).is(ModBlocks.byId("glue")), "Denied collection preserves source and bucket");
+        } finally { denied.discard(); }
+        level.setBlock(target.north(), Blocks.AIR.defaultBlockState(), 2);
+        passed.add("glue: source placement/pickup, flowing refusal and permission rejection preserve items and world");
     }
 
     private static void verifyGear(List<String> passed) {

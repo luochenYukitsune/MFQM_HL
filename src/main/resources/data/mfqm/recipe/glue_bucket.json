@@ -1,0 +1,6 @@
+{
+  "type": "mfqm:glue_bucket",
+  "category": "misc",
+  "ingredients": ["minecraft:slime_ball", "minecraft:bone_meal", "minecraft:water_bucket"],
+  "result": { "id": "mfqm:glue_bucket", "count": 1 }
+}

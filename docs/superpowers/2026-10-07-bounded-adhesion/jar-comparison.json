@@ -1,0 +1,10 @@
+{
+  "groundSuiteJarSha256": "404b1dce687bc2860c5f46bafcd3fe7bbf94ff4e16a5c9ccc49899ac269900b8",
+  "finalJarSha256": "f8ba4f1639f1ee4705ce19ecccc7b0818255904b8cbd9e2a0ac7af6c97418b5a",
+  "changedEntries": [
+    "com/mfqm/morefunquicksandmod/client/ClientPortChecks.class",
+    "com/mfqm/morefunquicksandmod/client/ViscosityActionChecks$1.class",
+    "com/mfqm/morefunquicksandmod/client/ViscosityActionChecks.class"
+  ],
+  "productionEntriesIdentical": true
+}

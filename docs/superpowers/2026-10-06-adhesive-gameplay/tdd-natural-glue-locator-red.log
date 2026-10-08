@@ -1,0 +1,196 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+注: 某些输入文件使用或覆盖了已过时的 API。
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+
+> Task :processResources
+> Task :classes
+> Task :downloadAssets UP-TO-DATE
+> Task :prepareServerRun UP-TO-DATE
+
+> Task :runServer
+2026-10-07T04:01:16.128001100Z main WARN Advanced terminal features are not available in this environment
+[12:01:16] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 328ms
+[12:01:16] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 10.0.36 (DEDICATED_SERVER in DEV)
+[12:01:16] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\server
+[12:01:16] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 104) in 41ms
+[12:01:16] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[12:01:16] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/10.0.36/dbd0e11d545443f602addede111c39d9639708f9/earlydisplay-10.0.36.jar
+[12:01:16] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/10.0.36/f72ab4d3e755fe736829883d90430a281527aca/loader-10.0.36.jar
+[12:01:16] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: Not loading early display in headless mode.
+[12:01:16] [main/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[12:01:16] [main/INFO] [ne.ne.fm.lo.mo.lo.InDevFolderLocator/CORE]: Got mod coordinates mfqm%%C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\build\classes\java\main;mfqm%%C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\build\resources\main from env
+[12:01:16] [main/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[12:01:16] [main/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Minecraft 1.21.11 (minecraft)
+		More Fun Quicksand Mod 0.6.1-dev (mfqm)
+		NeoForge 21.11.45 (neoforge)
+[12:01:17] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/80fc3a9f592673cea87f4cd702f87991c6c9fe4d/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=FML Env=SERVER
+[12:01:17] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[12:01:17] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > net.neoforged.neoforge-coremods-21.11.45.jar
+[12:01:17] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - mfqm (composite(folder(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/classes/java/main), folder(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/resources/main)))
+ - minecraft (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45-client-extra-aka-minecraft-resources.jar)), filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - mixinextras.neoforge (jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+[12:01:17] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 27ms
+[12:01:19] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[12:01:26] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[12:01:26] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[12:01:26] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[12:01:26] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[12:01:26] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[12:01:26] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[12:01:26] [modloading-worker-0/INFO] [MFQM/]: MFQM initializing...
+[12:01:26] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.11.45, for MC 1.21.11
+[12:01:26] [modloading-worker-0/INFO] [MFQM/]: MFQM initialized.
+[12:01:26] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[12:01:30] [main/INFO] [minecraft/RecipeManager]: Loaded 1677 recipes
+[12:01:30] [main/INFO] [minecraft/AdvancementTree]: Loaded 1584 advancements
+[12:01:30] [main/INFO] [ne.ne.ne.co.cr.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[12:01:30] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.21.11
+[12:01:30] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[12:01:30] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[12:01:30] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[12:01:30] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on 127.0.0.1:0
+[12:01:30] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[12:01:30] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[12:01:30] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[12:01:30] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[12:01:31] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "smoke-world"
+[12:01:31] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[12:01:31] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 100%
+[12:01:31] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 13 ms
+[12:01:31] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.830s)! For help, type "help"
+[12:01:32] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[12:01:33] [Server thread/INFO] [minecraft/MinecraftServer]: MFQMDimensionProbe has made the advancement [We Need to Go Deeper]
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 49 original block identities are registered
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 13 legacy and one glue source/flowing/type/block pairs, with legacy bucket policy
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS movement/jump/load/depth/boots parameter matrix
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS MCP-mapped vanilla fusion cases and bedrock protection
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual stacked body/eye contact, sinking motion, and one air spend per tick
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS both liquid mires consume vanilla air once and drown ordinary living entities
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS wading boots/life jacket/gas mask equipment are consumed by gameplay
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS persistent coating, rescue lift, and clear-air recovery
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS seven moss states use hanging bounds, eye immersion, and their actual surface
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS ordinary peat, softened wax, and upper blossom slab collision semantics
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS wetness/heat/crust/gas/orphan-mouth/directional-mouth/block-entity lifecycles
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: three drinks, original effect durations, bottle returns, food values
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: five equippable armor assets and slots
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue: distinct source/flowing registrations, source liquid block and usable bucket
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue: actual shapeless crafting, exact ingredients, transferred container and later bucket remainder
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue: source placement/pickup, flowing refusal and permission rejection preserve items and world
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: liquid gun fires, decrements ammo, rejects flowing fluid, samples and removes source
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: acid, stable mire, mineral clay collection; flowing source refusal; variant-preserving bucket placement
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: fertilizer double growth with one-item consumption
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS board: exact thin collision, empty/nonempty adhesion, real right-click and single bucket return
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS board: full/creative refill, charge consumption, real loot and re-placement preserve coating without duplication
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS board: adjacent boards/glue retain support, floating placement rejected and removed support breaks only affected board
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS board: actual tagged mixed-wood recipe produces three empty bases
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 18 entity types create/spawn with four distinct blob and legacy bee attributes
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual player passenger capture, synchronized swallow depth, and rescue release
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS HARD tool theft, persistent inventory, no natural despawn, and death item return
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS valid-pit appendage target binding, growth, damage, and retraction
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS all four legacy tentacle media survive spawning and pull; unsupported pits reject spawning
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS server sinking potion impact places legacy weak splash levels and consumes projectile
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS water/lava/honey gun impacts cannot produce bucket sources or fuse surrounding terrain
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS hand rescue starts held-use animation, survives use, and cleans up on release
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS rescue clears connection, held-use and temporary item on either death or owner dimension change
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS server-owned connector reeling and duplicate intent rate limit
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual deep glue holds still equipped actor without passive sinking
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual repeated struggle begins sinking; rest and duplicate tick add no sinking
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS long-lived glue anchors survive nearby exit and water washing; water only removes residue
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual over-distance break removes physical bonds immediately and finishes cosmetic recoil after six ticks
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual supported board restrains players/cows, rejects horses, releases after 19.8 seconds, and exempts creative
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS same-board recoating and switching to another board reset restraint effort while retaining press cooldown
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual same-coordinate glue/board dimension transfers remove old helpers, input and drag; same-clock contact starts fresh
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue boots preserve complete stack on transfer/save/recovery; full inventory and repeated retrieval are safe
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS removing glue releases exactly one item while chunk unload never releases a duplicate
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS coated boards can hold boots; depleted boards release them and cannot take another pair
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS held rope right click retains connection; sneaking alone and unheld controls cannot alter length
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS legacy desert tomb NBT resolves with original 48x20x27 dimensions
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 197-placement mucus blossom grows both into air and over its own mechanism blocks
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS new-chunk temple sandstone/TNT trap conversion uses server placement
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS cold-start long-stick registry recipe and actual crafting match per-world config=true
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS all three chest tables decode and generate valid stacks, including registry hive bonus
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS generated Nether waste column actually ejects slurry and rejects broken support
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue pool configured feature and wet-Overworld biome tag resolve
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual glue placement produces shallow/deep sealed pools inside its candidate chunk
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS sealed pools accept gentle natural banks and resolve forest canopy to ground without flattening the area
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS slope adaptation still rejects steep banks, liquids, bedrock, block entities, trunks and artificial structure blocks before excavation
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS disabled, dry, leaking and unwritable glue sites are rejected before modifying terrain
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual tomb placement preserves chest/spawners, adds 1..3 supported interior boards and respects config
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS both actual tomb chest tables generate sticky boards and glue materials
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: all nine source call sites decode, match exact inputs, reject wrong inputs and preserve outputs/remainders
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: absent optional mappings yield zero recipes without warnings
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: ambiguous outputs fail closed; multiple input mappings remain alternatives
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: integration settings, acquisition settings and actual item_enabled condition all apply
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: duplicate IDs, normal-resource overrides, identity ownership and stale-holder removal are protected
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: real finalization rebuilds and removes recipe displays and synchronized furnace inputs
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: live recipe manager and client displays match current datapack/config mappings; active=0
+[12:01:34] [Server thread/INFO] [MFQM/]: MFQM_PORT_CHECKS_COMPLETE checks=64 items=180
+[12:01:34] [Server thread/INFO] [minecraft/MinecraftServer]: Reloading!
+[12:01:36] [Server thread/INFO] [minecraft/RecipeManager]: Loaded 1677 recipes
+[12:01:36] [Server thread/INFO] [minecraft/AdvancementTree]: Loaded 1584 advancements
+[12:01:36] [Server thread/INFO] [ne.ne.ne.co.cr.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[12:01:36] [Server thread/INFO] [MFQM/]: MFQM_RELOAD_PASS compat: live recipe manager and client displays match current datapack/config mappings; active=0
+[12:01:36] [Server thread/INFO] [MFQM/]: MFQM_RELOAD_CHECKS_COMPLETE longStick=true compat=0
+[12:01:36] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2199ms or 43 ticks behind
+[12:01:37] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_LOCATOR freshCandidates=18 requiredEstimatedLandForest=192/256
+[12:01:37] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=6972,7012 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:38] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=6972,7028 estimatedLandForest=92/256 examined=157 reason=surface_forest_density
+[12:01:38] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=6972,7044 estimatedLandForest=1/256 examined=66 reason=surface_forest_density
+[12:01:39] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=6988,7012 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:39] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=6988,7028 estimatedLandForest=26/256 examined=91 reason=surface_forest_density
+[12:01:40] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=6988,7044 estimatedLandForest=17/256 examined=82 reason=surface_forest_density
+[12:01:40] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7004,7012 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:40] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7004,7028 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:40] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7004,7044 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:41] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7468,7536 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:41] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7468,7552 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:41] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7468,7568 estimatedLandForest=7/256 examined=72 reason=surface_forest_density
+[12:01:41] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7484,7536 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:42] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7484,7552 estimatedLandForest=1/256 examined=66 reason=surface_forest_density
+[12:01:42] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7484,7568 estimatedLandForest=24/256 examined=89 reason=surface_forest_density
+[12:01:42] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7500,7536 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:43] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7500,7552 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:43] [Server thread/INFO] [MFQM/]: MFQM_NATURAL_GLUE_SAMPLE_REJECT firstChunk=7500,7568 estimatedLandForest=0/256 examined=65 reason=surface_forest_density
+[12:01:43] [Server thread/ERROR] [MFQM/]: MFQM_NATURAL_GLUE_CHECKS_FAILED
+java.lang.IllegalStateException: No untouched candidate has enough predicted surface forest; do not replace this failure with a generated or modified site
+	at TRANSFORMER/mfqm@0.6.1-dev/com.mfqm.morefunquicksandmod.worldgen.NaturalGlueChecks.require(NaturalGlueChecks.java:162) ~[main/:?] {}
+	at TRANSFORMER/mfqm@0.6.1-dev/com.mfqm.morefunquicksandmod.worldgen.NaturalGlueChecks.selectSurfaceForestSample(NaturalGlueChecks.java:116) ~[main/:?] {}
+	at TRANSFORMER/mfqm@0.6.1-dev/com.mfqm.morefunquicksandmod.worldgen.NaturalGlueChecks.tick(NaturalGlueChecks.java:42) ~[main/:?] {}
+	at net.neoforged.bus.ConsumerEventHandler.invoke(ConsumerEventHandler.java:27) ~[bus-8.0.5.jar:?] {}
+	at net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar:?] {}
+	at net.neoforged.bus.EventBus.post(EventBus.java:328) ~[bus-8.0.5.jar:?] {}
+	at TRANSFORMER/neoforge@21.11.45/net.neoforged.neoforge.event.EventHooks.fireServerTickPost(EventHooks.java:1005) ~[neoforge-21.11.45.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:1047) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.dedicated.DedicatedServer.tickServer(DedicatedServer.java:336) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.MinecraftServer.processPacketsAndTick(MinecraftServer.java:1057) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:780) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:287) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?] {}
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping the server
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:overworld
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_end
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_nether
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (smoke-world): All chunks are saved
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[12:01:43] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[12:01:43] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Closing FML Loader 2de3e089
+[12:01:43] [main/INFO] [ne.ne.fm.ModLoader/]: Clearing ModLoader
+
+[Incubating] Problems report is available at: file:///C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 40s
+6 actionable tasks: 3 executed, 3 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html

@@ -23,7 +23,7 @@ public final class ModBlocks {
                 "hardened_clay", "sinking_clay", "tangleroot_moss", "dense_web", "tar", "larvae", "corrupted_sand",
                 "swallowing_flesh", "acid", "slurry", "gas", "soft_gravel", "honey", "solid_honey", "honeycomb",
                 "liquid_chocolate", "chocolate", "sinking_rug", "lure", "blossom", "blossom_slab", "vore_hole",
-                "meat_wall", "meat_hole", "wax_wood", "custom_lily_pad", "moor_grass", "tendrils", "leaves_pile"}) {
+                "meat_wall", "meat_hole", "wax_wood", "custom_lily_pad", "moor_grass", "tendrils", "leaves_pile", "glue"}) {
             if (ModFluids.entries().containsKey(id)) {
                 ENTRIES.put(id, BLOCKS.registerBlock(id, p -> new SinkingLiquidBlock(id, ModFluids.source(id), p),
                         () -> BlockBehaviour.Properties.of().replaceable().noCollision().noOcclusion()
@@ -34,6 +34,9 @@ public final class ModBlocks {
                 ENTRIES.put(id, BLOCKS.registerBlock(id, p -> new LegacyStateBlock(id, p), () -> properties(id)));
             }
         }
+        ENTRIES.put("sticky_board", BLOCKS.registerBlock("sticky_board",
+                com.mfqm.morefunquicksandmod.block.StickyBoardBlock::new,
+                () -> BlockBehaviour.Properties.of().strength(.4f).noOcclusion().sound(SoundType.WOOD)));
     }
 
     private static BlockBehaviour.Properties properties(String id) {

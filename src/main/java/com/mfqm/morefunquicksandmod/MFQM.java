@@ -29,6 +29,7 @@ public final class MFQM {
         ModItems.ITEMS.register(modEventBus);
         ModFluids.FLUIDS.register(modEventBus);
         ModFluids.FLUID_TYPES.register(modEventBus);
+        ModRecipes.SERIALIZERS.register(modEventBus);
         ModEntities.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModWorldgen.register(modEventBus);

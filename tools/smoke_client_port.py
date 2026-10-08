@@ -21,7 +21,7 @@ lines = [line for line in saved_options.splitlines() if not line.startswith(("on
 options.write_text("\n".join(lines + ["onboardAccessibility:false", "pauseOnLostFocus:false"]) + "\n", encoding="utf-8")
 environment = os.environ.copy()
 environment["JAVA_HOME"] = os.environ.get("JAVA_HOME", "D:/download/jdk21/jdk-21.0.9+10")
-process = subprocess.Popen([str(ROOT / "gradlew.bat"), "runClient", "-PmfqmClientChecks", "--console=plain", "--max-workers=2"],
+process = subprocess.Popen([str(ROOT / "gradlew.bat"), "runClient", "-PmfqmClientChecks", "-PmfqmTextureChecks", "--console=plain", "--max-workers=2"],
     cwd=ROOT, env=environment, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
     text=True, encoding="utf-8", errors="replace", creationflags=subprocess.CREATE_NO_WINDOW)
 output = queue.Queue()
@@ -44,6 +44,8 @@ try:
     code = process.wait(timeout=20)
     text = "".join(lines)
     assert code == 0 and "MFQM_CLIENT_CHECKS_COMPLETE" in text and "MFQM_CLIENT_CHECKS_FAILED" not in text, "Client validation failed; inspect " + str(logfile)
+    assert "MFQM_TEXTURE_SCENE_SAVED" in text and (ROOT / "run/1.21.11/client/screenshots/mfqm-texture-scene.png").exists(), "Missing rendered texture preview"
+    assert "Saved screenshot as mfqm-texture-flow.png" in text, "Missing source/flowing junction screenshot"
     assert not any("/ERROR]" in line and "yggdrasil" not in line for line in lines), "Client reported resource or rendering errors"
     print("PASS: client world, creative category, all baked item/block models, fluids and entity renderers", flush=True)
 finally:

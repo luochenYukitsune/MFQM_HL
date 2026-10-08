@@ -14,11 +14,17 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 /** Clients report button intent. Geometry, air, damage and rescue forces remain server-owned. */
 public final class ModNetworking {
-    public record InputPayload(boolean jump, boolean sneak) implements CustomPacketPayload {
+    public record InputPayload(boolean jump, boolean sneak, boolean moving) implements CustomPacketPayload {
         public static final Type<InputPayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MFQM.MOD_ID, "sinking_input"));
         public static final StreamCodec<RegistryFriendlyByteBuf, InputPayload> CODEC = StreamCodec.composite(
-                ByteBufCodecs.BOOL, InputPayload::jump, ByteBufCodecs.BOOL, InputPayload::sneak, InputPayload::new);
+                ByteBufCodecs.BOOL, InputPayload::jump, ByteBufCodecs.BOOL, InputPayload::sneak,
+                ByteBufCodecs.BOOL, InputPayload::moving, InputPayload::new);
         @Override public Type<InputPayload> type() { return TYPE; }
+    }
+    public record StrugglePayload() implements CustomPacketPayload {
+        public static final Type<StrugglePayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MFQM.MOD_ID, "struggle"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, StrugglePayload> CODEC = StreamCodec.unit(new StrugglePayload());
+        @Override public Type<StrugglePayload> type() { return TYPE; }
     }
     public record ControlPayload(int entityId, int action) implements CustomPacketPayload {
         public static final Type<ControlPayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath(MFQM.MOD_ID, "connector_control"));
@@ -28,14 +34,20 @@ public final class ModNetworking {
     }
     public static void register(IEventBus bus) { bus.addListener(ModNetworking::payloads); }
     private static void payloads(RegisterPayloadHandlersEvent event) {
-        var registrar = event.registrar("1");
+        var registrar = event.registrar("5");
         registrar.playToServer(InputPayload.TYPE, InputPayload.CODEC, (data, context) -> {
-            if (context.player() instanceof ServerPlayer player && player.isAlive()) QuicksandPhysics.setInput(player, data.jump(), data.sneak());
+            if (context.player() instanceof ServerPlayer player && player.isAlive()) QuicksandPhysics.setInput(player, data.jump(), data.sneak(), data.moving());
+        });
+        registrar.playToServer(StrugglePayload.TYPE, StrugglePayload.CODEC, (data, context) -> {
+            if (context.player() instanceof ServerPlayer player && player.isAlive()) AdhesionRequest.request(player);
         });
         registrar.playToServer(ControlPayload.TYPE, ControlPayload.CODEC, (data, context) -> {
             if (data.action() >= 0 && data.action() <= 3 && context.player() instanceof ServerPlayer player && player.isAlive())
                 ModEntities.controlConnector(player, data.entityId(), data.action());
         });
+    }
+    private static final class AdhesionRequest {
+        static void request(ServerPlayer player) { com.mfqm.morefunquicksandmod.gameplay.AdhesionController.requestStruggle(player); }
     }
     private ModNetworking() {}
 }

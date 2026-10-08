@@ -1,0 +1,462 @@
+{
+  "glue_alpha_scale": 0.55,
+  "sources": {
+    "mudoverlay9.png": "cfab6afba490f2360387b17d6262ab76dbc422037440e5cacce1964e272b6529",
+    "slimeoverlay9.png": "0918a4e69fbc35802d281fb73142b8543b343fd0a32f6db97ce9cc41017ba13e",
+    "taroverlay9.png": "aa4d1ee4fc860d086443bf03ae447dd282900461457f049459e57935bb89d732",
+    "honeyoverlay9.png": "91c427d6e3cb1fdadc25b7825c44aeb9495c8d14c67a80f55dcaf3bb540d7cba",
+    "glueoverlay9.png": "1d24c0bd25ff06d217c15703dd7c2c3a5443b592e0bfd476bdd12f880a8440e1"
+  },
+  "outputs": {
+    "mudoverlay_height0.png": {
+      "sha256": "53953e37ce56eb91b018170f58ae4ff54c9264b3781462d5da02dfeb5058f910",
+      "size": [
+        128,
+        64
+      ],
+      "level": 1,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height1.png": {
+      "sha256": "55b55495559b0c79289e68f5491ef175e01a7be4aeb98941f9a8beaec7c52db7",
+      "size": [
+        128,
+        64
+      ],
+      "level": 2,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height2.png": {
+      "sha256": "fcda6c8557115aad268abb4b50e1d8f01be0a982bb8133d5601a86eb4fe4bff1",
+      "size": [
+        128,
+        64
+      ],
+      "level": 3,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height3.png": {
+      "sha256": "5566533684e28884d3203bebda72c4349f29b58a11d720a79965627f0c73f957",
+      "size": [
+        128,
+        64
+      ],
+      "level": 4,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height4.png": {
+      "sha256": "0d6d4e162a40bee726a652cea2856ee75711038919e3463d6e730bb5e359c32e",
+      "size": [
+        128,
+        64
+      ],
+      "level": 5,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height5.png": {
+      "sha256": "344f8bea771831ef5554214d5bec64047ba34ade1bbc9f6733f95655eff4dc23",
+      "size": [
+        128,
+        64
+      ],
+      "level": 6,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height6.png": {
+      "sha256": "1c71b3a891917deacffadf3739926e76e6e4954f6b82aa14f8e874904554d9db",
+      "size": [
+        128,
+        64
+      ],
+      "level": 7,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height7.png": {
+      "sha256": "af765a7709a98990c3f77acf79b74b9ae912ccc5f10d7cc667496c4b1c3bab51",
+      "size": [
+        128,
+        64
+      ],
+      "level": 8,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height8.png": {
+      "sha256": "d550b4be4b80e647fb3e62e46e08340e0ad3b56b33d04693dbe6c5a3e1b568f0",
+      "size": [
+        128,
+        64
+      ],
+      "level": 9,
+      "source": "mudoverlay9.png"
+    },
+    "mudoverlay_height9.png": {
+      "sha256": "aac948ddcad0fcba9c1a43cec5c2824364ecd105312eb6659f94322a28754752",
+      "size": [
+        128,
+        64
+      ],
+      "level": 10,
+      "source": "mudoverlay9.png"
+    },
+    "slimeoverlay_height0.png": {
+      "sha256": "ed3a95fe1b0693291da4db18ef3ac0e94d643389a2c4bb45121259850337f8de",
+      "size": [
+        128,
+        64
+      ],
+      "level": 1,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height1.png": {
+      "sha256": "62a0f51fdd48d0bd6ca1f2a9ca781c5c6ab16718fb55ac1f36e7c1de9f29b077",
+      "size": [
+        128,
+        64
+      ],
+      "level": 2,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height2.png": {
+      "sha256": "0846bc18fa716419a12048a9f61661ebcee8c15c5e978f2de2b2465e82710355",
+      "size": [
+        128,
+        64
+      ],
+      "level": 3,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height3.png": {
+      "sha256": "42031a2553f3938e37e9ccb9c4f5c2c4fad9d9bfb8795f1a38bb671d4758549e",
+      "size": [
+        128,
+        64
+      ],
+      "level": 4,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height4.png": {
+      "sha256": "ed976e4ac7b0f9c59966e59e9d313a3e42b577f38a8f676aac1f1838d583ae4a",
+      "size": [
+        128,
+        64
+      ],
+      "level": 5,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height5.png": {
+      "sha256": "180f5fdb6d4e60d6444a2f6eae7a13f2b1b03a104ab0d747f3e109df8e0b0c99",
+      "size": [
+        128,
+        64
+      ],
+      "level": 6,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height6.png": {
+      "sha256": "55df8f3657a3b572e7ee437872b5382371e269e9be5e660f7d84cdf027696282",
+      "size": [
+        128,
+        64
+      ],
+      "level": 7,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height7.png": {
+      "sha256": "6e8c428e630b25b23762ca757ed054dc3a389864a8046d0bfac809a7d807bbc0",
+      "size": [
+        128,
+        64
+      ],
+      "level": 8,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height8.png": {
+      "sha256": "23b78869603001ec917e1f7205f71f1d4bfbc6e5856eca27fede197a7cbc561b",
+      "size": [
+        128,
+        64
+      ],
+      "level": 9,
+      "source": "slimeoverlay9.png"
+    },
+    "slimeoverlay_height9.png": {
+      "sha256": "0918a4e69fbc35802d281fb73142b8543b343fd0a32f6db97ce9cc41017ba13e",
+      "size": [
+        128,
+        64
+      ],
+      "level": 10,
+      "source": "slimeoverlay9.png"
+    },
+    "taroverlay_height0.png": {
+      "sha256": "242efec0cf549e1aa616fc2866eb38b68aeb3274cf357938317386eb0e560d0a",
+      "size": [
+        128,
+        64
+      ],
+      "level": 1,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height1.png": {
+      "sha256": "070927cef358f6dcb8e72c54cd4e77fabf4f5ef7cacf4f59f3a904a16566d5a9",
+      "size": [
+        128,
+        64
+      ],
+      "level": 2,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height2.png": {
+      "sha256": "30edf177b8fb9f08897ead7ad6eaed0902baaf54260c82649d76a304efbb943e",
+      "size": [
+        128,
+        64
+      ],
+      "level": 3,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height3.png": {
+      "sha256": "48441ecf703f925a1b89a3e88382d90893eac32aa0d540c8c460b96f9fa27a16",
+      "size": [
+        128,
+        64
+      ],
+      "level": 4,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height4.png": {
+      "sha256": "8d97f7f99cc6185ba26b24334a327310d46e199f504f439fe6edc36c575fb3f1",
+      "size": [
+        128,
+        64
+      ],
+      "level": 5,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height5.png": {
+      "sha256": "98872ce320acf1a4ec77a2ef0e83e8d25763134b1a63a1baf71e4cba0cb4f7eb",
+      "size": [
+        128,
+        64
+      ],
+      "level": 6,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height6.png": {
+      "sha256": "98b29a454f26ed1d4d97ca8ae48550806aa70c71be9e16d8e5447399a2233264",
+      "size": [
+        128,
+        64
+      ],
+      "level": 7,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height7.png": {
+      "sha256": "1a9c374f9f619fc9016259afb298d823dff7f841bb9e94d5d1ce83536623604d",
+      "size": [
+        128,
+        64
+      ],
+      "level": 8,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height8.png": {
+      "sha256": "9ad30798b7ee6d182211d8688649c28d292bc3faa71dbcdae35987086d0f8105",
+      "size": [
+        128,
+        64
+      ],
+      "level": 9,
+      "source": "taroverlay9.png"
+    },
+    "taroverlay_height9.png": {
+      "sha256": "aa4d1ee4fc860d086443bf03ae447dd282900461457f049459e57935bb89d732",
+      "size": [
+        128,
+        64
+      ],
+      "level": 10,
+      "source": "taroverlay9.png"
+    },
+    "honeyoverlay_height0.png": {
+      "sha256": "68cc9421ebef6a761d427dccfe42834ca2ccdefe1887c89645cbe351e0626b2a",
+      "size": [
+        128,
+        64
+      ],
+      "level": 1,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height1.png": {
+      "sha256": "5b0a061c2fcb290e5a0cfeb758e95498635ddf09b3a10a657a750c15486b66d3",
+      "size": [
+        128,
+        64
+      ],
+      "level": 2,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height2.png": {
+      "sha256": "b6893f83f5643a06607fe1ef47509793020072c037c17c570af8a36ef67fcb40",
+      "size": [
+        128,
+        64
+      ],
+      "level": 3,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height3.png": {
+      "sha256": "0c0ecc8ac70e3e89ebf005c76589ebb7da44252c0ecd8d34a6b4a8f3ce68d2ef",
+      "size": [
+        128,
+        64
+      ],
+      "level": 4,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height4.png": {
+      "sha256": "b64cd445a147299289f9636aa8a6e9c8f00411cd52c177fb3b7b5acd3cc7c62c",
+      "size": [
+        128,
+        64
+      ],
+      "level": 5,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height5.png": {
+      "sha256": "3f5f7f54601f7c82f487c62bf9d1a00532064dbbab9eb6f6f25e8efc9a206434",
+      "size": [
+        128,
+        64
+      ],
+      "level": 6,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height6.png": {
+      "sha256": "8a89d9f8f11071ce8b4413b1cb7e61eb7d64d6866324a36d6e663c29dd25370f",
+      "size": [
+        128,
+        64
+      ],
+      "level": 7,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height7.png": {
+      "sha256": "a44c0c99d267f2aa9e925a3f7218e36f12a9093c1989bb27f996ce4c41d85f19",
+      "size": [
+        128,
+        64
+      ],
+      "level": 8,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height8.png": {
+      "sha256": "d0cb89ae9428059b4ff7726a8801744c59610e65d5a96eac5ced944e82c1f788",
+      "size": [
+        128,
+        64
+      ],
+      "level": 9,
+      "source": "honeyoverlay9.png"
+    },
+    "honeyoverlay_height9.png": {
+      "sha256": "91c427d6e3cb1fdadc25b7825c44aeb9495c8d14c67a80f55dcaf3bb540d7cba",
+      "size": [
+        128,
+        64
+      ],
+      "level": 10,
+      "source": "honeyoverlay9.png"
+    },
+    "glueoverlay_height0.png": {
+      "sha256": "ae19d5474f52bcc7b7412a981ac552ce5aa2d4c78e752b9a922ccc47a54aea59",
+      "size": [
+        128,
+        64
+      ],
+      "level": 1,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height1.png": {
+      "sha256": "d93594eb12b207dee166b79296e3ee73964148e6df04851e4fb102d6d0a18ba4",
+      "size": [
+        128,
+        64
+      ],
+      "level": 2,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height2.png": {
+      "sha256": "8fbbde7fa2cb85ff5193953aabf7ab89629c52a91a7b95a056b12076b6c57920",
+      "size": [
+        128,
+        64
+      ],
+      "level": 3,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height3.png": {
+      "sha256": "c02b05e91007b10616f50611683fb1c21b59eb0ff8ec71f062a2935c4533b56d",
+      "size": [
+        128,
+        64
+      ],
+      "level": 4,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height4.png": {
+      "sha256": "d4a4bb26359f8c151d2b071b60498bac88668886358c9ea2e17afbf9702d23f8",
+      "size": [
+        128,
+        64
+      ],
+      "level": 5,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height5.png": {
+      "sha256": "c78b98b6b676a928404da00869b8a68051bc25a17f64129e69b0e7df194afbfd",
+      "size": [
+        128,
+        64
+      ],
+      "level": 6,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height6.png": {
+      "sha256": "acd76575867018cc5f245db3da5a7426e3db75179dd5f03aedbcbc3e2a5ddc36",
+      "size": [
+        128,
+        64
+      ],
+      "level": 7,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height7.png": {
+      "sha256": "a1a57fb862dad777061e379872174e0afbbb922efe0c0b46e1cf47000bbea01b",
+      "size": [
+        128,
+        64
+      ],
+      "level": 8,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height8.png": {
+      "sha256": "1832477974533d62d03eca6d234639aaec360fefa73c7a822f6dad88f240aad2",
+      "size": [
+        128,
+        64
+      ],
+      "level": 9,
+      "source": "glueoverlay9.png"
+    },
+    "glueoverlay_height9.png": {
+      "sha256": "5895649b686bdaaec03a589670301395b8d91fbe55ae7e7e4e6fe9c8bd1e6c85",
+      "size": [
+        128,
+        64
+      ],
+      "level": 10,
+      "source": "glueoverlay9.png"
+    }
+  }
+}

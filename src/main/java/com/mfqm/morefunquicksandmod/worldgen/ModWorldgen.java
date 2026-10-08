@@ -15,6 +15,7 @@ import java.util.function.Supplier;
 public final class ModWorldgen {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, MFQM.MOD_ID);
     public static final Supplier<LegacyTerrainFeature> TERRAIN = FEATURES.register("legacy_terrain", LegacyTerrainFeature::new);
+    public static final Supplier<GluePoolFeature> GLUE_POOL = FEATURES.register("glue_pool", GluePoolFeature::new);
     public static final DeferredRegister<StructureType<?>> STRUCTURES = DeferredRegister.create(Registries.STRUCTURE_TYPE, MFQM.MOD_ID);
     public static final Supplier<StructureType<DesertTombStructure>> TOMB = STRUCTURES.register("desert_tomb", () -> () -> DesertTombStructure.CODEC);
     public static final DeferredRegister<StructurePieceType> PIECES = DeferredRegister.create(Registries.STRUCTURE_PIECE, MFQM.MOD_ID);

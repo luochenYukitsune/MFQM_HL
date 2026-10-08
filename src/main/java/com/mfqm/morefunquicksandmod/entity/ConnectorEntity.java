@@ -34,7 +34,7 @@ public final class ConnectorEntity extends Projectile {
     private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(ConnectorEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> LENGTH = SynchedEntityData.defineId(ConnectorEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> ATTACHED = SynchedEntityData.defineId(ConnectorEntity.class, EntityDataSerializers.BOOLEAN);
-    private EntityReference<LivingEntity> grabbed;
+    private EntityReference<Entity> grabbed;
     private BlockPos support;
     private float strain;
     private long lastControlTick = Long.MIN_VALUE;
@@ -44,10 +44,10 @@ public final class ConnectorEntity extends Projectile {
     public double maxLength() { return kind().equals("hook") ? 48 : kind().equals("rescue") ? 1.5 : 32; }
     public float ropeLength() { return entityData.get(LENGTH); }
     public boolean attached() { return entityData.get(ATTACHED); }
-    public void bindTarget(LivingEntity target) { grabbed = EntityReference.of(target); entityData.set(TARGET_ID, target.getId()); setPos(target.getX(),target.getY()+target.getBbHeight()*0.5,target.getZ()); attach(); }
+    public void bindTarget(Entity target) { grabbed = EntityReference.of(target); entityData.set(TARGET_ID, target.getId()); setPos(target.getX(),target.getY()+target.getBbHeight()*0.5,target.getZ()); attach(); }
     @Override public void setOwner(Entity entity) { super.setOwner(entity); entityData.set(OWNER_ID, entity == null ? -1 : entity.getId()); }
     public Entity visibleOwner() { return level().isClientSide() ? level().getEntity(entityData.get(OWNER_ID)) : getOwner(); }
-    public Entity visibleTarget() { return level().isClientSide() ? level().getEntity(entityData.get(TARGET_ID)) : EntityReference.get(grabbed, level(), LivingEntity.class); }
+    public Entity visibleTarget() { return level().isClientSide() ? level().getEntity(entityData.get(TARGET_ID)) : EntityReference.get(grabbed, level(), Entity.class); }
     public boolean isOwnedBy(ServerPlayer player) { return getOwner() == player && player.level() == level(); }
     public boolean holdingTool(ServerPlayer player) {
         String item = kind().equals("hook") ? "grappling_hook" : kind().equals("rescue") ? "rescuing" : "rope";
@@ -55,7 +55,7 @@ public final class ConnectorEntity extends Projectile {
                 || (kind().equals("rescue") && player.getMainHandItem().isEmpty());
     }
     public void control(ServerPlayer player, int action) {
-        if (!isOwnedBy(player) || !holdingTool(player) || action < 0 || action > 3 || distanceToSqr(player) > (maxLength()+4)*(maxLength()+4)) return;
+        if (!player.isAlive() || player.isSpectator() || !isOwnedBy(player) || !holdingTool(player) || action < 0 || action > 3 || distanceToSqr(player) > (maxLength()+4)*(maxLength()+4)) return;
         long tick = level().getGameTime(); if (lastControlTick == tick) return; lastControlTick = tick;
         if (action == 2) { discard(); return; }
         float change = action == 1 ? 0.15F : -0.15F;
@@ -71,7 +71,7 @@ public final class ConnectorEntity extends Projectile {
         entityData.set(OWNER_ID, player.getId());
         if (distanceToSqr(player) > (maxLength()+4)*(maxLength()+4) || tickCount > 12000) { breakConnection(player, false); return; }
         if (!attached()) {
-            HitResult hit = ProjectileUtil.getHitResultOnMoveVector(this, entity -> canHitEntity(entity) && entity instanceof LivingEntity);
+            HitResult hit = ProjectileUtil.getHitResultOnMoveVector(this, entity -> canHitEntity(entity) && (entity instanceof LivingEntity || (kind().equals("rope") && entity instanceof StuckBootsEntity)));
             setPos(position().add(getDeltaMovement()));
             if (hit.getType() != HitResult.Type.MISS) { setPos(hit.getLocation()); onHit(hit); }
             else setDeltaMovement(getDeltaMovement().scale(0.99).add(0,-0.03,0));
@@ -79,7 +79,7 @@ public final class ConnectorEntity extends Projectile {
             if (distanceToSqr(player) > maxLength()*maxLength() || tickCount > 100) discard();
             return;
         }
-        LivingEntity target = EntityReference.get(grabbed, level(), LivingEntity.class);
+        Entity target = EntityReference.get(grabbed, level(), Entity.class);
         if (grabbed != null) {
             if (target == null || !target.isAlive() || target.level()!=level()) { discard(); return; }
             setPos(target.getX(), target.getY()+target.getBbHeight()*0.5, target.getZ()); entityData.set(TARGET_ID, target.getId());
@@ -87,13 +87,14 @@ public final class ConnectorEntity extends Projectile {
         Vec3 hand = player.position().add(0, player.getBbHeight()*0.65, 0);
         double distance = position().distanceTo(hand);
         double stretch = distance-ropeLength();
-        if (player.isShiftKeyDown()) entityData.set(LENGTH, Math.max(0.5F, ropeLength()-0.06F));
         if (stretch > 0.1) {
             double resistance=target==null?resistance(player):resistance(target);
             double force = Math.min(kind().equals("hook") ? 0.24 : 0.15, stretch * 0.08)/resistance;
             Vec3 direction = position().subtract(hand).normalize();
-            if (target != null && (player.onGround() || QuicksandPhysics.state(player).depth < 0.25)) {
-                Vec3 anchor = hand.add(0, 0.8, 0); QuicksandPhysics.rescue(target, anchor, force);
+            if (target instanceof StuckBootsEntity boots) {
+                boots.pullWithRope(player, force);
+            } else if (target instanceof LivingEntity living && (player.onGround() || QuicksandPhysics.state(player).depth < 0.25)) {
+                Vec3 anchor = hand.add(0, 0.8, 0); QuicksandPhysics.rescue(living, anchor, force);
                 if (!player.onGround()) player.setDeltaMovement(player.getDeltaMovement().add(direction.scale(force*0.3)));
             } else { QuicksandPhysics.rescue(player, position().add(0,0.5,0), force); }
             player.hurtMarked = true;
@@ -114,11 +115,13 @@ public final class ConnectorEntity extends Projectile {
         }
     }
     @Override protected void onHitEntity(EntityHitResult hit) {
-        if (!(hit.getEntity() instanceof LivingEntity target) || target == getOwner() || target.isSpectator() || target.hasInfiniteMaterials()) return;
-        if(kind().equals("hook") && level() instanceof ServerLevel server)target.hurtServer(server,damageSources().thrown(this,getOwner()),1.5F);
+        Entity target = hit.getEntity();
+        if (target == getOwner() || target.isSpectator() || (target instanceof LivingEntity living && living.hasInfiniteMaterials())) return;
+        if (!(target instanceof LivingEntity) && !(kind().equals("rope") && target instanceof StuckBootsEntity)) return;
+        if(kind().equals("hook") && target instanceof LivingEntity living && level() instanceof ServerLevel server)living.hurtServer(server,damageSources().thrown(this,getOwner()),1.5F);
         bindTarget(target);
         // Legacy HookAsRider was a helper mounting workaround, not permission to mount the player.
-        if(ModConfig.SERVER.hookAsRider.get() && !(target instanceof BlobEntity) && !(target instanceof net.minecraft.world.entity.player.Player))startRiding(target,false,true);
+        if(target instanceof LivingEntity && ModConfig.SERVER.hookAsRider.get() && !(target instanceof BlobEntity) && !(target instanceof net.minecraft.world.entity.player.Player))startRiding(target,false,true);
     }
     @Override protected void onHitBlock(BlockHitResult hit) {
         var state = level().getBlockState(hit.getBlockPos());
@@ -168,7 +171,7 @@ public final class ConnectorEntity extends Projectile {
         output.putBoolean("Attached", attached()); output.putFloat("Length", ropeLength()); output.putFloat("Strain", strain);
     }
     @Override protected void readAdditionalSaveData(ValueInput input) {
-        super.readAdditionalSaveData(input); grabbed = input.read("Grabbed", EntityReference.<LivingEntity>codec()).orElse(null);
+        super.readAdditionalSaveData(input); grabbed = input.read("Grabbed", EntityReference.<Entity>codec()).orElse(null);
         support = input.read("Support", BlockPos.CODEC).orElse(null); entityData.set(ATTACHED, input.getBooleanOr("Attached", false));
         entityData.set(LENGTH, net.minecraft.util.Mth.clamp(input.getFloatOr("Length", 1.5F), 0.5F, (float)maxLength()));
         strain = Math.max(0, input.getFloatOr("Strain", 0));

@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "sources": [
+    {
+      "id": "glue",
+      "path": "sources/glue.png",
+      "prompt": "Use case: stylized-concept\nAsset type: seamless square material source for a Minecraft 32-pixel fluid tile, to be downsampled into pixel art.\nPrimary request: top-down edge-to-edge flat milk-white semitransparent thick glue liquid surface, satin sheen with subtle viscous swirls, thick smooth milky adhesive rather than water. No visible background or object outline; material fills the entire square. Soft evenly distributed shallow creamy folds and small rounded ripples, restrained gray-white palette, readable at 32 by 32 pixels. No perspective, no directional lighting gradient, no large centered motif. Seamlessly repeating in both directions. Transparency must be real alpha, not a painted checkerboard. Slightly translucent material opacity roughly 70 percent throughout. No text, border, watermark, props or foam.",
+      "transparent_background": true
+    },
+    {
+      "id": "wood",
+      "path": "sources/wood.png",
+      "prompt": "Use case: stylized-concept\nAsset type: square repeating material source for a Minecraft thin reusable sticky trap board, to be downsampled to a 32 by 32 pixel texture.\nPrimary request: seamless pale natural birch wood and pressed wood-fiber surface, viewed straight from overhead, fills all edges. Light cream beige shallow fine straight grain with occasional subtle short fiber marks, understated and readable at Minecraft pixel density. A single flat wood material, not an assembled object. Matte finish, evenly distributed pattern, lighting completely flat. No glue, no perspective, no borders, nails, knots, objects, text or watermark. Repeat naturally in both directions. Restrained warm light wooden colors, enough contrast to read beneath a translucent white glue layer.",
+      "transparent_background": false
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+INSTALLED_ARTIFACT=C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\viscosity-client\mods\MFQM-neoforge-1.21.11-0.6.2-dev.jar
+SHA256=82647e3c0e291184ca6a5823534e92a63918f264dc9978322a319d59726a4ba8
+SCREENSHOTS=0
+2026-10-07T14:40:35.234945100Z main WARN Advanced terminal features are not available in this environment
+[22:40:35] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 289ms
+[22:40:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 10.0.36 (CLIENT in DEV)
+[22:40:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\viscosity-client
+[22:40:35] [main/WARN] [ne.ne.fm.lo.FMLConfig/CORE]: Configuration file C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\viscosity-client\config\fml.toml is not correct. Correcting
+[22:40:35] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 104) in 37ms
+[22:40:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[22:40:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/10.0.36/dbd0e11d545443f602addede111c39d9639708f9/earlydisplay-10.0.36.jar
+[22:40:35] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/10.0.36/f72ab4d3e755fe736829883d90430a281527aca/loader-10.0.36.jar
+[22:40:35] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because splash screen is disabled
+[22:40:35] [ForkJoinPool.commonPool-worker-1/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[22:40:35] [ForkJoinPool.commonPool-worker-1/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[22:40:35] [ForkJoinPool.commonPool-worker-1/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Minecraft 1.21.11 (minecraft)
+		NeoForge 21.11.45 (neoforge)
+		更多趣味流沙（MFQM） 0.6.2-dev (mfqm)
+[22:40:36] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/80fc3a9f592673cea87f4cd702f87991c6c9fe4d/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=FML Env=CLIENT
+[22:40:36] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[22:40:36] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > net.neoforged.neoforge-coremods-21.11.45.jar
+[22:40:36] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - mfqm (jar(mods/MFQM-neoforge-1.21.11-0.6.2-dev.jar))
+ - minecraft (composite(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45-client-extra-aka-minecraft-resources.jar), filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - mixinextras.neoforge (jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+[22:40:36] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 40ms
+[22:40:38] [Datafixer Bootstrap/INFO] [mojang/DataFixerBuilder]: 290 Datafixer optimizations took 584 milliseconds
+[22:40:39] [pool-8-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[22:40:45] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[22:40:45] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[22:40:45] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[22:40:45] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[22:40:45] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[22:40:45] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[22:40:45] [modloading-worker-0/INFO] [MFQM/]: MFQM initializing...
+[22:40:45] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.11.45, for MC 1.21.11
+[22:40:45] [modloading-worker-0/INFO] [MFQM/]: MFQM initialized.
+[22:40:46] [Render thread/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[22:40:46] [Render thread/INFO] [minecraft/Minecraft]: Setting user: Dev
+[22:40:46] [Render thread/INFO] [minecraft/Minecraft]: Backend library: LWJGL version 3.3.3+5
+[22:40:47] [Render thread/INFO] [minecraft/Minecraft]: Using optional rendering extensions: GL_ARB_buffer_storage, GL_KHR_debug, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
+[22:40:48] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources, mod/mfqm, mod/neoforge
+[22:40:48] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
+[22:40:48] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
+[22:40:48] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
+[22:40:50] [Render thread/INFO] [mojang/Library]: OpenAL initialized on device OpenAL Soft on 扬声器 (Realtek(R) Audio)
+[22:40:50] [Render thread/INFO] [minecraft/SoundEngine]: Sound engine started
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/beds.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/signs.png-atlas
+[22:40:50] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
+[22:40:51] [Render thread/INFO] [ne.ne.ne.cl.en.an.js.AnimationLoader/]: Loaded 0 entity animations
+[22:40:54] [Render thread/INFO] [minecraft/RecipeManager]: Loaded 1677 recipes
+[22:40:54] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 1584 advancements
+[22:40:54] [Render thread/INFO] [ne.ne.ne.co.cr.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[22:40:54] [Server thread/INFO] [minecraft/IntegratedServer]: Starting integrated minecraft server version 1.21.11
+[22:40:54] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[22:40:55] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[22:40:55] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[22:40:55] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[22:40:57] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 48 chunks for player spawn...
+[22:40:57] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[22:40:57] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：18%
+[22:40:57] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：18%
+[22:40:57] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：18%
+[22:40:57] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：18%
+[22:40:58] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：30%
+[22:40:58] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：39%
+[22:40:59] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[22:40:59] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 4370 ms
+[22:41:00] [Server thread/INFO] [minecraft/PlayerList]: Dev[local:E:d6af4a01] logged in with entity id 28 at (-63.5, 78.0, 95.5)
+[22:41:00] [Server thread/INFO] [minecraft/MinecraftServer]: Dev加入了游戏
+[22:41:00] [Render thread/WARN] [minecraft/ClientPacketListener]: Ignoring chat session from Dev due to missing Services public key
+[22:41:00] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 2 advancements
+[22:41:00] [Server thread/INFO] [minecraft/IntegratedServer]: Changing view distance to 12, from 10
+[22:41:00] [Server thread/INFO] [minecraft/IntegratedServer]: Changing simulation distance to 12, from 0
+[22:41:00] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[22:41:00] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[22:41:00] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[22:41:00] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[22:41:00] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
+[22:41:02] [Render thread/INFO] [MFQM/]: MFQM_INSTALLED_JAR_LOADED file:/C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/run/1.21.11/viscosity-client/mods/MFQM-neoforge-1.21.11-0.6.2-dev.jar
+[22:41:02] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_VISUAL_CHECKS_COMPLETE modelCases=60
+[22:41:02] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_INPUT_CHECKS_COMPLETE shortTap=true repeat=false tetherSwap=false menuLeak=false
+[22:41:02] [Render thread/INFO] [MFQM/]: MFQM_CHINESE_CHECKS_COMPLETE englishKeys=566 chineseKeys=781 active=true configScreen=true formats=true registeredNames=true
+[22:41:02] [Render thread/INFO] [MFQM/]: MFQM_CLIENT_CHECKS_COMPLETE items=180 visible=165 blocks=51 fluids=14 entities=18
+[22:41:02] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_CHECKS_START suite=ground cases=23 movementTicks=60 screenshots=0 flightControls=false thinMud=unsupported hotTar=false randomTentacles=false creativeGroundTraps=true
+[22:41:05] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 12 advancements
+[22:41:09] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow/water ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.0, 4.5) clientEnd=(85.5, 253.0, 10.06640076825505) serverStart=(85.5, 253.0, 4.5) serverEnd=(85.5, 253.0, 9.890001027414632) maxClientY=253.0 forward=5.390001027414632 horizontal=5.390001027414632 clientServerError=0.17639974084041832 maxRecentClientServerError=0.29397967458036334 maxObservedSampleAgeTicks=1 finalMaterial= depth=0.0 effort=0.0 connections=0 contactTicks=60 serverMoving=true
+[22:41:09] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 16 reached during a single frame. New capacity will be 32.
+[22:41:16] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow/glue ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.04, 4.5) clientEnd=(85.5, 253.04, 4.516386591577842) serverStart=(85.5, 253.04, 4.5) serverEnd=(85.5, 253.04, 4.51584037185858) maxClientY=253.04 forward=0.015840371858580227 horizontal=0.015840371858580227 clientServerError=5.462197192613871E-4 maxRecentClientServerError=5.462197192613871E-4 maxObservedSampleAgeTicks=1 finalMaterial=glue depth=0.8488888955116352 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:41:24] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow/tar ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.0, 4.5) clientEnd=(85.5, 253.0, 4.518178625956544) serverStart=(85.5, 253.0, 4.5) serverEnd=(85.5, 253.0, 4.517572671757993) maxClientY=253.0 forward=0.01757267175799271 horizontal=0.01757267175799271 clientServerError=6.059541985514727E-4 maxRecentClientServerError=6.059541985514727E-4 maxObservedSampleAgeTicks=1 finalMaterial=tar depth=0.8888888955116272 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:41:31] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow/honey ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.00000000000003, 4.5) clientEnd=(85.5, 253.0, 4.523372519575924) serverStart=(85.5, 253.00000000000003, 4.5) serverEnd=(85.5, 253.0, 4.52259343559006) maxClientY=253.00000000000003 forward=0.022593435590059663 horizontal=0.022593435590059663 clientServerError=7.790839858641263E-4 maxRecentClientServerError=7.790839858641263E-4 maxObservedSampleAgeTicks=1 finalMaterial=honey depth=0.8888888955116272 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:41:38] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow/mud ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.0, 4.5) clientEnd=(85.5, 253.0, 4.666325110918838) serverStart=(85.5, 253.0, 4.5) serverEnd=(85.5, 253.0, 4.6683123434448985) maxClientY=253.0 forward=0.16831234344489854 horizontal=0.16831234344489854 clientServerError=0.0019872325260603674 maxRecentClientServerError=0.016577289818275 maxObservedSampleAgeTicks=1 finalMaterial=mud depth=1.0 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:41:38] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow/glue waterForward=5.390001027414632 mediumForward=0.015840371858580227 ratio=0.002938843940476616
+[22:41:38] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow/tar waterForward=5.390001027414632 mediumForward=0.01757267175799271 ratio=0.0032602353262299127
+[22:41:38] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow/honey waterForward=5.390001027414632 mediumForward=0.022593435590059663 ratio=0.004191731221412555
+[22:41:38] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow/mud waterForward=5.390001027414632 mediumForward=0.16831234344489854 ratio=0.031226773907616717
+[22:41:46] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_deep/water ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 251.0, 4.5) clientEnd=(85.5, 251.0, 10.06640076825505) serverStart=(85.5, 251.0, 4.5) serverEnd=(85.5, 251.0, 9.890001027414632) maxClientY=251.0 forward=5.390001027414632 horizontal=5.390001027414632 clientServerError=0.17639974084041832 maxRecentClientServerError=0.19599967320068146 maxObservedSampleAgeTicks=1 finalMaterial= depth=0.0 effort=0.0 connections=0 contactTicks=60 serverMoving=true
+[22:41:53] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_deep/glue ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 251.04, 4.5) clientEnd=(85.5, 251.04, 4.505880000393724) serverStart=(85.5, 251.04, 4.5) serverEnd=(85.5, 251.04, 4.505390000360913) maxClientY=251.04 forward=0.005390000360913305 horizontal=0.005390000360913305 clientServerError=4.900000328103005E-4 maxRecentClientServerError=4.900000328103005E-4 maxObservedSampleAgeTicks=1 finalMaterial=glue depth=2.848888895511635 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:42:00] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_deep/tar ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 251.0, 4.5) clientEnd=(85.5, 251.0, 4.505880000393724) serverStart=(85.5, 251.0, 4.5) serverEnd=(85.5, 251.0, 4.505390000360913) maxClientY=251.0 forward=0.005390000360913305 horizontal=0.005390000360913305 clientServerError=4.900000328103005E-4 maxRecentClientServerError=4.900000328103005E-4 maxObservedSampleAgeTicks=1 finalMaterial=tar depth=2.888888895511627 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:42:08] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_deep/honey ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 251.00000000000003, 4.5) clientEnd=(85.5, 251.0, 4.505390000360913) serverStart=(85.5, 251.00000000000003, 4.5) serverEnd=(85.5, 251.0, 4.505390000360913) maxClientY=251.00000000000003 forward=0.005390000360913305 horizontal=0.005390000360913305 clientServerError=0.0 maxRecentClientServerError=4.900000328103005E-4 maxObservedSampleAgeTicks=2 finalMaterial=honey depth=2.888888895511627 effort=0.48000000000000037 connections=2 contactTicks=60 serverMoving=true
+[22:42:15] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_deep/mud ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 251.0, 4.5) clientEnd=(85.5, 251.0, 4.581822110682957) serverStart=(85.5, 251.0, 4.5) serverEnd=(85.5, 251.0, 4.578016217141008) maxClientY=251.0 forward=0.07801621714100815 horizontal=0.07801621714100815 clientServerError=0.0038058935419487128 maxRecentClientServerError=0.004213166278031366 maxObservedSampleAgeTicks=1 finalMaterial=mud depth=3.0 effort=0.46400000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:42:23] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/flowing_thin/water ticks=60 clientFlying=false serverFlying=false clientStart=(86.67172287563152, 253.0, 4.5) clientEnd=(87.48916526907787, 253.0, 10.06640076825505) serverStart=(86.64210000728973, 253.0, 4.5) serverEnd=(87.46569934129094, 253.0, 9.792001209587378) maxClientY=253.0 forward=5.292001209587378 horizontal=5.3557065514497255 clientServerError=0.2754011030550078 maxRecentClientServerError=0.2975521522612003 maxObservedSampleAgeTicks=1 finalMaterial= depth=0.0 effort=0.0 connections=0 contactTicks=60 serverMoving=true
+[22:42:30] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/flowing_thin/glue ticks=60 clientFlying=false serverFlying=false clientStart=(83.514, 253.04, 4.5) clientEnd=(83.514, 253.04, 4.533500207238912) serverStart=(83.514, 253.04, 4.5) serverEnd=(83.514, 253.04, 4.532941870451597) maxClientY=253.04 forward=0.03294187045159713 horizontal=0.03294187045159713 clientServerError=5.583367873152056E-4 maxRecentClientServerError=0.001675010361945617 maxObservedSampleAgeTicks=2 finalMaterial=glue depth=0.18222222387791476 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:42:36] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 32 reached during a single frame. New capacity will be 64.
+[22:42:37] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 64 reached during a single frame. New capacity will be 128.
+[22:42:37] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/flowing_thin/tar ticks=60 clientFlying=false serverFlying=false clientStart=(83.5, 253.0, 4.5) clientEnd=(83.49954559822184, 253.0, 4.538093693649796) serverStart=(83.5, 253.0, 4.5) serverEnd=(83.49964502994852, 253.0, 4.537465750569037) maxClientY=253.0 forward=0.037465750569037226 horizontal=0.03746743211695669 clientServerError=6.357666088620525E-4 maxRecentClientServerError=0.0019072998581544098 maxObservedSampleAgeTicks=2 finalMaterial=tar depth=0.2222222238779068 effort=0.48000000000000037 connections=2 contactTicks=60 serverMoving=true
+[22:42:38] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 128 reached during a single frame. New capacity will be 256.
+[22:42:38] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 256 reached during a single frame. New capacity will be 512.
+[22:42:45] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/flowing_thin/honey ticks=60 clientFlying=false serverFlying=false clientStart=(83.5, 253.0, 4.5) clientEnd=(83.5, 253.0, 4.549044852028519) serverStart=(83.5, 253.0, 4.5) serverEnd=(83.5, 253.0, 4.548227437828044) maxClientY=253.0 forward=0.04822743782804384 horizontal=0.04822743782804384 clientServerError=8.174142004753193E-4 maxRecentClientServerError=0.0032696568019012773 maxObservedSampleAgeTicks=1 finalMaterial=honey depth=0.2222222238779068 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:42:52] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow_jump/water ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.0, 4.5) clientEnd=(85.5, 253.93940947724764, 11.009239426676398) serverStart=(85.5, 253.0, 4.5) serverEnd=(85.5, 253.70903571493557, 10.823826275468056) maxClientY=254.16415961451256 forward=6.323826275468056 horizontal=6.323826275468056 clientServerError=0.29571964257185485 maxRecentClientServerError=0.5278337048782562 maxObservedSampleAgeTicks=1 finalMaterial= depth=0.0 effort=0.0 connections=0 contactTicks=48 serverMoving=true
+[22:42:59] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow_jump/glue ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.04, 4.5) clientEnd=(85.5, 253.04, 4.516386591577842) serverStart=(85.5, 253.04, 4.5) serverEnd=(85.5, 253.04, 4.51584037185858) maxClientY=253.04 forward=0.015840371858580227 horizontal=0.015840371858580227 clientServerError=5.462197192613871E-4 maxRecentClientServerError=5.462197192613871E-4 maxObservedSampleAgeTicks=1 finalMaterial=glue depth=0.8488888955116352 effort=0.7220000000000004 connections=2 contactTicks=60 serverMoving=true
+[22:43:07] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow_jump/tar ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.0, 4.5) clientEnd=(85.5, 253.0, 4.518178625956544) serverStart=(85.5, 253.0, 4.5) serverEnd=(85.5, 253.0, 4.517572671757993) maxClientY=253.0 forward=0.01757267175799271 horizontal=0.01757267175799271 clientServerError=6.059541985514727E-4 maxRecentClientServerError=6.059541985514727E-4 maxObservedSampleAgeTicks=1 finalMaterial=tar depth=0.8888888955116272 effort=0.7220000000000004 connections=2 contactTicks=60 serverMoving=true
+[22:43:14] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=survival/ground/source_shallow_jump/honey ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.00000000000003, 4.5) clientEnd=(85.5, 253.0, 4.523372519575924) serverStart=(85.5, 253.00000000000003, 4.5) serverEnd=(85.5, 253.0, 4.52259343559006) maxClientY=253.00000000000003 forward=0.022593435590059663 horizontal=0.022593435590059663 clientServerError=7.790839858641263E-4 maxRecentClientServerError=7.790839858641263E-4 maxObservedSampleAgeTicks=1 finalMaterial=honey depth=0.8888888955116272 effort=0.7220000000000004 connections=2 contactTicks=60 serverMoving=true
+[22:43:21] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=creative/ground/source_shallow/water ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.0, 4.5) clientEnd=(85.35432417901065, 253.0, 10.064494341180712) serverStart=(85.5, 253.0, 4.5) serverEnd=(85.35894065887602, 253.0, 9.888155015185692) maxClientY=253.0 forward=5.388155015185692 horizontal=5.390001132225211 clientServerError=0.17639974427057803 maxRecentClientServerError=0.1959996770119684 maxObservedSampleAgeTicks=1 finalMaterial= depth=0.0 effort=0.0 connections=0 contactTicks=60 serverMoving=true
+[22:43:29] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=creative/ground/source_shallow/glue ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.04, 4.5) clientEnd=(85.5, 253.04, 4.516386591577842) serverStart=(85.5, 253.04, 4.5) serverEnd=(85.5, 253.04, 4.51584037185858) maxClientY=253.04 forward=0.015840371858580227 horizontal=0.015840371858580227 clientServerError=5.462197192613871E-4 maxRecentClientServerError=5.462197192613871E-4 maxObservedSampleAgeTicks=1 finalMaterial=glue depth=0.8488888955116352 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:43:36] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=creative/ground/source_shallow/tar ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.0, 4.5) clientEnd=(85.5, 253.0, 4.518178625956544) serverStart=(85.5, 253.0, 4.5) serverEnd=(85.5, 253.0, 4.517572671757993) maxClientY=253.0 forward=0.01757267175799271 horizontal=0.01757267175799271 clientServerError=6.059541985514727E-4 maxRecentClientServerError=6.059541985514727E-4 maxObservedSampleAgeTicks=1 finalMaterial=tar depth=0.8888888955116272 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:43:43] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=creative/ground/source_shallow/honey ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.00000000000003, 4.5) clientEnd=(85.5, 253.0, 4.523372519575924) serverStart=(85.5, 253.00000000000003, 4.5) serverEnd=(85.5, 253.0, 4.52259343559006) maxClientY=253.00000000000003 forward=0.022593435590059663 horizontal=0.022593435590059663 clientServerError=7.790839858641263E-4 maxRecentClientServerError=7.790839858641263E-4 maxObservedSampleAgeTicks=1 finalMaterial=honey depth=0.8888888955116272 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESULT case=creative/ground/source_shallow/mud ticks=60 clientFlying=false serverFlying=false clientStart=(85.5, 253.0, 4.5) clientEnd=(85.5, 253.0, 4.666356598236999) serverStart=(85.5, 253.0, 4.5) serverEnd=(85.5, 253.0, 4.6683384651000495) maxClientY=253.0 forward=0.16833846510004946 horizontal=0.16833846510004946 clientServerError=0.0019818668630504632 maxRecentClientServerError=0.01662153186538884 maxObservedSampleAgeTicks=1 finalMaterial=mud depth=1.0 effort=0.47200000000000036 connections=2 contactTicks=60 serverMoving=true
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow/glue waterForward=5.390001027414632 mediumForward=0.015840371858580227 ratio=0.002938843940476616
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow/tar waterForward=5.390001027414632 mediumForward=0.01757267175799271 ratio=0.0032602353262299127
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow/honey waterForward=5.390001027414632 mediumForward=0.022593435590059663 ratio=0.004191731221412555
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow/mud waterForward=5.390001027414632 mediumForward=0.16831234344489854 ratio=0.031226773907616717
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_deep/glue waterForward=5.390001027414632 mediumForward=0.005390000360913305 ratio=9.99999876344861E-4
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_deep/tar waterForward=5.390001027414632 mediumForward=0.005390000360913305 ratio=9.99999876344861E-4
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_deep/honey waterForward=5.390001027414632 mediumForward=0.005390000360913305 ratio=9.99999876344861E-4
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_deep/mud waterForward=5.390001027414632 mediumForward=0.07801621714100815 ratio=0.014474249029675864
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/flowing_thin/glue waterForward=5.292001209587378 mediumForward=0.03294187045159713 ratio=0.006224841822015691
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/flowing_thin/tar waterForward=5.292001209587378 mediumForward=0.037465750569037226 ratio=0.007079694256524644
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/flowing_thin/honey waterForward=5.292001209587378 mediumForward=0.04822743782804384 ratio=0.00911327037126739
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow_jump/glue waterForward=6.323826275468056 mediumForward=0.015840371858580227 ratio=0.0025048714446868335
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow_jump/tar waterForward=6.323826275468056 mediumForward=0.01757267175799271 ratio=0.0027788036850667714
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=survival/ground/source_shallow_jump/honey waterForward=6.323826275468056 mediumForward=0.022593435590059663 ratio=0.0035727476698254835
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=creative/ground/source_shallow/glue waterForward=5.388155015185692 mediumForward=0.015840371858580227 ratio=0.002939850804948365
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=creative/ground/source_shallow/tar waterForward=5.388155015185692 mediumForward=0.01757267175799271 ratio=0.003261352301198985
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=creative/ground/source_shallow/honey waterForward=5.388155015185692 mediumForward=0.022593435590059663 ratio=0.004193167332117119
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RATIO case=creative/ground/source_shallow/mud waterForward=5.388155015185692 mediumForward=0.16833846510004946 ratio=0.031242320353741346
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_CHECKS_COMPLETE cases=23 realInput=true packagedJar=true clientFlying=false serverFlying=false screenshots=0
+[22:43:51] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_ACTION_CHECKS_START screenshots=0 realF=true suspendedGlue=true rescueOnce=true
+[22:43:57] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_REST_COMPLETE ticks=30 floorGap=3.5 serverY=252.5 clientY=252.5 depth=1.3888888955116272
+[22:43:57] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=1 effort=1.0 totalSink=0.4879999999999945 serverY=252.5 clientY=252.5
+[22:43:58] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=2 effort=2.0 totalSink=0.4879999999999945 serverY=252.5 clientY=252.5
+[22:43:59] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=3 effort=3.0 totalSink=0.4879999999999945 serverY=252.5 clientY=252.5
+[22:44:00] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=4 effort=4.0 totalSink=0.5129999999999945 serverY=252.5 clientY=252.475
+[22:44:01] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=5 effort=5.0 totalSink=0.5379999999999945 serverY=252.475 clientY=252.45
+[22:44:01] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_F_SINK_COMPLETE realF=5 effort=5.0 serverSink=0.05000000000001137 clientSink=0.05000000000001137 totalSinkDelta=0.04999999999999999
+[22:44:04] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_NO_REPLAY_COMPLETE ticks=60 serverY=252.45 clientY=252.45 depth=1.4388888955116386 totalSink=0.5379999999999945
+[22:44:06] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESCUE_COMPLETE strength=.08 calls=1 heldJump=true serverRise=0.40010986998723297 clientRise=0.40010986998723297 maxClientY=252.84010986998723 rescueSequence=1 rescueTicks=0
+[22:44:09] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESCUE_REST_COMPLETE ticks=60 serverY=252.84010986998723 clientY=252.84010986998723 sequence=1 expired=true
+[22:44:16] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_DRY_WALK_COMPLETE ticks=60 serverWalk=12.476083534970456 clientWalk=12.809801668419098 serverEnd=(114.97608353497046, 253.0, -3.5) clientEnd=(115.3098016684191, 253.0, -3.5) speed=0.10000000149011612 gravity=0.08
+[22:44:19] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_KNOCKBACK_READY serverY=251.00000000000006 clientY=251.00000000000006 serverGround=true clientGround=true depth=0.8888888955115704
+[22:44:21] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_KNOCKBACK_ARC_COMPLETE ticks=30 strength=.4 attacks=1 realDamage=true clientFlying=false serverFlying=false groundedNaturally=true serverRise=0.7049478117560852 clientRise=0.7049478117560852 serverEnd=(104.1926172806998, 251.15779670357688, 8.5) clientEnd=(104.20257925066245, 251.13293342918635, 8.5) serverVelocity=(0.004417480349929426, -0.011836601055914511, 0.0) clientVelocity=(0.004417480349929426, -0.011836601055914511, 0.0) externalSequence=1 externalTicks=0
+[22:44:24] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_KNOCKBACK_EXPIRED_COMPLETE idleTicks=60 serverEnd=(104.27827575155364, 251.0, 8.5) clientEnd=(104.27881512624381, 251.0, 8.5) maxClientRise=0.7049478117560852 externalSequence=1 externalTicks=0
+[22:44:24] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_ACTION_CHECKS_COMPLETE suspendedRest=true realF=5 sinkOnce=true noReplay=true rescueOnce=true heldJump=true rescueExpires=true dryWalk=true externalKnockback=true externalExpires=true screenshots=0
+[22:44:24] [Render thread/INFO] [minecraft/Minecraft]: Stopping!
+[22:44:24] [Server thread/INFO] [minecraft/ServerGamePacketListenerImpl]: Dev lost connection: 连接中断
+[22:44:24] [Server thread/INFO] [minecraft/MinecraftServer]: Dev退出了游戏
+[22:44:24] [Server thread/INFO] [minecraft/ServerCommonPacketListenerImpl]: Stopping singleplayer server as player logged out
+[22:44:24] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[22:44:24] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[22:44:24] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[22:44:26] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:overworld
+[22:44:26] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_end
+[22:44:26] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_nether
+[22:44:26] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (mfqm-port-checks): All chunks are saved
+[22:44:26] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[22:44:26] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[22:44:26] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved

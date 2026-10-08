@@ -19,6 +19,7 @@ def registered_items():
     items.update(f"{block}_variant_{n}" for block, count in VARIANT_COUNTS.items() for n in range(1, count))
     items.update(f"{mob}_spawn_egg" for mob in ("vore_slime", "muddy_blob", "sand_blob", "tar_slime", "bee"))
     assert len(items) == 178
+    items.update({"glue_bucket", "sticky_board"})
     return items
 
 
@@ -28,7 +29,7 @@ def check(files):
     for item in items:
         if f"assets/mfqm/items/{item}.json" not in files:
             errors.append(f"missing client item definition: {item}")
-    for block in BLOCKS:
+    for block in BLOCKS + ["glue", "sticky_board"]:
         path = f"assets/mfqm/blockstates/{block}.json"
         if path not in files:
             errors.append(f"missing blockstate: {block}")
@@ -44,8 +45,10 @@ def check(files):
     if not any(p.startswith("data/mfqm/worldgen/placed_feature/") for p in files):
         errors.append("no placed world features")
     recipes = [p for p in files if p.startswith("data/mfqm/recipe/") and p.endswith(".json")]
-    if len(recipes) != 205:
-        errors.append(f"expected 205 core recipes, found {len(recipes)}")
+    legacy_recipes = [p for p in recipes if Path(p).name.startswith("legacy_")]
+    expected_new = {"data/mfqm/recipe/glue_bucket.json", "data/mfqm/recipe/sticky_board.json"}
+    if len(legacy_recipes) != 205 or set(recipes) - set(legacy_recipes) != expected_new:
+        errors.append(f"expected 205 legacy recipes plus glue_bucket/sticky_board, found {len(legacy_recipes)} legacy / {len(recipes)} total")
     templates = [p for p in files if p.startswith("data/mfqm/mfqm_compat_recipe/") and p.endswith(".json")]
     if len(templates) != 9:
         errors.append(f"expected nine optional compatibility templates, found {len(templates)}")

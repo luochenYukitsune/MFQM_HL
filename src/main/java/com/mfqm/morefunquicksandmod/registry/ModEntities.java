@@ -41,6 +41,8 @@ public final class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<SurfaceEffectEntity>> TAR_TREADS = effect("tar_treads");
     public static final DeferredHolder<EntityType<?>, EntityType<SurfaceEffectEntity>> SLIME_HOLE = effect("slime_hole");
     public static final DeferredHolder<EntityType<?>, EntityType<SurfaceEffectEntity>> LONG_STICK = effect("long_stick");
+    public static final DeferredHolder<EntityType<?>, EntityType<AdhesiveTetherEntity>> ADHESIVE_TETHER = entity("adhesive_tether", EntityType.Builder.of(AdhesiveTetherEntity::new, MobCategory.MISC).sized(.2F,.2F).clientTrackingRange(8).updateInterval(1).noSave());
+    public static final DeferredHolder<EntityType<?>, EntityType<StuckBootsEntity>> STUCK_BOOTS = entity("stuck_boots", EntityType.Builder.of(StuckBootsEntity::new, MobCategory.MISC).sized(.6F,.3F).clientTrackingRange(8).updateInterval(2));
     public static final DeferredHolder<EntityType<?>, EntityType<ConnectorEntity>> ROPE = connector("rope");
     public static final DeferredHolder<EntityType<?>, EntityType<ConnectorEntity>> HOOK = connector("hook");
     public static final DeferredHolder<EntityType<?>, EntityType<ConnectorEntity>> RESCUE = connector("rescue");
@@ -71,12 +73,20 @@ public final class ModEntities {
 
     public static void spawnConnector(ServerPlayer player, String kind, ItemStack held) {
         if (kind.equals("long_stick")) {
+            var bootHit = ProjectileUtil.getHitResultOnViewVector(player, entity -> entity instanceof StuckBootsEntity, 5);
+            if (bootHit instanceof net.minecraft.world.phys.EntityHitResult hit && hit.getEntity() instanceof StuckBootsEntity boots) {
+                var hand = player.getMainHandItem() == held ? net.minecraft.world.InteractionHand.MAIN_HAND : net.minecraft.world.InteractionHand.OFF_HAND;
+                boots.recover(player, hand, 5); return;
+            }
             var hit = player.pick(5,0,false);
             if (hit instanceof BlockHitResult block) spawnEffect(player.level(), "long_stick", Vec3.atCenterOf(block.getBlockPos()), player.level().getBlockState(block.getBlockPos()), player, 2);
             return;
         }
         if (!java.util.Set.of("rope","hook","rescue").contains(kind)) return;
-        for (ConnectorEntity existing : player.level().getEntitiesOfClass(ConnectorEntity.class, player.getBoundingBox().inflate(52))) if (existing.isOwnedBy(player)) { existing.discard(); return; }
+        for (ConnectorEntity existing : player.level().getEntitiesOfClass(ConnectorEntity.class, player.getBoundingBox().inflate(52))) if (existing.isOwnedBy(player)) {
+            if (existing.kind().equals(kind)) return;
+            existing.discard();
+        }
         EntityType<ConnectorEntity> type = kind.equals("hook") ? HOOK.get() : kind.equals("rescue") ? RESCUE.get() : ROPE.get();
         ConnectorEntity entity = type.create(player.level(), EntitySpawnReason.TRIGGERED);
         if (entity == null) return;

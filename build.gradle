@@ -27,11 +27,16 @@ neoForge {
                 systemProperty 'mfqm.clientChecks', 'true'
                 programArguments.addAll '--quickPlaySingleplayer', 'mfqm-port-checks'
             }
+            if (providers.gradleProperty('mfqmTextureChecks').isPresent()) {
+                systemProperty 'mfqm.textureChecks', 'true'
+            }
         }
         server {
             server()
             programArgument '--nogui'
             if (providers.gradleProperty('mfqmPortChecks').isPresent()) systemProperty 'mfqm.portChecks', 'true'
+            if (providers.gradleProperty('mfqmPersistencePhase').isPresent()) systemProperty 'mfqm.persistencePhase', providers.gradleProperty('mfqmPersistencePhase').get()
+            if (providers.gradleProperty('mfqmNaturalGlueChecks').isPresent()) systemProperty 'mfqm.naturalGlueChecks', 'true'
         }
         data {
             clientData()
@@ -66,6 +71,47 @@ tasks.register('verifySinkingMotion', JavaExec) {
 }
 tasks.named('test', Test) { failOnNoDiscoveredTests = false }
 tasks.named('check') { dependsOn tasks.named('verifySinkingMotion') }
+['AdhesiveRules', 'StruggleRules', 'AdhesiveMotion'].each { suite ->
+    def verifier = tasks.register("verify${suite}", JavaExec) {
+        dependsOn tasks.named('testClasses')
+        classpath = sourceSets.test.runtimeClasspath
+        mainClass = "com.mfqm.morefunquicksandmod.gameplay.${suite}Test"
+    }
+    tasks.named('check') { dependsOn verifier }
+}
+tasks.register('verifyStrugglePose', JavaExec) {
+    dependsOn tasks.named('testClasses')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.mfqm.morefunquicksandmod.client.StrugglePoseTest'
+}
+tasks.named('check') { dependsOn tasks.named('verifyStrugglePose') }
+tasks.register('verifyCoatingVoxels', JavaExec) {
+    dependsOn tasks.named('testClasses')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.mfqm.morefunquicksandmod.client.CoatingVoxelsTest'
+}
+tasks.named('check') { dependsOn tasks.named('verifyCoatingVoxels') }
+
+// Export the dependency runtime without launching it; the installed test loads only mods/*.jar.
+tasks.register('prepareInstalledClient') {
+    dependsOn providers.provider { def run = tasks.named('runClient').get(); run.taskDependencies.getDependencies(run) }
+    doLast {
+        def run = tasks.named('runClient').get()
+        // RunGameTask.exec() fills JavaExec.classpath only when launching. Read its
+        // configured provider here; exporting JavaExec.classpath yields an empty list.
+        def outputPaths = sourceSets.collectMany { it.output.files }.collect { it.canonicalPath }.toSet()
+        def runtimeClasspath = run.classpathProvider.files.findAll {
+            !outputPaths.contains(it.canonicalPath) && !it.name.startsWith('DevLaunch-')
+        }
+        if (runtimeClasspath.isEmpty()) throw new GradleException('Installed client dependency classpath is empty')
+        def runtime = [classpath: runtimeClasspath.collect { it.absolutePath },
+                       javaExecutable: run.javaLauncher.get().executablePath.asFile.absolutePath,
+                       vmArgsFile: file('build/moddev/clientRunVmArgs.txt').absolutePath,
+                       programArgsFile: file('build/moddev/clientRunProgramArgs.txt').absolutePath,
+                       jar: tasks.named('jar', Jar).get().archiveFile.get().asFile.absolutePath]
+        file('build/installed-client-runtime.json').text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(runtime))
+    }
+}
 
 tasks.named('processResources', ProcessResources) {
     def metadata = [mod_version: mod_version, neo_version: neo_version,
@@ -76,7 +122,6 @@ tasks.named('processResources', ProcessResources) {
     }
 }
 
-// Include permission and attribution notices in distributed binaries.
 tasks.named('processResources', ProcessResources) {
     from(project.files('LICENSE', 'NOTICE.md')) { into 'META-INF' }
 }

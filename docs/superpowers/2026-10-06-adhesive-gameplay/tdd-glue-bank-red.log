@@ -1,0 +1,103 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+> Task :compileJava
+> Task :processResources UP-TO-DATE
+> Task :classes
+> Task :downloadAssets UP-TO-DATE
+> Task :prepareServerRun
+
+> Task :runServer
+2026-10-07T03:53:19.529921800Z main WARN Advanced terminal features are not available in this environment
+[11:53:19] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 302ms
+[11:53:19] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 10.0.36 (DEDICATED_SERVER in DEV)
+[11:53:19] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\server
+[11:53:19] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 104) in 45ms
+[11:53:19] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[11:53:19] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/10.0.36/dbd0e11d545443f602addede111c39d9639708f9/earlydisplay-10.0.36.jar
+[11:53:19] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/10.0.36/f72ab4d3e755fe736829883d90430a281527aca/loader-10.0.36.jar
+[11:53:19] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: Not loading early display in headless mode.
+[11:53:19] [main/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[11:53:20] [main/INFO] [ne.ne.fm.lo.mo.lo.InDevFolderLocator/CORE]: Got mod coordinates mfqm%%C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\build\classes\java\main;mfqm%%C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\build\resources\main from env
+[11:53:20] [main/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[11:53:20] [main/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Minecraft 1.21.11 (minecraft)
+		More Fun Quicksand Mod 0.6.1-dev (mfqm)
+		NeoForge 21.11.45 (neoforge)
+[11:53:20] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/80fc3a9f592673cea87f4cd702f87991c6c9fe4d/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=FML Env=SERVER
+[11:53:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[11:53:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > net.neoforged.neoforge-coremods-21.11.45.jar
+[11:53:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - mfqm (composite(folder(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/classes/java/main), folder(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/resources/main)))
+ - minecraft (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45-client-extra-aka-minecraft-resources.jar)), filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - mixinextras.neoforge (jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+[11:53:21] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 25ms
+[11:53:23] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[11:53:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[11:53:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[11:53:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[11:53:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[11:53:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[11:53:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[11:53:29] [modloading-worker-0/INFO] [MFQM/]: MFQM initializing...
+[11:53:29] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.11.45, for MC 1.21.11
+[11:53:29] [modloading-worker-0/INFO] [MFQM/]: MFQM initialized.
+[11:53:30] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[11:53:33] [main/INFO] [minecraft/RecipeManager]: Loaded 1677 recipes
+[11:53:33] [main/INFO] [minecraft/AdvancementTree]: Loaded 1584 advancements
+[11:53:33] [main/INFO] [ne.ne.ne.co.cr.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[11:53:33] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.21.11
+[11:53:33] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[11:53:33] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[11:53:33] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[11:53:33] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on 127.0.0.1:0
+[11:53:34] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[11:53:34] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[11:53:34] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[11:53:34] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[11:53:34] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "smoke-world"
+[11:53:34] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[11:53:34] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 100%
+[11:53:34] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 12 ms
+[11:53:34] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.858s)! For help, type "help"
+[11:53:35] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[11:53:36] [Server thread/INFO] [minecraft/MinecraftServer]: MFQMDimensionProbe has made the advancement [We Need to Go Deeper]
+[11:53:36] [Server thread/ERROR] [MFQM/]: MFQM_PORT_CHECKS_FAILED
+java.lang.IllegalStateException: A one-block natural bank must permit a sealed glue pool instead of requiring perfectly flat terrain
+	at TRANSFORMER/mfqm@0.6.1-dev/com.mfqm.morefunquicksandmod.worldgen.GlueWorldgenPortChecks.require(GlueWorldgenPortChecks.java:201) ~[main/:?] {}
+	at TRANSFORMER/mfqm@0.6.1-dev/com.mfqm.morefunquicksandmod.worldgen.GlueWorldgenPortChecks.verify(GlueWorldgenPortChecks.java:79) ~[main/:?] {}
+	at TRANSFORMER/mfqm@0.6.1-dev/com.mfqm.morefunquicksandmod.validation.ModPortChecks.lambda$started$1(ModPortChecks.java:55) ~[main/:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.11.45.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:157) ~[neoforge-21.11.45.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:956) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:189) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.util.thread.BlockableEventLoop.execute(BlockableEventLoop.java:103) ~[neoforge-21.11.45.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/mfqm@0.6.1-dev/com.mfqm.morefunquicksandmod.validation.ModPortChecks.started(ModPortChecks.java:43) ~[main/:?] {}
+	at net.neoforged.bus.ConsumerEventHandler.invoke(ConsumerEventHandler.java:27) ~[bus-8.0.5.jar:?] {}
+	at net.neoforged.bus.EventBus.post(EventBus.java:360) ~[bus-8.0.5.jar:?] {}
+	at net.neoforged.bus.EventBus.post(EventBus.java:328) ~[bus-8.0.5.jar:?] {}
+	at TRANSFORMER/neoforge@21.11.45/net.neoforged.neoforge.server.ServerLifecycleHooks.handleServerStarted(ServerLifecycleHooks.java:106) ~[neoforge-21.11.45.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:747) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:287) ~[neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:access_transformer}
+	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?] {}
+[11:53:36] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping the server
+[11:53:36] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[11:53:36] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[11:53:36] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[11:53:37] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:overworld
+[11:53:37] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_nether
+[11:53:37] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_end
+[11:53:37] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (smoke-world): All chunks are saved
+[11:53:37] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[11:53:37] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[11:53:37] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[11:53:37] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Closing FML Loader bae1767
+[11:53:37] [main/INFO] [ne.ne.fm.ModLoader/]: Clearing ModLoader
+
+BUILD SUCCESSFUL in 22s
+6 actionable tasks: 3 executed, 3 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html

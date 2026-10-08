@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-/** The original overlays are 64x32; a modern 64x64 player model would sample the wrong UVs. */
+/** Legacy 64x32 UV layout, sampled by the refreshed 128x64 overlays; includes both arm widths. */
 public final class LegacyCoatingModel extends HumanoidModel<AvatarRenderState> {
     public LegacyCoatingModel(boolean slim){super(layer(slim).bakeRoot(),RenderTypes::entityTranslucent);hat.visible=false;}
     private static LayerDefinition layer(boolean slim){

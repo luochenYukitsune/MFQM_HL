@@ -1,0 +1,13 @@
+{
+  "mire": "sources/mire.png",
+  "moor": "sources/moor.png",
+  "morass": "sources/morass.png",
+  "bog": "sources/bog.png",
+  "tar": "sources/tar.png",
+  "honey": "sources/honey.png",
+  "peat": "sources/peat.png",
+  "coating": "sources/coating.png",
+  "honeycomb": "sources/honeycomb.png",
+  "slurry": "sources/slurry.png",
+  "mud": "sources/mud.png"
+}

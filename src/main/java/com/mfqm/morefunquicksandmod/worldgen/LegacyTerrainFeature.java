@@ -223,7 +223,7 @@ public final class LegacyTerrainFeature extends Feature<NoneFeatureConfiguration
             chest.setLootTable(ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath("mfqm", "chests/honey")));
             chest.setLootTableSeed(random.nextLong());
             chest.applyComponents(net.minecraft.core.component.DataComponentMap.builder().set(
-                    net.minecraft.core.component.DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.literal("Honey Chest")).build(),
+                    net.minecraft.core.component.DataComponents.CUSTOM_NAME, net.minecraft.network.chat.Component.translatable("container.mfqm.honey_chest")).build(),
                     net.minecraft.core.component.DataComponentPatch.EMPTY);
         }
         return true;

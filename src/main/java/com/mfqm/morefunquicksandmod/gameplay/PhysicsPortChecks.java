@@ -25,8 +25,19 @@ public final class PhysicsPortChecks {
     private PhysicsPortChecks() {}
     public static List<String> verify(ServerLevel level, BlockPos origin) {
         var passed = new ArrayList<String>();
-        require(ModBlocks.entries().size() == 49, "49 legacy blocks");
-        require(ModFluids.entries().size() == 13, "13 legacy fluids");
+        var legacyBlocks = java.util.Set.of("mud", "bog", "soft_snow", "dry_quicksand", "soft_quicksand", "morass",
+                "wet_peat", "peat", "brown_clay", "wax", "quicksand", "sandstone_trap", "jungle_quicksand",
+                "liquid_mire", "stable_liquid_mire", "sinky_liquid", "sinking_slime", "mucus", "mire", "moor",
+                "hardened_clay", "sinking_clay", "tangleroot_moss", "dense_web", "tar", "larvae", "corrupted_sand",
+                "swallowing_flesh", "acid", "slurry", "gas", "soft_gravel", "honey", "solid_honey", "honeycomb",
+                "liquid_chocolate", "chocolate", "sinking_rug", "lure", "blossom", "blossom_slab", "vore_hole",
+                "meat_wall", "meat_hole", "wax_wood", "custom_lily_pad", "moor_grass", "tendrils", "leaves_pile");
+        var legacyFluids = java.util.Set.of("bog", "dry_quicksand", "jungle_quicksand", "liquid_mire", "stable_liquid_mire",
+                "sinky_liquid", "sinking_slime", "mucus", "tar", "acid", "slurry", "honey", "liquid_chocolate");
+        require(legacyBlocks.size() == 49 && ModBlocks.entries().keySet().containsAll(legacyBlocks), "49 legacy blocks preserved");
+        require(legacyFluids.size() == 13 && ModFluids.entries().keySet().containsAll(legacyFluids), "13 legacy fluids preserved");
+        require(ModBlocks.entries().size() == 51 && ModBlocks.entries().containsKey("glue") && ModBlocks.entries().containsKey("sticky_board"), "49 legacy blocks plus glue and sticky board");
+        require(ModFluids.entries().size() == 14 && ModFluids.entries().containsKey("glue"), "13 legacy fluids plus glue");
         for (var block : ModBlocks.entries().entrySet()) require(block.getValue().get() != Blocks.AIR, "registered block " + block.getKey());
         passed.add("49 original block identities are registered");
         for (var entry : ModFluids.entries().values()) {
@@ -38,7 +49,7 @@ public final class PhysicsPortChecks {
             require(entry.type().get().canDrownIn(null) == ModFluids.isWaterMire(entry.id()), entry.id() + " selects exactly one drowning route");
         }
         require(ModFluids.source("sinky_liquid").getBucket() == Items.AIR, "sinky fluid has no invented bucket");
-        passed.add("13 source/flowing/type/block pairs, with legacy bucket policy");
+        passed.add("13 legacy and one glue source/flowing/type/block pairs, with legacy bucket policy");
         var sand = SinkingMaterial.QUICKSAND.motion;
         var quiet = SinkingMotion.calculate(sand, .6, 0, false, false, 0, false, false);
         var struggle = SinkingMotion.calculate(sand, .6, .2, true, false, 0, false, false);
@@ -72,6 +83,7 @@ public final class PhysicsPortChecks {
             pig.setPos(origin.getX() + .5, origin.getY() + .2, origin.getZ() + .5);
             var state = QuicksandPhysics.state(pig);
             require(QuicksandPhysics.findContact(pig, level) != null, "physical body contact");
+            pig.setDeltaMovement(.2, 0, .2);
             QuicksandPhysics.tick(pig, level);
             require(state.material.equals("quicksand") && state.eyesCovered, "body and eyes inside actual medium");
             require(state.air == 299, "one oxygen decrement");
@@ -79,6 +91,14 @@ public final class PhysicsPortChecks {
             QuicksandPhysics.tick(pig, level);
             require(state.air == spent, "same-tick overlapping contacts cannot double-spend air");
             require(pig.getDeltaMovement().y < 0, "living entity receives actual sinking velocity");
+            require(pig.getDeltaMovement().horizontalDistanceSqr() == 0, "legacy sand stops momentum");
+            var speed = pig.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
+            require(speed != null && Math.abs(speed.getValue()-speed.getBaseValue())<1e-7,
+                    "sinking constrains actual input without modifying the FOV-driving speed attribute");
+            state.lastTick = Long.MIN_VALUE;
+            QuicksandPhysics.rescue(pig, pig.position().add(2, 2, 0), .1);
+            QuicksandPhysics.tick(pig, level);
+            require(pig.getDeltaMovement().x > 0 && pig.getDeltaMovement().y > 0, "rescue preserves horizontal and vertical pull in sticky media");
             passed.add("actual stacked body/eye contact, sinking motion, and one air spend per tick");
             for (String mire : List.of("liquid_mire", "stable_liquid_mire")) {
                 for (int up = 0; up < 4; up++) level.setBlock(origin.above(up), ModBlocks.byId(mire).defaultBlockState(), 2);

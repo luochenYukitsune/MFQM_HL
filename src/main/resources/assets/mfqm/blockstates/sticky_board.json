@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "charge=0": {
+      "model": "mfqm:block/sticky_board"
+    },
+    "charge=1": {
+      "model": "mfqm:block/sticky_board_coated"
+    },
+    "charge=2": {
+      "model": "mfqm:block/sticky_board_coated"
+    },
+    "charge=3": {
+      "model": "mfqm:block/sticky_board_coated"
+    },
+    "charge=4": {
+      "model": "mfqm:block/sticky_board_coated"
+    },
+    "charge=5": {
+      "model": "mfqm:block/sticky_board_coated"
+    },
+    "charge=6": {
+      "model": "mfqm:block/sticky_board_coated"
+    },
+    "charge=7": {
+      "model": "mfqm:block/sticky_board_coated"
+    }
+  }
+}

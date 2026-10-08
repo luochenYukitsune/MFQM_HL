@@ -1,0 +1,26 @@
+{
+  "mfqm-texture-scene.png": {
+    "bytes": 138074,
+    "sha256": "4d68b38419dde221c80a97281249c69410407d1bea116b97f791e2ef31c9e14b"
+  },
+  "mfqm-texture-flow.png": {
+    "bytes": 226417,
+    "sha256": "f5a30b0b4e49483d06910a9d13573860ca87d2c8f86e13c60a08b4c33a6a2cab"
+  },
+  "mfqm-adhesive-glue.png": {
+    "bytes": 342077,
+    "sha256": "74e22fa44eac244b590520ab92170f7b3258152fbd3ba039b71b7c25a7c830fe"
+  },
+  "mfqm-adhesive-deep.png": {
+    "bytes": 237479,
+    "sha256": "bf24591869625b5960e16347f5402ebab3682fa7ef3fa583c880162a4c6ad2e7"
+  },
+  "mfqm-adhesive-board.png": {
+    "bytes": 254787,
+    "sha256": "f6ed8af576fd5f48729f21a3232d8779fef37dd1c8ddbcd211451ea0b91e93bc"
+  },
+  "mfqm-adhesive-hand.png": {
+    "bytes": 391160,
+    "sha256": "fd0f6bfbb26f6db8224f9c283760e9eb1260817f438d4bc1bd5c62eedeabafb0"
+  }
+}

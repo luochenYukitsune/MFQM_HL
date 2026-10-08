@@ -53,11 +53,7 @@ public final class SurfaceEffectEntity extends Entity {
             }
             if (kind().equals("tar_treads") && (attached == null || !attached.isAlive() || attached.level()!=level()
                     || attached.position().distanceToSqr(position()) > 9)) { discard(); return; }
-            if (kind().equals("tar_treads") && attached != null) {
-                // A retreating strand pulls back to its tar surface; rescue strength can overcome this drag.
-                Vec3 stretch = position().subtract(attached.position());
-                if (stretch.lengthSqr() > 0.4) { attached.setDeltaMovement(attached.getDeltaMovement().add(stretch.scale(0.008))); attached.hurtMarked = true; }
-            }
+            // Legacy tar_treads IDs remain readable; aggregate adhesion is applied only by the controller.
             if (tickCount >= lifetime()) {
                 if (kind().equals("bubble")) { server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, material()), getX(),getY(),getZ(),6,0.1,0.02,0.1,0.03); playSound(SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, 0.25F, 0.8F); }
                 discard();

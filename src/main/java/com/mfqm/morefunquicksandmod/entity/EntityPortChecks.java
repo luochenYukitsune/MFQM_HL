@@ -46,7 +46,9 @@ public final class EntityPortChecks {
         player.connection=new FakePlayer(level,profile).connection;
         player.setPos(origin.getX()+.5,origin.getY()+.1,origin.getZ()+.5);
         try {
-            require(ModEntities.ENTITIES.getEntries().size()==16,"16 registered entity types");
+            require(ModEntities.ENTITIES.getEntries().size()==18,"18 registered entity types");
+            for (String id : List.of("vore_slime", "muddy_blob", "sand_blob", "tar_slime", "bee", "tentacles", "mud_tentacles", "bubble", "tar_treads", "slime_hole", "long_stick", "rope", "hook", "rescue", "sinking_potion", "liquid_ball", "adhesive_tether", "stuck_boots"))
+                require(net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getKey(ModEntities.byId(id)).getPath().equals(id), "exact entity identity " + id);
             for(var holder:ModEntities.ENTITIES.getEntries()){
                 Entity entity=holder.get().create(level,EntitySpawnReason.TRIGGERED);require(entity!=null,"create "+holder.getId());probes.add(entity);
                 entity.setPos(origin.getX()+.5,origin.getY()+2,origin.getZ()+.5);
@@ -54,7 +56,7 @@ public final class EntityPortChecks {
                 if(entity instanceof BlobEntity blob){require(blob.getMaxHealth()==blob.kind().health,"health "+blob.kind());require(blob.getAttributeValue(Attributes.ATTACK_DAMAGE)==blob.kind().damage,"attack "+blob.kind());}
                 if(entity instanceof MfqmBeeEntity bee){require(bee.getMaxHealth()==10 && bee.getAttributeValue(Attributes.ATTACK_DAMAGE)==1.25,"legacy bee attributes");}
             }
-            passed.add("16 entity types create/spawn with four distinct blob and legacy bee attributes");
+            passed.add("18 entity types create/spawn with four distinct blob and legacy bee attributes");
             for(int dy=-1;dy<=3;dy++)for(int dx=-1;dx<=1;dx++)for(int dz=-1;dz<=1;dz++){
                 BlockPos pos=origin.offset(dx,dy,dz);require(level.hasChunkAt(pos),"probe loaded");saved.put(pos,level.getBlockState(pos));level.setBlock(pos,dy==-1?Blocks.STONE.defaultBlockState():Blocks.AIR.defaultBlockState(),2);
             }
@@ -100,6 +102,12 @@ public final class EntityPortChecks {
             passed.add("all four legacy tentacle media survive spawning and pull; unsupported pits reject spawning");
             for(Direction direction:Direction.Plane.HORIZONTAL)level.setBlock(origin.relative(direction),Blocks.AIR.defaultBlockState(),2);level.setBlock(origin,Blocks.AIR.defaultBlockState(),2);
             LiquidProjectileEntity potion=ModEntities.SINKING_POTION.get().create(level,EntitySpawnReason.TRIGGERED);require(potion!=null,"potion");probes.add(potion);potion.setOwner(player);potion.setMedium(ModBlocks.byId("sinky_liquid").defaultBlockState());potion.setPos(Vec3.atCenterOf(origin));
+            // Placement levels and terrain fusion have separate checks. Keep this impact probe
+            // deterministic by avoiding the 30 possible fusion attempts (five cells x six sides).
+            // Seed 86610 was found against LegacyRandomSource's exact nextInt(3) algorithm.
+            var noFusion=net.minecraft.util.RandomSource.create(86610L);
+            for(int i=0;i<30;i++)require(noFusion.nextInt(3)!=0,"deterministic potion fixture skips terrain fusion");
+            level.random.setSeed(86610L);
             potion.onHit(new BlockHitResult(Vec3.atCenterOf(origin),Direction.UP,origin.below(),false));
             require(level.getBlockState(origin).is(ModBlocks.byId("sinky_liquid")),"potion impact places center");
             require(level.getBlockState(origin).getValue(net.minecraft.world.level.block.LiquidBlock.LEVEL)==4,"potion center has four remaining quanta");

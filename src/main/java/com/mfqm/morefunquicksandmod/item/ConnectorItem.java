@@ -28,7 +28,7 @@ public final class ConnectorItem extends Item {
         if ((kind.equals("rope") || kind.equals("hook")) && player.getAbilities().invulnerable) return InteractionResult.FAIL;
         if (kind.equals("long_stick") && player.getFoodData().getFoodLevel() <= 6) return InteractionResult.FAIL;
         if (player instanceof ServerPlayer server) ModEntities.spawnConnector(server, kind, player.getItemInHand(hand));
-        if (kind.equals("long_stick") || kind.equals("hook") || kind.equals("rescue")) player.startUsingItem(hand);
+        if (kind.equals("long_stick") || kind.equals("hook") || kind.equals("rescue") || kind.equals("rope")) player.startUsingItem(hand);
         return InteractionResult.SUCCESS;
     }
     @Override public InteractionResult useOn(UseOnContext context) {
@@ -37,6 +37,11 @@ public final class ConnectorItem extends Item {
     @Override public ItemUseAnimation getUseAnimation(ItemStack stack) { return ItemUseAnimation.BOW; }
     @Override public int getUseDuration(ItemStack stack, LivingEntity entity) { return 72000; }
     @Override public void onUseTick(net.minecraft.world.level.Level level, LivingEntity entity, ItemStack stack, int remaining) {
+        if ((kind.equals("rope") || kind.equals("hook")) && entity instanceof ServerPlayer player && player.isUsingItem() && player.getUseItem() == stack) {
+            for (var connector : level.getEntitiesOfClass(com.mfqm.morefunquicksandmod.entity.ConnectorEntity.class, player.getBoundingBox().inflate(52)))
+                if (!connector.isRemoved() && connector.isOwnedBy(player) && connector.kind().equals(kind) && connector.attached())
+                    connector.control(player, player.isShiftKeyDown() ? 1 : 0);
+        }
         if (kind.equals("long_stick") && entity instanceof ServerPlayer player && level.getGameTime() % 256 == 0) {
             var at = level.getBlockState(player.blockPosition());
             if (at.getBlock().builtInRegistryHolder().getRegisteredName().startsWith("mfqm:") && player.getFoodData().getFoodLevel() > 6)

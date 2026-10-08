@@ -1,0 +1,10 @@
+{
+  "coating_tested_sha256": "53f2cb6dceab7c7596f6de1b431271b8ed4d3d6216506c7c4f39a9c57d183f4e",
+  "final_sha256": "865e54bfb37454b590fbeda04838123b9c9788b4e8d4959d950140c5c14f91e0",
+  "changed_entries": [
+    "com/mfqm/morefunquicksandmod/client/ViscosityClientChecks$1.class",
+    "com/mfqm/morefunquicksandmod/client/ViscosityClientChecks$2.class",
+    "com/mfqm/morefunquicksandmod/client/ViscosityClientChecks.class"
+  ],
+  "all_production_and_coating_fixture_bytes_identical": true
+}

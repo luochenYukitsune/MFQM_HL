@@ -38,7 +38,7 @@ class IsolationChecks(unittest.TestCase):
                 if existing:
                     config.parent.mkdir(parents=True)
                     config.write_bytes(original)
-                args = SimpleNamespace(disable_long_stick=True, reload=True, compat_fixture=True)
+                args = SimpleNamespace(disable_long_stick=True, reload=True, compat_fixture=True, persistence_phase=None)
                 with patch("smoke_port.subprocess.Popen", side_effect=OSError("launch probe")), self.assertRaises(OSError):
                     smoke_port.run(args, root)
                 if existing:
@@ -60,7 +60,7 @@ class IsolationChecks(unittest.TestCase):
                 (fixture / "partial.json").write_text("{}", encoding="utf-8")
                 raise OSError("fixture probe")
 
-            args = SimpleNamespace(disable_long_stick=True, reload=True, compat_fixture=True)
+            args = SimpleNamespace(disable_long_stick=True, reload=True, compat_fixture=True, persistence_phase=None)
             with patch("smoke_port.write_fixture", side_effect=interrupted), self.assertRaises(OSError):
                 smoke_port.run(args, root)
             world = root / "run/1.21.11/server/smoke-world"

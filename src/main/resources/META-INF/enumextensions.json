@@ -1,0 +1,11 @@
+{
+  "entries": [{
+    "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+    "name": "MFQM_STRUGGLE",
+    "constructor": "(ZZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+    "parameters": {
+      "class": "com/mfqm/morefunquicksandmod/client/StruggleEnumParams",
+      "field": "STRUGGLE"
+    }
+  }]
+}

@@ -36,6 +36,12 @@ public final class ModItems {
     private static final Map<String, Supplier<Item>> ENTRIES = new LinkedHashMap<>();
     static {
         ModBlocks.entries().forEach((id, block) -> {
+            // Glue is obtained and placed with its bucket; a liquid block item cannot be used.
+            if (id.equals("glue")) return;
+            if (id.equals("sticky_board")) {
+                register(id, properties -> new com.mfqm.morefunquicksandmod.item.StickyBoardItem(block.get(), properties.useBlockDescriptionPrefix()));
+                return;
+            }
             register(id, properties -> new LegacyBlockItem(block, 0, id.equals("peat") ? 9603 : 0, properties.useBlockDescriptionPrefix()));
             int variants = switch (id) {
                 case "mud", "tendrils" -> 4;
@@ -68,6 +74,7 @@ public final class ModItems {
         register("chocolate_powder_bucket", p -> new Item(p.stacksTo(1).craftRemainder(Items.BUCKET)));
         bucket("honey_bucket", "honey", 0, 0);
         bucket("slurry_bucket", "slurry", 0, 0);
+        bucket("glue_bucket", "glue", 0, 0);
         register("fertilizer", FertilizerItem::new);
         register("long_stick", p -> new ConnectorItem("long_stick", p.stacksTo(1).attributes(ItemAttributeModifiers.builder().add(
                 Attributes.ATTACK_DAMAGE, new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, 3, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build())));

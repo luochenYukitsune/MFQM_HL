@@ -99,8 +99,39 @@ public final class ModConfig {
         public final ModConfigSpec.BooleanValue realisticArmor;
         public final ModConfigSpec.BooleanValue weightCalc;
         public final ModConfigSpec.DoubleValue damageMultiplier;
+        public final ModConfigSpec.BooleanValue adhesiveBonds;
+        public final ModConfigSpec.BooleanValue creativeGroundPhysics;
+        public final ModConfigSpec.DoubleValue glueBondDistance, honeyBondDistance, tarBondDistance, slimeBondDistance, mudBondDistance;
+        public final ModConfigSpec.DoubleValue glueActivityRadius, honeyActivityRadius, tarActivityRadius, slimeActivityRadius, mudActivityRadius, boardActivityRadius;
+        public final ModConfigSpec.DoubleValue bootLossChance;
+        public final ModConfigSpec.BooleanValue genGluePools, genStickyBoards;
+        public final ModConfigSpec.IntValue gluePoolChance;
+        public final ModConfigSpec.IntValue gluePoolShallowDepth, gluePoolMinDeepDepth, gluePoolMaxDeepDepth;
 
         ServerConfig(ModConfigSpec.Builder builder) {
+            builder.push("adhesive");
+            adhesiveBonds = builder.define("adhesiveBonds", true);
+            creativeGroundPhysics = builder.comment("Apply trapping physics to grounded creative players; flying and spectator players remain exempt")
+                    .define("creativeGroundPhysics", true);
+            glueBondDistance = builder.defineInRange("glueBondDistance", 2.5, .25, 8);
+            honeyBondDistance = builder.defineInRange("honeyBondDistance", 1.8, .25, 8);
+            tarBondDistance = builder.defineInRange("tarBondDistance", 1.2, .25, 8);
+            slimeBondDistance = builder.defineInRange("slimeBondDistance", 1.8, .25, 8);
+            mudBondDistance = builder.defineInRange("mudBondDistance", .8, .25, 8);
+            glueActivityRadius = builder.defineInRange("glueActivityRadius", 1.2, .1, 4);
+            honeyActivityRadius = builder.defineInRange("honeyActivityRadius", 1., .1, 4);
+            tarActivityRadius = builder.defineInRange("tarActivityRadius", .8, .1, 4);
+            slimeActivityRadius = builder.defineInRange("slimeActivityRadius", 1., .1, 4);
+            mudActivityRadius = builder.defineInRange("mudActivityRadius", .6, .1, 4);
+            boardActivityRadius = builder.defineInRange("boardActivityRadius", .7, .1, 4);
+            bootLossChance = builder.comment("One roll per glue/board episode, only on forceful pull or break").defineInRange("bootLossChance", .1, 0, 1);
+            genGluePools = builder.define("genGluePools", true);
+            genStickyBoards = builder.define("genStickyBoards", true);
+            gluePoolChance = builder.comment("One candidate per this many eligible chunks").defineInRange("gluePoolChance", 24, 1, 10000);
+            gluePoolShallowDepth = builder.defineInRange("gluePoolShallowDepth", 1, 1, 8);
+            gluePoolMinDeepDepth = builder.defineInRange("gluePoolMinDeepDepth", 3, 1, 8);
+            gluePoolMaxDeepDepth = builder.defineInRange("gluePoolMaxDeepDepth", 4, 1, 8);
+            builder.pop();
             builder.push("worldgen");
             genMud = builder.comment("Generate Mud in swamps").define("genMud", true);
             genMire = builder.comment("Generate Mire in swamps").define("genMire", true);
@@ -188,6 +219,8 @@ public final class ModConfig {
         public final ModConfigSpec.BooleanValue quicksandOpacity;
         public final ModConfigSpec.BooleanValue bubbleEffects;
         public final ModConfigSpec.BooleanValue tarTreadsEffect;
+        public final ModConfigSpec.BooleanValue struggleAnimation, struggleCamera, adhesiveTethers;
+        public final ModConfigSpec.BooleanValue glueCoating3d;
 
         ClientConfig(ModConfigSpec.Builder builder) {
             builder.push("hud");
@@ -200,6 +233,11 @@ public final class ModConfig {
             quicksandOpacity = builder.comment("Render quicksand blocks as opaque").define("quicksandOpacity", false);
             bubbleEffects = builder.comment("Render surface bubble particles").define("bubbleEffects", true);
             tarTreadsEffect = builder.comment("Render tar treads visual").define("tarTreadsEffect", true);
+            struggleAnimation = builder.define("struggleAnimation", true);
+            struggleCamera = builder.comment("Subtle camera movement during accepted struggle actions").define("struggleCamera", true);
+            adhesiveTethers = builder.define("adhesiveTethers", true);
+            glueCoating3d = builder.comment("Extrude glue coating pixels outside skin layers; disable for a flat coating")
+                    .define("glueCoating3d", true);
             builder.pop();
         }
     }

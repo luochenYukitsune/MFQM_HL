@@ -17,22 +17,35 @@ import net.minecraft.util.context.ContextKey;
 
 public final class MuddyPlayerLayer extends RenderLayer<AvatarRenderState,PlayerModel> {
     private final LegacyCoatingModel model;
+    private final boolean slim;
     public static final ContextKey<Coating> COATING = new ContextKey<>(Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"coating"));
     public record Coating(int level,int ticks,String material) {
         public static Coating snapshot(SinkingState state){return new Coating(state.coatingLevel,state.coatingTicks,state.coatingType);}
+        public boolean glue(){return material.equals("glue") || material.equals("sticky_board");}
         public Identifier texture() {
             boolean slimy=java.util.Set.of("sinking_slime","sinky_liquid","swallowing_flesh","meat","mucus","tar","honey","wax","larvae").contains(material);
-            return Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"textures/entity/mudoverlays/"+(slimy?"slimeoverlay":"mudoverlay")+Mth.clamp(level-1,0,9)+".png");
+            String family=switch(material){case "glue","sticky_board"->"glueoverlay";case "tar"->"taroverlay";case "honey","wax"->"honeyoverlay";default->slimy?"slimeoverlay":"mudoverlay";};
+            return Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"textures/entity/mudoverlays/"+family+"_height"+Mth.clamp(level-1,0,9)+".png");
         }
         public int color() {
-            int rgb=switch(material){case "tar"->0x191413;case "sinking_slime","mucus"->0x8bac43;case "honey","wax"->0xd59926;case "swallowing_flesh","meat"->0x99403d;case "quicksand","soft_quicksand"->0xbcb28d;default->0x665243;};
+            int rgb=switch(material){case "glue","sticky_board"->0xffffff;case "tar"->0x191413;case "sinking_slime","mucus"->0x8bac43;case "honey","wax"->0xd59926;case "swallowing_flesh","meat"->0x99403d;case "quicksand","soft_quicksand"->0xbcb28d;default->0x665243;};
             return (Mth.clamp((int)(255*Math.min(1,ticks/1000F)),0,255)<<24)|rgb;
         }
     }
-    public MuddyPlayerLayer(RenderLayerParent<AvatarRenderState,PlayerModel> parent,boolean slim){super(parent);model=new LegacyCoatingModel(slim);}
+    public MuddyPlayerLayer(RenderLayerParent<AvatarRenderState,PlayerModel> parent,boolean slim){super(parent);this.slim=slim;model=new LegacyCoatingModel(slim);}
     @Override public void submit(PoseStack pose,SubmitNodeCollector collector,int light,AvatarRenderState state,float yaw,float pitch){
         Coating coat=state.getRenderData(COATING);
         if(coat==null || coat.level<=0 || coat.ticks<=50 || state.isInvisible || state.isSpectator || !ModConfig.CLIENT.coverPlayerWithMud.get())return;
+        if(coat.glue()) {
+            var parent=getParentModel();boolean detailed=state.distanceToCameraSq<256;
+            GlueCoatingRenderer.submit(parent.head,"head",slim,coat,pose,collector,light,false,detailed,parent.hat);
+            GlueCoatingRenderer.submit(parent.body,"body",slim,coat,pose,collector,light,false,detailed,parent.jacket);
+            GlueCoatingRenderer.submit(parent.leftArm,"left_arm",slim,coat,pose,collector,light,false,detailed,parent.leftSleeve);
+            GlueCoatingRenderer.submit(parent.rightArm,"right_arm",slim,coat,pose,collector,light,false,detailed,parent.rightSleeve);
+            GlueCoatingRenderer.submit(parent.leftLeg,"left_leg",slim,coat,pose,collector,light,false,detailed,parent.leftPants);
+            GlueCoatingRenderer.submit(parent.rightLeg,"right_leg",slim,coat,pose,collector,light,false,detailed,parent.rightPants);
+            return;
+        }
         pose.pushPose();pose.scale(1.002F,1.002F,1.002F);
         collector.order(1).submitModel(model,state,pose,RenderTypes.entityTranslucent(coat.texture()),light,OverlayTexture.NO_OVERLAY,coat.color(),null,state.outlineColor,null);
         pose.popPose();
