@@ -97,6 +97,15 @@ class ViscosityLauncherTest(unittest.TestCase):
         self.assertEqual(dense.count("-Dmfqm.dynamicVisual="),1)
         self.assertIn("-Dmfqm.dynamicVisual=true\n",dense)
 
+    def test_focused_visual_scope_clears_stale_flags(self):
+        stale="-Dmfqm.adhesiveVisualChecks=true\n-Dmfqm.coatingChecks=true\n-Dmfqm.dynamicAdhesionChecks=true\n"
+        self.assertIn("-Dmfqm.adhesiveVisualChecks=false\n",viscosity_vm(stale,True))
+        focused=viscosity_vm(stale,True,visual_only=True)
+        self.assertEqual(focused.count("-Dmfqm.adhesiveVisualChecks="),1)
+        self.assertIn("-Dmfqm.adhesiveVisualChecks=true\n",focused)
+        self.assertIn("-Dmfqm.coatingChecks=false\n",focused)
+        self.assertIn("-Dmfqm.dynamicAdhesionChecks=false\n",focused)
+
     def test_animation_compatibility_is_explicit_and_exact(self):
         stale="-Dmfqm.coatingAnimationsExpected=true\n"
         self.assertIn("-Dmfqm.coatingAnimationsExpected=false\n",viscosity_vm(stale,True))

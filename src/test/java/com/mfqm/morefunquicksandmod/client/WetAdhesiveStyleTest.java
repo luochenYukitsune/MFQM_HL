@@ -59,6 +59,12 @@ public final class WetAdhesiveStyleTest {
         var submerged=WetAdhesiveStyle.submergedRoot(new Vec(.99,.9,.01),.15,.033);
         check(submerged.point().y()+submerged.radius()<.15 && submerged.point().y()-submerged.radius()>0,"entire root cap remains below the lowest rendered fluid corner");
         check(submerged.point().x()+submerged.radius()<1 && submerged.point().z()-submerged.radius()>0,"thicker root cap cannot cross cell sides");
+        var deepRoot=WetAdhesiveStyle.submergedRoot(new Vec(.5,.85,.5),.89,.033);
+        check(deepRoot.point().y()<.09,"medium end extends near the bottom instead of lying on the liquid surface");
+        check(.95-deepRoot.point().y()>.3,"lowering the medium end gives a steeper strand without raising the fixed .95 body endpoint");
+        check(WetAdhesiveStyle.taper(.5)>=.85,"regular strip avoids a pinched irregular silhouette");
+        check(WetAdhesiveStyle.sag(.4)<=.002,"medium-side extension remains almost straight");
+        check(WetAdhesiveStyle.width(.8,0,"glue")>=.024,"extended glue strip remains clearly visible without changing the body endpoint");
         var heights=new java.util.HashSet<Double>();
         var frame=new WetAdhesiveStyle.Frame(new Vec(0,0,0),new Vec(0,1,0),new Vec(1,0,0),new Vec(0,0,1),.135,.135);
         for(long seed=0;seed<32;seed++) {

@@ -280,7 +280,7 @@ public final class CoatingClientChecks {
                 double minimum=RenderedAdhesiveSurface.minimumHeight(game.level,cell,helper.material()),radius=filament.rootWidth();
                 require(minimum>0 && root.y-radius>cell.getY() && root.y+radius<cell.getY()+minimum,"entire root cap stays under the lowest actual fluid corner");
                 require(root.x-radius>cell.getX() && root.x+radius<cell.getX()+1 && root.z-radius>cell.getZ() && root.z+radius<cell.getZ()+1,"entire root cap stays inside its medium cell sides");
-                require(filament.end().subtract(filament.root()).horizontalDistance()<.9 && Math.abs(filament.end().y-filament.root().y)<1.35,"actual short bundle stays around ankle");
+                require(filament.end().subtract(filament.root()).horizontalDistance()<.65 && Math.abs(origin.y+filament.end().y-(cell.getY()+minimum))<1.15,"short visible bundle stays around ankle; submerged extension does not consume surface reach");
                 var endpoint=new CoatingVoxels.Vec(filament.end().x,filament.end().y,filament.end().z).subtract(state.surface.center());
                 double perimeter=Math.max(Math.abs(endpoint.dot(state.surface.right()))/(state.surface.halfWidth()+WetAdhesiveStyle.THICKNESS),Math.abs(endpoint.dot(state.surface.front()))/(state.surface.halfDepth()+WetAdhesiveStyle.THICKNESS));
                 require(Math.abs(perimeter-1)<1e-5,"actual strand touches the skin film surface instead of ending inside the leg");

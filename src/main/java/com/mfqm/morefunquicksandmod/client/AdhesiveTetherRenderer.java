@@ -59,7 +59,8 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
         state.x=base.x;state.y=base.y;state.z=base.z;Vec3 origin=base;
         state.foot=target.getPosition(tick).add(sampled.ankle()).subtract(origin);
         state.shin=target.getPosition(tick).add(sampled.shin()).subtract(origin);
-        double opacity=CompactStrandStyle.opacity(state.foot.horizontalDistance(),state.foot.y);
+        // Submerged length must not consume the existing visible reach above the medium.
+        double opacity=CompactStrandStyle.opacity(state.foot.horizontalDistance(),target.getPosition(tick).y+sampled.ankle().y-(cell.getY()+surfaceHeight));
         if(opacity<=0)return;
         double recoil=entity.breakProgress(tick),remaining=entity.breaking()?WetAdhesiveStyle.contraction(recoil):1;
         Vec3 endpointFoot=state.foot;
@@ -84,7 +85,7 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
             var localRoot=anchor.point().subtract(origin);
             var attached=point(WetAdhesiveStyle.endpoint(state.surface,depth,seed,vector(localRoot)));
             var end=localRoot.add(attached.subtract(localRoot).scale(remaining));
-            var delta=end.subtract(localRoot);double fade=CompactStrandStyle.opacity(delta.horizontalDistance(),delta.y);
+            var delta=end.subtract(localRoot);double fade=CompactStrandStyle.opacity(delta.horizontalDistance(),end.y+origin.y-(cell.getY()+surfaceHeight));
             if(fade<=0)continue;
             double width=WetAdhesiveStyle.width(delta.length(),(int)seed,entity.material())*Math.max(.05,remaining);
             double rootWidth=Math.min(width,anchor.radius());

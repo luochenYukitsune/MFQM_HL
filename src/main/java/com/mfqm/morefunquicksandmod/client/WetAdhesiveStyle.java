@@ -12,12 +12,12 @@ public final class WetAdhesiveStyle {
     public static final double THICKNESS=.003;
     private static final double[][] EDGE={{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1},{1,-1},{1,0}};
     public static double height(double depth) {return Double.isFinite(depth)?.08+.20*Math.clamp((depth-.15)/.85,0,1):0;}
-    public static double width(double length,int variation) {return (.007+.002*Math.floorMod(variation,3))/Math.sqrt(1+Math.max(0,length-.12)*3);}
+    public static double width(double length,int variation) {return (.010+.002*Math.floorMod(variation,3))/Math.sqrt(1+Math.max(0,length-.35)*1.2);}
     public static double width(double length,int variation,String material) {
         return width(length,variation)*("glue".equals(material) || "sticky_board".equals(material)?3:1);
     }
-    public static double taper(double t) {return .55+.45*Math.pow(Math.abs(2*Math.clamp(t,0,1)-1),1.5);}
-    public static double sag(double length) {return Math.min(Math.max(0,length)*.04,.008/(1+Math.max(0,length)*3));}
+    public static double taper(double t) {double x=2*Math.clamp(t,0,1)-1;return .88+.12*x*x;}
+    public static double sag(double length) {return Math.min(Math.max(0,length)*.008,.002/(1+Math.max(0,length)*3));}
     public static double contraction(double progress){double remaining=1-Math.clamp(progress,0,1);return remaining*remaining;}
     public static Vec endpoint(Frame f,double depth,long seed) {
         return endpoint(f,depth,seed,f.center.subtract(f.up));
@@ -37,7 +37,8 @@ public final class WetAdhesiveStyle {
         double low=radius+margin,high=lowestHeight-radius-margin;
         if(low>=high)return null;
         double inset=Math.max(.035,radius+.006);
-        return new Root(new Vec(Math.clamp(desired.x(),inset,1-inset),Math.clamp(desired.y(),low,high),Math.clamp(desired.z(),inset,1-inset)),radius);
+        // Lower the medium end, not the skin end. The whole cap still fits in shallow flowing cells and boards.
+        return new Root(new Vec(Math.clamp(desired.x(),inset,1-inset),Math.clamp(Math.min(desired.y(),.06),low,high),Math.clamp(desired.z(),inset,1-inset)),radius);
     }
     /** Independent roots share a contact cell, never a branching stem or an exposed cap. */
     public static Root submergedRoot(Vec desired,double lowestHeight,double requestedRadius,long seed,int index,int count) {
@@ -94,12 +95,12 @@ public final class WetAdhesiveStyle {
         for(int segment=0;segment<segments;segment++)for(int side=0;side<6;side++) {
             int next=(side+1)%6;Vec a=rings[segment][side],b=rings[segment+1][side],c=rings[segment+1][next],d=rings[segment][next];
             Vec outward=a.subtract(centers[segment]).add(d.subtract(centers[segment])).unit();
-            add(quads,a,b,c,d,outward,side==0?0xd0ffffff:0xb0ffffff);
+            add(quads,a,b,c,d,outward,side==0?0xefffffff:0xd8ffffff);
         }
         for(int side=0;side<6;side++) {
             int next=(side+1)%6;
-            add(quads,start,rings[0][side],rings[0][next],start,axis.scale(-1),0xb0ffffff);
-            add(quads,end,rings[segments][side],rings[segments][next],end,axis,0xb0ffffff);
+            add(quads,start,rings[0][side],rings[0][next],start,axis.scale(-1),0xd8ffffff);
+            add(quads,end,rings[segments][side],rings[segments][next],end,axis,0xd8ffffff);
         }
         return List.copyOf(quads);
     }

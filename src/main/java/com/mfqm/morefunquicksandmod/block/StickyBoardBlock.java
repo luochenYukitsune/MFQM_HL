@@ -56,8 +56,11 @@ public final class StickyBoardBlock extends Block {
         };
     }
     private BlockState connected(BlockState state,BlockGetter level,BlockPos pos) {
-        for(var direction:Direction.Plane.HORIZONTAL)
-            state=state.setValue(connection(direction),level.getBlockState(pos.relative(direction)).is(this));
+        for(var direction:Direction.Plane.HORIZONTAL) {
+            var neighbor=pos.relative(direction);
+            if(level instanceof LevelReader reader && !reader.hasChunkAt(neighbor))continue;
+            state=state.setValue(connection(direction),level.getBlockState(neighbor).is(this));
+        }
         return state;
     }
     @Override public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -68,7 +71,7 @@ public final class StickyBoardBlock extends Block {
         return direction.getAxis().isHorizontal()?state.setValue(connection(direction),neighbor.is(this))
                 :super.updateShape(state,level,ticks,pos,direction,neighborPos,neighbor,random);
     }
-    private void refreshConnections(Level level,BlockPos pos) {
+    public void refreshConnections(Level level,BlockPos pos) {
         if(!(level instanceof ServerLevel))return;
         var current=level.getBlockState(pos);if(!current.is(this))return;
         var updated=connected(current,level,pos);if(updated!=current)level.setBlock(pos,updated,Block.UPDATE_ALL);

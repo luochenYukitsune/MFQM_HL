@@ -1,6 +1,8 @@
 # More Fun Quicksand Mod — Minecraft 1.21.11 / NeoForge
 
-当前 GitHub 版本为 **0.7.0 预发布版**，仍标记为 **Pre-release**。相较 v0.6.5 的完整中文变更见 [更新日志](release-notes-0.7.0.zh-CN.md)。
+当前版本为 **0.7.1 预发布版**，继续标记为 **Pre-release**。相较 v0.7.0 的修复见 [0.7.1 更新日志](release-notes-0.7.1.zh-CN.md)，此前功能更新见 [0.7.0 更新日志](release-notes-0.7.0.zh-CN.md)。
+
+**0.7.1** 让黏丝介质端向所在液体格底部延伸，胶带加宽、减少收腰与下垂；身体端与活动范围保持原有规则。粘鼠板接缝不再采样胶面贴图的透明框，旧存档中的连接也会在区块加载后自动刷新。
 
 基于 MoreFunQuicksandMod 1.1.1 / Minecraft 1.7.10 的玩法移植。当前开发版增加胶水、粘鼠板、腿脚黏丝及专用挣扎；创造栏显示 165 项，包含 180 个注册物品。
 
@@ -41,7 +43,7 @@
 
 macOS / Linux 使用 `sh ./gradlew`。首次构建需要下载官方依赖。
 
-产物：`build/libs/MFQM-neoforge-1.21.11-0.7.0.jar`，替换实例 `mods` 中旧版 MFQM，避免同时保留多个版本。粘鼠板新增连接状态，同步协议升为 7，客户端与服务端需一起更新为同版。世界生成在新生成区块生效。
+产物：`build/libs/MFQM-neoforge-1.21.11-0.7.1.jar`，替换实例 `mods` 中旧版 MFQM，避免同时保留多个版本。粘鼠板新增连接状态，同步协议为 7，客户端与服务端需一起更新为同版。世界生成在新生成区块生效。
 
 配置包含原有玩法以及黏连距离、留靴概率、胶水池／板生成和动作显示开关，可从模组列表打开中文配置界面。`creativeGroundPhysics` 默认开启，控制关闭飞行的创造玩家是否受困；服务器决定玩法设置。获取工具的开关控制配方，注册保持稳定；配方设置修改后可通过 `/reload` 重载，世界生成设置仅影响新区块。旧数字 DataWatcher 槽位由现代附件替代。
 
@@ -49,8 +51,8 @@ macOS / Linux 使用 `sh ./gradlew`。首次构建需要下载官方依赖。
 
 ```powershell
 .\gradlew.bat runData build
-python tools/verify_jar.py build/libs/MFQM-neoforge-1.21.11-0.7.0.jar
-python tools/verify_port.py build/libs/MFQM-neoforge-1.21.11-0.7.0.jar
+python tools/verify_jar.py build/libs/MFQM-neoforge-1.21.11-0.7.1.jar
+python tools/verify_port.py build/libs/MFQM-neoforge-1.21.11-0.7.1.jar
 python tools/connected_boards.py --verify
 python -m unittest discover -s tools -p test_coating_height.py
 python tools/coating_height.py --verify
@@ -71,6 +73,7 @@ python tools/smoke_viscosity_client.py --coating-only --skin-layers --coating-vi
 python tools/smoke_viscosity_client.py --coating-only --skin-layers --first-person --coating-visual
 python tools/smoke_viscosity_client.py --coating-only --skin-layers --first-person --animations --coating-visual
 python tools/smoke_viscosity_client.py --dynamic-only --dynamic-visual
+python tools/smoke_viscosity_client.py --visual-only
 ```
 
 立体胶水兼容测试的外部 JAR 仅放在被 Git 忽略的 `run/compat`，不随 MFQM 发布。测试使用作者官方 3D Skin Layers 1.11.3 / 1.21.11 NeoForge 构建并核对哈希；该构建及其内嵌库存在资源包描述格式报错，实际皮肤网格和胶膜仍完成了合载渲染检查，详见 [0.6.4-dev 验收报告](docs/superpowers/2026-10-08-glue-coating-3d/final_report.md)。
@@ -79,9 +82,9 @@ python tools/smoke_viscosity_client.py --dynamic-only --dynamic-visual
 
 Python 工具需要 Python 3.11+。服务器检查只允许绑定本机、随机端口和独立的 `smoke-world`；客户端检查使用复制的测试存档。测试工具为该独立测试服务器写入 EULA 接受值，正式实例由使用者阅读并决定接受。开发数据位于忽略的 `run/1.21.11/`。
 
-`build` 包含 35 组运动检查、35 个阻力边界样本，以及黏连 241 项、接触/根部 78 项、范围/短跳 112 项、覆盖颜色/贴肤间隙 12 项、像素胶膜 388 项、短密黏丝 92 项、湿黏薄壳与立体胶带 2151 项、挣扎 739 项、动作姿态 378 项断言。服务器检查覆盖配方、束缚、救援、留靴、换维度与地形保护，并通过真实存档重启验证留靴。安装检查通过代码来源断言排除直接加载开发类。黏度工具默认不截图，主套件使用生存及关闭飞行的创造模式、真实 W 与跳跃输入，测量期间检查两端 `flying=false`，随后验证胶水持续移动、F、救援、受击和已涂胶板。`--bounded-only` 仅运行粘鼠板、FOV 与范围走跳检查；`--board-visual` 显式增加一张必要的空板/胶板模型截图。飞行对照需单独使用 `--flight-controls`，不进入主验收。自然生成检查保持默认概率，扫描未生成过的地表森林候选区块。旧玩法结果见[验收报告](docs/superpowers/2026-10-06-adhesive-gameplay/final_report.md)，此前黏度记录见[黏度修复](docs/superpowers/2026-10-07-viscosity-fix.md)。
+`build` 包含 35 组运动检查、35 个阻力边界样本，以及黏连 241 项、接触/根部 78 项、范围/短跳 112 项、覆盖颜色/贴肤间隙 12 项、像素胶膜 388 项、短密黏丝 92 项、湿黏薄壳与立体胶带 2156 项、挣扎 739 项、动作姿态 378 项断言。服务器检查覆盖配方、束缚、救援、留靴、换维度与地形保护，并通过真实存档重启验证留靴。安装检查通过代码来源断言排除直接加载开发类。黏度工具默认不截图，主套件使用生存及关闭飞行的创造模式、真实 W 与跳跃输入，测量期间检查两端 `flying=false`，随后验证胶水持续移动、F、救援、受击和已涂胶板。`--bounded-only` 仅运行粘鼠板、FOV 与范围走跳检查；`--board-visual` 显式增加一张必要的空板/胶板模型截图。飞行对照需单独使用 `--flight-controls`，不进入主验收。自然生成检查保持默认概率，扫描未生成过的地表森林候选区块。旧玩法结果见[验收报告](docs/superpowers/2026-10-06-adhesive-gameplay/final_report.md)，此前黏度记录见[黏度修复](docs/superpowers/2026-10-07-viscosity-fix.md)。
 
-按用户要求，0.7.0 本次仅编译、打包并运行轻量几何及 JAR 资源检查；未启动游戏或执行以上完整回归。黏丝两个定向几何检查分别通过 92 和 2151 项断言；粘鼠板模型检查通过 16 种连接 × 8 个胶量的 128 个组合。实际观感交由用户测试，历史合载报告对应当时的版本。
+0.7.0 发布时按用户要求仅编译、打包并运行轻量几何及 JAR 资源检查；未启动游戏。0.7.1-dev 恢复简化的真实游戏验证，`--visual-only` 只运行跨区块 2×2 板实际放置、拆除、旧状态修复及黏丝两场景，保存两张必要截图；不代表重跑完整玩法或兼容矩阵。拼接工具增加实际纹理透明度检查，需安装 Pillow，避免几何已连通但接缝仍透出木色。详见[本次修正记录](docs/superpowers/2026-10-09-adhesive-visual-fix/final_report.md)。
 
 `src/generated/resources` 中的 19 个 JSON 是构建输入，需与源码一起保留；缓存不进入 JAR。模型、配方和世界生成数据位于 `src/main/resources`。正常构建不需要旧模组目录或反编译缓存。
 
@@ -114,13 +117,15 @@ Python 工具需要 Python 3.11+。服务器检查只允许绑定本机、随机
 
 项目采用 [MIT License](LICENSE)，原作者和第三方材料声明见 [NOTICE.md](NOTICE.md)。历史报告中的旧许可证与原始像素描述仅对应当时的快照。
 
-## 当前预发布版：0.7.0
+## 当前玩法与显示
 
-同高度、四边相邻的粘鼠板自动拼成大板。内部胶面延伸到接缝、补齐四角，只在整片外缘保留木边；对角或高低错位的板不连接。拆除邻板恢复外缘。每格胶层消耗、补胶、回收和受困仍独立，空底板不会因拼接自动获得胶层。物品栏继续显示原单板外观。此前已放置的旧板若未刷新，可在旁边放下或拆除一块板触发邻居更新。
+同高度、四边相邻的粘鼠板自动拼成大板。内部胶面延伸到接缝、补齐四角，只在整片外缘保留木边；对角或高低错位的板不连接。拆除邻板恢复外缘。每格胶层消耗、补胶、回收和受困仍独立，空底板不会因拼接自动获得胶层。物品栏继续显示原单板外观。0.7.1-dev 在区块完成加载后自动修复旧板的连接，也处理已加载的跨区块邻板。
 
 FirstPersonModel 会临时移动正在渲染的身体。现在从同一帧的原生渲染状态取得实际双脚世界端点，避免脚环使用恢复后的物理位置而浮在身体前方；不硬编码偏移。切换视角和 F6 开关时清除相机脚点。验收直接比较实际身体腿部矩阵与黏丝提交位置，覆盖站立、潜行、转身及真实胶水/胶板受困；合载 FirstPersonModel 2.7.3、3D Skin Layers 1.11.3 和 Not Enough Animations 1.12.6。
 
-每个接触默认显示 8 根独立、完整且无分叉的立体黏丝，仍采用有封闭侧壁和端面的扁胶带截面；胶水及涂胶板的主宽度保持 0.6.9-dev 的加粗效果。身体端点朝向各自根部，稳定随机分布在胶膜高度的 25%～75%，从脚踝到小腿下部随接触深度变化。每根根部在原接触方块内独立散布，液面只需计算一次；每根沿自身连接方向回缩。水平 0.45～0.65 格、竖向 0.9～1.15 格逐根淡出，远处旧丝不参与绘制。
+每个接触默认显示 8 根独立、完整且无分叉的立体黏丝，仍采用有封闭侧壁和端面的扁胶带截面；胶水及涂胶板比其他介质更宽。身体端点朝向各自根部，稳定随机分布在胶膜高度的 25%～75%，从脚踝到小腿下部随接触深度变化。每根根部在原接触方块内独立散布，液面只需计算一次；每根沿自身连接方向回缩。水平 0.45～0.65 格、相对介质表面竖向 0.9～1.15 格逐根淡出，远处旧丝不参与绘制。
+
+0.7.1-dev 进一步加宽胶带并提高不透明度，中段保留至少 88% 宽度、减少下垂，避免过度收腰形成不规则轮廓。介质端下移到所在格底部附近（根部中心通常距底部约 0.06 格），浅流体和板面自动限制深度以容纳完整截面。此内部延长不消耗介质表面以上的可见距离，不额外提高身体连接点。
 
 中文“黏丝束显示上限”仍控制最多 64 个接触，新设置“每个接触的独立黏丝数量”默认 8、可调 1～8；满额时最多约 512 根。旧配置直接采用新密度默认值，不必重置文件。实际数量受接触和距离影响，静止不会无限补充。物理连接、活动范围和竖向断裂配置保持原有规则，每脚仍只有一层胶膜。高密度会增加客户端绘制开销，可在游戏中调低密度或接触上限；本版未进行实际游戏性能测试。
 

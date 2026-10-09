@@ -32,9 +32,9 @@ def upstream_skin_pack_metadata_error(line, skin_layers, first_person=False, ani
         r'Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field\.', line))
 
 
-def viscosity_vm(vm, creative_ground_traps, fail_fast=True, flight_controls=False, bounded_only=False, board_visual=False, actions_only=False, coating_only=False, skin_layers=False, coating_visual=False, first_person=False, dynamic_only=False, dynamic_visual=False, animations=False):
+def viscosity_vm(vm, creative_ground_traps, fail_fast=True, flight_controls=False, bounded_only=False, board_visual=False, actions_only=False, coating_only=False, skin_layers=False, coating_visual=False, first_person=False, dynamic_only=False, dynamic_visual=False, animations=False, visual_only=False):
     """Disable broad texture previews; board imagery requires an explicit opt-in."""
-    own_flags = re.compile(r"^-Dmfqm\.(?:textureChecks|viscosityChecks|viscosityCreativeGroundTraps|viscosityFailFast|viscosityFlightChecks|clientChecks|installedChecks|boundedOnly|boardVisual|actionsOnly|coatingChecks|coatingSkinLayersExpected|coatingVisual|firstPersonExpected|dynamicAdhesionChecks|dynamicVisual|coatingAnimationsExpected)(?:=|$)")
+    own_flags = re.compile(r"^-Dmfqm\.(?:textureChecks|viscosityChecks|viscosityCreativeGroundTraps|viscosityFailFast|viscosityFlightChecks|clientChecks|installedChecks|boundedOnly|boardVisual|actionsOnly|coatingChecks|coatingSkinLayersExpected|coatingVisual|firstPersonExpected|dynamicAdhesionChecks|dynamicVisual|coatingAnimationsExpected|adhesiveVisualChecks)(?:=|$)")
     vm = "\n".join(line for line in vm.splitlines()
                    if not own_flags.match(line.strip()))
     return vm + ("\n-Dmfqm.clientChecks=true\n-Dmfqm.textureChecks=false\n-Dmfqm.installedChecks=true"
@@ -46,16 +46,16 @@ def viscosity_vm(vm, creative_ground_traps, fail_fast=True, flight_controls=Fals
                  + "\n-Dmfqm.coatingChecks=" + str(coating_only).lower() + "\n-Dmfqm.coatingSkinLayersExpected=" + str(skin_layers).lower()
                  + "\n-Dmfqm.coatingVisual=" + str(coating_visual).lower() + "\n-Dmfqm.firstPersonExpected=" + str(first_person).lower()
                  + "\n-Dmfqm.dynamicAdhesionChecks=" + str(dynamic_only).lower() + "\n-Dmfqm.dynamicVisual=" + str(dynamic_visual).lower()
-                 + "\n-Dmfqm.coatingAnimationsExpected="+str(animations).lower()+"\n")
+                 + "\n-Dmfqm.coatingAnimationsExpected="+str(animations).lower()+"\n-Dmfqm.adhesiveVisualChecks="+str(visual_only).lower()+"\n")
 
 
-def run(timeout, creative_ground_traps, fail_fast, flight_controls=False, bounded_only=False, board_visual=False, actions_only=False, coating_only=False, skin_layers=False, coating_visual=False, first_person=False, dynamic_only=False, dynamic_visual=False, animations=False):
+def run(timeout, creative_ground_traps, fail_fast, flight_controls=False, bounded_only=False, board_visual=False, actions_only=False, coating_only=False, skin_layers=False, coating_visual=False, first_person=False, dynamic_only=False, dynamic_visual=False, animations=False, visual_only=False):
     game = workspace_path(ROOT / ("run/1.21.11/coating-client" if coating_only else "run/1.21.11/viscosity-client"))
     with instance_lock(game):
-        return run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls, bounded_only, board_visual, actions_only, coating_only, skin_layers, coating_visual, first_person, dynamic_only, dynamic_visual, animations)
+        return run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls, bounded_only, board_visual, actions_only, coating_only, skin_layers, coating_visual, first_person, dynamic_only, dynamic_visual, animations, visual_only)
 
 
-def run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls, bounded_only, board_visual, actions_only, coating_only=False, skin_layers=False, coating_visual=False, first_person=False, dynamic_only=False, dynamic_visual=False, animations=False):
+def run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls, bounded_only, board_visual, actions_only, coating_only=False, skin_layers=False, coating_visual=False, first_person=False, dynamic_only=False, dynamic_visual=False, animations=False, visual_only=False):
     runtime = json.loads((ROOT / "build/installed-client-runtime.json").read_text(encoding="utf-8"))
     classpath, vm, program = validate_runtime(runtime, ROOT)
     jar = workspace_path(Path(runtime["jar"]))
@@ -111,7 +111,7 @@ def run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls,
              if not line.startswith(("onboardAccessibility:", "pauseOnLostFocus:", "fullscreen:", "lang:"))]
     options.write_text("\n".join(lines + ["onboardAccessibility:false", "pauseOnLostFocus:false", "fullscreen:false", "lang:zh_cn"]) + "\n", encoding="utf-8")
     launch = game / "viscosity-client-java.args"
-    launch.write_text(viscosity_vm(vm, creative_ground_traps, fail_fast, flight_controls, bounded_only, board_visual, actions_only, coating_only, skin_layers, coating_visual, first_person, dynamic_only, dynamic_visual, animations) + "\n-Dfile.encoding=UTF-8\n-Xmx3G\n-cp\n"
+    launch.write_text(viscosity_vm(vm, creative_ground_traps, fail_fast, flight_controls, bounded_only, board_visual, actions_only, coating_only, skin_layers, coating_visual, first_person, dynamic_only, dynamic_visual, animations, visual_only) + "\n-Dfile.encoding=UTF-8\n-Xmx3G\n-cp\n"
                       + java_argument(os.pathsep.join(str(path) for path in classpath)) + "\n" + program
                       + "\n--width\n960\n--height\n540\n", encoding="utf-8")
     environment = os.environ.copy()
@@ -120,6 +120,7 @@ def run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls,
             del environment[key]
     process = None
     logfile = ROOT / ("run/1.21.11/validation/coating-client-" + str(skin_layers).lower() + ("-firstperson" if first_person else "") + ("-animations" if animations else "") + ".log" if coating_only else "run/1.21.11/validation/viscosity-client-smoke.log")
+    if visual_only:logfile=ROOT / "run/1.21.11/validation/adhesive-visual-client.log"
     if dynamic_only:logfile=ROOT / "run/1.21.11/validation/dynamic-client.log"
     logfile.parent.mkdir(parents=True, exist_ok=True)
     output = queue.Queue()
@@ -136,6 +137,7 @@ def run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls,
         deadline = time.monotonic() + timeout
         with logfile.open("w", encoding="utf-8") as log:
             requested_images = (2+int(skin_layers) if first_person else (3 if skin_layers else 1)+1) if coating_visual else int(board_visual)+int(dynamic_visual)
+            if visual_only:requested_images=2
             log.write("INSTALLED_ARTIFACT=" + str(installed) + "\nSHA256=" + digest + "\nSCREENSHOTS=" + str(requested_images) + "\n")
             while time.monotonic() < deadline:
                 try:
@@ -167,7 +169,7 @@ def run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls,
                 raise TimeoutError("Viscosity client exceeded " + str(timeout) + " seconds")
         code = process.wait(timeout=20)
         text = "".join(captured)
-        complete = (("MFQM_COATING_CHECKS_COMPLETE", "MFQM_COATING_BODY_COMPLETE", "MFQM_COATING_ARM_COMPLETE", "MFQM_COATING_RESOURCE_RELOAD_COMPLETE", "MFQM_ALL_MATERIAL_COATINGS_COMPLETE", "MFQM_COATING_DISPLAY_CONTROLS_COMPLETE") if coating_only else
+        complete = (("MFQM_ADHESIVE_VISUAL_COMPLETE", "MFQM_ADHESIVE_VISUAL_SAVED file=mfqm-connected-boards.png", "MFQM_ADHESIVE_VISUAL_SAVED file=mfqm-straight-strands.png") if visual_only else ("MFQM_COATING_CHECKS_COMPLETE", "MFQM_COATING_BODY_COMPLETE", "MFQM_COATING_ARM_COMPLETE", "MFQM_COATING_RESOURCE_RELOAD_COMPLETE", "MFQM_ALL_MATERIAL_COATINGS_COMPLETE", "MFQM_COATING_DISPLAY_CONTROLS_COMPLETE") if coating_only else
                     ("MFQM_DYNAMIC_ADHESION_COMPLETE",) if dynamic_only else ("MFQM_VISCOSITY_FLIGHT_CONTROLS_COMPLETE",) if flight_controls else
                     ("MFQM_BOUNDED_ADHESION_CHECKS_COMPLETE",) if bounded_only else
                     ("MFQM_VISCOSITY_ACTION_CHECKS_COMPLETE", "MFQM_BOUNDED_ADHESION_CHECKS_COMPLETE") if actions_only else
@@ -193,13 +195,13 @@ def run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls,
             raise RuntimeError("Actual installed game checks failed; inspect " + str(logfile))
         if sha256(installed) != digest:
             raise ValueError("Installed artifact changed while testing")
-        summary = ("voxel coating masks, body/arm rendering, actual optional skin mesh and resource reload" if coating_only else
+        summary = ("focused 2x2 boards, saved-state upgrade and visible submerged strands" if visual_only else "voxel coating masks, body/arm rendering, actual optional skin mesh and resource reload" if coating_only else
                    "real alternating W/S creates 64 synchronized roots, two cuffs and adjustable display budget" if dynamic_only else
                    "separate five-case flight immunity controls" if flight_controls else
                    "bounded board, FOV, short hop and F escape" if bounded_only else
                    "real F, rescue, dry walking, knockback and bounded board" if actions_only else
                    "23 non-flying ground cases, real F sink, no replay, rescue, dry walking, real damage knockback, bounded board")
-        print("PASS: actual mods JAR, " + ("" if coating_only or dynamic_only else "60-tick W input, ") + summary + "; requested screenshots=" + str(requested_images) + " SHA256=" + digest, flush=True)
+        print("PASS: actual mods JAR, " + ("" if coating_only or dynamic_only or visual_only else "60-tick W input, ") + summary + "; requested screenshots=" + str(requested_images) + " SHA256=" + digest, flush=True)
         return 0
     finally:
         if process is not None and process.poll() is None:
@@ -234,7 +236,10 @@ if __name__ == "__main__":
     parser.add_argument("--dynamic-only",action="store_true",help="Real non-flying W/S input accumulates 64 synchronized strands and verifies the display budget")
     parser.add_argument("--dynamic-visual",action="store_true",help="Save one necessary dense-strand screenshot; requires dynamic-only")
     parser.add_argument("--animations",action="store_true",help="Also test the verified user's Not Enough Animations 1.12.6 JAR with FirstPersonModel")
+    parser.add_argument("--visual-only",action="store_true",help="Only connected-board and straight-strand fixes, with two necessary screenshots")
     arguments = parser.parse_args()
+    if arguments.visual_only and any((arguments.flight_controls,arguments.bounded_only,arguments.board_visual,arguments.actions_only,arguments.coating_only,arguments.dynamic_only,arguments.dynamic_visual,arguments.skin_layers,arguments.coating_visual,arguments.first_person,arguments.animations)):
+        parser.error("visual-only is a separate focused scope")
     if arguments.timeout < 30:
         parser.error("--timeout must be at least 30 seconds")
     if arguments.flight_controls and (arguments.bounded_only or arguments.board_visual or arguments.actions_only):
@@ -248,4 +253,4 @@ if __name__ == "__main__":
     if arguments.dynamic_only and (arguments.coating_only or arguments.flight_controls or arguments.actions_only or arguments.bounded_only or arguments.board_visual):parser.error("dynamic-only is a separate ground scope")
     if arguments.dynamic_visual and not arguments.dynamic_only:parser.error("dynamic-visual requires dynamic-only")
     if arguments.animations and not (arguments.coating_only and arguments.first_person):parser.error("animations requires coating-only and first-person")
-    raise SystemExit(run(arguments.timeout, arguments.creative_ground_traps, not arguments.full_diagnostics, arguments.flight_controls, arguments.bounded_only, arguments.board_visual, arguments.actions_only, arguments.coating_only, arguments.skin_layers, arguments.coating_visual, arguments.first_person, arguments.dynamic_only, arguments.dynamic_visual, arguments.animations))
+    raise SystemExit(run(arguments.timeout, arguments.creative_ground_traps, not arguments.full_diagnostics, arguments.flight_controls, arguments.bounded_only, arguments.board_visual, arguments.actions_only, arguments.coating_only, arguments.skin_layers, arguments.coating_visual, arguments.first_person, arguments.dynamic_only, arguments.dynamic_visual, arguments.animations, arguments.visual_only))

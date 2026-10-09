@@ -107,6 +107,7 @@ public final class ClientPortChecks {
             ChineseLanguageChecks.run(game);
             MFQM.LOGGER.info("MFQM_CLIENT_CHECKS_COMPLETE items={} visible={} blocks=51 fluids=14 entities=18", ModItems.entries().size(), visible);
         } catch (Throwable failure) { MFQM.LOGGER.error("MFQM_CLIENT_CHECKS_FAILED", failure); }
+        if (Boolean.getBoolean("mfqm.adhesiveVisualChecks")) { AdhesiveVisualClientChecks.start(game); return; }
         if (Boolean.getBoolean("mfqm.coatingChecks")) { CoatingClientChecks.start(game); return; }
         if (Boolean.getBoolean("mfqm.dynamicAdhesionChecks")) { DynamicAdhesionClientChecks.start(game); return; }
         if (Boolean.getBoolean("mfqm.boundedOnly")) { BoundedAdhesionClientChecks.start(game); return; }

@@ -3,6 +3,7 @@ import argparse
 import json
 from itertools import product
 from pathlib import Path
+from PIL import Image
 
 ASSETS = Path(__file__).resolve().parents[1] / 'src/main/resources/assets/mfqm'
 DIRECTIONS = ('north', 'east', 'south', 'west')
@@ -20,6 +21,12 @@ PIECES = {
 }
 
 
+def glue_uv(bounds):
+    # The original 32px texture has a transparent two-pixel frame. Extend its
+    # inner edge texels across connected seams, never sample that empty frame.
+    return [min(14.75, max(1.25, value)) for value in bounds]
+
+
 def bake():
     parts = [{'apply': {'model': 'mfqm:block/sticky_board'}}]
     for name, (directions, bounds) in PIECES.items():
@@ -28,7 +35,7 @@ def bake():
         model = {'parent': 'minecraft:block/block', 'render_type': 'minecraft:cutout',
                  'textures': {'glue': 'mfqm:blocks/stickyboard_glue', 'particle': 'mfqm:blocks/stickyboard_glue'},
                  'elements': [{'from': [x1, 1, z1], 'to': [x2, 1.1875, z2],
-                               'faces': {'up': {'texture': '#glue', 'uv': [x1, z1, x2, z2]}}}]}
+                               'faces': {'up': {'texture': '#glue', 'uv': glue_uv(bounds)}}}]}
         (ASSETS / 'models/block' / (model_name + '.json')).write_text(json.dumps(model, indent=2) + '\n', encoding='utf-8')
         condition = {'charge': '1|2|3|4|5|6|7', **{direction: 'true' for direction in directions}}
         parts.append({'when': condition, 'apply': {'model': 'mfqm:block/' + model_name}})
@@ -38,6 +45,7 @@ def bake():
 def verify():
     state = json.loads((ASSETS / 'blockstates/sticky_board.json').read_text(encoding='utf-8'))
     assert 'multipart' in state, 'board needs neighbor-aware multipart geometry'
+    texture = Image.open(ASSETS / 'textures/blocks/stickyboard_glue.png').convert('RGBA')
     cases = 0
     for flags in product((False, True), repeat=4):
         neighbors = dict(zip(DIRECTIONS, flags))
@@ -58,7 +66,12 @@ def verify():
                     x1, y1, z1 = element['from']
                     x2, y2, z2 = element['to']
                     assert y1 == 1 and y2 == 1.1875, 'all glue pieces share the original top height'
-                    assert element['faces']['up']['uv'] == [x1, z1, x2, z2], 'UVs continue across piece boundaries'
+                    u1, v1, u2, v2 = element['faces']['up']['uv']
+                    for a in (.01, .5, .99):
+                        for b in (.01, .5, .99):
+                            u, v = u1 + (u2-u1)*a, v1 + (v2-v1)*b
+                            pixel = texture.getpixel((min(texture.width-1, int(u*texture.width/16)), min(texture.height-1, int(v*texture.height/16))))
+                            assert pixel[3] >= 128, ('connected glue samples transparent texture frame', model, u, v)
                     for z in range(z1, z2):
                         for x in range(x1, x2):
                             coverage[z][x] += 1
