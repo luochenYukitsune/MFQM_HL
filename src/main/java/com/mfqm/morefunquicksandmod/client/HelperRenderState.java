@@ -10,4 +10,6 @@ public final class HelperRenderState extends EntityRenderState {
     public Vec3 end = Vec3.ZERO;
     public float height;
     public float progress;
+    public long cosmeticSeed;
+    public float u0,u1=1,v0,v1=1;
 }

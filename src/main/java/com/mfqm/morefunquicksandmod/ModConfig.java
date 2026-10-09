@@ -253,7 +253,7 @@ public final class ModConfig {
             coatingOpacity=builder.comment("Client only: source opacity multiplier; zero hides residue").defineInRange("coatingOpacity",1.,0,2);
             coatingThickness=builder.comment("Client only: pixel relief multiplier; zero uses a flat surface").defineInRange("coatingThickness",1.,0,3);
             strandDisplayLimit=builder.comment("Client only: maximum visible contact groups per target; each contains strandDensity independent strands, physics unchanged").defineInRange("strandDisplayLimit",64,0,64);
-            strandDensity=builder.comment("Client only: independent complete strands per contact; 8 allows up to 512 strands per target without extra physical entities").defineInRange("strandDensity",8,1,8);
+            strandDensity=builder.comment("Client only: base strands per contact, 1-128; default target budget 512, maximum 8192. Fresh contact density adapts up to 4x inside this budget; high values increase rendering cost, not physics").defineInRange("strandDensity",8,1,128);
             var visuals=new java.util.LinkedHashMap<String,MaterialVisuals>();
             for(String family:new String[]{"glue","tar","honey","slime","mud"}) {
                 builder.push(family+"Visuals");

@@ -11,7 +11,14 @@ public final class CompactStrandStyleTest {
         check(CompactStrandStyle.opacity(.55,.4)>0 && CompactStrandStyle.opacity(.55,.4)<1,"short horizontal fade prevents a hard pop");
         check(CompactStrandStyle.opacity(.2,1)>0 && CompactStrandStyle.opacity(.2,1)<1,"short vertical fade prevents a hard pop");
         check(CompactStrandStyle.opacity(Double.NaN,0)==0,"invalid endpoints cannot reach the vertex buffer");
-        check(CompactStrandStyle.MAX_DENSITY==8,"each physical contact can display eight independent continuous strands");
+        check(CompactStrandStyle.MAX_DENSITY==128,"64 contacts can display up to 8192 complete strands");
+        check(CompactStrandStyle.density(8,2)==32,"fresh contact looks denser immediately");
+        check(CompactStrandStyle.density(8,64)==8,"full default contact budget still tops out at 512");
+        for(int base:new int[]{1,8,32,128})for(int groups=1;groups<=64;groups++)
+            check(CompactStrandStyle.density(base,groups)*groups<=base*64,"adaptive density never exceeds the configured total budget");
+        var identities=new HashSet<Long>();
+        for(int contact=1;contact<=64;contact++)for(int i=0;i<128;i++)
+            check(identities.add(CompactStrandStyle.seed(contact,i)),"larger density must not reuse another contact's random seed");
         for(long seed:new long[]{0,1,-1,17,Long.MAX_VALUE}) {
             var ends=new HashSet<Double>();
             for(int i=0;i<CompactStrandStyle.MAX_DENSITY;i++) {

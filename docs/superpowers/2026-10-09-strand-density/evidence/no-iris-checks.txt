@@ -1,0 +1,18 @@
+JAR SHA256: f0a415215c35b7193b1a34674607cad62b1bfc98468ff4a2167aa0239e523815
+Screenshots: disabled
+[23:42:27] [Render thread/INFO] [MFQM/]: MFQM_INSTALLED_JAR_LOADED file:/C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/run/1.21.11/coating-client/mods/MFQM-neoforge-1.21.11-0.7.3-dev.jar
+[23:42:27] [Render thread/INFO] [MFQM/]: MFQM_CREATIVE_BOARD_VARIANTS_COMPLETE coated=粘鼠板（已涂胶） empty=粘鼠板底板（未涂胶） adjacent=true
+[23:42:27] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_VISUAL_CHECKS_COMPLETE modelCases=60
+[23:42:27] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_INPUT_CHECKS_COMPLETE shortTap=true repeat=false tetherSwap=false menuLeak=false
+[23:42:27] [Render thread/INFO] [MFQM/]: MFQM_CHINESE_CHECKS_COMPLETE englishKeys=572 chineseKeys=828 active=true configScreen=true formats=true registeredNames=true
+[23:42:27] [Render thread/INFO] [MFQM/]: MFQM_CLIENT_CHECKS_COMPLETE items=180 visible=165 blocks=51 fluids=14 entities=18
+[23:42:27] [Render thread/INFO] [MFQM/]: MFQM_COATING_MASKS_COMPLETE cases=600 legTiers1to3=true headDryThrough7=true fullBody=true
+[23:42:27] [Render thread/INFO] [MFQM/]: MFQM_COATING_CHECKS_START skinLayers=false actualModVersion=absent groundCamera=true
+[23:42:32] [Render thread/INFO] [MFQM/]: MFQM_COATING_CLOSE_FIT_COMPLETE hiddenPadding=.02 flatPadding=.27 defaultReliefMax=.12 anatomicalCoverageUnchanged=true
+[23:42:32] [Render thread/INFO] [MFQM/]: MFQM_COATING_BODY_COMPLETE wide=true slim=true fullCoverage=true detailedSubmissions=2712
+[23:42:37] [Render thread/INFO] [MFQM/]: MFQM_COATING_MASKS_COMPLETE cases=600 legTiers1to3=true headDryThrough7=true fullBody=true
+[23:42:37] [Render thread/INFO] [MFQM/]: MFQM_COATING_RESOURCE_RELOAD_COMPLETE regenerated=true cacheBounded=true
+[23:42:39] [Render thread/INFO] [MFQM/]: MFQM_COATING_ARM_COMPLETE actualSkin=SLIM padding=0.27 flight=false
+[23:42:41] [Render thread/INFO] [MFQM/]: MFQM_ALL_MATERIAL_COATINGS_COMPLETE nativePose=true tint=true adjustable=true
+[23:42:43] [Render thread/INFO] [MFQM/]: MFQM_COATING_DISPLAY_CONTROLS_COMPLETE zeroOpacityHidden=true zeroThicknessFlat=true
+[23:42:43] [Render thread/INFO] [MFQM/]: MFQM_COATING_CHECKS_COMPLETE skinLayers=false firstPerson=false anatomicalHeightMasks=true originalPngUnchanged=true

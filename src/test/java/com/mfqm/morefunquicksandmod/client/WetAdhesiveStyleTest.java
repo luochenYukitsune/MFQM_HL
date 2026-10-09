@@ -39,7 +39,7 @@ public final class WetAdhesiveStyleTest {
             }
             var root=frame.center().add(frame.right().scale(.4));
             var facing=WetAdhesiveStyle.endpoint(frame,.1,17,root).subtract(frame.center());
-            check(facing.dot(frame.right())>0 && Math.abs(facing.dot(frame.front()))<1e-7,"foot endpoint faces the actual root rather than spraying around the opposite side");
+            check(facing.dot(frame.right())>0 && Math.abs(facing.dot(frame.front()))<=frame.halfDepth(),"varied foot endpoint stays on the root-facing leg surface");
         }
         for(var end:List.of(new Vec(.5,.3,.1),new Vec(0,.6,0),new Vec(.3,0,0))) {
             var tube=WetAdhesiveStyle.tube(new Vec(0,0,0),end,6,.02,.008);
@@ -97,6 +97,25 @@ public final class WetAdhesiveStyleTest {
             check(roots.size()==8,"all eight strands have distinct roots even at a cell corner");
         }
         check(WetAdhesiveStyle.sag(.001)<.0001,"retracting short strands cannot curl into loose noodles");
+        var widths=new java.util.HashSet<Double>();var sides=new java.util.HashSet<Double>();
+        for(int i=0;i<128;i++) {
+            long seed=CompactStrandStyle.seed(17,i);widths.add(WetAdhesiveStyle.width(.4,(int)seed,"glue"));
+            sides.add(WetAdhesiveStyle.endpoint(frame,.1,seed,new Vec(.4,0,0)).z());
+            var root8=WetAdhesiveStyle.submergedRoot(new Vec(.5,.9,.5),.89,.033,17,i,128);
+            check(root8.equals(WetAdhesiveStyle.submergedRoot(new Vec(.5,.9,.5),.89,.033,17,i,CompactStrandStyle.MAX_DENSITY)),"root randomness does not depend on density");
+            if(i<8)check(root8.equals(WetAdhesiveStyle.submergedRoot(new Vec(.5,.9,.5),.89,.033,17,i,8)),"adding extra strands does not teleport existing roots");
+            var varied=WetAdhesiveStyle.tube(new Vec(0,0,0),new Vec(.3,.8,.1),3,.03,.025,seed);
+            check(varied.equals(WetAdhesiveStyle.tube(new Vec(0,0,0),new Vec(.3,.8,.1),3,.03,.025,seed)),"size, thickness and bend are stable");
+            closed(varied,"varied strip remains closed and unbranched");
+        }
+        check(widths.size()>100,"widths are continuous varied sizes, not three repeating stripes");
+        check(sides.size()>100,"body attachments do not form an aligned fan on one narrow line");
+        for(int i=0;i<128;i++) {
+            long seed=CompactStrandStyle.seed(17,i);
+            var before=WetAdhesiveStyle.endpoint(frame,.1,seed,new Vec(.400000001,0,.4));
+            var after=WetAdhesiveStyle.endpoint(frame,.1,seed,new Vec(.4,0,.400000001));
+            check(before.subtract(after).length()<1e-7,"turning past a leg corner must not teleport the random attachment");
+        }
         check(WetAdhesiveStyle.tube(new Vec(0,0,0),new Vec(0,0,0),6,.02,.008).isEmpty(),"fully retracted strands cannot create NaN geometry");
         System.out.println("WetAdhesiveStyle: "+checks+" behavioral checks passed");
     }

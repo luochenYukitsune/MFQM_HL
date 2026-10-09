@@ -1,0 +1,14 @@
+JAR SHA256: f0a415215c35b7193b1a34674607cad62b1bfc98468ff4a2167aa0239e523815
+Shader SHA256: c0735d5f1de0edca2b1c155dae1c650ddb8d2d04a3ebdd3d2ff74dd7a19db116
+Scope: focused
+[23:38:21] [Render thread/INFO] [Iris/]: Using shaderpack: iterationT 3.2.0.zip
+[23:38:43] [Render thread/INFO] [MFQM/]: MFQM_INSTALLED_JAR_LOADED file:/C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/run/1.21.11/shader-client/iterationT_3.2.0/mods/MFQM-neoforge-1.21.11-0.7.3-dev.jar
+[23:38:46] [Render thread/INFO] [MFQM/]: MFQM_SHADER_POOL_PATH_VERIFIED pigment=true glassAbsorption=false sourceFlowingMapped=true
+[23:38:54] [Render thread/INFO] [MFQM/]: MFQM_SHADER_STRANDS_VERIFIED total=380 raised=98 rootsInside=true
+[23:38:54] [Render thread/INFO] [MFQM/]: MFQM_SHADER_DENSITY_BUBBLES_VERIFIED initialDensity=32 maximumTotal=8192 stableRandom=true atlasMaterials=6 maximumBubbleDiameter=.112
+[23:38:54] [Render thread/INFO] [MFQM/]: MFQM_SHADER_VISUAL_SAVED file=mfqm-shader-body.png
+[23:38:57] [Render thread/INFO] [MFQM/]: MFQM_SHADER_FIRSTPERSON_VERIFIED samples=3800 error=3.332000937312528E-8 shadowsSeparate=true
+[23:38:57] [Render thread/INFO] [MFQM/]: MFQM_SHADER_VISUAL_SAVED file=mfqm-shader-firstperson.png
+[23:39:01] [Render thread/INFO] [MFQM/]: MFQM_SHADER_POOL_VIEW_VERIFIED x=211.5 y=261.0 z=10.5 grounded=true
+[23:39:03] [Render thread/INFO] [MFQM/]: MFQM_SHADER_VISUAL_SAVED file=mfqm-shader-pools.png
+[23:39:03] [Render thread/INFO] [MFQM/]: MFQM_SHADER_CHECKS_COMPLETE active=true fallback=false grounded=true calfAttachments=true rootsInside=true body3d=true flatLod=true firstPerson=true poolsCaptured=true

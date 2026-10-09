@@ -31,6 +31,8 @@ def find_mod(mods,name):
 def prepare(game,pack,instance,smoke_only=False):
     runtime=json.loads((ROOT/'build/installed-client-runtime.json').read_text(encoding='utf-8'))
     classpath,vm,program=validate_runtime(runtime,ROOT)
+    if '--quickPlaySingleplayer' not in program or 'mfqm-port-checks' not in program:
+        raise ValueError('Prepare the copied-world launcher with prepareInstalledClient -PmfqmClientChecks before running shader checks')
     jar=workspace_path(Path(runtime['jar'])); digest=sha256(jar)
     game.mkdir(parents=True,exist_ok=True)
     previous=workspace_path(game/'previous-runs'/str(time.time_ns()))

@@ -36,7 +36,7 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
         state.local=target==net.minecraft.client.Minecraft.getInstance().getCameraEntity() && !entity.breaking();state.side=entity.side();
         if(target==null || !target.isAlive() || target.isInvisible() || target.isSpectator() || !ModConfig.CLIENT.adhesiveTethers.get()
                 || entity.material().equals("tar") && !ModConfig.CLIENT.tarTreadsEffect.get())return;
-        if(!AdhesiveDisplayBudget.visible(entity))return;
+        int density=AdhesiveDisplayBudget.density(entity);if(density==0)return;
         var original=entity.position();
         var cell=net.minecraft.core.BlockPos.containing(original);
         double surfaceHeight=RenderedAdhesiveSurface.minimumHeight(entity.level(),cell,entity.material());
@@ -63,7 +63,7 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
             endpointFoot=entity.breakAnkle(state.foot);state.foot=endpointFoot.scale(remaining);
             state.shin=entity.breakShin(state.shin).scale(remaining);
         }
-        state.cuff=entity.cuff() && !entity.breaking();state.segments=state.distanceToCameraSq>256?3:6;
+        state.cuff=entity.cuff() && !entity.breaking();state.segments=state.distanceToCameraSq>256 || density>=32?3:6;
         var sampledSurface=sampled.surface();
         state.surface=new WetAdhesiveStyle.Frame(vector(endpointFoot).add(sampledSurface.center().subtract(vector(sampled.ankle()))),
                 sampledSurface.up(),sampledSurface.right(),sampledSurface.front(),sampledSurface.halfWidth(),sampledSurface.halfDepth(),sampledSurface.calfHeight());
@@ -71,21 +71,20 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
         var membrane=new java.util.ArrayList<CoatingVoxels.Quad>();
         if(state.cuff)appendFaded(membrane,WetAdhesiveStyle.film(state.surface,depth,entity.side()),opacity);
         state.membrane=java.util.List.copyOf(membrane);
-        int density=ModConfig.CLIENT.strandDensity.get();
         var filaments=new java.util.ArrayList<Filament>(density);var strands=new java.util.ArrayList<CoatingVoxels.Quad>();
         for(int i=0;i<density;i++) {
-            long seed=((long)entity.getId()<<3)+i;
-            var anchor=RenderedAdhesiveSurface.root(cell,surfaceHeight,original,WetAdhesiveStyle.width(0,(int)seed,entity.material()),entity.getId(),i,density);
+            long seed=CompactStrandStyle.seed(entity.getId(),i);int widthSeed=(int)(seed^(seed>>>32));
+            var anchor=RenderedAdhesiveSurface.root(cell,surfaceHeight,original,WetAdhesiveStyle.width(0,widthSeed,entity.material()),entity.getId(),i,density);
             if(anchor==null)continue;
             var localRoot=anchor.point().subtract(origin);
             var attached=point(WetAdhesiveStyle.endpoint(state.surface,depth,seed,vector(localRoot)));
             var end=localRoot.add(attached.subtract(localRoot).scale(remaining));
             var delta=end.subtract(localRoot);double fade=CompactStrandStyle.opacity(delta.horizontalDistance(),end.y+origin.y-(cell.getY()+surfaceHeight));
             if(fade<=0)continue;
-            double width=WetAdhesiveStyle.width(delta.length(),(int)seed,entity.material())*Math.max(.05,remaining);
+            double width=WetAdhesiveStyle.width(delta.length(),widthSeed,entity.material())*Math.max(.05,remaining);
             double rootWidth=Math.min(width,anchor.radius());
             filaments.add(new Filament(localRoot,end,width,rootWidth));
-            appendFaded(strands,WetAdhesiveStyle.tube(vector(localRoot),vector(end),state.segments,rootWidth,width),fade);
+            appendFaded(strands,WetAdhesiveStyle.tube(vector(localRoot),vector(end),state.segments,rootWidth,width,seed),fade);
         }
         state.filaments=java.util.List.copyOf(filaments);state.strands=java.util.List.copyOf(strands);
         int rgb=switch(entity.material()) {

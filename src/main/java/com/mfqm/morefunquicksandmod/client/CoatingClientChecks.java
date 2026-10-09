@@ -263,7 +263,7 @@ public final class CoatingClientChecks {
         for(var helper:helpers) {
             var renderer=(AdhesiveTetherRenderer)game.getEntityRenderDispatcher().getRenderer(helper);var state=renderer.createRenderState(helper,1);
             if(!state.visible)continue;visibleBundles++;visibleFilaments+=state.filaments.size();
-            require(state.filaments.size()<=ModConfig.CLIENT.strandDensity.get(),"actual contact respects independent strand density without branching");
+            require(state.filaments.size()<=AdhesiveDisplayBudget.density(helper),"actual contact respects adaptive independent strand density without branching");
             require(state.strands.size()==state.filaments.size()*(state.segments*6+12),"every independent strand has its own closed sides and caps, with no shared stem");
             if(!state.membrane.isEmpty()) {
                 membranes++;require(state.cuff && state.membrane.size()==52,"one bounded solid wet shell only on the newest contact per foot");
@@ -288,7 +288,7 @@ public final class CoatingClientChecks {
                 require(endpointHeight>=Math.min(filmHeight*.25,state.surface.calfHeight())-1e-6 && endpointHeight<=state.surface.calfHeight()+1e-6,"body endpoint remains on sampled leg below its calf midpoint");
             }
         }
-        require(visibleFilaments<=visibleBundles*ModConfig.CLIENT.strandDensity.get() && visibleFilaments>=16,"nearby scene has bounded independent strands without branching");
+        require(visibleFilaments<=64*ModConfig.CLIENT.strandDensity.get() && visibleFilaments>=16,"nearby scene has bounded independent strands without branching");
         require(membranes==2,"dense scene renders exactly one film on each foot");
         MFQM.LOGGER.info("MFQM_WET_ADHESIVE_COMPLETE film2=true closedShell=true independentStrands=true noBranches=true hexagonalTubes=true nativeFootBounds=true depthHeight=true rootsInside=true translucent=true");
     }

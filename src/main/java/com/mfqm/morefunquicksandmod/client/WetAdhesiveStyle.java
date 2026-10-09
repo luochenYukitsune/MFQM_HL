@@ -16,7 +16,7 @@ public final class WetAdhesiveStyle {
     public static final double THICKNESS=.003;
     private static final double[][] EDGE={{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1},{1,-1},{1,0}};
     public static double height(double depth) {return Double.isFinite(depth)?.08+.20*Math.clamp((depth-.15)/.85,0,1):0;}
-    public static double width(double length,int variation) {return (.010+.002*Math.floorMod(variation,3))/Math.sqrt(1+Math.max(0,length-.35)*1.2);}
+    public static double width(double length,int variation) {return (.010+.006*CompactStrandStyle.variation(Integer.toUnsignedLong(variation)^0x8EBC6AF09C88C6E3L))/Math.sqrt(1+Math.max(0,length-.35)*1.2);}
     public static double width(double length,int variation,String material) {
         return width(length,variation)*("glue".equals(material) || "sticky_board".equals(material)?3:1);
     }
@@ -30,8 +30,23 @@ public final class WetAdhesiveStyle {
     public static Vec endpoint(Frame f,double depth,long seed,Vec root) {
         Vec towards=root.subtract(f.center);double x=towards.dot(f.right),z=towards.dot(f.front);
         if(Math.abs(x)+Math.abs(z)<1e-8){x=0;z=1;}
-        double scale=1/Math.max(Math.abs(x)/(f.halfWidth+THICKNESS),Math.abs(z)/(f.halfDepth+THICKNESS));
-        return f.center.add(f.right.scale(x*scale)).add(f.front.scale(z*scale))
+        double halfWidth=f.halfWidth+THICKNESS,halfDepth=f.halfDepth+THICKNESS;
+        double scale=1/Math.max(Math.abs(x)/halfWidth,Math.abs(z)/halfDepth);
+        x*=scale;z*=scale;
+        double offset=2*CompactStrandStyle.variation(seed^0x589965CC75374CC3L)-1;
+        // Move along the continuous rectangle perimeter. Switching the random
+        // offset axis at a corner would teleport attachments when the leg turns.
+        double position;
+        if(Math.abs(x)/halfWidth>=Math.abs(z)/halfDepth)
+            position=x>=0?2*halfWidth+z+halfDepth:4*halfWidth+3*halfDepth-z;
+        else position=z>=0?3*halfWidth+2*halfDepth-x:x+halfWidth;
+        double perimeter=4*(halfWidth+halfDepth);
+        position=(position+offset*Math.min(f.halfWidth,f.halfDepth)*.55+perimeter)%perimeter;
+        if(position<=2*halfWidth){x=position-halfWidth;z=-halfDepth;}
+        else if(position<=2*halfWidth+2*halfDepth){x=halfWidth;z=position-2*halfWidth-halfDepth;}
+        else if(position<=4*halfWidth+2*halfDepth){x=3*halfWidth+2*halfDepth-position;z=halfDepth;}
+        else{x=-halfWidth;z=4*halfWidth+3*halfDepth-position;}
+        return f.center.add(f.right.scale(x)).add(f.front.scale(z))
                 .add(f.up.scale(attachmentHeight(f,depth,seed)));
     }
     /** Stable minority reaches the sampled calf midpoint; shallow film coverage stays at the ankle. */
@@ -54,10 +69,10 @@ public final class WetAdhesiveStyle {
     public static Root submergedRoot(Vec desired,double lowestHeight,double requestedRadius,long seed,int index,int count) {
         if(count<1 || count>CompactStrandStyle.MAX_DENSITY || index<0 || index>=count)
             throw new IllegalArgumentException("Invalid strand density");
-        var root=submergedRoot(desired,lowestHeight,requestedRadius);if(root==null || count==1)return root;
+        var root=submergedRoot(desired,lowestHeight,requestedRadius);if(root==null || index==0)return root;
         double spread=.09,inset=Math.max(.035,root.radius+.006);
         double x=Math.clamp(root.point.x(),inset+spread,1-inset-spread),z=Math.clamp(root.point.z(),inset+spread,1-inset-spread);
-        double distance=spread*Math.sqrt((index+.5)/count),angle=CompactStrandStyle.angle(seed,index);
+        double distance=spread*Math.sqrt(CompactStrandStyle.variation(seed^((index+1L)*0xD6E8FEB86659FD93L))),angle=CompactStrandStyle.angle(seed,index);
         return new Root(new Vec(x+distance*Math.cos(angle),root.point.y(),z+distance*Math.sin(angle)),root.radius);
     }
     public static List<Quad> film(Frame f,double depth,long seed) {
@@ -86,19 +101,29 @@ public final class WetAdhesiveStyle {
     }
     /** Closed flattened hexagonal strip: real thickness, without a round rope silhouette. */
     public static List<Quad> tube(Vec start,Vec end,int segments,double startRadius,double endRadius) {
+        return tubeShape(start,end,segments,startRadius,endRadius,.30,0,1);
+    }
+    public static List<Quad> tube(Vec start,Vec end,int segments,double startRadius,double endRadius,long seed) {
+        double thickness=.23+.15*CompactStrandStyle.variation(seed^0xDB4F0B9175AE2165L);
+        double bend=(CompactStrandStyle.variation(seed^0xBBE0563303A4615FL)-.5)*Math.min(.004,Math.min(startRadius,endRadius)*.18);
+        double droop=.6+.8*CompactStrandStyle.variation(seed^0xA0F2EC75A1FE1575L);
+        return tubeShape(start,end,segments,startRadius,endRadius,thickness,bend,droop);
+    }
+    private static List<Quad> tubeShape(Vec start,Vec end,int segments,double startRadius,double endRadius,double thickness,double bend,double droop) {
         Vec delta=end.subtract(start);double length=delta.length();
         if(!Double.isFinite(length) || length<1e-7)return List.of();
         if(segments<1 || segments>6 || !Double.isFinite(startRadius+endRadius) || startRadius<=0 || endRadius<=0)
             throw new IllegalArgumentException("Invalid adhesive tube dimensions");
         Vec axis=delta.unit(),right=new Vec(-axis.z(),0,axis.x());
         right=right.length()<1e-8?new Vec(1,0,0):right.unit();Vec up=axis.cross(right).unit();
-        var rings=new Vec[segments+1][6];var centers=new Vec[segments+1];double sag=sag(length);
+        var rings=new Vec[segments+1][6];var centers=new Vec[segments+1];double sag=sag(length)*droop;
         for(int segment=0;segment<=segments;segment++) {
             double t=segment/(double)segments,radius=(startRadius+(endRadius-startRadius)*t)*taper(t);
-            centers[segment]=start.add(delta.scale(t)).add(new Vec(0,-sag*Math.sin(Math.PI*t),0));
+            double curve=Math.sin(Math.PI*t);
+            centers[segment]=start.add(delta.scale(t)).add(new Vec(0,-sag*curve,0)).add(right.scale(bend*curve));
             for(int side=0;side<6;side++) {
                 double angle=side*Math.PI/3;
-                rings[segment][side]=centers[segment].add(right.scale(radius*Math.cos(angle))).add(up.scale(radius*.30*Math.sin(angle)));
+                rings[segment][side]=centers[segment].add(right.scale(radius*Math.cos(angle))).add(up.scale(radius*thickness*Math.sin(angle)));
             }
         }
         var quads=new ArrayList<Quad>(segments*6+12);

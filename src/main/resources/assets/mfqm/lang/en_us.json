@@ -570,5 +570,5 @@
   "tooltip.mfqm.sticky_board.coated": "Glue coating: %s/7. Place on solid ground to trap targets. Adjacent boards at the same height join into a larger board.",
   "tooltip.mfqm.sticky_board.empty": "No glue: this base cannot trap targets. Apply a glue bucket. Adjacent boards at the same height join into a larger board.",
   "mfqm.configuration.strandDensity": "Independent strands per contact",
-  "mfqm.configuration.strandDensity.tooltip": "Client display only: 1-8 complete independent strands per contact, default 8. Up to about 512 strands across 64 contacts; visibility depends on nearby contacts. Lower this to reduce rendering work. Physics is unchanged."
+  "mfqm.configuration.strandDensity.tooltip": "Client strand base per contact: 1-128, default 8. Per target, up to about 512 by default or 8192 at the maximum. Few contacts receive up to 4x density within the total budget. Stable random attachment, width, thickness and slight curvature; independent submerged roots with no branching. High values increase rendering cost. Physics is unchanged."
 }

@@ -4,6 +4,7 @@ import com.mfqm.morefunquicksandmod.MFQM;
 import com.mfqm.morefunquicksandmod.ModConfig;
 import com.mfqm.morefunquicksandmod.block.StickyBoardBlock;
 import com.mfqm.morefunquicksandmod.entity.AdhesiveTetherEntity;
+import com.mfqm.morefunquicksandmod.entity.SurfaceEffectEntity;
 import com.mfqm.morefunquicksandmod.registry.ModBlocks;
 import com.mfqm.morefunquicksandmod.registry.ModEntities;
 import java.util.Set;
@@ -32,6 +33,7 @@ public final class ShaderClientChecks {
     private static int phase,ticks;
     private static ClientInput oldInput;
     private static long detailed,flat;
+    private static long bubbles;
     public static void start(Minecraft game) {
         if(!Boolean.getBoolean("mfqm.shaderChecks"))return;
         running=true;ticks=0;phase=0;ready=false;oldInput=game.player.input;
@@ -103,6 +105,7 @@ public final class ShaderClientChecks {
                 case 3->{}
                 case 4->{
                     if(ticks<60)return;verifyPack();
+                    require(HelperRenderer.bubbleSubmissions()>bubbles,"tiny bubble atlas geometry actually submitted to render pipeline");
                     require(FirstPersonTetherProof.samples()>0,"actual first-person native leg and tether matrices sampled");
                     require(FirstPersonTetherProof.error()<.035,"first-person foot alignment error "+FirstPersonTetherProof.error());
                     MFQM.LOGGER.info("MFQM_SHADER_FIRSTPERSON_VERIFIED samples={} error={} shadowsSeparate=true",FirstPersonTetherProof.samples(),FirstPersonTetherProof.error());
@@ -118,11 +121,21 @@ public final class ShaderClientChecks {
                     server.execute(()->{
                         var player=server.getPlayerList().getPlayer(id);var level=player.level();
                         for(int x=210;x<=212;x++)for(int z=9;z<=11;z++)level.setBlock(new BlockPos(x,260,z),Blocks.QUARTZ_BLOCK.defaultBlockState(),3);
+                        // The pool overview is a separate placement fixture, after all binding tests.
+                        // Clear the old episode instead of letting its predicted anchors interfere with teleport.
+                        com.mfqm.morefunquicksandmod.gameplay.AdhesionController.changedDimension(player,level,level);
                         player.teleportTo(level,211.5,261,10.5,Set.of(),180,50,false);player.setDeltaMovement(Vec3.ZERO);ready=true;
+                        player.syncData(com.mfqm.morefunquicksandmod.registry.ModAttachmentTypes.SINKING_STATE.get());
                     });
                 }
                 case 7->{
                     if(!ready || ticks<60)return;verifyPack();game.player.setYRot(180);game.player.setXRot(50);
+                    if(game.player.position().distanceToSqr(new Vec3(211.5,261,10.5))>.0625) {
+                        if(ticks<160)return;
+                        throw new IllegalStateException("Pool overview client did not reach platform: "+game.player.position());
+                    }
+                    require(game.player.onGround(),"pool overview camera remains grounded");
+                    MFQM.LOGGER.info("MFQM_SHADER_POOL_VIEW_VERIFIED x={} y={} z={} grounded=true",game.player.getX(),game.player.getY(),game.player.getZ());
                     phase=8;ticks=0;screenshot(game,"mfqm-shader-pools.png",()->{
                         MFQM.LOGGER.info("MFQM_SHADER_CHECKS_COMPLETE active=true fallback=false grounded=true calfAttachments=true rootsInside=true body3d=true flatLod=true firstPerson=true poolsCaptured=true");finish(game);
                     });
@@ -141,20 +154,60 @@ public final class ShaderClientChecks {
     }
     private static void verifyStrands(Minecraft game) {
         int total=0,raised=0;
+        var widths=new java.util.HashSet<Double>();var sides=new java.util.HashSet<Double>();
+        boolean highCapChecked=false;
         for(var helper:game.level.getEntitiesOfClass(AdhesiveTetherEntity.class,game.player.getBoundingBox().inflate(8),e->e.target()==game.player && !e.breaking())) {
             var renderer=(AdhesiveTetherRenderer)game.getEntityRenderDispatcher().getRenderer(helper);var state=renderer.createRenderState(helper,1);
             if(!state.visible)continue;var origin=new Vec3(state.x,state.y,state.z);
+            require(state.filaments.size()<=AdhesiveDisplayBudget.density(helper),"actual helper respects adaptive display budget");
+            if(!highCapChecked) {
+                int old=ModConfig.CLIENT.strandDensity.get(),ordinaryCount=state.filaments.size();
+                try {
+                    ModConfig.CLIENT.strandDensity.set(128);
+                    var dense=renderer.createRenderState(helper,1);
+                    require(AdhesiveDisplayBudget.density(helper)==128 && dense.filaments.size()>=ordinaryCount,"actual renderer accepts extended 8192 total cap");
+                    require(dense.segments==3,"high density uses bounded segment cost");
+                }finally{ModConfig.CLIENT.strandDensity.set(old);}
+                state=renderer.createRenderState(helper,1);highCapChecked=true;
+            }
             for(var strand:state.filaments) {
                 var root=origin.add(strand.root());var cell=BlockPos.containing(root);double y=root.y-cell.getY(),radius=strand.rootWidth();
                 double surface=RenderedAdhesiveSurface.minimumHeight(game.level,cell,helper.material());
                 require(y-radius>0 && y+radius<surface && y<=.061,"root remains fully inside glue near bottom");
                 double height=new CoatingVoxels.Vec(strand.end().x,strand.end().y,strand.end().z).subtract(state.surface.center()).dot(state.surface.up());
                 require(height<=state.surface.calfHeight()+1e-6,"body attachment stops at sampled calf midpoint");
+                widths.add(strand.width());
+                sides.add(new CoatingVoxels.Vec(strand.end().x,strand.end().y,strand.end().z).subtract(state.surface.center()).dot(state.surface.front()));
                 if(height>state.surface.calfHeight()*.79)raised++;total++;
             }
         }
         require(total>=32 && raised>0 && raised<total/2,"some but not all strands attach high: "+raised+"/"+total);
+        require(total<=64*ModConfig.CLIENT.strandDensity.get(),"target display stays within configured total budget");
+        require(highCapChecked && widths.size()>16 && sides.size()>16,"actual strands vary in width and leg position");
         MFQM.LOGGER.info("MFQM_SHADER_STRANDS_VERIFIED total={} raised={} rootsInside=true",total,raised);
+        verifyBubbles(game);
+    }
+    private static void verifyBubbles(Minecraft game) {
+        int count=0;bubbles=HelperRenderer.bubbleSubmissions();
+        for(String medium:new String[]{"glue","honey","tar","sinking_slime","mud","quicksand"}) {
+            // Client-only fixture exercises the same renderer for every material, without altering the server save.
+            var bubble=ModEntities.BUBBLE.get().create(game.level,EntitySpawnReason.COMMAND);
+            require(bubble!=null,"bubble fixture can be created");
+            bubble.configure(ModBlocks.byId(medium).defaultBlockState(),null,200);bubble.tickCount=100;
+            bubble.setId(80000+count);require(game.level.getEntity(bubble.getId())==null,"isolated bubble fixture ID available");
+            var location=game.player.position().add(.5+.15*count,0,.3);var cell=BlockPos.containing(location);
+            bubble.setPos(location.x,cell.getY()+RenderedAdhesiveSurface.minimumHeight(game.level,cell,"glue")+.002,location.z);
+            bubble.setOldPosAndRot();game.level.addEntity(bubble);
+            @SuppressWarnings("unchecked") var renderer=(HelperRenderer<SurfaceEffectEntity>)game.getEntityRenderDispatcher().getRenderer(bubble);
+            var state=renderer.createRenderState(bubble,0);
+            require(state.texture.equals(net.minecraft.client.renderer.texture.TextureAtlas.LOCATION_BLOCKS),"bubble uses animated block atlas for "+medium);
+            require(state.u1>state.u0 && state.v1>state.v0 && state.u0>=0 && state.v0>=0 && state.u1<=1 && state.v1<=1,"bubble sprite bounds are valid");
+            for(var q:SurfaceBubbleStyle.mesh(state.progress,state.cosmeticSeed))for(var point:java.util.List.of(q.a(),q.b(),q.c(),q.d()))
+                require(Math.abs(point.x())<=.056 && Math.abs(point.z())<=.056 && point.y()<=.035,"all material bubbles remain small");
+            count++;
+        }
+        require(CompactStrandStyle.density(8,2)==32,"initial contacts are four times denser");
+        MFQM.LOGGER.info("MFQM_SHADER_DENSITY_BUBBLES_VERIFIED initialDensity=32 maximumTotal=8192 stableRandom=true atlasMaterials={} maximumBubbleDiameter=.112",count);
     }
     private static ClientInput input(int direction){return new ClientInput(){@Override public void tick(){keyPresses=new net.minecraft.world.entity.player.Input(direction>0,direction<0,false,false,false,false,false);moveVector=new Vec2(0,direction);}};}
     private static void screenshot(Minecraft game,String name,Runnable next){Screenshot.grab(game.gameDirectory,name,game.getMainRenderTarget(),1,message->game.execute(()->{MFQM.LOGGER.info("MFQM_SHADER_VISUAL_SAVED file={}",name);next.run();}));}

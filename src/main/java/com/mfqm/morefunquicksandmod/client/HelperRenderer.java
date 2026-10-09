@@ -20,11 +20,14 @@ import net.minecraft.world.phys.Vec3;
 
 /** Procedural legacy helper geometry submitted from snapshots, without OpenGL global state. */
 public final class HelperRenderer<T extends Entity> extends EntityRenderer<T,HelperRenderState> {
+    private static long bubbleSubmissions;
+    static long bubbleSubmissions(){return bubbleSubmissions;}
     public HelperRenderer(EntityRendererProvider.Context context) { super(context); }
     @Override public HelperRenderState createRenderState() { return new HelperRenderState(); }
     @Override protected boolean affectedByCulling(T entity) { return false; }
     @Override public void extractRenderState(T entity, HelperRenderState state, float tick) {
         super.extractRenderState(entity,state,tick); state.end=Vec3.ZERO; state.height=0; state.progress=0;
+        state.cosmeticSeed=entity.getId();state.u0=0;state.u1=1;state.v0=0;state.v1=1;
         Vec3 origin=new Vec3(state.x,state.y,state.z);
         if (entity instanceof ConnectorEntity connector) {
             state.kind=connector.kind();
@@ -40,6 +43,10 @@ public final class HelperRenderer<T extends Entity> extends EntityRenderer<T,Hel
             state.kind=effect.kind();state.progress=(entity.tickCount+tick)/Math.max(1,effect.lifetime());
             var sprite=Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getParticleIcon(effect.material(),entity.level(),entity.blockPosition());
             var id=sprite.contents().name(); state.texture=Identifier.fromNamespaceAndPath(id.getNamespace(),"textures/"+id.getPath()+".png");
+            if(state.kind.equals("bubble")) {
+                state.texture=sprite.atlasLocation();
+                state.u0=sprite.getU0();state.u1=sprite.getU1();state.v0=sprite.getV0();state.v1=sprite.getV1();
+            }
             if(state.kind.equals("slime_hole"))state.texture=texture("blocks/slimehole"+Math.min(3,(int)(state.progress*4))+".png");
             if(state.kind.equals("tar_treads")) { state.texture=texture("blocks/tartread.png");Entity target=effect.target();if(target!=null)state.end=target.getPosition(tick).add(0,target.getBbHeight()*0.65,0).subtract(origin); }
         }
@@ -61,9 +68,21 @@ public final class HelperRenderer<T extends Entity> extends EntityRenderer<T,Hel
             if(state.kind.equals("hook")) {
                 strip(collector,pose,texture("items/grapplinghooktex.png"),new Vec3(-0.12,-0.12,0),new Vec3(0.12,0.12,0),0.08F,state.lightCoords);
             }
+        } else if(state.kind.equals("bubble")) {
+            var mesh=SurfaceBubbleStyle.mesh(state.progress,state.cosmeticSeed);
+            bubbleSubmissions++;
+            float u0=state.u0,u1=state.u1,v0=state.v0,v1=state.v1;int light=state.lightCoords;
+            collector.submitCustomGeometry(pose,RenderTypes.entityTranslucent(state.texture),(matrix,vertices)->{
+                for(var q:mesh) {
+                    var normal=new Vec3(q.normal().x(),q.normal().y(),q.normal().z());
+                    bubbleVertex(vertices,matrix,q.a(),u0,u1,v0,v1,light,normal);
+                    bubbleVertex(vertices,matrix,q.b(),u0,u1,v0,v1,light,normal);
+                    bubbleVertex(vertices,matrix,q.c(),u0,u1,v0,v1,light,normal);
+                    bubbleVertex(vertices,matrix,q.d(),u0,u1,v0,v1,light,normal);
+                }
+            });
         } else {
-            float radius=state.kind.equals("bubble")?(float)(0.05+0.2*Math.sin(Math.min(1,state.progress)*Math.PI)):0.4F;
-            float elevation=state.kind.equals("bubble")?radius*0.3F:0.01F;
+            float radius=0.4F,elevation=0.01F;
             int light=state.lightCoords;
             collector.submitCustomGeometry(pose,RenderTypes.entityTranslucent(state.texture),(matrix,vertices)->{
                 var normal=new Vec3(0,1,0);
@@ -76,6 +95,12 @@ public final class HelperRenderer<T extends Entity> extends EntityRenderer<T,Hel
         super.submit(state,pose,collector,camera);
     }
     private static Identifier texture(String path){return Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"textures/"+path);}
+    private static void bubbleVertex(VertexConsumer vertices,PoseStack.Pose matrix,CoatingVoxels.Vec point,
+                                     float u0,float u1,float v0,float v1,int light,Vec3 normal) {
+        float u=(float)(.5+.5*point.x()/SurfaceBubbleStyle.UV_RADIUS);
+        float v=(float)(.5+.5*point.z()/SurfaceBubbleStyle.UV_RADIUS);
+        vertex(vertices,matrix,new Vec3(point.x(),point.y(),point.z()),u0+(u1-u0)*u,v0+(v1-v0)*v,light,normal);
+    }
     private static void strip(SubmitNodeCollector collector,PoseStack pose,Identifier texture,Vec3 start,Vec3 end,float width,int light) {
         Vec3 direction=end.subtract(start);if(direction.lengthSqr()<1.0E-12)return;
         Vec3 side=new Vec3(-direction.z,0,direction.x).normalize().scale(width);

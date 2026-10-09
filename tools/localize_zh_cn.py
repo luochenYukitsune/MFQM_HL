@@ -191,7 +191,7 @@ def build():
         result["mfqm.configuration."+field+".tooltip"]="仅影响本机显示。1 为默认像素凸起厚度；全局值与材质值相乘，0 使用平面覆盖，不改变浸入高度和黏力。"
     for field in ("strandDisplayLimit","materialStrands"):
         result["mfqm.configuration."+field+".tooltip"]="每个角色可见接触组数量，默认 64，范围 0～64；每组有 1～8 根独立完整黏丝，由密度设置控制。取全局与材质上限中较小的值，优先显示脚边新连接；远处旧丝淡出，不影响服务器物理。"
-    result["mfqm.configuration.strandDensity.tooltip"]="每个接触显示的独立黏丝数量，默认 8，范围 1～8；64 个接触满额时最多约 512 根。每根有独立根部且不分叉，实际显示受距离和接触数量限制。调低可减少绘制开销，不改变物理黏力。"
+    result["mfqm.configuration.strandDensity.tooltip"]="每个接触的黏丝基数，默认 8，范围 1～128；每个角色满额最多约 512 根，上限可调至 8192 根。接触少时每组最多增密四倍，但不超出总预算；移动后接触逐渐增加。位置、宽厚和轻微弯曲稳定随机，根部始终在介质内且不分叉。高数值会增加绘制开销，不改变物理黏力。"
     for medium in ("glue","honey","tar","slime","board"):
         result["mfqm.configuration."+medium+"VerticalDistance.tooltip"]="黏丝竖向延伸超过此距离时断开，单位为格。与水平活动半径独立；延长不会使角色飞行。服务器决定此值。"
     for key in ("mudBondDistance","mudActivityRadius"):

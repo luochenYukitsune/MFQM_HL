@@ -1,6 +1,8 @@
 # More Fun Quicksand Mod — Minecraft 1.21.11 / NeoForge
 
-当前版本为 **0.7.2-dev 预发布版（Pre-release）**，见 [0.7.2 更新日志](release-notes-0.7.2.zh-CN.md)。本次增加少量小腿高位黏丝，增强胶水身体覆盖，并改善其他黏性介质的透明度；优先适配 IterationT 与 IterationRP，修复池面近乎全透明的问题，详细范围见 [光影兼容说明](docs/shader-compatibility.md)。
+当前版本为 **0.7.3-dev 预发布版（Pre-release）**，见 [0.7.3 更新日志](release-notes-0.7.3.zh-CN.md)。默认最多约 512 根黏丝，可调上限扩展到 8192 根；初次接触更浓密，附着位置、宽厚和轻微弯曲稳定随机，并修复介质表面的巨型方形气泡。
+
+前一版 [0.7.2-dev](release-notes-0.7.2.zh-CN.md) 独立发布：增加少量小腿高位黏丝，增强胶水身体覆盖，并改善其他黏性介质的透明度；优先适配 IterationT 与 IterationRP，修复池面近乎全透明的问题，详细范围见 [光影兼容说明](docs/shader-compatibility.md)。0.7.3-dev 包含这些改进。
 
 **0.7.1** 让黏丝介质端向所在液体格底部延伸，胶带加宽、减少收腰与下垂；身体端与活动范围保持原有规则。粘鼠板接缝不再采样胶面贴图的透明框，旧存档中的连接也会在区块加载后自动刷新。
 
@@ -43,7 +45,7 @@
 
 macOS / Linux 使用 `sh ./gradlew`。首次构建需要下载官方依赖。
 
-开发版产物：`build/libs/MFQM-neoforge-1.21.11-0.7.2-dev.jar`，替换实例 `mods` 中旧版 MFQM，避免同时保留多个版本。本次显示修改延续同步协议 7；客户端与服务端建议使用同版。世界生成在新生成区块生效。
+开发版产物：`build/libs/MFQM-neoforge-1.21.11-0.7.3-dev.jar`，替换实例 `mods` 中旧版 MFQM，避免同时保留多个版本。本次显示修改延续同步协议 7；客户端与服务端建议使用同版。世界生成在新生成区块生效。
 
 配置包含原有玩法以及黏连距离、留靴概率、胶水池／板生成和动作显示开关，可从模组列表打开中文配置界面。`creativeGroundPhysics` 默认开启，控制关闭飞行的创造玩家是否受困；服务器决定玩法设置。获取工具的开关控制配方，注册保持稳定；配方设置修改后可通过 `/reload` 重载，世界生成设置仅影响新区块。旧数字 DataWatcher 槽位由现代附件替代。
 
@@ -51,8 +53,8 @@ macOS / Linux 使用 `sh ./gradlew`。首次构建需要下载官方依赖。
 
 ```powershell
 .\gradlew.bat runData build
-python tools/verify_jar.py build/libs/MFQM-neoforge-1.21.11-0.7.2-dev.jar
-python tools/verify_port.py build/libs/MFQM-neoforge-1.21.11-0.7.2-dev.jar
+python tools/verify_jar.py build/libs/MFQM-neoforge-1.21.11-0.7.3-dev.jar
+python tools/verify_port.py build/libs/MFQM-neoforge-1.21.11-0.7.3-dev.jar
 python tools/connected_boards.py --verify
 python -m unittest discover -s tools -p test_coating_height.py
 python tools/coating_height.py --verify

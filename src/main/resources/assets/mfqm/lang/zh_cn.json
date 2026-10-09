@@ -570,7 +570,7 @@
   "tooltip.mfqm.sticky_board.coated": "胶层：%s/7；放在坚固地面上即可困住目标。同高度相邻板可拼成大板。",
   "tooltip.mfqm.sticky_board.empty": "尚未涂胶，不能困住目标；用胶水桶右键补胶。同高度相邻板可拼成大板。",
   "mfqm.configuration.strandDensity": "每个接触的独立黏丝数量",
-  "mfqm.configuration.strandDensity.tooltip": "每个接触显示的独立黏丝数量，默认 8，范围 1～8；64 个接触满额时最多约 512 根。每根有独立根部且不分叉，实际显示受距离和接触数量限制。调低可减少绘制开销，不改变物理黏力。",
+  "mfqm.configuration.strandDensity.tooltip": "每个接触的黏丝基数，默认 8，范围 1～128；每个角色满额最多约 512 根，上限可调至 8192 根。接触少时每组最多增密四倍，但不超出总预算；移动后接触逐渐增加。位置、宽厚和轻微弯曲稳定随机，根部始终在介质内且不分叉。高数值会增加绘制开销，不改变物理黏力。",
   "entity.mfqm.adhesive_tether": "黏丝连接",
   "entity.mfqm.stuck_boots": "留存靴子",
   "entity.mfqm.cable": "缆绳连接",
