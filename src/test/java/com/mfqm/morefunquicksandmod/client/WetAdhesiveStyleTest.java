@@ -69,10 +69,23 @@ public final class WetAdhesiveStyleTest {
         var frame=new WetAdhesiveStyle.Frame(new Vec(0,0,0),new Vec(0,1,0),new Vec(1,0,0),new Vec(0,0,1),.135,.135);
         for(long seed=0;seed<32;seed++) {
             var endpoint=WetAdhesiveStyle.endpoint(frame,.8,seed,new Vec(.4,0,0));double h=endpoint.y();heights.add(h);
-            check(h>=WetAdhesiveStyle.height(.8)*.25 && h<=WetAdhesiveStyle.height(.8)*.75,"raised endpoints remain inside the lower-calf film");
+            check(h>=WetAdhesiveStyle.height(.8)*.25 && h<=frame.calfHeight(),"raised endpoints stop at the sampled mid-calf");
             check(endpoint.equals(WetAdhesiveStyle.endpoint(frame,.8,seed,new Vec(.4,0,0))),"random raised endpoint does not flicker between frames");
         }
         check(heights.size()>16,"body endpoints use varied stable heights rather than a narrow ring");
+        int raised=0;
+        for(long seed=0;seed<4096;seed++) {
+            var p=WetAdhesiveStyle.endpoint(frame,.1,seed,new Vec(.4,0,0));
+            if(p.y()>WetAdhesiveStyle.height(.1))raised++;
+            check(p.y()<=frame.calfHeight(),"no attachment passes the actual calf midpoint");
+        }
+        check(raised>4096*.20 && raised<4096*.30,"approximately a quarter of strands attach higher, leaving most at the ankle");
+        var smallRotated=new WetAdhesiveStyle.Frame(new Vec(2,3,4),new Vec(1,0,0),new Vec(0,0,1),new Vec(0,1,0),.04,.04,.10);
+        for(long seed=0;seed<128;seed++) {
+            var p=WetAdhesiveStyle.endpoint(smallRotated,.8,seed,new Vec(2,4,4)).subtract(smallRotated.center());
+            check(p.dot(smallRotated.up())<=.10+1e-8,"small/rotated legs limit height in native model space");
+            check(Math.abs(p.dot(smallRotated.front())-(.04+WetAdhesiveStyle.THICKNESS))<1e-8,"raised attachment still hugs root-facing leg surface");
+        }
         for(double height:new double[]{.02,.0625,.15,.89})for(var desired:List.of(new Vec(.01,.9,.01),new Vec(.5,.9,.5),new Vec(.99,.9,.99))) {
             var roots=new java.util.HashSet<Vec>();
             for(int i=0;i<8;i++) {

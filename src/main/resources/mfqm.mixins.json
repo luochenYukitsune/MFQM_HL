@@ -4,5 +4,6 @@
   "package": "com.mfqm.morefunquicksandmod.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": ["GlueJumpMixin"],
+  "client": ["IrisIdMapMixin", "IrisWaterProgramMixin"],
   "injectors": {"defaultRequire": 1}
 }

@@ -91,7 +91,7 @@ public final class MfqmClient {
     }
     @SubscribeEvent public static void struggleHand(RenderHandEvent event){StruggleClient.hand(event);}
     @SubscribeEvent public static void struggleCamera(ViewportEvent.ComputeCameraAngles event){StruggleClient.camera(event);}
-    @SubscribeEvent public static void renderFrame(net.neoforged.neoforge.client.event.RenderFrameEvent.Pre event){FirstPersonCompatibility.beginFrame();FirstPersonTetherProof.beginFrame();}
+    @SubscribeEvent public static void renderFrame(net.neoforged.neoforge.client.event.RenderFrameEvent.Pre event){FirstPersonCompatibility.beginFrame();FirstPersonTetherProof.beginFrame();FlatCoatingTextures.beginFrame();}
     @SubscribeEvent public static void adhesiveTooltip(net.neoforged.neoforge.event.entity.player.ItemTooltipEvent event) {
         var item=event.getItemStack().getItem();
         String id=net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(item).getPath();

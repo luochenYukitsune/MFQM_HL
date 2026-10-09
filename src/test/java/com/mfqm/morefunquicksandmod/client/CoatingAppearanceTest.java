@@ -14,7 +14,17 @@ public final class CoatingAppearanceTest {
         check(CoatingAppearance.surfacePadding(true,true,0)==.52,"hat coating follows the half-pixel hat shell");
         check(CoatingAppearance.surfacePadding(false,true,.875)==.895,"active voxel clothing receives no extra thick safety gap");
         check(CoatingAppearance.surfacePadding(false,true,1.5)>CoatingAppearance.surfacePadding(false,true,.875),"custom skin voxel sizes still receive adequate clearance");
-        System.out.println("CoatingAppearance: 12 behavioral checks passed");
+        int glue=CoatingAppearance.tint(0x63ffffff,0xffffffff,CoatingAppearance.materialOpacity("glue"));
+        check((glue>>>24)>99 && (glue>>>24)<128,"glue becomes modestly more visible while preserving skin detail");
+        check(CoatingAppearance.materialOpacity("sticky_board")==CoatingAppearance.materialOpacity("glue"),"board and glue residue share the same art direction");
+        for(String material:new String[]{"honey","tar","sinking_slime"}) {
+            int translucent=CoatingAppearance.tint(0xffffffff,0xffd59926,CoatingAppearance.materialOpacity(material));
+            check((translucent>>>24)>128 && (translucent>>>24)<255,"adhesive coating becomes more translucent: "+material);
+            check((translucent&0xffffff)==0xd59926,"transparency keeps the material's color: "+material);
+        }
+        check(CoatingAppearance.tint(0xffffffff,0xffffffff,CoatingAppearance.materialOpacity("glue")*0)>>>24==0,"user's zero opacity still hides stronger glue");
+        check(CoatingAppearance.materialOpacity("bog")==1,"mud appearance is unchanged by adhesive transparency");
+        System.out.println("CoatingAppearance: 22 behavioral checks passed");
     }
     private static void check(boolean value,String message){if(!value)throw new AssertionError(message);}
 }

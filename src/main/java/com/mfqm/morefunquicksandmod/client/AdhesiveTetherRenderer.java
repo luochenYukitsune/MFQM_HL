@@ -1,23 +1,18 @@
 package com.mfqm.morefunquicksandmod.client;
 
-import com.mfqm.morefunquicksandmod.MFQM;
 import com.mfqm.morefunquicksandmod.ModConfig;
 import com.mfqm.morefunquicksandmod.entity.AdhesiveTetherEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 
 /** Wet foot films and independent complete volumetric strands; physics is server-owned. */
 public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherEntity,AdhesiveTetherRenderer.State> {
-    private static final Identifier TEXTURE=Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"textures/entity/adhesive_strand.png");
     private final AdhesiveFeetSampler feet;
     record Filament(Vec3 root,Vec3 end,double width,double rootWidth){}
     public static final class State extends EntityRenderState {
@@ -71,7 +66,7 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
         state.cuff=entity.cuff() && !entity.breaking();state.segments=state.distanceToCameraSq>256?3:6;
         var sampledSurface=sampled.surface();
         state.surface=new WetAdhesiveStyle.Frame(vector(endpointFoot).add(sampledSurface.center().subtract(vector(sampled.ankle()))),
-                sampledSurface.up(),sampledSurface.right(),sampledSurface.front(),sampledSurface.halfWidth(),sampledSurface.halfDepth());
+                sampledSurface.up(),sampledSurface.right(),sampledSurface.front(),sampledSurface.halfWidth(),sampledSurface.halfDepth(),sampledSurface.calfHeight());
         double depth=com.mfqm.morefunquicksandmod.gameplay.QuicksandPhysics.state(target).depth;
         var membrane=new java.util.ArrayList<CoatingVoxels.Quad>();
         if(state.cuff)appendFaded(membrane,WetAdhesiveStyle.film(state.surface,depth,entity.side()),opacity);
@@ -101,7 +96,7 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
             default->0x70513a;
         };
         float strength=entity.strength();
-        int alpha=Float.isFinite(strength)?(int)(255*Math.clamp(strength,.2F,1F)*(1-recoil)):0;
+        int alpha=Float.isFinite(strength)?(int)(255*Math.clamp(strength,.2F,1F)*(1-recoil)*CoatingAppearance.strandOpacity(entity.material())):0;
         state.color=alpha<<24|rgb;state.visible=alpha>0 && (!strands.isEmpty() || !membrane.isEmpty());
     }
     private static void appendFaded(java.util.List<CoatingVoxels.Quad> output,java.util.List<CoatingVoxels.Quad> mesh,double opacity) {
@@ -112,22 +107,14 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
         FirstPersonTetherProof.tether(pose,state.foot,state.side,state.local);
         // Capture immutable values: a deferred callback must never retain the reused mutable render state.
         var strands=state.strands;var membrane=state.membrane;
-        int light=state.lightCoords,color=state.color;
-        collector.submitCustomGeometry(pose,RenderTypes.entityTranslucent(TEXTURE),(matrix,vertices)->{
-            for(var q:strands)quad(vertices,matrix,q,light,color);
-            for(var q:membrane)quad(vertices,matrix,q,light,color);
+        int light=state.lightCoords,color=CoatingAppearance.tint(state.color,0xffebebeb,1);
+        double textureOpacity=.70;
+        collector.submitCustomGeometry(pose,RenderTypes.entityTranslucent(TranslucentGeometry.TEXTURE),(matrix,vertices)->{
+            for(var q:strands)TranslucentGeometry.quad(vertices,matrix,q,color,light,textureOpacity);
+            for(var q:membrane)TranslucentGeometry.quad(vertices,matrix,q,color,light,textureOpacity);
         });
         super.submit(state,pose,collector,camera);
     }
-    private static void quad(VertexConsumer vertices,PoseStack.Pose matrix,CoatingVoxels.Quad q,int light,int color) {
-        int tint=CoatingAppearance.tint(q.color(),color,1);var normal=point(q.normal());
-        vertex(vertices,matrix,point(q.a()),0,0,light,tint,normal);vertex(vertices,matrix,point(q.b()),1,0,light,tint,normal);
-        vertex(vertices,matrix,point(q.c()),1,1,light,tint,normal);vertex(vertices,matrix,point(q.d()),0,1,light,tint,normal);
-    }
     private static CoatingVoxels.Vec vector(Vec3 p){return new CoatingVoxels.Vec(p.x,p.y,p.z);}
     private static Vec3 point(CoatingVoxels.Vec p){return new Vec3(p.x(),p.y(),p.z());}
-    private static void vertex(VertexConsumer vertices,PoseStack.Pose matrix,Vec3 point,float u,float v,int light,int color,Vec3 normal) {
-        vertices.addVertex(matrix,(float)point.x,(float)point.y,(float)point.z).setColor(color).setUv(u,v)
-                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,(float)normal.x,(float)normal.y,(float)normal.z);
-    }
 }

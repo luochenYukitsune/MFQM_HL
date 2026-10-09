@@ -40,6 +40,7 @@ public final class MechanismRenderer implements BlockEntityRenderer<MechanismBlo
         }
     }
     @Override public void submit(State state,PoseStack pose,SubmitNodeCollector collector,CameraRenderState camera){
+        int light=state.lightCoords;
         Identifier texture=Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"textures/blocks/"+(state.kind.equals("larvae")?"larvae":"meat10")+".png");
         for(Direction face:Direction.values()){
             if((state.faces & 1<<face.ordinal())==0)continue;
@@ -51,11 +52,12 @@ public final class MechanismRenderer implements BlockEntityRenderer<MechanismBlo
             rotate(pose,face);pose.translate(0,0,.501);
             if(state.kind.equals("larvae")){
                 float wave=(float)Math.sin(state.time*.12)*.018F;
+                var normal=new Vec3(-wave,wave,1).normalize();
                 collector.submitCustomGeometry(pose,RenderTypes.entityCutoutNoCull(texture),(matrix,vertices)->{
-                    vertex(vertices,matrix,-.5F,-.5F,0,0,1,state.lightCoords);
-                    vertex(vertices,matrix,.5F,-.5F,wave,1,1,state.lightCoords);
-                    vertex(vertices,matrix,.5F,.5F,0,1,0,state.lightCoords);
-                    vertex(vertices,matrix,-.5F,.5F,-wave,0,0,state.lightCoords);
+                    vertex(vertices,matrix,-.5F,-.5F,0,0,1,light,normal);
+                    vertex(vertices,matrix,.5F,-.5F,wave,1,1,light,normal);
+                    vertex(vertices,matrix,.5F,.5F,0,1,0,light,normal);
+                    vertex(vertices,matrix,-.5F,.5F,-wave,0,0,light,normal);
                 });
             }else{
                 int count=state.kind.equals("blossom")?6:3;
@@ -64,7 +66,7 @@ public final class MechanismRenderer implements BlockEntityRenderer<MechanismBlo
                     float pulse=(float)Math.sin(state.time*.09+i*Math.PI*.5);
                     float size=.11F+pulse*.014F;
                     float protrusion=state.amplitude*(1+pulse*.25F);
-                    collector.submitCustomGeometry(pose,RenderTypes.entityCutoutNoCull(texture),(matrix,vertices)->box(vertices,matrix,px-size,py-size,0,px+size,py+size,protrusion,state.lightCoords));
+                    collector.submitCustomGeometry(pose,RenderTypes.entityCutoutNoCull(texture),(matrix,vertices)->box(vertices,matrix,px-size,py-size,0,px+size,py+size,protrusion,light));
                 }
             }
             pose.popPose();
@@ -81,9 +83,12 @@ public final class MechanismRenderer implements BlockEntityRenderer<MechanismBlo
         quad(vertices,matrix,new float[]{x0,y0,z0,x1,y0,z0,x1,y0,z1,x0,y0,z1},light);
     }
     private static void quad(VertexConsumer vertices,PoseStack.Pose matrix,float[] coordinates,int light){
-        for(int i=0;i<4;i++)vertex(vertices,matrix,coordinates[i*3],coordinates[i*3+1],coordinates[i*3+2],i==1||i==2?1:0,i<2?1:0,light);
+        var a=new Vec3(coordinates[0],coordinates[1],coordinates[2]);
+        var b=new Vec3(coordinates[3],coordinates[4],coordinates[5]);var c=new Vec3(coordinates[6],coordinates[7],coordinates[8]);
+        var normal=b.subtract(a).cross(c.subtract(a)).normalize();
+        for(int i=0;i<4;i++)vertex(vertices,matrix,coordinates[i*3],coordinates[i*3+1],coordinates[i*3+2],i==1||i==2?1:0,i<2?1:0,light,normal);
     }
-    private static void vertex(VertexConsumer vertices,PoseStack.Pose matrix,float x,float y,float z,float u,float v,int light){
-        vertices.addVertex(matrix,x,y,z).setColor(-1).setUv(u,v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,0,0,1);
+    private static void vertex(VertexConsumer vertices,PoseStack.Pose matrix,float x,float y,float z,float u,float v,int light,Vec3 normal){
+        vertices.addVertex(matrix,x,y,z).setColor(-1).setUv(u,v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,(float)normal.x,(float)normal.y,(float)normal.z);
     }
 }

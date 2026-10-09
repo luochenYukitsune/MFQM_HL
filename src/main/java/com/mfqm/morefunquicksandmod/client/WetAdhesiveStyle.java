@@ -7,7 +7,11 @@ import java.util.List;
 
 /** Cosmetic wet-film geometry in world blocks, independent of entities and physics. */
 public final class WetAdhesiveStyle {
-    public record Frame(Vec center,Vec up,Vec right,Vec front,double halfWidth,double halfDepth) {}
+    public record Frame(Vec center,Vec up,Vec right,Vec front,double halfWidth,double halfDepth,double calfHeight) {
+        public Frame(Vec center,Vec up,Vec right,Vec front,double halfWidth,double halfDepth) {
+            this(center,up,right,front,halfWidth,halfDepth,.28);
+        }
+    }
     public record Root(Vec point,double radius) {}
     public static final double THICKNESS=.003;
     private static final double[][] EDGE={{1,1},{0,1},{-1,1},{-1,0},{-1,-1},{0,-1},{1,-1},{1,0}};
@@ -28,7 +32,13 @@ public final class WetAdhesiveStyle {
         if(Math.abs(x)+Math.abs(z)<1e-8){x=0;z=1;}
         double scale=1/Math.max(Math.abs(x)/(f.halfWidth+THICKNESS),Math.abs(z)/(f.halfDepth+THICKNESS));
         return f.center.add(f.right.scale(x*scale)).add(f.front.scale(z*scale))
-                .add(f.up.scale(height(depth)*(.25+.5*CompactStrandStyle.variation(seed^0x9E3779B97F4A7C15L))));
+                .add(f.up.scale(attachmentHeight(f,depth,seed)));
+    }
+    /** Stable minority reaches the sampled calf midpoint; shallow film coverage stays at the ankle. */
+    public static double attachmentHeight(Frame f,double depth,long seed) {
+        double calf=Math.max(0,f.calfHeight),variation=CompactStrandStyle.variation(seed^0x9E3779B97F4A7C15L);
+        if(CompactStrandStyle.variation(seed^0xD1B54A32D192ED03L)<.25)return calf*(.8+.2*variation);
+        return Math.min(height(depth)*(.25+.5*variation),calf);
     }
     /** Local cell coordinates; a sphere around the full start cap stays below every fluid corner. */
     public static Root submergedRoot(Vec desired,double lowestHeight,double requestedRadius) {

@@ -285,7 +285,7 @@ public final class CoatingClientChecks {
                 double perimeter=Math.max(Math.abs(endpoint.dot(state.surface.right()))/(state.surface.halfWidth()+WetAdhesiveStyle.THICKNESS),Math.abs(endpoint.dot(state.surface.front()))/(state.surface.halfDepth()+WetAdhesiveStyle.THICKNESS));
                 require(Math.abs(perimeter-1)<1e-5,"actual strand touches the skin film surface instead of ending inside the leg");
                 double endpointHeight=endpoint.dot(state.surface.up()),filmHeight=WetAdhesiveStyle.height(QuicksandPhysics.state(game.player).depth);
-                require(endpointHeight>=filmHeight*.25-1e-6 && endpointHeight<=filmHeight*.75+1e-6,"raised body endpoint stays within the actual depth-dependent film");
+                require(endpointHeight>=Math.min(filmHeight*.25,state.surface.calfHeight())-1e-6 && endpointHeight<=state.surface.calfHeight()+1e-6,"body endpoint remains on sampled leg below its calf midpoint");
             }
         }
         require(visibleFilaments<=visibleBundles*ModConfig.CLIENT.strandDensity.get() && visibleFilaments>=16,"nearby scene has bounded independent strands without branching");

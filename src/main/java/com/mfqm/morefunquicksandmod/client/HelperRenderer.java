@@ -64,18 +64,21 @@ public final class HelperRenderer<T extends Entity> extends EntityRenderer<T,Hel
         } else {
             float radius=state.kind.equals("bubble")?(float)(0.05+0.2*Math.sin(Math.min(1,state.progress)*Math.PI)):0.4F;
             float elevation=state.kind.equals("bubble")?radius*0.3F:0.01F;
+            int light=state.lightCoords;
             collector.submitCustomGeometry(pose,RenderTypes.entityTranslucent(state.texture),(matrix,vertices)->{
-                vertex(vertices,matrix,new Vec3(-radius,elevation,-radius),0,0,state.lightCoords);
-                vertex(vertices,matrix,new Vec3(-radius,elevation,radius),0,1,state.lightCoords);
-                vertex(vertices,matrix,new Vec3(radius,elevation,radius),1,1,state.lightCoords);
-                vertex(vertices,matrix,new Vec3(radius,elevation,-radius),1,0,state.lightCoords);
+                var normal=new Vec3(0,1,0);
+                vertex(vertices,matrix,new Vec3(-radius,elevation,-radius),0,0,light,normal);
+                vertex(vertices,matrix,new Vec3(-radius,elevation,radius),0,1,light,normal);
+                vertex(vertices,matrix,new Vec3(radius,elevation,radius),1,1,light,normal);
+                vertex(vertices,matrix,new Vec3(radius,elevation,-radius),1,0,light,normal);
             });
         }
         super.submit(state,pose,collector,camera);
     }
     private static Identifier texture(String path){return Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"textures/"+path);}
     private static void strip(SubmitNodeCollector collector,PoseStack pose,Identifier texture,Vec3 start,Vec3 end,float width,int light) {
-        Vec3 direction=end.subtract(start);Vec3 side=new Vec3(-direction.z,0,direction.x).normalize().scale(width);
+        Vec3 direction=end.subtract(start);if(direction.lengthSqr()<1.0E-12)return;
+        Vec3 side=new Vec3(-direction.z,0,direction.x).normalize().scale(width);
         if(side.lengthSqr()<1.0E-8)side=new Vec3(width,0,0);
         Vec3 cross=direction.normalize().cross(side).normalize().scale(width);
         Vec3 first=side, second=cross;
@@ -84,10 +87,11 @@ public final class HelperRenderer<T extends Entity> extends EntityRenderer<T,Hel
         });
     }
     private static void quad(VertexConsumer vertices,PoseStack.Pose matrix,Vec3 start,Vec3 end,Vec3 side,int light) {
-        vertex(vertices,matrix,start.subtract(side),0,0,light);vertex(vertices,matrix,end.subtract(side),0,1,light);
-        vertex(vertices,matrix,end.add(side),1,1,light);vertex(vertices,matrix,start.add(side),1,0,light);
+        var normal=end.subtract(start).cross(side).normalize();
+        vertex(vertices,matrix,start.subtract(side),0,0,light,normal);vertex(vertices,matrix,end.subtract(side),0,1,light,normal);
+        vertex(vertices,matrix,end.add(side),1,1,light,normal);vertex(vertices,matrix,start.add(side),1,0,light,normal);
     }
-    private static void vertex(VertexConsumer vertices,PoseStack.Pose matrix,Vec3 position,float u,float v,int light){
-        vertices.addVertex(matrix,(float)position.x,(float)position.y,(float)position.z).setColor(-1).setUv(u,v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,0,1,0);
+    private static void vertex(VertexConsumer vertices,PoseStack.Pose matrix,Vec3 position,float u,float v,int light,Vec3 normal){
+        vertices.addVertex(matrix,(float)position.x,(float)position.y,(float)position.z).setColor(-1).setUv(u,v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,(float)normal.x,(float)normal.y,(float)normal.z);
     }
 }

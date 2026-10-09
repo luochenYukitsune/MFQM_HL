@@ -4,12 +4,10 @@ import com.mfqm.morefunquicksandmod.MFQM;
 import com.mfqm.morefunquicksandmod.ModConfig;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
@@ -22,15 +20,13 @@ import java.util.Set;
 
 /** Cached pixel surfaces, submitted with immutable geometry and a snapshot of each native part's pose. */
 public final class GlueCoatingRenderer {
-    private static final Identifier WHITE=Identifier.fromNamespaceAndPath(MFQM.MOD_ID,"runtime/coating_white");
     private record Key(Identifier texture,String part,boolean slim,float padding,float thickness){}
-    private record Geometry(ModelPart.Cube cube,CoatingVoxels.Mesh mesh){}
+    private record Geometry(ModelPart.Cube cube,CoatingVoxels.Mesh mesh,java.util.List<CoatingVoxels.Quad> worldQuads){}
     private static final Map<Key,Geometry> CACHE=new LinkedHashMap<>(32,.75F,true);
     private static final Set<Identifier> FAILED=new java.util.HashSet<>();
-    private static boolean whiteReady;
     private static long detailedSubmissions,flatSubmissions,armSubmissions;
     private static final Map<String,Long> FAMILIES=new java.util.HashMap<>();
-    public static void clear(){CACHE.clear();FAILED.clear();whiteReady=false;}
+    public static void clear(){CACHE.clear();FAILED.clear();FlatCoatingTextures.clear();}
     public static int cachedMeshes(){return CACHE.size();}
     static long detailedSubmissions(){return detailedSubmissions;}
     static long flatSubmissions(){return flatSubmissions;}
@@ -45,31 +41,31 @@ public final class GlueCoatingRenderer {
                               PoseStack pose,SubmitNodeCollector collector,int light,boolean firstPerson,boolean detailed,ModelPart outer) {
         if(!part.visible || part.skipDraw)return;
         var settings=ModConfig.CLIENT.visuals(CoatingAppearance.family(coat.material()));
-        double opacity=ModConfig.CLIENT.coatingOpacity.get()*settings.opacity().get();
+        double opacity=CoatingAppearance.materialOpacity(coat.material())*ModConfig.CLIENT.coatingOpacity.get()*settings.opacity().get();
         if(opacity<=0)return;
         float thickness=(float)(Math.round(ModConfig.CLIENT.coatingThickness.get()*settings.thickness().get()*16)/16.);
         float padding=SkinLayerClearance.padding(name,firstPerson,outer);
+        boolean volume=ModConfig.CLIENT.glueCoating3d.get() && detailed && thickness>0;
         var geometry=geometry(coat.texture(),name,slim,padding,Math.max(.0625F,thickness));if(geometry==null)return;
         if(geometry.mesh().pixels()==0)return;
         pose.pushPose();part.translateAndRotate(pose);
         int tint=coat.color();
-        if(ModConfig.CLIENT.glueCoating3d.get() && detailed && thickness>0) {
+        if(volume) {
             detailedSubmissions++;
             FAMILIES.merge(CoatingAppearance.family(coat.material()),1L,Long::sum);
             if(firstPerson)armSubmissions++;
-            white();var mesh=geometry.mesh();
-            collector.order(1).submitCustomGeometry(pose,RenderTypes.entityTranslucent(WHITE),(matrix,vertices)->{
-                for(var q:mesh.quads()) {
-                    int color=CoatingAppearance.tint(q.color(),tint,opacity);
-                    vertex(vertices,matrix,q.a(),q.normal(),color,light);vertex(vertices,matrix,q.b(),q.normal(),color,light);
-                    vertex(vertices,matrix,q.c(),q.normal(),color,light);vertex(vertices,matrix,q.d(),q.normal(),color,light);
-                }
+            var quads=geometry.worldQuads();
+            collector.order(1).submitCustomGeometry(pose,RenderTypes.entityTranslucent(TranslucentGeometry.TEXTURE),(matrix,vertices)->{
+                for(var q:quads)TranslucentGeometry.quad(vertices,matrix,q,tint,light,opacity);
             });
         } else {
             flatSubmissions++;
-            var cube=geometry.cube();int color=CoatingAppearance.tint(0xffffffff,tint,opacity);
-            collector.order(1).submitCustomGeometry(pose,RenderTypes.entityTranslucent(coat.texture()),
-                    (matrix,vertices)->cube.compile(matrix,vertices,light,OverlayTexture.NO_OVERLAY,color));
+            var texture=FlatCoatingTextures.texture(coat.texture(),opacity*(tint>>>24)/255.);
+            if(texture!=null) {
+                var cube=geometry.cube();int opaque=tint|0xff000000;
+                collector.order(1).submitCustomGeometry(pose,RenderTypes.entityTranslucent(texture),
+                        (matrix,vertices)->cube.compile(matrix,vertices,light,OverlayTexture.NO_OVERLAY,opaque));
+            }
         }
         pose.popPose();
     }
@@ -96,7 +92,7 @@ public final class GlueCoatingRenderer {
             // Average a complete native UV pixel, keeping the 128x64 refreshed mask
             // faithful to its original 64x32 coverage rather than sampling one corner.
             var mesh=CoatingVoxels.build(faces,(u,v)->sample(image,u,v),thickness);
-            var result=new Geometry(cube,mesh);CACHE.put(key,result);
+            var result=new Geometry(cube,mesh,mesh.quads().stream().map(TranslucentGeometry::modelPixels).toList());CACHE.put(key,result);
             if(CACHE.size()>96)CACHE.remove(CACHE.keySet().iterator().next());
             return result;
         } catch(IOException | RuntimeException e) {
@@ -129,15 +125,6 @@ public final class GlueCoatingRenderer {
             default->throw new IllegalArgumentException("Unknown coating part: "+part);
         }
         return new ModelPart.Cube(u,v,x,y,z,w,h,d,p,p,p,mirror,64,32,Set.of(Direction.values()));
-    }
-    private static void white() {
-        if(whiteReady)return;
-        var image=new NativeImage(1,1,false);image.setPixel(0,0,0xffffffff);
-        Minecraft.getInstance().getTextureManager().register(WHITE,new DynamicTexture(()->"MFQM coating vertex color",image));whiteReady=true;
-    }
-    private static void vertex(VertexConsumer out,PoseStack.Pose matrix,CoatingVoxels.Vec p,CoatingVoxels.Vec n,int color,int light) {
-        out.addVertex(matrix,(float)p.x()/16,(float)p.y()/16,(float)p.z()/16).setColor(color).setUv(.5F,.5F)
-                .setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,(float)n.x(),(float)n.y(),(float)n.z());
     }
     private GlueCoatingRenderer(){}
 }

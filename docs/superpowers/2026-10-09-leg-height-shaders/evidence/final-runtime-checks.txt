@@ -1,0 +1,9 @@
+FINAL_JAR_SHA256=c23a8a9bce4cb915edc5b94eb76cd09778e7016a244c18187a0488b792f95fce
+LOG=shader-iterationT_3.2.0.log
+[23:03:18] [Render thread/INFO] [MFQM/]: MFQM_SHADER_POOL_PATH_VERIFIED pigment=true glassAbsorption=false sourceFlowingMapped=true
+[23:03:18] [Render thread/INFO] [MFQM/]: MFQM_SHADER_SMOKE_COMPLETE active=true fallback=false grounded=true
+LOG=shader-iterationRP_Alpha_0.8.26_hotfix.log
+[23:03:57] [Render thread/INFO] [MFQM/]: MFQM_SHADER_POOL_PATH_VERIFIED pigment=true glassAbsorption=false sourceFlowingMapped=true
+[23:03:57] [Render thread/INFO] [MFQM/]: MFQM_SHADER_SMOKE_COMPLETE active=true fallback=false grounded=true
+LOG=coating-client-false.log
+[23:06:36] [Render thread/INFO] [MFQM/]: MFQM_COATING_CHECKS_COMPLETE skinLayers=false firstPerson=false anatomicalHeightMasks=true originalPngUnchanged=true

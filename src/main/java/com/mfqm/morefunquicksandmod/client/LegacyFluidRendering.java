@@ -24,11 +24,11 @@ public final class LegacyFluidRendering {
         }, entry.type().get()));
     }
     @SubscribeEvent public static void setup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
-        for(String id:new String[]{"glue","honey"}) {
+        event.enqueueWork(()->{for(String id:new String[]{"glue","honey","tar","sinking_slime","mucus","sinky_liquid"}) {
             var entry=ModFluids.entry(id);
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(entry.source().get(),net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT);
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(entry.flowing().get(),net.minecraft.client.renderer.chunk.ChunkSectionLayer.TRANSLUCENT);
-        }
+        }});
     }
     private LegacyFluidRendering() {}
 }

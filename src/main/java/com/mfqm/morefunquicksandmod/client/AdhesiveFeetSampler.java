@@ -46,8 +46,8 @@ import java.util.function.Consumer;
 /** Owns private baked models. Sampling never changes the renderer model queued for deferred drawing. */
 public final class AdhesiveFeetSampler {
     public record Foot(Vec3 ankle,Vec3 shin,WetAdhesiveStyle.Frame surface) {
-        public Foot(Vec3 ankle,Vec3 shin){this(ankle,shin,new WetAdhesiveStyle.Frame(vector(ankle),vector(shin.subtract(ankle).normalize()),new CoatingVoxels.Vec(1,0,0),new CoatingVoxels.Vec(0,0,1),.08,.08));}
-        public Foot translated(Vec3 offset){return new Foot(ankle.add(offset),shin.add(offset),new WetAdhesiveStyle.Frame(surface.center().add(vector(offset)),surface.up(),surface.right(),surface.front(),surface.halfWidth(),surface.halfDepth()));}
+        public Foot(Vec3 ankle,Vec3 shin){this(ankle,shin,new WetAdhesiveStyle.Frame(vector(ankle),vector(shin.subtract(ankle).normalize()),new CoatingVoxels.Vec(1,0,0),new CoatingVoxels.Vec(0,0,1),.08,.08,shin.distanceTo(ankle)));}
+        public Foot translated(Vec3 offset){return new Foot(ankle.add(offset),shin.add(offset),new WetAdhesiveStyle.Frame(surface.center().add(vector(offset)),surface.up(),surface.right(),surface.front(),surface.halfWidth(),surface.halfDepth(),surface.calfHeight()));}
     }
     private record Bounds(double minX,double maxX,double minZ,double maxZ){}
     private static final Map<ModelPart,Bounds> BOUNDS=new java.util.WeakHashMap<>();
@@ -92,7 +92,7 @@ public final class AdhesiveFeetSampler {
             double fore=0;
             Vec3 foot=new Vec3(lateral*Math.cos(yaw)-fore*Math.sin(yaw),.045,lateral*Math.sin(yaw)+fore*Math.cos(yaw));
             return new Foot(foot,foot.add(0,Math.min(.3,target.getBbHeight()*.25),0),new WetAdhesiveStyle.Frame(vector(foot),new CoatingVoxels.Vec(0,1,0),
-                    new CoatingVoxels.Vec(Math.cos(yaw),0,Math.sin(yaw)),new CoatingVoxels.Vec(-Math.sin(yaw),0,Math.cos(yaw)),.125*modelScale,.125*modelScale));
+                    new CoatingVoxels.Vec(Math.cos(yaw),0,Math.sin(yaw)),new CoatingVoxels.Vec(-Math.sin(yaw),0,Math.cos(yaw)),.125*modelScale,.125*modelScale,Math.min(.3,target.getBbHeight()*.25)));
         }
         return new Foot(new Vec3(0,.04,0),new Vec3(0,.2,0));
     }
@@ -117,7 +117,7 @@ public final class AdhesiveFeetSampler {
         var center=position(pose,(box.minX()+box.maxX())/32,ankleY/16,(box.minZ()+box.maxZ())/32);
         var up=position(pose,0,-1./16,0).subtract(zero).normalize();
         return new Foot(ankle,shin,new WetAdhesiveStyle.Frame(vector(center),vector(up),vector(right.normalize()),vector(front.normalize()),
-                ((box.maxX()-box.minX())*.5+padding)*right.length(),((box.maxZ()-box.minZ())*.5+padding)*front.length()));
+                ((box.maxX()-box.minX())*.5+padding)*right.length(),((box.maxZ()-box.minZ())*.5+padding)*front.length(),shin.distanceTo(ankle)));
     }
     private interface AnimalSampler {
         LivingEntityRenderState state(LivingEntity target,float partialTick);

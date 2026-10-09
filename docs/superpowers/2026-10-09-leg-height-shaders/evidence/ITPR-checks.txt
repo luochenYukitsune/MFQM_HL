@@ -1,0 +1,9 @@
+[21:12:07] [Render thread/INFO] [MFQM/]: MFQM_ITERATION_FLUID_COMPAT profile=RP materialId=32000 scope=stickyFluids
+[21:12:29] [Render thread/INFO] [MFQM/]: MFQM_SHADER_POOL_PATH_VERIFIED pigment=true glassAbsorption=false sourceFlowingMapped=true
+[21:12:37] [Render thread/INFO] [MFQM/]: MFQM_SHADER_STRANDS_VERIFIED total=320 raised=85 rootsInside=true
+[21:12:37] [Render thread/INFO] [MFQM/]: MFQM_SHADER_VISUAL_SAVED file=mfqm-shader-body.png
+[21:12:40] [Render thread/INFO] [MFQM/]: MFQM_SHADER_FIRSTPERSON_VERIFIED samples=5960 error=3.332000937312528E-8 shadowsSeparate=true
+[21:12:40] [Render thread/INFO] [MFQM/]: MFQM_SHADER_VISUAL_SAVED file=mfqm-shader-firstperson.png
+[21:12:45] [Render thread/INFO] [MFQM/]: MFQM_SHADER_VISUAL_SAVED file=mfqm-shader-pools.png
+[21:12:45] [Render thread/INFO] [MFQM/]: MFQM_SHADER_CHECKS_COMPLETE active=true fallback=false grounded=true calfAttachments=true rootsInside=true body3d=true flatLod=true firstPerson=true poolsCaptured=true
+JAR_SHA256=7ab1b0f354a06ab41e38cbacc01558688ee54ed91cbc6a2fd709e452798d2f59

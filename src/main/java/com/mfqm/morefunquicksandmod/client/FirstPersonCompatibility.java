@@ -19,7 +19,7 @@ public final class FirstPersonCompatibility {
     static void beginFrame(){feet=null;}
     static boolean hasCameraFeet(){return feet!=null;}
     static void capture(Entity entity,AvatarRenderState state) {
-        if(sampler==null || !(entity instanceof net.minecraft.client.player.AbstractClientPlayer player) || !camera(state))return;
+        if(ShaderCompatibility.shadowPass() || sampler==null || !(entity instanceof net.minecraft.client.player.AbstractClientPlayer player) || !camera(state))return;
         boolean slim=player.getSkin().model()==net.minecraft.world.entity.player.PlayerModelType.SLIM;
         var origin=new Vec3(state.x,state.y,state.z);
         // FirstPersonModel restores the temporary entity position after extracting this state.
@@ -29,7 +29,7 @@ public final class FirstPersonCompatibility {
     }
     static AdhesiveFeetSampler.Foot localFeet(Entity entity,int side,float partialTick) {
         var game=net.minecraft.client.Minecraft.getInstance();
-        if(feet==null || feet.entity().get()!=entity || game.getCameraEntity()!=entity || !game.options.getCameraType().isFirstPerson())return null;
+        if(ShaderCompatibility.shadowPass() || feet==null || feet.entity().get()!=entity || game.getCameraEntity()!=entity || !game.options.getCameraType().isFirstPerson())return null;
         var world=side==0?feet.right():feet.left();var origin=entity.getPosition(partialTick);
         return world.translated(origin.scale(-1));
     }
