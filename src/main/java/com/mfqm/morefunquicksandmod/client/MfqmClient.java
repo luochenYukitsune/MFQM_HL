@@ -118,8 +118,10 @@ public final class MfqmClient {
         var arm=event.getArm()==HumanoidArm.RIGHT?model.rightArm:model.leftArm;
         arm.resetPose();arm.visible=true;arm.zRot=event.getArm()==HumanoidArm.RIGHT?0.1F:-0.1F;
         boolean slim=event.getPlayer().getSkin().model()==net.minecraft.world.entity.player.PlayerModelType.SLIM;
+        var nativeRenderer=(net.minecraft.client.renderer.entity.player.AvatarRenderer<?>)net.minecraft.client.Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(event.getPlayer());
+        var sleeve=event.getArm()==HumanoidArm.RIGHT?nativeRenderer.getModel().rightSleeve:nativeRenderer.getModel().leftSleeve;
         GlueCoatingRenderer.submit(arm,event.getArm()==HumanoidArm.RIGHT?"right_arm":"left_arm",slim,coat,
-                event.getPoseStack(),event.getSubmitNodeCollector(),event.getPackedLight(),true,true);
+                event.getPoseStack(),event.getSubmitNodeCollector(),event.getPackedLight(),true,true,sleeve,event.getPlayer().getSkin().body().texturePath());
     }
     @SubscribeEvent public static void beforeTick(ClientTickEvent.Pre event){
         var game=Minecraft.getInstance();

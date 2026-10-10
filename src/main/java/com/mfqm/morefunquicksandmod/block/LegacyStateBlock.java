@@ -74,14 +74,14 @@ public class LegacyStateBlock extends Block {
         if (!above.getFluidState().isEmpty() || above.is(state.getBlock()) && !level.getFluidState(pos.above(2)).isEmpty()) depth = 3;
         else if (depth < 3) {
             int surround = 0;
-            for (int x = -1; x <= 1; x++) for (int z = -1; z <= 1; z++) if ((x != 0 || z != 0) && level.getBlockState(pos.offset(x, 0, z)).is(state.getBlock())) surround++;
+            for (int x = -1; x <= 1; x++) for (int z = -1; z <= 1; z++) if ((x != 0 || z != 0) && nearbyState(level, pos.offset(x, 0, z)).is(state.getBlock())) surround++;
             if (surround == 8) {
                 int radius = 0;
-                for (var direction : Direction.Plane.HORIZONTAL) if (level.getBlockState(pos.relative(direction, 2)).is(state.getBlock())) radius++;
+                for (var direction : Direction.Plane.HORIZONTAL) if (nearbyState(level, pos.relative(direction, 2)).is(state.getBlock())) radius++;
                 int natural = radius == 4 ? 2 : 1;
                 if (radius == 4) {
                     radius = 0;
-                    for (var direction : Direction.Plane.HORIZONTAL) if (level.getBlockState(pos.relative(direction, 3)).is(state.getBlock())) radius++;
+                    for (var direction : Direction.Plane.HORIZONTAL) if (nearbyState(level, pos.relative(direction, 3)).is(state.getBlock())) radius++;
                     if (radius == 4) natural = 3;
                 }
                 depth = Math.max(depth, natural);
@@ -89,12 +89,16 @@ public class LegacyStateBlock extends Block {
         }
         if (depth > 0 && above.getFluidState().isEmpty()) {
             for (var direction : Direction.Plane.HORIZONTAL) {
-                var neighbor = level.getBlockState(pos.relative(direction));
+                var neighbor = nearbyState(level, pos.relative(direction));
                 if (!neighbor.is(state.getBlock()) && !neighbor.blocksMotion()) return 0;
             }
         }
         if (above.is(state.getBlock()) && above.getValue(VARIANT) < 3) return 0;
         return depth;
+    }
+    private static BlockState nearbyState(BlockGetter level, BlockPos pos) {
+        return level instanceof LevelReader reader && !reader.hasChunkAt(pos)
+                ? Blocks.AIR.defaultBlockState() : level.getBlockState(pos);
     }
 
     @Override protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -162,9 +166,12 @@ public class LegacyStateBlock extends Block {
     }
     @Override protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (stack.is(Items.SHEARS) && (legacyId.equals("leaves_pile") || legacyId.equals("tendrils") || legacyId.equals("moor_grass"))) {
+            if (!player.mayBuild() || !level.mayInteract(player, pos) || !player.mayUseItemAt(pos, hit.getDirection(), stack))
+                return InteractionResult.FAIL;
             if (!level.isClientSide()) {
                 Block.dropResources(state, level, pos, level.getBlockEntity(pos), player, stack);
                 level.removeBlock(pos, false);
+                stack.hurtAndBreak(1, player, hand);
             }
             return InteractionResult.SUCCESS;
         }

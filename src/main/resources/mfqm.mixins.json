@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.mfqm.morefunquicksandmod.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": ["GlueJumpMixin"],
+  "mixins": ["GlueJumpMixin", "CaptureTeleportMixin", "CaptureEntityTeleportMixin"],
   "client": ["IrisIdMapMixin", "IrisWaterProgramMixin"],
   "injectors": {"defaultRequire": 1}
 }

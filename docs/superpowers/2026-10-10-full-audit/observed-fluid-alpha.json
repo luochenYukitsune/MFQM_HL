@@ -1,0 +1,52 @@
+{
+  "blocks/honey_still.png": {
+    "before_sha256": "1e55af916667aacbae98f7ede000b55c5c0c72a2c30ed7020ec2c9b83366f354",
+    "sha256": "87a33f13aa854e492a610d884ba991e413da5269dd951c01e841b8688f806ff5",
+    "alpha_scale": 0.8823529411764706
+  },
+  "blocks/honey_flowing.png": {
+    "before_sha256": "0baf72ea7491df6aee48450458a43924621af859cb9353db0f45c258cddf3506",
+    "sha256": "8aa84c2cfa3a61a2c378697ec91047b3908c41d672f8f64293fdbf08305d383a",
+    "alpha_scale": 0.8823529411764706
+  },
+  "blocks/tar_still.png": {
+    "before_sha256": "bf6bb197d0daded565018e8fa7b999ad9c2750b83c41611cb52b76cd311a1819",
+    "sha256": "984247bdf24d81bbb6f0ff8ba80ed110c6fa89841a54d800306192db13dc16a4",
+    "alpha_scale": 0.8627450980392157
+  },
+  "blocks/tar_flowing.png": {
+    "before_sha256": "94553d326a9da9c2090765fd86819f5da89de998fc53790fa55acef2972d07b0",
+    "sha256": "a44a0b2df4e177344fe409de0e09e992c6faab3052f286fb95c6710cd0438ffc",
+    "alpha_scale": 0.8627450980392157
+  },
+  "blocks/slime_still.png": {
+    "before_sha256": "9a5d58e401380fdc6de2f02b41272f779992eda098d2de04cd4d08aa494d68df",
+    "sha256": "da09c883223e07466eef4e3ae0cf29e5f50b7dd122bd0bd2fd2a837fa47d4719",
+    "alpha_scale": 0.7843137254901961
+  },
+  "blocks/slime_flowing.png": {
+    "before_sha256": "ec938475436ae5ffd5bbb55dcf423221b14a431ea5f51fe2e5b467bc766e835c",
+    "sha256": "4322d3b11e52fcc6be8cd31992afacb35e5835229400b6053a89ccdeafba5bda",
+    "alpha_scale": 0.7843137254901961
+  },
+  "blocks/mucus_still.png": {
+    "before_sha256": "a33261fc594be4f1578407b5ea4cd46532cd759bb75ed93367ace1dbc368f5f8",
+    "sha256": "4b493ddbde969db533a78e4fbb2ecef4bb3a48aa1e52ccdd9520d2e65d5184cd",
+    "alpha_scale": 0.8264462809917356
+  },
+  "blocks/mucus_flowing.png": {
+    "before_sha256": "3662df57c7e489648ddf5553872204ac530ac9871530e788d4950ba14bc26b8f",
+    "sha256": "55d842e43d0116702ac581af9fb6e8b0272e1f07be1c9138780db1ddf40964c1",
+    "alpha_scale": 0.8264462809917356
+  },
+  "blocks/sinkyliquid_still.png": {
+    "before_sha256": "97844a8de4d0b05ea59fd34d6dd20bfd2de3c5ba3ce473c7d5a5fc5b62594e29",
+    "sha256": "147ebaad3eb7d00a333b23e8c6ecc6ea3b87201643053745385f049d4d9f371c",
+    "alpha_scale": 0.7843137254901961
+  },
+  "blocks/sinkyliquid_flowing.png": {
+    "before_sha256": "86ca6e8a7ce07cca743d744da6f182110f71213463a4f66aa40618075705f846",
+    "sha256": "094c24cd2460293892f057e8a32d561e01c7d3a437cbd58072ca99610fc3faeb",
+    "alpha_scale": 0.7843137254901961
+  }
+}

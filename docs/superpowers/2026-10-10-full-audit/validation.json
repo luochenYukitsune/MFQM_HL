@@ -1,0 +1,192 @@
+{
+  "recorded_at": "2026-10-10T22:05:34.523959+08:00",
+  "baseline_commit": "17e0349f1706545aaab5ef5d6f4b25fdd71edd0a",
+  "target": {
+    "minecraft": "1.21.11",
+    "neoforge": "21.11.45",
+    "java": 21,
+    "mod_version": "0.7.4-dev"
+  },
+  "artifact": {
+    "path": "build/libs/MFQM-neoforge-1.21.11-0.7.4-dev.jar",
+    "sha256": "244c1c49b02de3b5398358ee25911609d694f070ad063695ee5ec0a4e21d86e3",
+    "size": 2583916,
+    "github_published": false
+  },
+  "backup": {
+    "path": "exports/backups/before-full-audit-20261010-174957",
+    "digests_verified": true,
+    "git_bundle_verified": true,
+    "working_tree_clean_at_backup": true
+  },
+  "scope": {
+    "main_java": 141,
+    "test_java": 12,
+    "python": 23,
+    "powershell": 4,
+    "main_json": 1655,
+    "generated_json": 19,
+    "runtime_png": 339,
+    "runtime_png_byte_identical_to_backup": 339
+  },
+  "checks": [
+    {
+      "command": "gradlew.bat check build prepareInstalledClient -PmfqmClientChecks --offline --console=plain",
+      "passed": true,
+      "java_programs": 12,
+      "behavioral_checks_samples_or_groups": 60512
+    },
+    {
+      "command": "python -m unittest discover -s tools -p 'test_*.py' -v",
+      "passed": true,
+      "test_count": 36
+    },
+    {
+      "command": "python tools/verify_jar.py build/libs/MFQM-neoforge-1.21.11-0.7.4-dev.jar",
+      "passed": true
+    },
+    {
+      "command": "python tools/verify_port.py build/libs/MFQM-neoforge-1.21.11-0.7.4-dev.jar",
+      "passed": true,
+      "errors": 0
+    },
+    {
+      "command": "python tools/connected_boards.py --verify",
+      "passed": true,
+      "combinations": 128
+    },
+    {
+      "command": "python tools/coating_height.py --verify",
+      "passed": true,
+      "images": 50
+    },
+    {
+      "command": "python tools/translucent_palette.py --verify",
+      "passed": true,
+      "lookup_cells": 256
+    },
+    {
+      "command": "python tools/refresh_textures.py --verify",
+      "passed": true,
+      "textures": 100,
+      "fluid_strips": 10,
+      "uv_coatings": 40
+    },
+    {
+      "command": "python tools/refresh_adhesive_textures.py --verify",
+      "passed": true,
+      "textures": 16,
+      "protected_assets": 319
+    },
+    {
+      "command": "python tools/smoke_port.py --reload",
+      "passed": true,
+      "artifact_type": "Gradle development classes",
+      "aggregate_checks": 84,
+      "reload_passed": true,
+      "log": "green-server.txt"
+    },
+    {
+      "command": "python tools/smoke_port.py --reload --persistence-phase prepare",
+      "passed": true,
+      "artifact_type": "Gradle development classes",
+      "aggregate_checks": 84,
+      "reload_passed": true,
+      "phase": "prepare",
+      "log": "persistence-prepare.txt"
+    },
+    {
+      "command": "python tools/smoke_port.py --reload --persistence-phase recover",
+      "passed": true,
+      "artifact_type": "Gradle development classes",
+      "aggregate_checks": 84,
+      "reload_passed": true,
+      "phase": "recover",
+      "log": "persistence-recover.txt"
+    },
+    {
+      "command": "python tools/smoke_viscosity_client.py --creative-ground-traps --timeout 480",
+      "passed": true,
+      "artifact_type": "installed JAR",
+      "jar_sha256": "00da0bbf625b74ff556e4b27ac614fa62df798c8a3379b1ddab51a3b812f5417",
+      "ground_cases": 23,
+      "main_measurements_flying": false,
+      "actual_keyboard_input": true,
+      "log": "ground-client.txt",
+      "later_changes": "ordinary entity teleport hook, server regressions and opt-in validation fixture only; movement and rendering unchanged"
+    },
+    {
+      "command": "python tools/smoke_viscosity_client.py --coating-only --first-person --skin-layers --timeout 240",
+      "passed": true,
+      "artifact_type": "installed final JAR",
+      "jar_sha256": "244c1c49b02de3b5398358ee25911609d694f070ad063695ee5ec0a4e21d86e3",
+      "first_person_model_version": "2.7.3",
+      "skin_layers_version": "1.11.3",
+      "mask_cases": 600,
+      "first_person_max_endpoint_error_blocks": 1.3348812510944096e-07,
+      "observed_filaments": 352,
+      "physical_limit": 64,
+      "screenshots_requested": 0,
+      "log": "green-coating-client.txt"
+    },
+    {
+      "command": "git diff --cached --check",
+      "passed": true
+    }
+  ],
+  "logs": {
+    "green-coating-client.txt": {
+      "sha256": "caf9e4931251acb7be42e95c13c7788edd3a6e7ae23fb1a9b3774fa1f9e8636d",
+      "bytes": 26981
+    },
+    "green-server.txt": {
+      "sha256": "3a2394a5ebf246210cd1812e55421dd45eee97e247971a37983021801890b2cc",
+      "bytes": 22196
+    },
+    "ground-client.txt": {
+      "sha256": "183e778e1b644a342497ebeea84a118bdcb76963fe5f1b0fc5173eab34b8296a",
+      "bytes": 39847
+    },
+    "persistence-prepare.txt": {
+      "sha256": "f24e39be1817ea5b2466acd5d8f1e2eac0c511cc45102793236c2afa28b1428c",
+      "bytes": 21874
+    },
+    "persistence-recover.txt": {
+      "sha256": "a3862fa2418e21651e92a7306691d4b587e00ecc4113541fc5e4db5b4d243376",
+      "bytes": 21972
+    },
+    "red-all.txt": {
+      "sha256": "4a90c073036941c73bb8b660a64c8299ffc1b2539b3b11408ab494fc408f71b5",
+      "bytes": 12401
+    },
+    "red-callbacks.txt": {
+      "sha256": "fa5862dd53c5abd6ce56004475e099d0c9c7244df93893fe957787ae32439409",
+      "bytes": 11880
+    },
+    "red-coating-fixture.txt": {
+      "sha256": "0ba60b845f5ac92503402eb2ff25e6b334efe7aec62cd3acd10c46e5a110e937",
+      "bytes": 27401
+    },
+    "red-initial.txt": {
+      "sha256": "db8a26d48755075d2147f56e8194cb8271ba3241d33d4f303a80aabe3dd0080e",
+      "bytes": 12174
+    },
+    "red-mob-teleport.txt": {
+      "sha256": "91b1735319c57340185628a99b7cc405de8c728cfaa94bd2e55b5e256d68d697",
+      "bytes": 12105
+    },
+    "red-review-boundaries.txt": {
+      "sha256": "d11055adca3351e43ba59b76586a9e0f795651add3fff8f2f208676b0e6e7ab5",
+      "bytes": 12375
+    }
+  },
+  "limits": {
+    "all_shaderpacks_retested": false,
+    "8192_strand_performance_benchmarked": false,
+    "optional_mod_metadata_errors": "exact known supported_formats errors in firstperson/trender/skinlayers3d/transition; preserved and recorded, external JARs not changed",
+    "third_party_jars_modified": false,
+    "user_game_instance_modified": false,
+    "desktop_exports_modified": false
+  },
+  "archived_log_normalization": "Trailing horizontal whitespace removed; event content unchanged. Original runtime logs remain in isolated run directories."
+}

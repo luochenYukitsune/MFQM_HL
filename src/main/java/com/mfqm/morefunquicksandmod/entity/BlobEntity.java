@@ -100,7 +100,7 @@ public final class BlobEntity extends Monster {
             super.hurtServer(server, damageSources().drown(), 1);
         LivingEntity victim = getFirstPassenger() instanceof LivingEntity living ? living : null;
         if (victim != null) {
-            if (!victim.isAlive() || victim.isSpectator() || victim.hasInfiniteMaterials() || isInWater()) { releasePassenger(victim); return; }
+            if (victim.level() != level() || !victim.isAlive() || victim.isSpectator() || victim.hasInfiniteMaterials() || isInWater()) { releasePassenger(victim); return; }
             float depth = swallowDepth() + kind.sink;
             if (--pullDelay <= 0) {
                 pullDelay = kind.pullTicks + random.nextInt(10); depth += kind.pulse; squish = 1.5F;
@@ -162,14 +162,15 @@ public final class BlobEntity extends Monster {
     }
     @Override public boolean hurtServer(ServerLevel server, DamageSource source, float damage) {
         Kind kind = kind();
+        Player theftTarget = null;
+        ItemStack theftStack = ItemStack.EMPTY;
+        ItemStack theftSnapshot = ItemStack.EMPTY;
         if (kind == Kind.TAR && source.is(DamageTypeTags.IS_FIRE)) { damage *= 2; igniteForSeconds(5); }
         if ((kind == Kind.MUD || kind == Kind.TAR) && server.getDifficulty() == Difficulty.HARD
                 && source.getEntity() instanceof Player player && source.getDirectEntity() == player
                 && !player.hasInfiniteMaterials() && damage < 3F * getMaxHealth()/25F && damage < getHealth()
                 && stolenItems.size() < 5 && (player.getMainHandItem().is(ItemTags.MELEE_WEAPON_ENCHANTABLE) || player.getMainHandItem().is(ItemTags.MINING_ENCHANTABLE))) {
-            stolenItems.add(player.getMainHandItem().copy()); player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-            setPersistenceRequired(); player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1));
-            playSound(SoundEvents.SLIME_ATTACK, 0.5F, 0.6F);
+            theftTarget = player; theftStack = player.getMainHandItem(); theftSnapshot = theftStack.copy();
         }
         if (kind == Kind.SAND && !source.is(DamageTypeTags.IS_DROWNING)) {
             damage *= 0.2F;
@@ -180,6 +181,14 @@ public final class BlobEntity extends Monster {
             }
         }
         boolean result = super.hurtServer(server, source, damage);
+        // Damage hooks and invulnerability may reject a hit or change its held item.
+        // Transfer only the exact equipment that qualified for an accepted, nonlethal hit.
+        if (result && isAlive() && theftTarget != null && stolenItems.size() < 5
+                && theftTarget.getMainHandItem() == theftStack && ItemStack.matches(theftStack, theftSnapshot)) {
+            stolenItems.add(theftSnapshot); theftTarget.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+            setPersistenceRequired(); theftTarget.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1));
+            playSound(SoundEvents.SLIME_ATTACK, 0.5F, 0.6F);
+        }
         if (result && !getPassengers().isEmpty()) {
             setDepth(swallowDepth() - damage * 0.45F);
             if (!isAlive() || swallowDepth() <= 0) for (Entity passenger : java.util.List.copyOf(getPassengers())) releasePassenger(passenger);
@@ -188,8 +197,6 @@ public final class BlobEntity extends Monster {
     }
     @Override protected void dropCustomDeathLoot(ServerLevel server, DamageSource source, boolean recentlyHit) {
         super.dropCustomDeathLoot(server, source, recentlyHit);
-        for (ItemStack stack : stolenItems) spawnAtLocation(server, stack);
-        stolenItems.clear();
         int looting = source.getEntity() instanceof LivingEntity attacker
                 ? net.minecraft.world.item.enchantment.EnchantmentHelper.getEnchantmentLevel(server.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT).getOrThrow(net.minecraft.world.item.enchantment.Enchantments.LOOTING), attacker) : 0;
         if (kind() == Kind.SAND) {
@@ -201,6 +208,22 @@ public final class BlobEntity extends Monster {
             if (kind() == Kind.MUD) dropCount(server, ModItems.byId("peat_item"), random.nextInt(2) + random.nextInt(1 + looting));
             if (kind() == Kind.TAR) dropCount(server, Items.COAL, 1 + random.nextInt(4) + random.nextInt(1 + looting));
         }
+    }
+    @Override protected void dropEquipment(ServerLevel server) {
+        super.dropEquipment(server);
+        returnStolenItems(server);
+    }
+    @Override public void remove(RemovalReason reason) {
+        // Unloading and dimension transfer preserve the saved inventory. Destructive
+        // removal (including peaceful despawn) must return player property once.
+        if (!isRemoved() && reason.shouldDestroy() && level() instanceof ServerLevel server) returnStolenItems(server);
+        super.remove(reason);
+    }
+    private void returnStolenItems(ServerLevel server) {
+        if (stolenItems.isEmpty()) return;
+        var items = java.util.List.copyOf(stolenItems);
+        stolenItems.clear();
+        for (ItemStack stack : items) spawnAtLocation(server, stack);
     }
     private void dropCount(ServerLevel level, net.minecraft.world.item.Item item, int amount) { if (amount > 0) spawnAtLocation(level, new ItemStack(item, amount)); }
     @Override public boolean removeWhenFarAway(double distance) { return stolenItems.isEmpty() && getPassengers().isEmpty(); }

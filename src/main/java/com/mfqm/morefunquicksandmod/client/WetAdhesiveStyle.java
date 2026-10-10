@@ -109,6 +109,23 @@ public final class WetAdhesiveStyle {
         double droop=.6+.8*CompactStrandStyle.variation(seed^0xA0F2EC75A1FE1575L);
         return tubeShape(start,end,segments,startRadius,endRadius,thickness,bend,droop);
     }
+    /** The entire thick body end stays outside its real skin face, not just its center. */
+    public static List<Quad> attachedTube(Vec start,SkinSurfaceContact.Hit end,Frame leg,int segments,double startRadius,double endRadius,long seed) {
+        var result=new ArrayList<Quad>();
+        for(var q:tube(start,end.point(),segments,startRadius,endRadius,seed)) {
+            var a=outside(q.a(),start,end,leg,startRadius);var b=outside(q.b(),start,end,leg,startRadius);
+            var c=outside(q.c(),start,end,leg,startRadius);var d=outside(q.d(),start,end,leg,startRadius);
+            var normal=b.subtract(a).cross(c.subtract(a));
+            if(normal.length()<1e-12)continue;
+            result.add(new Quad(a,b,c,d,normal.unit(),q.color()));
+        }
+        return List.copyOf(result);
+    }
+    private static Vec outside(Vec p,Vec root,SkinSurfaceContact.Hit skin,Frame leg,double rootRadius) {
+        // Keep the medium cap exactly where its submerged-root validation put it.
+        if(p.subtract(root).length()<=rootRadius*1.00001 || p.subtract(leg.center()).dot(leg.up())<-.035)return p;
+        return SkinSurfaceContact.outside(p,skin);
+    }
     private static List<Quad> tubeShape(Vec start,Vec end,int segments,double startRadius,double endRadius,double thickness,double bend,double droop) {
         Vec delta=end.subtract(start);double length=delta.length();
         if(!Double.isFinite(length) || length<1e-7)return List.of();

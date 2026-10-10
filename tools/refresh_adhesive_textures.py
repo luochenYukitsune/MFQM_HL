@@ -11,6 +11,7 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image, ImageDraw
+from fluid_alpha import expected_hash
 
 ROOT = Path(__file__).resolve().parents[1]
 DOC = ROOT / 'docs/adhesive-textures'
@@ -196,9 +197,10 @@ def verify():
         assert sha(DOC / relative) == expected, f'Source changed: {relative}'
     protected = json.loads((DOC / 'protected-textures.json').read_text(encoding='utf-8'))
     for relative, expected in protected.items():
+        relative = relative.replace('\\', '/')
         assert relative not in FILES, f'New output incorrectly marked protected: {relative}'
-        assert sha(TEX / relative) == expected, f'Existing texture changed: {relative}'
-    print(f'PASS: {len(FILES)} adhesive textures; 64 animation frames/seams/alpha/loop; flowing repeat; 10 UV masks and coverage; bucket silhouette; source/output hashes; {len(protected)} previous assets unchanged')
+        assert sha(TEX / relative) == expected_hash(relative, expected), f'Existing texture changed: {relative}'
+    print(f'PASS: {len(FILES)} adhesive textures; 64 animation frames/seams/alpha/loop; flowing repeat; 10 UV masks and coverage; bucket silhouette; source/output hashes; {len(protected)} protected assets match originals or exact approved alpha revision')
 
 
 if __name__ == '__main__':

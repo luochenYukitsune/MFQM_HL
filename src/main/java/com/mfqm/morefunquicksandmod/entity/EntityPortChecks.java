@@ -73,7 +73,8 @@ public final class EntityPortChecks {
             BlobEntity loaded=ModEntities.MUDDY_BLOB.get().create(level,EntitySpawnReason.LOAD);require(loaded!=null,"load blob");probes.add(loaded);loaded.setPos(player.position());
             loaded.readAdditionalSaveData(TagValueInput.create(ProblemReporter.DISCARDING,level.registryAccess(),output.buildResult()));
             require(!loaded.removeWhenFarAway(10000),"stolen inventory survives Value I/O");
-            loaded.dropCustomDeathLoot(level,level.damageSources().generic(),true);
+            loaded.invulnerableTime = 0;
+            require(loaded.hurtServer(level,level.damageSources().genericKill(),1000), "actual loaded blob death");
             require(level.getEntitiesOfClass(ItemEntity.class,area).stream().anyMatch(item->!existingItems.contains(item.getUUID()) && item.getItem().is(Items.WOODEN_SWORD)),"death returns stolen original tool");
             passed.add("HARD tool theft, persistent inventory, no natural despawn, and death item return");
             var pit=ModBlocks.byId("swallowing_flesh").defaultBlockState();level.setBlock(origin,pit,2);

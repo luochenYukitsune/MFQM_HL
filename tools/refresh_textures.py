@@ -14,6 +14,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 import numpy as np
 from PIL import Image
+from fluid_alpha import expected_hash, expected_alpha as approved_alpha
 
 ROOT = Path(__file__).resolve().parents[1]
 DOC = ROOT / "docs/texture-refresh"
@@ -131,8 +132,9 @@ def bake():
                     count = old.width // fw * (old.height // fh)
                     flowing = "_flowing" in name
                     image = frames(tile, count, flowing).convert("RGBA")
-                    # Honey was 80% opaque. Preserve fluid alpha independently of regenerated RGB.
-                    image.putalpha(old.resize(image.size, Image.Resampling.NEAREST).getchannel("A"))
+                    # Keep RGB generation unchanged and apply the approved fluid-alpha revision.
+                    alpha = np.array(old.resize(image.size, Image.Resampling.NEAREST).getchannel("A"))
+                    image.putalpha(Image.fromarray(approved_alpha(name, alpha)))
                     animation.pop("width", None)
                     animation.pop("height", None)
                     (TEXTURES / (name + ".mcmeta")).write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
@@ -194,7 +196,7 @@ def verify():
     coverage = {}
     for name, info in entries.items():
         path = TEXTURES / name
-        assert sha(path.read_bytes()) == info["sha256"], f"unexpected image modification: {name}"
+        assert sha(path.read_bytes()) == expected_hash(name, info["sha256"]), f"unexpected image modification: {name}"
         image = Image.open(path).convert("RGBA")
         assert list(image.size) == info["size"], f"size mismatch: {name}"
         if "frames" in info:
@@ -209,7 +211,7 @@ def verify():
                          for n in range(info["frames"])]
             assert len({a.tobytes() for a in animation}) > 1, f"static animation: {name}"
             expected_alpha = np.array(original(name).resize(image.size, Image.Resampling.NEAREST).getchannel("A"))
-            assert np.array_equal(np.array(image.getchannel("A")), expected_alpha), f"fluid transparency changed: {name}"
+            assert np.array_equal(np.array(image.getchannel("A")), approved_alpha(name, expected_alpha)), f"fluid transparency changed: {name}"
             for frame in animation:
                 assert np.array_equal(frame[0], frame[-1]), f"vertical tile seam: {name}"
                 assert np.array_equal(frame[:, 0], frame[:, -1]), f"horizontal tile seam: {name}"

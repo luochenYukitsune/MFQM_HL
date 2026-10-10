@@ -1,0 +1,65 @@
+{
+  "version": "0.7.5-inside",
+  "minecraft": "1.21.11",
+  "neoforge": "21.11.45",
+  "java": 21,
+  "backup_baseline": "fa740275df3a32dd0285aa3736905f50e354fc69",
+  "backup_source_sha256": "ec4f6da44be8c2ee2e6a1ae87c13c6bcbd096718a9913fc61ab595f2bef83d33",
+  "final_jar": "build/libs/MFQM-neoforge-1.21.11-0.7.5-inside.jar",
+  "final_jar_sha256": "05f8c634c8774f304c6e043e3ba5866270b60509f7ecc8d91dca2fd434842cd8",
+  "java_programs": 13,
+  "java_checks": 65636,
+  "runtime_png_unchanged": 339,
+  "build": {"passed": true, "log": "evidence/build-final.txt"},
+  "installed_compat": {
+    "passed": true,
+    "log": "evidence/coating-final-compat.txt",
+    "firstperson": "2.7.3",
+    "skinlayers": "1.11.3",
+    "anatomical_mask_cases": 600,
+    "flight": false,
+    "alignment_max_error_blocks": 1.3348812510944096e-7,
+    "physical_contacts": 64,
+    "visible_bundles": 55,
+    "visible_filaments": 440,
+    "surface_separation_limit_model_pixels": 0.024,
+    "whole_body_end_outside": true,
+    "whole_root_caps_inside_medium": true,
+    "requested_screenshots": 0
+  },
+  "installed_vanilla": {
+    "passed": true,
+    "log": "evidence/coating-final-vanilla.txt",
+    "outer_faces_per_part_flat_lod": 6,
+    "pixel_geometry_cached": true,
+    "skin_cutout_alpha_and_film_intensity_verified": true,
+    "anatomical_mask_cases": 600,
+    "resource_reload": true,
+    "requested_screenshots": 0
+  },
+  "development_server": {
+    "passed": true,
+    "log": "evidence/server-final.txt",
+    "aggregate_checks": 84,
+    "reload": true,
+    "installed_jar_server_test": false
+  },
+  "candidate_visual": {
+    "jar_sha256": "a6267160dff008862481a5b5cc160c5cf117fa71507ecd5c42b7baeacf59dcda",
+    "log": "evidence/coating-candidate.txt",
+    "screenshots": [
+      "evidence/mfqm-glue-coating-skinlayers.png",
+      "evidence/mfqm-firstperson-tethers.png",
+      "evidence/mfqm-close-strands.png"
+    ],
+    "visually_inspected": true,
+    "final_jar_screenshots": false
+  },
+  "jar_metadata_and_resource_references": {"passed": true, "errors": 0},
+  "anatomical_overlay_resources": 50,
+  "board_model_combinations": 128,
+  "known_upstream_metadata_errors_only": true,
+  "all_shaderpacks_retested": false,
+  "8192_filament_performance_benchmark": false,
+  "user_game_and_old_desktop_exports_modified": false
+}

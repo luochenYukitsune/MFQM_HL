@@ -1,0 +1,102 @@
+[22:45:16] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\server
+[22:45:16] [main/INFO] [ne.ne.fm.lo.mo.lo.InDevFolderLocator/CORE]: Got mod coordinates mfqm%%C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\build\classes\java\main;mfqm%%C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\build\resources\main from env
+		更多趣味流沙（MFQM） 0.7.5-inside (mfqm)
+[22:45:18] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > net.neoforged.neoforge-coremods-21.11.45.jar
+ - mfqm (composite(folder(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/classes/java/main), folder(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/resources/main)))
+ - minecraft (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45-client-extra-aka-minecraft-resources.jar)), filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - mixinextras.neoforge (jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+[22:45:32] [modloading-worker-0/INFO] [MFQM/]: MFQM initializing...
+[22:45:32] [modloading-worker-0/INFO] [MFQM/]: MFQM initialized.
+[22:45:41] [Server thread/INFO] [minecraft/DedicatedServer]: Done (1.548s)! For help, type "help"
+[22:45:44] [Server thread/INFO] [minecraft/MinecraftServer]: MFQMAuditProbe has made the advancement [We Need to Go Deeper]
+[22:45:45] [Server thread/INFO] [minecraft/MinecraftServer]: MFQMDimensionProbe has made the advancement [We Need to Go Deeper]
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: blob-death-drops=true
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: blob-death-drops=false
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: blob-peaceful-return
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: hostile-types-exclude-peaceful
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: blob-rejected-hit-keeps-tool
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: capture-teleport
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: capture-mob-teleport
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: shears-permissions-and-durability
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS audit: reactions-keep-unloaded-neighbors
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 49 original block identities are registered
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 13 legacy and one glue source/flowing/type/block pairs, with legacy bucket policy
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS movement/jump/load/depth/boots parameter matrix
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS MCP-mapped vanilla fusion cases and bedrock protection
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual stacked body/eye contact, sinking motion, and one air spend per tick
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS both liquid mires consume vanilla air once and drown ordinary living entities
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS wading boots/life jacket/gas mask equipment are consumed by gameplay
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS persistent coating, rescue lift, and clear-air recovery
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS seven moss states use hanging bounds, eye immersion, and their actual surface
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS ordinary peat, softened wax, and upper blossom slab collision semantics
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS wetness/heat/crust/gas/orphan-mouth/directional-mouth/block-entity lifecycles
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 56 real standing/crouching player coating depths follow stable anatomical tiers
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS deep residue survives shallower contact without fabricating new upper-body coverage
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS dry exit retains residue and advances its existing expiry timer
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS motion codec preserves load, rescue, cumulative sink, pull and trusted impulse while execution clocks remain local
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS prediction ledger consumes a synchronized sinking cost once across replacement snapshots and dimension resets
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS direct server physics callers retain one motion and one air update without native travel
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual native solid travel limits input before displacement and Post does not apply it twice
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual one-ninth flowing tar constrains foot input without eye immersion
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: three drinks, original effect durations, bottle returns, food values
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: five equippable armor assets and slots
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue: distinct source/flowing registrations, source liquid block and usable bucket
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue: actual shapeless crafting, exact ingredients, transferred container and later bucket remainder
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue: source placement/pickup, flowing refusal and permission rejection preserve items and world
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: liquid gun fires, decrements ammo, rejects flowing fluid, samples and removes source
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: acid, stable mire, mineral clay collection; flowing source refusal; variant-preserving bucket placement
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS items: fertilizer double growth with one-item consumption
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS board: exact thin collision, empty/nonempty adhesion, real right-click and single bucket return
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS board: full/creative refill, charge consumption, real loot and re-placement preserve coating without duplication
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS board: adjacent boards/glue retain support, floating placement rejected and removed support breaks only affected board
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS board: actual tagged mixed-wood recipe produces three empty bases
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 18 entity types create/spawn with four distinct blob and legacy bee attributes
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual player passenger capture, synchronized swallow depth, and rescue release
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS HARD tool theft, persistent inventory, no natural despawn, and death item return
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS valid-pit appendage target binding, growth, damage, and retraction
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS all four legacy tentacle media survive spawning and pull; unsupported pits reject spawning
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS server sinking potion impact places legacy weak splash levels and consumes projectile
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS water/lava/honey gun impacts cannot produce bucket sources or fuse surrounding terrain
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS hand rescue starts held-use animation, survives use, and cleans up on release
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS rescue clears connection, held-use and temporary item on either death or owner dimension change
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS server-owned connector reeling and duplicate intent rate limit
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual deep glue holds still equipped actor without passive sinking
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual repeated struggle begins sinking; rest and duplicate tick add no sinking
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS long-lived glue anchors survive nearby exit and water washing; water only removes residue
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual over-distance break removes physical bonds immediately and finishes cosmetic recoil after six ticks
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual supported board restrains players/cows, rejects horses and releases after 19.8 seconds; both creative-ground settings and flight/spectator immunity pass
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS same-board recoating and switching to another board reset restraint effort while retaining press cooldown
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual same-coordinate glue/board dimension transfers remove old helpers, input and drag; same-clock contact starts fresh
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual vanilla mob fluid jump cannot float out of glue; original intent, upward rescue and dry jumps remain available
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual mob coated-board jumping is restrained; real struggle releases it, refill/new board re-trap immediately, and depleted boards permit jumps
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS dynamic adhesion: same-cell 64 roots, FIFO recoil, stationary retention, stable origin, vertical distance, thin-fluid edges and non-adhesive contact pass
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue boots preserve complete stack on transfer/save/recovery; full inventory and repeated retrieval are safe
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS removing glue releases exactly one item while chunk unload never releases a duplicate
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS coated boards can hold boots; depleted boards release them and cannot take another pair
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS held rope right click retains connection; sneaking alone and unheld controls cannot alter length
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS legacy desert tomb NBT resolves with original 48x20x27 dimensions
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS 197-placement mucus blossom grows both into air and over its own mechanism blocks
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS new-chunk temple sandstone/TNT trap conversion uses server placement
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS cold-start long-stick registry recipe and actual crafting match per-world config=true
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS all three chest tables decode and generate valid stacks, including registry hive bonus
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS generated Nether waste column actually ejects slurry and rejects broken support
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS glue pool configured feature and wet-Overworld biome tag resolve
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual glue placement produces shallow/deep sealed pools inside its candidate chunk
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS sealed pools accept gentle natural banks and resolve forest canopy to ground without flattening the area
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS slope adaptation still rejects steep banks, liquids, bedrock, block entities, trunks and artificial structure blocks before excavation
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS disabled, dry, leaking and unwritable glue sites are rejected before modifying terrain
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS actual tomb placement preserves chest/spawners, adds 1..3 supported interior boards and respects config
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS both actual tomb chest tables generate sticky boards and glue materials
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: all nine source call sites decode, match exact inputs, reject wrong inputs and preserve outputs/remainders
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: absent optional mappings yield zero recipes without warnings
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: ambiguous outputs fail closed; multiple input mappings remain alternatives
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: integration settings, acquisition settings and actual item_enabled condition all apply
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: duplicate IDs, normal-resource overrides, identity ownership and stale-holder removal are protected
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: real finalization rebuilds and removes recipe displays and synchronized furnace inputs
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_PASS compat: live recipe manager and client displays match current datapack/config mappings; active=0
+[22:45:47] [Server thread/INFO] [MFQM/]: MFQM_PORT_CHECKS_COMPLETE checks=84 items=180
+[22:45:51] [Server thread/INFO] [MFQM/]: MFQM_RELOAD_PASS compat: live recipe manager and client displays match current datapack/config mappings; active=0
+[22:45:51] [Server thread/INFO] [MFQM/]: MFQM_RELOAD_CHECKS_COMPLETE longStick=true compat=0
+BUILD SUCCESSFUL in 43s
+PASS: dedicated-server gameplay assertions and resource loading

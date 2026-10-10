@@ -41,11 +41,11 @@ public final class MuddyPlayerLayer extends RenderLayer<AvatarRenderState,Player
         // The native model has already run setupAnim for this exact render state.
         // In particular, FirstPersonModel can move/hide its head and selected arms.
         if(FirstPersonCompatibility.camera(state)){firstPersonBodies++;if(!parent.head.visible)hiddenHeads++;}
-        else GlueCoatingRenderer.submit(parent.head,"head",slim,coat,pose,collector,light,false,detailed,parent.hat);
-        GlueCoatingRenderer.submit(parent.body,"body",slim,coat,pose,collector,light,false,detailed,parent.jacket);
-        GlueCoatingRenderer.submit(parent.leftArm,"left_arm",slim,coat,pose,collector,light,false,detailed,parent.leftSleeve);
-        GlueCoatingRenderer.submit(parent.rightArm,"right_arm",slim,coat,pose,collector,light,false,detailed,parent.rightSleeve);
-        GlueCoatingRenderer.submit(parent.leftLeg,"left_leg",slim,coat,pose,collector,light,false,detailed,parent.leftPants);
-        GlueCoatingRenderer.submit(parent.rightLeg,"right_leg",slim,coat,pose,collector,light,false,detailed,parent.rightPants);
+        else GlueCoatingRenderer.submit(parent.head,"head",slim,coat,pose,collector,light,false,detailed,parent.hat,state.skin.body().texturePath());
+        GlueCoatingRenderer.submit(parent.body,"body",slim,coat,pose,collector,light,false,detailed,parent.jacket,state.skin.body().texturePath());
+        GlueCoatingRenderer.submit(parent.leftArm,"left_arm",slim,coat,pose,collector,light,false,detailed,parent.leftSleeve,state.skin.body().texturePath());
+        GlueCoatingRenderer.submit(parent.rightArm,"right_arm",slim,coat,pose,collector,light,false,detailed,parent.rightSleeve,state.skin.body().texturePath());
+        GlueCoatingRenderer.submit(parent.leftLeg,"left_leg",slim,coat,pose,collector,light,false,detailed,parent.leftPants,state.skin.body().texturePath());
+        GlueCoatingRenderer.submit(parent.rightLeg,"right_leg",slim,coat,pose,collector,light,false,detailed,parent.rightPants,state.skin.body().texturePath());
     }
 }

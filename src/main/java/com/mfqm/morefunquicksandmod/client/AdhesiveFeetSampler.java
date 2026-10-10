@@ -45,9 +45,11 @@ import java.util.function.Consumer;
 
 /** Owns private baked models. Sampling never changes the renderer model queued for deferred drawing. */
 public final class AdhesiveFeetSampler {
-    public record Foot(Vec3 ankle,Vec3 shin,WetAdhesiveStyle.Frame surface) {
+    public record Foot(Vec3 ankle,Vec3 shin,WetAdhesiveStyle.Frame surface,java.util.List<CoatingVoxels.Quad> skin,Vec3 skinOffset) {
+        public Foot { skin=java.util.List.copyOf(skin); }
+        public Foot(Vec3 ankle,Vec3 shin,WetAdhesiveStyle.Frame surface){this(ankle,shin,surface,java.util.List.of(),Vec3.ZERO);}
         public Foot(Vec3 ankle,Vec3 shin){this(ankle,shin,new WetAdhesiveStyle.Frame(vector(ankle),vector(shin.subtract(ankle).normalize()),new CoatingVoxels.Vec(1,0,0),new CoatingVoxels.Vec(0,0,1),.08,.08,shin.distanceTo(ankle)));}
-        public Foot translated(Vec3 offset){return new Foot(ankle.add(offset),shin.add(offset),new WetAdhesiveStyle.Frame(surface.center().add(vector(offset)),surface.up(),surface.right(),surface.front(),surface.halfWidth(),surface.halfDepth(),surface.calfHeight()));}
+        public Foot translated(Vec3 offset){return new Foot(ankle.add(offset),shin.add(offset),new WetAdhesiveStyle.Frame(surface.center().add(vector(offset)),surface.up(),surface.right(),surface.front(),surface.halfWidth(),surface.halfDepth(),surface.calfHeight()),skin,skinOffset.add(offset));}
     }
     private record Bounds(double minX,double maxX,double minZ,double maxZ){}
     private static final Map<ModelPart,Bounds> BOUNDS=new java.util.WeakHashMap<>();
@@ -117,7 +119,13 @@ public final class AdhesiveFeetSampler {
         var center=position(pose,(box.minX()+box.maxX())/32,ankleY/16,(box.minZ()+box.maxZ())/32);
         var up=position(pose,0,-1./16,0).subtract(zero).normalize();
         return new Foot(ankle,shin,new WetAdhesiveStyle.Frame(vector(center),vector(up),vector(right.normalize()),vector(front.normalize()),
-                ((box.maxX()-box.minX())*.5+padding)*right.length(),((box.maxZ()-box.minZ())*.5+padding)*front.length(),shin.distanceTo(ankle)));
+                ((box.maxX()-box.minX())*.5+padding)*right.length(),((box.maxZ()-box.minZ())*.5+padding)*front.length(),shin.distanceTo(ankle)),
+                transformed(pose,NativeSkinSurface.base(part)),Vec3.ZERO);
+    }
+    private static java.util.List<CoatingVoxels.Quad> transformed(PoseStack pose,java.util.List<NativeSkinSurface.Face> faces) {
+        return faces.stream().map(face->{var q=face.quad();var n=pose.last().normal().transform(new Vector3f((float)q.normal().x(),(float)q.normal().y(),(float)q.normal().z())).normalize();
+            return new CoatingVoxels.Quad(vector(position(pose,q.a().x(),q.a().y(),q.a().z())),vector(position(pose,q.b().x(),q.b().y(),q.b().z())),
+                    vector(position(pose,q.c().x(),q.c().y(),q.c().z())),vector(position(pose,q.d().x(),q.d().y(),q.d().z())),new CoatingVoxels.Vec(n.x,n.y,n.z),q.color());}).toList();
     }
     private interface AnimalSampler {
         LivingEntityRenderState state(LivingEntity target,float partialTick);
@@ -265,8 +273,10 @@ public final class AdhesiveFeetSampler {
             var leg=side==0?getModel().rightLeg:getModel().leftLeg;
             leg.translateAndRotate(pose);
             var outer=side==0?getModel().rightPants:getModel().leftPants;
-            double padding=outer.visible?SkinLayerClearance.padding(side==0?"right_leg":"left_leg",false):.02;
-            return surface(pose,leg,position(pose,0,11.5/16,0),position(pose,0,7./16,0),11.5,padding);
+            var sampled=surface(pose,leg,position(pose,0,11.5/16,0),position(pose,0,7./16,0),11.5,.012);
+            var skins=new java.util.ArrayList<CoatingVoxels.Quad>(sampled.skin());
+            skins.addAll(transformed(pose,NativeSkinSurface.capture(outer,state.skin.body().texturePath())));
+            return new Foot(sampled.ankle(),sampled.shin(),sampled.surface(),skins,Vec3.ZERO);
         }
     }
 }

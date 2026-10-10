@@ -248,10 +248,10 @@ public final class ModConfig {
             struggleCamera = builder.comment("Subtle camera movement during accepted struggle actions").define("struggleCamera", true);
             adhesiveTethers = builder.define("adhesiveTethers", true);
             // Keep the existing saved key; it now controls 3D residue for every material.
-            glueCoating3d = builder.comment("Extrude all residue pixels outside skin layers; disable for flat coatings")
+            glueCoating3d = builder.comment("Subtle surface relief on skin-following residue films; disable for smooth films")
                     .define("glueCoating3d", true);
             coatingOpacity=builder.comment("Client only: source opacity multiplier; zero hides residue").defineInRange("coatingOpacity",1.,0,2);
-            coatingThickness=builder.comment("Client only: pixel relief multiplier; zero uses a flat surface").defineInRange("coatingThickness",1.,0,3);
+            coatingThickness=builder.comment("Client only: thin-film micro-relief multiplier; zero uses a smooth skin surface").defineInRange("coatingThickness",1.,0,3);
             strandDisplayLimit=builder.comment("Client only: maximum visible contact groups per target; each contains strandDensity independent strands, physics unchanged").defineInRange("strandDisplayLimit",64,0,64);
             strandDensity=builder.comment("Client only: base strands per contact, 1-128; default target budget 512, maximum 8192. Fresh contact density adapts up to 4x inside this budget; high values increase rendering cost, not physics").defineInRange("strandDensity",8,1,128);
             var visuals=new java.util.LinkedHashMap<String,MaterialVisuals>();

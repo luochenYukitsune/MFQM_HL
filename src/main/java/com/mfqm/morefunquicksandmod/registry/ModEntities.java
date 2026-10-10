@@ -34,7 +34,7 @@ public final class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<BlobEntity>> MUDDY_BLOB = blob("muddy_blob");
     public static final DeferredHolder<EntityType<?>, EntityType<BlobEntity>> SAND_BLOB = blob("sand_blob");
     public static final DeferredHolder<EntityType<?>, EntityType<BlobEntity>> TAR_SLIME = blob("tar_slime");
-    public static final DeferredHolder<EntityType<?>, EntityType<MfqmBeeEntity>> BEE = entity("bee", EntityType.Builder.of(MfqmBeeEntity::new, MobCategory.MONSTER).sized(0.7F,0.5F).clientTrackingRange(8));
+    public static final DeferredHolder<EntityType<?>, EntityType<MfqmBeeEntity>> BEE = entity("bee", EntityType.Builder.of(MfqmBeeEntity::new, MobCategory.MONSTER).sized(0.7F,0.5F).clientTrackingRange(8).notInPeaceful());
     public static final DeferredHolder<EntityType<?>, EntityType<TentacleEntity>> TENTACLES = tentacle("tentacles");
     public static final DeferredHolder<EntityType<?>, EntityType<TentacleEntity>> MUD_TENTACLES = tentacle("mud_tentacles");
     public static final DeferredHolder<EntityType<?>, EntityType<SurfaceEffectEntity>> BUBBLE = effect("bubble");
@@ -52,7 +52,7 @@ public final class ModEntities {
     private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> entity(String name, EntityType.Builder<T> builder) {
         return ENTITIES.register(name, () -> builder.build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(MFQM.MOD_ID, name))));
     }
-    private static DeferredHolder<EntityType<?>, EntityType<BlobEntity>> blob(String id) { return entity(id, EntityType.Builder.of(BlobEntity::new, MobCategory.MONSTER).sized(1.8F,1.8F).clientTrackingRange(10)); }
+    private static DeferredHolder<EntityType<?>, EntityType<BlobEntity>> blob(String id) { return entity(id, EntityType.Builder.of(BlobEntity::new, MobCategory.MONSTER).sized(1.8F,1.8F).clientTrackingRange(10).notInPeaceful()); }
     private static DeferredHolder<EntityType<?>, EntityType<TentacleEntity>> tentacle(String id) { return entity(id, EntityType.Builder.of(TentacleEntity::new, MobCategory.MISC).sized(0.6F,2).clientTrackingRange(10).updateInterval(2)); }
     private static DeferredHolder<EntityType<?>, EntityType<SurfaceEffectEntity>> effect(String id) { return entity(id, EntityType.Builder.of(SurfaceEffectEntity::new, MobCategory.MISC).sized(0.4F,0.2F).clientTrackingRange(6).updateInterval(3).noSave()); }
     private static DeferredHolder<EntityType<?>, EntityType<ConnectorEntity>> connector(String id) { return entity(id, EntityType.Builder.of(ConnectorEntity::new, MobCategory.MISC).sized(0.2F,0.2F).clientTrackingRange(12).updateInterval(1)); }

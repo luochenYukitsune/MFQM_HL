@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 /** Wet foot films and independent complete volumetric strands; physics is server-owned. */
 public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherEntity,AdhesiveTetherRenderer.State> {
     private final AdhesiveFeetSampler feet;
-    record Filament(Vec3 root,Vec3 end,double width,double rootWidth){}
+    record Filament(Vec3 root,Vec3 end,double width,double rootWidth,SkinSurfaceContact.Hit attachment,java.util.List<CoatingVoxels.Quad> geometry){}
     public static final class State extends EntityRenderState {
         Vec3 foot=Vec3.ZERO,shin=Vec3.ZERO;
         int color;
@@ -77,14 +77,22 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
             var anchor=RenderedAdhesiveSurface.root(cell,surfaceHeight,original,WetAdhesiveStyle.width(0,widthSeed,entity.material()),entity.getId(),i,density);
             if(anchor==null)continue;
             var localRoot=anchor.point().subtract(origin);
-            var attached=point(WetAdhesiveStyle.endpoint(state.surface,depth,seed,vector(localRoot)));
+            var suggested=WetAdhesiveStyle.endpoint(sampled.surface(),depth,seed,vector(anchor.point().subtract(target.getPosition(tick))));
+            var rayOrigin=sampled.surface().center().add(sampled.surface().up().scale(WetAdhesiveStyle.attachmentHeight(sampled.surface(),depth,seed)));
+            var skin=SkinSurfaceContact.project(rayOrigin.subtract(vector(sampled.skinOffset())),suggested.subtract(rayOrigin),sampled.skin());
+            CoatingVoxels.Vec attachedPoint=skin==null?suggested:skin.point().add(vector(sampled.skinOffset())).add(skin.normal().scale(.012/16));
+            var attached=entity.breaking()?point(WetAdhesiveStyle.endpoint(state.surface,depth,seed,vector(localRoot))):target.getPosition(tick).add(point(attachedPoint)).subtract(origin);
             var end=localRoot.add(attached.subtract(localRoot).scale(remaining));
             var delta=end.subtract(localRoot);double fade=CompactStrandStyle.opacity(delta.horizontalDistance(),end.y+origin.y-(cell.getY()+surfaceHeight));
             if(fade<=0)continue;
             double width=WetAdhesiveStyle.width(delta.length(),widthSeed,entity.material())*Math.max(.05,remaining);
             double rootWidth=Math.min(width,anchor.radius());
-            filaments.add(new Filament(localRoot,end,width,rootWidth));
-            appendFaded(strands,WetAdhesiveStyle.tube(vector(localRoot),vector(end),state.segments,rootWidth,width,seed),fade);
+            var normal=skin==null?attachedPoint.subtract(rayOrigin).unit():skin.normal();
+            var endSurface=new SkinSurfaceContact.Hit(vector(end),normal);
+            var geometry=entity.breaking()?WetAdhesiveStyle.tube(vector(localRoot),vector(end),state.segments,rootWidth,width,seed)
+                    :WetAdhesiveStyle.attachedTube(vector(localRoot),endSurface,state.surface,state.segments,rootWidth,width,seed);
+            filaments.add(new Filament(localRoot,end,width,rootWidth,endSurface,geometry));
+            appendFaded(strands,geometry,fade);
         }
         state.filaments=java.util.List.copyOf(filaments);state.strands=java.util.List.copyOf(strands);
         int rgb=switch(entity.material()) {

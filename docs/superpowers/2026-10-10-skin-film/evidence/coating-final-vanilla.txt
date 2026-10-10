@@ -1,0 +1,30 @@
+[22:47:00] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\coating-client
+[22:47:00] [main/WARN] [ne.ne.fm.lo.FMLConfig/CORE]: Configuration file C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\coating-client\config\fml.toml is not correct. Correcting
+		更多趣味流沙（MFQM） 0.7.5-inside (mfqm)
+[22:47:00] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > net.neoforged.neoforge-coremods-21.11.45.jar
+ - mfqm (jar(mods/MFQM-neoforge-1.21.11-0.7.5-inside.jar))
+ - minecraft (composite(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45-client-extra-aka-minecraft-resources.jar), filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - mixinextras.neoforge (jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+[22:47:01] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/shaderpack/IdMap (java.lang.ClassNotFoundException: net.irisshaders.iris.shaderpack.IdMap)
+[22:47:01] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/shaderpack/programs/ProgramSource (java.lang.ClassNotFoundException: net.irisshaders.iris.shaderpack.programs.ProgramSource)
+[22:47:10] [modloading-worker-0/INFO] [MFQM/]: MFQM initializing...
+[22:47:10] [modloading-worker-0/INFO] [MFQM/]: MFQM initialized.
+[22:47:26] [Render thread/INFO] [MFQM/]: MFQM_INSTALLED_JAR_LOADED file:/C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/run/1.21.11/coating-client/mods/MFQM-neoforge-1.21.11-0.7.5-inside.jar
+[22:47:26] [Render thread/INFO] [MFQM/]: MFQM_CREATIVE_BOARD_VARIANTS_COMPLETE coated=粘鼠板（已涂胶） empty=粘鼠板底板（未涂胶） adjacent=true
+[22:47:26] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_VISUAL_CHECKS_COMPLETE modelCases=60
+[22:47:26] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_INPUT_CHECKS_COMPLETE shortTap=true repeat=false tetherSwap=false menuLeak=false
+[22:47:26] [Render thread/INFO] [MFQM/]: MFQM_CHINESE_CHECKS_COMPLETE englishKeys=572 chineseKeys=828 active=true configScreen=true formats=true registeredNames=true
+[22:47:26] [Render thread/INFO] [MFQM/]: MFQM_CLIENT_CHECKS_COMPLETE items=180 visible=165 blocks=51 fluids=14 entities=18
+[22:47:26] [Render thread/INFO] [MFQM/]: MFQM_COATING_MASKS_COMPLETE cases=600 legTiers1to3=true headDryThrough7=true fullBody=true
+[22:47:26] [Render thread/INFO] [MFQM/]: MFQM_COATING_CHECKS_START skinLayers=false actualModVersion=absent groundCamera=true
+[22:47:32] [Render thread/INFO] [MFQM/]: MFQM_COATING_CLOSE_FIT_COMPLETE basePadding=.012 defaultReliefMax=.018 nativeOuter=true anatomicalCoverageUnchanged=true
+[22:47:32] [Render thread/INFO] [MFQM/]: MFQM_COATING_FLAT_LOD_COMPLETE outerFaces=6 pixelCache=true alphaCutouts=true
+[22:47:32] [Render thread/INFO] [MFQM/]: MFQM_COATING_BODY_COMPLETE wide=true slim=true fullCoverage=true detailedSubmissions=1992
+[22:47:37] [Render thread/INFO] [MFQM/]: MFQM_COATING_MASKS_COMPLETE cases=600 legTiers1to3=true headDryThrough7=true fullBody=true
+[22:47:37] [Render thread/INFO] [MFQM/]: MFQM_COATING_RESOURCE_RELOAD_COMPLETE regenerated=true cacheBounded=true
+[22:47:38] [Render thread/INFO] [MFQM/]: MFQM_COATING_ARM_COMPLETE actualSkin=SLIM baseFilmSeparation=.012 nativeOuter=true flight=false
+[22:47:40] [Render thread/INFO] [MFQM/]: MFQM_ALL_MATERIAL_COATINGS_COMPLETE nativePose=true tint=true adjustable=true
+[22:47:42] [Render thread/INFO] [MFQM/]: MFQM_COATING_DISPLAY_CONTROLS_COMPLETE zeroOpacityHidden=true zeroThicknessFlat=true
+[22:47:42] [Render thread/INFO] [MFQM/]: MFQM_COATING_CHECKS_COMPLETE skinLayers=false firstPerson=false anatomicalHeightMasks=true originalPngUnchanged=true
+PASS: actual mods JAR, voxel coating masks, body/arm rendering, actual optional skin mesh and resource reload; requested screenshots=0 SHA256=05f8c634c8774f304c6e043e3ba5866270b60509f7ecc8d91dca2fd434842cd8

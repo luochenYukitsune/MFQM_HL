@@ -25,6 +25,10 @@ final class TranslucentGeometry {
         out.addVertex(matrix,(float)p.x(),(float)p.y(),(float)p.z()).setColor(color).setUv(u,v)
                 .setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(matrix,(float)n.x(),(float)n.y(),(float)n.z());
     }
+    static void texturedQuad(VertexConsumer vertices,PoseStack.Pose matrix,CoatingVoxels.Quad q,double[] uv,int color,int light) {
+        var points=new CoatingVoxels.Vec[]{q.a(),q.b(),q.c(),q.d()};
+        for(int i=0;i<4;i++)vertex(vertices,matrix,points[i],q.normal(),color|0xff000000,light,(float)uv[i*2],(float)uv[i*2+1]);
+    }
     static CoatingVoxels.Quad modelPixels(CoatingVoxels.Quad q) {
         return new CoatingVoxels.Quad(q.a().scale(1./16),q.b().scale(1./16),q.c().scale(1./16),q.d().scale(1./16),q.normal(),q.color());
     }

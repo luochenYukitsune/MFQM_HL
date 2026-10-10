@@ -1,0 +1,73 @@
+> Task :createMinecraftArtifacts UP-TO-DATE
+
+> Task :compileJava
+.\gradlew.bat : 注: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\src\main\java\com\mfqm\morefunquicks
+andmod\client\ClientPortChecks.java使用或覆盖了已过时的 API。
+所在位置 行:2 字符: 51
++ ... 21.0.9+10'; .\gradlew.bat check build prepareInstalledClient -PmfqmCl ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (注: C:\Users\Adm...使用或覆盖了已过时的 API。:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+注: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+
+> Task :processResources UP-TO-DATE
+> Task :classes
+> Task :jarJar NO-SOURCE
+> Task :jar
+> Task :compileTestJava UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test
+
+> Task :verifyAdhesiveContact
+AdhesiveContact: 78 behavioral checks passed
+
+> Task :verifyAdhesiveMotion
+AdhesiveMotion: 112 behavioral checks passed
+
+> Task :verifyAdhesiveRules
+AdhesiveRules: 241 behavioral checks passed
+
+> Task :verifyCoatingAppearance
+CoatingAppearance: 22 behavioral checks passed
+
+> Task :verifyCoatingVoxels
+CoatingVoxels: 389 behavioral checks passed
+
+> Task :verifyCompactStrandStyle
+CompactStrandStyle: 9742 behavioral checks passed
+
+> Task :verifyIterationFluidCompatibility
+IterationFluidCompatibility: 23 behavioral checks passed
+
+> Task :verifySinkingMotion
+SinkingMotion: 35 motion groups, 35 resistance boundaries and 23 coating height checks passed
+
+> Task :verifySkinSurfaceContact
+SkinSurfaceContact: 5122 behavioral checks passed
+
+> Task :verifyStrugglePose
+STRUGGLE_POSE_TESTS_PASSED checks=378
+
+> Task :verifyStruggleRules
+StruggleRules: 739 assertions passed; board fed=19.8s hungry=33.6s
+
+> Task :verifySurfaceBubbleStyle
+SurfaceBubbleStyle: 41665 checks passed
+
+> Task :verifyWetAdhesiveStyle
+WetAdhesiveStyle: 7032 behavioral checks passed
+
+> Task :check
+> Task :assemble
+> Task :build
+> Task :downloadAssets UP-TO-DATE
+> Task :prepareClientRun UP-TO-DATE
+> Task :prepareInstalledClient
+
+[Incubating] Problems report is available at: file:///C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 7s
+22 actionable tasks: 17 executed, 5 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html

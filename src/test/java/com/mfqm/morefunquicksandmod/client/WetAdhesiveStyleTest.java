@@ -16,6 +16,11 @@ public final class WetAdhesiveStyleTest {
         check(WetAdhesiveStyle.taper(.5)<WetAdhesiveStyle.taper(0),"strand middle narrows between attached ends");
         check(WetAdhesiveStyle.sag(.8)<WetAdhesiveStyle.sag(.1),"tense strands sag less than relaxed strands");
         check(WetAdhesiveStyle.contraction(0)==1 && WetAdhesiveStyle.contraction(.5)==.25 && WetAdhesiveStyle.contraction(1)==0,"breaking retracts the entire continuous strand including its raised ankle endpoint");
+        var skinFrame=new WetAdhesiveStyle.Frame(new Vec(0,0,0),new Vec(0,1,0),new Vec(1,0,0),new Vec(0,0,1),.125,.125);
+        var skinEnd=WetAdhesiveStyle.endpoint(skinFrame,.1,17,new Vec(.4,-.1,0));
+        var coarse=WetAdhesiveStyle.attachedTube(new Vec(.4,-.1,0),new SkinSurfaceContact.Hit(skinEnd,new Vec(1,0,0)),skinFrame,6,.04,.04,17);
+        check(coarse.stream().filter(q->q.a().y()>.02 || q.b().y()>.02).flatMap(q->List.of(q.a(),q.b(),q.c(),q.d()).stream())
+                .filter(p->p.y()>.02).allMatch(p->p.x()>=.125),"thick attached strand must not enter the leg even when its center is on the surface");
         for(var frame:List.of(
                 new WetAdhesiveStyle.Frame(new Vec(0,0,0),new Vec(0,1,0),new Vec(1,0,0),new Vec(0,0,1),.135,.135),
                 new WetAdhesiveStyle.Frame(new Vec(2,3,4),new Vec(0,1,0),new Vec(0,0,1),new Vec(-1,0,0),.135,.135))) {

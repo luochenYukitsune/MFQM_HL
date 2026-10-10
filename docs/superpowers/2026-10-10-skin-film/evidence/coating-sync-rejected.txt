@@ -1,0 +1,98 @@
+[22:42:04] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\coating-client
+[22:42:04] [main/WARN] [ne.ne.fm.lo.FMLConfig/CORE]: Configuration file C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\coating-client\config\fml.toml is not correct. Correcting
+		更多趣味流沙（MFQM） 0.7.5-inside (mfqm)
+[22:42:05] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > net.neoforged.neoforge-coremods-21.11.45.jar
+ - mfqm (jar(mods/MFQM-neoforge-1.21.11-0.7.5-inside.jar))
+ - minecraft (composite(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45-client-extra-aka-minecraft-resources.jar), filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - mixinextras.neoforge (jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+[22:42:05] [main/WARN] [mixin/]: Error loading class: traben/entity_model_features/models/parts/EMFModelPart (java.lang.ClassNotFoundException: traben.entity_model_features.models.parts.EMFModelPart)
+[22:42:05] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/shaderpack/IdMap (java.lang.ClassNotFoundException: net.irisshaders.iris.shaderpack.IdMap)
+[22:42:05] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/shaderpack/programs/ProgramSource (java.lang.ClassNotFoundException: net.irisshaders.iris.shaderpack.programs.ProgramSource)
+[22:42:14] [modloading-worker-0/INFO] [MFQM/]: MFQM initializing...
+[22:42:14] [modloading-worker-0/INFO] [MFQM/]: MFQM initialized.
+[22:42:19] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/firstperson pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+[22:42:19] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/trender pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+[22:42:19] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/skinlayers3d pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+[22:42:19] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/transition pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+[22:42:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/firstperson pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+[22:42:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/trender pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+[22:42:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/skinlayers3d pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+[22:42:24] [Render thread/ERROR] [minecraft/AbstractPackResources]: Couldn't load mod/transition pack metadata: Pack declares support for format 75, but game versions supporting formats 17 to 81 require a supported_formats field. Add "supported_formats": [75, 81] or require a version greater or equal to 82.0.
+[22:42:31] [Render thread/INFO] [MFQM/]: MFQM_INSTALLED_JAR_LOADED file:/C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/run/1.21.11/coating-client/mods/MFQM-neoforge-1.21.11-0.7.5-inside.jar
+[22:42:31] [Render thread/INFO] [MFQM/]: MFQM_CREATIVE_BOARD_VARIANTS_COMPLETE coated=粘鼠板（已涂胶） empty=粘鼠板底板（未涂胶） adjacent=true
+[22:42:31] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_VISUAL_CHECKS_COMPLETE modelCases=60
+[22:42:31] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_INPUT_CHECKS_COMPLETE shortTap=true repeat=false tetherSwap=false menuLeak=false
+[22:42:31] [Render thread/INFO] [MFQM/]: MFQM_CHINESE_CHECKS_COMPLETE englishKeys=572 chineseKeys=828 active=true configScreen=true formats=true registeredNames=true
+[22:42:31] [Render thread/INFO] [MFQM/]: MFQM_CLIENT_CHECKS_COMPLETE items=180 visible=165 blocks=51 fluids=14 entities=18
+[22:42:31] [Render thread/INFO] [MFQM/]: MFQM_COATING_MASKS_COMPLETE cases=600 legTiers1to3=true headDryThrough7=true fullBody=true
+[22:42:31] [Render thread/INFO] [MFQM/]: MFQM_COATING_CHECKS_START skinLayers=true actualModVersion=1.11.3 groundCamera=true
+[22:42:37] [Render thread/INFO] [MFQM/]: MFQM_SKIN_LAYERS_MESH_VERIFIED skin=WIDE visibleJacket=true dynamicSizing=true
+[22:42:37] [Render thread/INFO] [MFQM/]: MFQM_SKIN_LAYERS_MESH_VERIFIED skin=WIDE visibleJacket=true dynamicSizing=true
+[22:42:37] [Render thread/INFO] [MFQM/]: MFQM_SKIN_LAYERS_MESH_VERIFIED skin=SLIM visibleJacket=true dynamicSizing=true
+[22:42:37] [Render thread/INFO] [MFQM/]: MFQM_SKIN_LAYERS_MESH_VERIFIED skin=SLIM visibleJacket=true dynamicSizing=true
+[22:42:37] [Render thread/INFO] [MFQM/]: MFQM_COATING_CLOSE_FIT_COMPLETE basePadding=.012 defaultReliefMax=.018 nativeOuter=true anatomicalCoverageUnchanged=true
+[22:42:37] [Render thread/INFO] [MFQM/]: MFQM_COATING_BODY_COMPLETE wide=true slim=true fullCoverage=true detailedSubmissions=1572
+[22:42:42] [Render thread/INFO] [MFQM/]: MFQM_COATING_MASKS_COMPLETE cases=600 legTiers1to3=true headDryThrough7=true fullBody=true
+[22:42:42] [Render thread/INFO] [MFQM/]: MFQM_COATING_RESOURCE_RELOAD_COMPLETE regenerated=true cacheBounded=true
+[22:42:44] [Render thread/INFO] [MFQM/]: MFQM_COATING_ARM_COMPLETE actualSkin=SLIM baseFilmSeparation=.012 nativeOuter=true flight=false
+[22:42:46] [Render thread/INFO] [MFQM/]: MFQM_ALL_MATERIAL_COATINGS_COMPLETE nativePose=true tint=true adjustable=true
+[22:42:48] [Render thread/INFO] [MFQM/]: MFQM_COATING_DISPLAY_CONTROLS_COMPLETE zeroOpacityHidden=true zeroThicknessFlat=true
+[22:42:52] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_MODEL_COMPLETE nativeBody=true hiddenHead=true vanillaHands=true crouchingHeldItem=true headLevel3Dry=true flight=false
+[22:42:55] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage=standing samples=532 maxError=1.1944189326376765E-7
+[22:42:57] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage=crouching samples=432 maxError=1.3348812510944096E-7
+[22:42:59] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage=turned samples=502 maxError=1.341104507446289E-7
+[22:43:14] [Render thread/INFO] [MFQM/]: MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage=glue64 samples=5228 maxError=1.3657139822709083E-7
+[22:43:14] [Render thread/INFO] [MFQM/]: MFQM_WET_ADHESIVE_COMPLETE film2=true closedShell=true independentStrands=true noBranches=true hexagonalTubes=true nativeFootBounds=true depthHeight=true rootsInside=true translucent=true
+[22:43:16] [Render thread/INFO] [MFQM/]: MFQM_WET_ADHESIVE_COMPLETE film2=true closedShell=true independentStrands=true noBranches=true hexagonalTubes=true nativeFootBounds=true depthHeight=true rootsInside=true translucent=true
+[22:43:16] [Render thread/ERROR] [MFQM/]: MFQM_WET_CONTACT_MISMATCH live=66 synced=64 authoritative=64 phase=18 y=253.8876714645478
+[22:43:16] [Render thread/ERROR] [MFQM/]: MFQM_CLIENT_CHECKS_FAILED glue coating
+java.lang.IllegalStateException: Coating client check failed: dense trap still has 64 physical synchronized contacts: live=66 synchronized=64 phase=18 y=253.8876714645478
+	at TRANSFORMER/mfqm@0.7.5-inside/com.mfqm.morefunquicksandmod.client.CoatingClientChecks.require(CoatingClientChecks.java:414) ~[MFQM-neoforge-1.21.11-0.7.5-inside.jar:?] {}
+	at TRANSFORMER/mfqm@0.7.5-inside/com.mfqm.morefunquicksandmod.client.CoatingClientChecks.verifyCompactBundles(CoatingClientChecks.java:266) ~[MFQM-neoforge-1.21.11-0.7.5-inside.jar:?] {}
+	at TRANSFORMER/mfqm@0.7.5-inside/com.mfqm.morefunquicksandmod.client.CoatingClientChecks.tick(CoatingClientChecks.java:236) ~[MFQM-neoforge-1.21.11-0.7.5-inside.jar:?] {}
+	at net.neoforged.bus.EventBus.post(EventBus.java:360) [bus-8.0.5.jar:?] {}
+	at net.neoforged.bus.EventBus.post(EventBus.java:328) [bus-8.0.5.jar:?] {}
+	at TRANSFORMER/neoforge@21.11.45/net.neoforged.neoforge.client.ClientHooks.fireClientTickPost(ClientHooks.java:938) [neoforge-21.11.45.jar:?] {}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.Minecraft.tick(Minecraft.java:1945) [neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:mixin[APP:firstperson.mixins.json:FeatureRendererMixin from mod firstperson,APP:skinlayers3d.mixins.json:HttpTextureMixin from mod skinlayers3d,APP:transition.mixins.json:MinecraftMixin from mod transition]}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.Minecraft.runTick(Minecraft.java:1299) [neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:mixin[APP:firstperson.mixins.json:FeatureRendererMixin from mod firstperson,APP:skinlayers3d.mixins.json:HttpTextureMixin from mod skinlayers3d,APP:transition.mixins.json:MinecraftMixin from mod transition]}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.Minecraft.run(Minecraft.java:918) [neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {neoforge:mixin[APP:firstperson.mixins.json:FeatureRendererMixin from mod firstperson,APP:skinlayers3d.mixins.json:HttpTextureMixin from mod skinlayers3d,APP:transition.mixins.json:MinecraftMixin from mod transition]}
+	at TRANSFORMER/minecraft@1.21.11/net.minecraft.client.main.Main.main(Main.java:229) [neoforge-21.11.45-client-extra-aka-minecraft-resources.jar:?] {}
+	at net.neoforged.fml.startup.Client.main(Client.java:19) [loader-10.0.36.jar:10.0] {}
+[22:43:16] [Render thread/INFO] [minecraft/Minecraft]: Stopping!
+[22:43:16] [Server thread/INFO] [minecraft/ServerGamePacketListenerImpl]: Dev lost connection: 连接中断
+[22:43:16] [Server thread/INFO] [minecraft/MinecraftServer]: Dev退出了游戏
+[22:43:16] [Server thread/INFO] [minecraft/ServerCommonPacketListenerImpl]: Stopping singleplayer server as player logged out
+[22:43:16] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[22:43:16] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[22:43:16] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+python : Traceback (most recent call last):
+所在位置 行:2 字符: 1
++ python tools/smoke_viscosity_client.py --coating-only --first-person  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\tools\smoke_viscosity_client.py", line 256, in 
+<module>
+    raise SystemExit(run(arguments.timeout, arguments.creative_ground_traps, not arguments.full_diagnostics, arguments.
+flight_controls, arguments.bounded_only, arguments.board_visual, arguments.actions_only, arguments.coating_only, argume
+nts.skin_layers, arguments.coating_visual, arguments.first_person, arguments.dynamic_only, arguments.dynamic_visual, ar
+guments.animations, arguments.visual_only))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\tools\smoke_viscosity_client.py", line 55, in r
+un
+    return run_locked(game, timeout, creative_ground_traps, fail_fast, flight_controls, bounded_only, board_visual, act
+ions_only, coating_only, skin_layers, coating_visual, first_person, dynamic_only, dynamic_visual, animations, visual_on
+ly)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^
+  File "C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\tools\smoke_viscosity_client.py", line 167, in 
+run_locked
+    raise RuntimeError("Viscosity validation failed; inspect " + str(logfile))
+RuntimeError: Viscosity validation failed; inspect C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\
+1.21.11\validation\coating-client-true-firstperson.log

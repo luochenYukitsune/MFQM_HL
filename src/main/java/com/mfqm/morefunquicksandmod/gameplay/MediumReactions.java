@@ -18,6 +18,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -31,7 +32,9 @@ public final class MediumReactions {
     private MediumReactions() {}
     public static boolean nearSolidEdge(BlockGetter level, BlockPos pos) {
         for (var direction : Direction.Plane.HORIZONTAL) {
-            var state = level.getBlockState(pos.relative(direction));
+            var neighbor = pos.relative(direction);
+            if (level instanceof LevelReader reader && !reader.hasChunkAt(neighbor)) continue;
+            var state = level.getBlockState(neighbor);
             if (!state.isAir() && !(state.getBlock() instanceof LegacyStateBlock) && state.getFluidState().isEmpty()) return true;
         }
         return false;
@@ -42,12 +45,17 @@ public final class MediumReactions {
         return state.hasProperty(LegacyStateBlock.VARIANT) ? state.setValue(LegacyStateBlock.VARIANT, Math.clamp(variant, 0, 15)) : state;
     }
     public static boolean nearFluid(ServerLevel level, BlockPos pos, net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> tag) {
-        for (var direction : Direction.values()) if (level.getFluidState(pos.relative(direction)).is(tag)) return true;
+        for (var direction : Direction.values()) {
+            var neighbor = pos.relative(direction);
+            if (level.hasChunkAt(neighbor) && level.getFluidState(neighbor).is(tag)) return true;
+        }
         return false;
     }
     private static boolean hot(ServerLevel level, BlockPos pos) {
         for (var direction : Direction.values()) {
-            var state = level.getBlockState(pos.relative(direction));
+            var neighbor = pos.relative(direction);
+            if (!level.hasChunkAt(neighbor)) continue;
+            var state = level.getBlockState(neighbor);
             if (state.getFluidState().is(FluidTags.LAVA) || state.is(Blocks.FIRE) || state.is(Blocks.SOUL_FIRE)) return true;
         }
         return false;
@@ -280,6 +288,8 @@ public final class MediumReactions {
         String parent = id.equals("vore_hole") ? "blossom" : "meat_wall";
         for (int variant = 6; variant <= 9; variant++) {
             var at = pos.relative(mouthDirection(id, variant).getOpposite());
+            // Defer validation if its possible parent has not been loaded yet.
+            if (!level.hasChunkAt(at)) return;
             var state = level.getBlockState(at);
             if (state.is(ModBlocks.byId(parent)) && variant(state) == variant) return;
         }
@@ -289,7 +299,10 @@ public final class MediumReactions {
         for (int up = 1; up <= 5; up++) {
             var at = base.above(up);
             if (!level.hasChunkAt(at) || !level.getBlockState(at).is(ModBlocks.byId("meat_wall"))) return false;
-            if (up < 5) for (var direction : Direction.Plane.HORIZONTAL) if (!level.getBlockState(at.relative(direction)).is(ModBlocks.byId("meat_wall"))) return false;
+            if (up < 5) for (var direction : Direction.Plane.HORIZONTAL) {
+                var neighbor = at.relative(direction);
+                if (!level.hasChunkAt(neighbor) || !level.getBlockState(neighbor).is(ModBlocks.byId("meat_wall"))) return false;
+            }
         }
         return true;
     }

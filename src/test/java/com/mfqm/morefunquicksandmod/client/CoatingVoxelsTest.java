@@ -12,6 +12,7 @@ public final class CoatingVoxelsTest {
         var shallow=CoatingVoxels.build(List.of(face),(u,v)->v>=26?0x78f5f4ef:0);
         check(shallow.pixels()==8,"shallow mask covers exactly two ankle rows");
         var full=CoatingVoxels.build(List.of(face),(u,v)->0x90f5f4ef);
+        check(full.quads().stream().flatMap(q->List.of(q.a(),q.b(),q.c(),q.d()).stream()).allMatch(p->p.z()<=2.318001),"skin film stays within .018 model pixels instead of a plastic relief shell");
         var thin=CoatingVoxels.build(List.of(face),(u,v)->0x90f5f4ef,.5);
         check(full.quads().stream().flatMap(q->List.of(q.a(),q.b(),q.c(),q.d()).stream()).allMatch(p->p.z()<=2.420001),"default coating relief hugs the skin within 0.12 model pixels");
         check(thin.pixels()==full.pixels(),"thickness never changes anatomical coverage");

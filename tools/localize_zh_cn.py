@@ -95,10 +95,10 @@ CONFIG = {
     "glueActivityRadius": "胶水受困活动半径", "honeyActivityRadius": "蜂蜜受困活动半径",
     "tarActivityRadius": "焦油受困活动半径", "slimeActivityRadius": "黏液受困活动半径",
     "mudActivityRadius": "泥潭受困活动半径", "boardActivityRadius": "粘鼠板受困活动半径",
-    "glueCoating3d": "立体介质覆盖（全部材质）",
-    "coatingOpacity": "全局覆盖透明强度", "coatingThickness": "全局像素凸起厚度", "strandDisplayLimit": "每个角色黏丝束显示上限",
+    "glueCoating3d": "贴肤薄膜细节（全部材质）",
+    "coatingOpacity": "全局覆盖透明强度", "coatingThickness": "全局胶层微起伏", "strandDisplayLimit": "每个角色黏丝束显示上限",
     "strandDensity": "每个接触的独立黏丝数量",
-    "materialOpacity": "此材质覆盖透明强度", "materialThickness": "此材质像素凸起厚度", "materialStrands": "此材质黏丝束显示上限",
+    "materialOpacity": "此材质覆盖透明强度", "materialThickness": "此材质胶层微起伏", "materialStrands": "此材质黏丝束显示上限",
     "glueVerticalDistance": "胶水黏丝竖向断裂距离", "honeyVerticalDistance": "蜂蜜黏丝竖向断裂距离",
     "tarVerticalDistance": "焦油黏丝竖向断裂距离", "slimeVerticalDistance": "黏液黏丝竖向断裂距离", "boardVerticalDistance": "粘鼠板黏丝竖向断裂距离",
     "genGluePools": "生成胶水池", "genStickyBoards": "遗迹生成粘鼠板", "gluePoolChance": "胶水池候选间隔",
@@ -162,7 +162,7 @@ def build():
         **{"mfqm.configuration." + k: v for k, v in {"adhesive": "黏连与胶水", "worldgen": "世界生成", "mobs": "生物生成",
             "items": "工具获取", "options": "玩法与物理", "hud": "界面与视角", "rendering": "画面显示", "compat": "模组兼容"}.items()},
         "mfqm.configuration.creativeGroundPhysics.tooltip": "开启后，关闭飞行的创造玩家也会黏住、下陷并需要挣扎。飞行和旁观始终免疫；创造模式仍免受伤害。",
-        "mfqm.configuration.glueCoating3d.tooltip": "将胶水、焦油、蜂蜜、黏液及泥沙等全部残留显示为逐像素凸起，适配 FirstPersonModel 与 3D Skin Layers。关闭后使用平面覆盖，不影响黏力和水洗。",
+        "mfqm.configuration.glueCoating3d.tooltip": "将胶水、焦油、蜂蜜、黏液及泥沙等残留显示为贴合实际皮肤和衣物的薄膜，沿用 3D Skin Layers 的凹凸表面。关闭后取消微起伏，仍保留贴肤覆盖，不影响黏力和水洗。",
         "mfqm.configuration.gluePoolChance.tooltip": "适宜新区块平均每此数量尝试一个胶水池候选；值越小，候选越多，地形不适宜时仍不会生成。",
         "mfqm.configuration.bootLossChance.tooltip": "胶水或涂胶粘鼠板中奋力拔脚、挣断时的单次留靴概率。每次连续受困只检查一次；靴子的原有组件完整保留。",
         "mfqm.configuration.realisticSuffocation.tooltip": "开启时玩家耗尽沉陷空气量后才受窒息伤害；关闭时头部没入危险介质便可能受伤。",
@@ -188,9 +188,9 @@ def build():
     for field in ("coatingOpacity","materialOpacity"):
         result["mfqm.configuration."+field+".tooltip"]="仅影响本机显示。1 为原始透明强度，0 隐藏覆盖；全局值与材质值相乘，不改变浸入高度、水洗或黏力。"
     for field in ("coatingThickness","materialThickness"):
-        result["mfqm.configuration."+field+".tooltip"]="仅影响本机显示。1 为默认像素凸起厚度；全局值与材质值相乘，0 使用平面覆盖，不改变浸入高度和黏力。"
+        result["mfqm.configuration."+field+".tooltip"]="仅影响本机显示。1 为默认薄胶层的细微起伏；全局值与材质值相乘，0 取消起伏。不会把整个身体撑成厚壳，不改变浸入高度和黏力。"
     for field in ("strandDisplayLimit","materialStrands"):
-        result["mfqm.configuration."+field+".tooltip"]="每个角色可见接触组数量，默认 64，范围 0～64；每组有 1～8 根独立完整黏丝，由密度设置控制。取全局与材质上限中较小的值，优先显示脚边新连接；远处旧丝淡出，不影响服务器物理。"
+        result["mfqm.configuration."+field+".tooltip"]="每个角色可见接触组数量，默认 64，范围 0～64；每组最多 128 根独立完整黏丝，由密度设置控制。取全局与材质上限中较小的值，优先显示脚边新连接；远处旧丝淡出，不影响服务器物理。"
     result["mfqm.configuration.strandDensity.tooltip"]="每个接触的黏丝基数，默认 8，范围 1～128；每个角色满额最多约 512 根，上限可调至 8192 根。接触少时每组最多增密四倍，但不超出总预算；移动后接触逐渐增加。位置、宽厚和轻微弯曲稳定随机，根部始终在介质内且不分叉。高数值会增加绘制开销，不改变物理黏力。"
     for medium in ("glue","honey","tar","slime","board"):
         result["mfqm.configuration."+medium+"VerticalDistance.tooltip"]="黏丝竖向延伸超过此距离时断开，单位为格。与水平活动半径独立；延长不会使角色飞行。服务器决定此值。"

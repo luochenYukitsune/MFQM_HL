@@ -37,7 +37,7 @@ public final class CoatingVoxels {
                 // The mask owns opacity; do not turn a thin translucent patch
                 // into dense white paint when switching to voxel geometry.
                 colors[y][x]=color;
-                heights[y][x]=thickness*(.06+.02*((f.u+x)*37+(f.v+y)*17&3));
+                heights[y][x]=thickness*(.006+.004*((f.u+x)*37+(f.v+y)*17&3));
             }
             for(int y=0;y<f.height;y++)for(int x=0;x<f.width;x++) {
                 double h=heights[y][x];if(h==0)continue;
@@ -53,7 +53,7 @@ public final class CoatingVoxels {
         return new Mesh(quads,pixels);
     }
     private static double neighbor(double[][] heights,int x,int y) {
-        return x<0 || y<0 || y>=heights.length || x>=heights[0].length?.02:Math.max(.02,heights[y][x]);
+        return x<0 || y<0 || y>=heights.length || x>=heights[0].length?.002:Math.max(.002,heights[y][x]);
     }
     private static void wall(List<Quad> quads,Vec a,Vec b,Vec outward,Vec normal,double high,double low,int color) {
         if(high<=low+.0001)return;

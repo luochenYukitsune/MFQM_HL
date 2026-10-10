@@ -97,7 +97,7 @@ public final class CoatingClientChecks {
                     coatAvatars(10);if(ticks<45)return;
                     require(GlueCoatingRenderer.detailedSubmissions()>submissions+30,"real rendered body submits voxel geometry");
                     if(SkinLayerClearance.present())for(var avatar:AVATARS)verifySkinMesh(game,avatar);
-                    verifyCloseFit(game);
+                    verifyCloseFit(game);if(!SkinLayerClearance.present())verifyFlatLod(game);
                     screenshot(game,"mfqm-glue-coating-"+(SkinLayerClearance.present()?"skinlayers":"vanilla")+".png");
                     MFQM.LOGGER.info("MFQM_COATING_BODY_COMPLETE wide=true slim=true fullCoverage=true detailedSubmissions={}",GlueCoatingRenderer.detailedSubmissions()-submissions);
                     flat=GlueCoatingRenderer.flatSubmissions();ModConfig.CLIENT.glueCoating3d.set(false);phase=2;ticks=0;
@@ -118,10 +118,14 @@ public final class CoatingClientChecks {
                 }
                 case 4->{
                     coatAvatars(1);var state=QuicksandPhysics.state(game.player);state.coatingType="glue";state.coatingLevel=10;state.coatingTicks=1200;
-                    if(ticks<35)return;
+                    // Render frames are independent of client ticks, particularly
+                    // after resource reload in a background test window.
+                    if(ticks<35 || GlueCoatingRenderer.armSubmissions()<=submissions+30) {
+                        require(ticks<=140,"first-person arm render timeout; submits="+(GlueCoatingRenderer.armSubmissions()-submissions));return;
+                    }
                     require(GlueCoatingRenderer.armSubmissions()>submissions+30,"actual first-person arm submits voxel coating independently of other avatar bodies");
                     if(SkinLayerClearance.present())screenshot(game,"mfqm-glue-first-person.png");
-                    MFQM.LOGGER.info("MFQM_COATING_ARM_COMPLETE actualSkin={} padding={} flight=false",game.player.getSkin().model(),SkinLayerClearance.padding("right_arm",true));
+                    MFQM.LOGGER.info("MFQM_COATING_ARM_COMPLETE actualSkin={} baseFilmSeparation=.012 nativeOuter=true flight=false",game.player.getSkin().model());
                     require(GlueCoatingRenderer.cachedMeshes()<=96,"bounded resource cache");
                     phase=5;ticks=0;
                 }
@@ -257,14 +261,17 @@ public final class CoatingClientChecks {
         if(helpers.size()!=64) {
             var id=game.player.getUUID();
             int serverCount=game.getSingleplayerServer().submit(()->QuicksandPhysics.state(game.getSingleplayerServer().getPlayerList().getPlayer(id)).anchors.size()).orTimeout(2,java.util.concurrent.TimeUnit.SECONDS).join();
-            MFQM.LOGGER.error("MFQM_WET_CONTACT_MISMATCH live={} synced={} authoritative={} phase={} y={}",helpers.size(),QuicksandPhysics.state(game.player).adhesiveConnections,serverCount,phase,game.player.getY());
+            require(serverCount==64,"server retains exactly 64 physical anchors while entity updates are in flight");
+            MFQM.LOGGER.info("MFQM_WET_CONTACT_SYNC live={} synced={} authoritative={} phase={} y={}",helpers.size(),QuicksandPhysics.state(game.player).adhesiveConnections,serverCount,phase,game.player.getY());
         }
-        require(helpers.size()==64,"dense trap still has 64 physical synchronized contacts: live="+helpers.size()+" synchronized="+QuicksandPhysics.state(game.player).adhesiveConnections+" phase="+phase+" y="+game.player.getY());visibleBundles=0;visibleFilaments=0;int membranes=0;
+        // Spawn and beginBreak arrive as separate packets. Transient client entity
+        // counts may differ; physical anchors and the actual display budget may not.
+        require(QuicksandPhysics.state(game.player).adhesiveConnections==64,"dense trap synchronizes its 64 physical contacts");visibleBundles=0;visibleFilaments=0;int membranes=0;
         for(var helper:helpers) {
             var renderer=(AdhesiveTetherRenderer)game.getEntityRenderDispatcher().getRenderer(helper);var state=renderer.createRenderState(helper,1);
             if(!state.visible)continue;visibleBundles++;visibleFilaments+=state.filaments.size();
             require(state.filaments.size()<=AdhesiveDisplayBudget.density(helper),"actual contact respects adaptive independent strand density without branching");
-            require(state.strands.size()==state.filaments.size()*(state.segments*6+12),"every independent strand has its own closed sides and caps, with no shared stem");
+            require(state.strands.size()<=state.filaments.size()*(state.segments*6+12) && !state.strands.isEmpty(),"independent strands retain bounded sides/caps; collapsed skin-plane faces are omitted");
             if(!state.membrane.isEmpty()) {
                 membranes++;require(state.cuff && state.membrane.size()==52,"one bounded solid wet shell only on the newest contact per foot");
                 for(var q:state.membrane)for(var p:java.util.List.of(q.a(),q.b(),q.c(),q.d())) {
@@ -275,20 +282,37 @@ public final class CoatingClientChecks {
             }
             var origin=new net.minecraft.world.phys.Vec3(state.x,state.y,state.z);
             for(var filament:state.filaments) {
-                require(filament.width()>WetAdhesiveStyle.width(filament.end().subtract(filament.root()).length(),0)*2.99,"actual independent glue strip keeps the thicker visible width");
+                // Width now varies independently per strand. Check the approved
+                // three-times-wide interval, rather than another strand's seed.
+                double length=filament.end().subtract(filament.root()).length();
+                double unstretchedWidth=filament.width()*Math.sqrt(1+Math.max(0,length-.35)*1.2);
+                require(unstretchedWidth>=.03-1e-9 && unstretchedWidth<=.048+1e-9,
+                        "actual randomized glue strip stays within its thicker visible width range");
                 var root=origin.add(filament.root());var cell=net.minecraft.core.BlockPos.containing(root);
                 double minimum=RenderedAdhesiveSurface.minimumHeight(game.level,cell,helper.material()),radius=filament.rootWidth();
                 require(minimum>0 && root.y-radius>cell.getY() && root.y+radius<cell.getY()+minimum,"entire root cap stays under the lowest actual fluid corner");
                 require(root.x-radius>cell.getX() && root.x+radius<cell.getX()+1 && root.z-radius>cell.getZ() && root.z+radius<cell.getZ()+1,"entire root cap stays inside its medium cell sides");
                 require(filament.end().subtract(filament.root()).horizontalDistance()<.65 && Math.abs(origin.y+filament.end().y-(cell.getY()+minimum))<1.15,"short visible bundle stays around ankle; submerged extension does not consume surface reach");
                 var endpoint=new CoatingVoxels.Vec(filament.end().x,filament.end().y,filament.end().z).subtract(state.surface.center());
-                double perimeter=Math.max(Math.abs(endpoint.dot(state.surface.right()))/(state.surface.halfWidth()+WetAdhesiveStyle.THICKNESS),Math.abs(endpoint.dot(state.surface.front()))/(state.surface.halfDepth()+WetAdhesiveStyle.THICKNESS));
-                require(Math.abs(perimeter-1)<1e-5,"actual strand touches the skin film surface instead of ending inside the leg");
+                var sampled=renderer.feet().sample(game.player,helper.side(),1);
+                var localEnd=new CoatingVoxels.Vec(origin.x+filament.end().x-game.player.getPosition(1).x-sampled.skinOffset().x,
+                        origin.y+filament.end().y-game.player.getPosition(1).y-sampled.skinOffset().y,origin.z+filament.end().z-game.player.getPosition(1).z-sampled.skinOffset().z);
+                var center=sampled.surface().center().subtract(new CoatingVoxels.Vec(sampled.skinOffset().x,sampled.skinOffset().y,sampled.skinOffset().z));
+                var rayOrigin=center.add(sampled.surface().up().scale(localEnd.subtract(center).dot(sampled.surface().up())));
+                var nativeHit=SkinSurfaceContact.project(rayOrigin,localEnd.subtract(rayOrigin),sampled.skin());
+                require(nativeHit!=null && localEnd.subtract(nativeHit.point()).length()<.0015,"actual strand ends within .024 pixels of the native skin geometry, never inside its volume");
+                require(localEnd.subtract(nativeHit.point()).dot(nativeHit.normal())>=0,"actual endpoint is on the exposed side of the skin");
+                for(var q:filament.geometry())for(var p:java.util.List.of(q.a(),q.b(),q.c(),q.d())) {
+                    require(Double.isFinite(p.length()),"clipped strand vertices remain finite");
+                    var rootVector=new CoatingVoxels.Vec(filament.root().x,filament.root().y,filament.root().z);
+                    if(p.subtract(rootVector).length()>filament.rootWidth()*1.00001 && p.subtract(state.surface.center()).dot(state.surface.up())>=-.035)
+                        require(p.subtract(filament.attachment().point()).dot(filament.attachment().normal())>=-1e-7,"whole thick body end stays outside its skin face");
+                }
                 double endpointHeight=endpoint.dot(state.surface.up()),filmHeight=WetAdhesiveStyle.height(QuicksandPhysics.state(game.player).depth);
                 require(endpointHeight>=Math.min(filmHeight*.25,state.surface.calfHeight())-1e-6 && endpointHeight<=state.surface.calfHeight()+1e-6,"body endpoint remains on sampled leg below its calf midpoint");
             }
         }
-        require(visibleFilaments<=64*ModConfig.CLIENT.strandDensity.get() && visibleFilaments>=16,"nearby scene has bounded independent strands without branching");
+        require(visibleBundles<=64 && visibleFilaments<=64*ModConfig.CLIENT.strandDensity.get() && visibleFilaments>=16,"nearby scene has bounded independent strands without branching");
         require(membranes==2,"dense scene renders exactly one film on each foot");
         MFQM.LOGGER.info("MFQM_WET_ADHESIVE_COMPLETE film2=true closedShell=true independentStrands=true noBranches=true hexagonalTubes=true nativeFootBounds=true depthHeight=true rootsInside=true translucent=true");
     }
@@ -316,22 +340,60 @@ public final class CoatingClientChecks {
         var state=renderer.createRenderState(avatar,1);renderer.getModel().setupAnim(state);
         Object mesh=renderer.getModel().jacket.getClass().getMethod("getInjectedMesh").invoke(renderer.getModel().jacket);
         require(mesh!=null && (boolean)mesh.getClass().getMethod("isVisible").invoke(mesh),"3D Skin Layers actually injects a visible jacket mesh");
-        require(SkinLayerClearance.padding("body",false)>.7,"glue shell clears the real extruded jacket");
+        var meshVisibility=mesh.getClass().getMethod("setVisible",boolean.class);
+        try{meshVisibility.invoke(mesh,false);
+            require(NativeSkinSurface.capture(renderer.getModel().jacket,avatar.getSkin().body().texturePath()).isEmpty(),"hidden injected mesh cannot become a flat cuboid coating shell");
+        }finally{meshVisibility.invoke(mesh,true);}
+        var actual=NativeSkinSurface.capture(renderer.getModel().jacket,avatar.getSkin().body().texturePath());
+        require(!actual.isEmpty() && NativeSkinSurface.voxelSnapshots()>0,"actual injected skin voxel geometry is used directly, without an inflated coating cube");
         var config=Class.forName("dev.tr7zw.skinlayers.SkinLayersModBase").getField("config").get(null);
-        var size=config.getClass().getField("baseVoxelSize");float old=size.getFloat(config),normal=SkinLayerClearance.padding("right_arm",false);
-        try{size.setFloat(config,1.4F);require(SkinLayerClearance.padding("right_arm",false)>normal+.3,"custom voxel size increases clearance");}
+        var size=config.getClass().getField("baseVoxelSize");float old=size.getFloat(config);
+        double normal=actual.stream().flatMap(f->java.util.List.of(f.quad().a(),f.quad().b(),f.quad().c(),f.quad().d()).stream()).mapToDouble(p->Math.abs(p.z())).max().orElseThrow();
+        try{size.setFloat(config,1.4F);
+            double larger=NativeSkinSurface.capture(renderer.getModel().jacket,avatar.getSkin().body().texturePath()).stream()
+                    .flatMap(f->java.util.List.of(f.quad().a(),f.quad().b(),f.quad().c(),f.quad().d()).stream()).mapToDouble(p->Math.abs(p.z())).max().orElseThrow();
+            require(larger>normal+.005,"actual skin surface follows custom voxel size");}
         finally{size.setFloat(config,old);}
+        var failures=NativeSkinSurface.class.getDeclaredField("FAILED_MESHES");failures.setAccessible(true);
+        var failed=(java.util.Map<Object,Boolean>)failures.get(null);failed.put(mesh,true);
+        require(NativeSkinSurface.capture(renderer.getModel().jacket,avatar.getSkin().body().texturePath()).isEmpty(),"failed mesh remains empty across repeated calls");
+        NativeSkinSurface.clear();require(!NativeSkinSurface.capture(renderer.getModel().jacket,avatar.getSkin().body().texturePath()).isEmpty(),"reload retries a previously failed mesh");
+        var unavailable=NativeSkinSurface.class.getDeclaredField("apiUnavailable");unavailable.setAccessible(true);unavailable.setBoolean(null,true);
+        require(NativeSkinSurface.capture(renderer.getModel().jacket,avatar.getSkin().body().texturePath()).isEmpty(),"unavailable API never guesses an outer cube");
+        NativeSkinSurface.clear();require(!NativeSkinSurface.capture(renderer.getModel().jacket,avatar.getSkin().body().texturePath()).isEmpty(),"reload retries the API bridge");
         MFQM.LOGGER.info("MFQM_SKIN_LAYERS_MESH_VERIFIED skin={} visibleJacket=true dynamicSizing=true",avatar.getSkin().model());
+    }
+    @SuppressWarnings("unchecked") private static void verifyFlatLod(Minecraft game) {
+        var avatar=AVATARS.get(1);var renderer=(AvatarRenderer<AbstractClientPlayer>)game.getEntityRenderDispatcher().getRenderer(avatar);
+        var outer=renderer.getModel().jacket;var skin=avatar.getSkin().body().texturePath();
+        var detailed=NativeSkinSurface.capture(outer,skin);
+        require(detailed==NativeSkinSurface.capture(outer,skin),"flat visible pixel geometry is cached rather than rebuilt each frame");
+        var flat=NativeSkinSurface.surface(outer,skin,false,"body",false,false);
+        require(flat.flat() && flat.faces().size()==6 && detailed.size()>6,"distant/disabled detail keeps six actual outer faces");
+        var texture=FlatCoatingTextures.outerTexture(new MuddyPlayerLayer.Coating(10,1200,"glue").texture(),skin,"body",.5,(x,y)->0xffffffff);
+        require(texture!=null,"flat skin cutout texture is available");
+        var image=((net.minecraft.client.renderer.texture.DynamicTexture)game.getTextureManager().getTexture(texture)).getPixels();
+        boolean empty=false,visible=false;
+        for(int y=0;y<64;y++)for(int x=0;x<64;x++) {
+            int alpha=NativeSkinSurface.skinAlpha(skin,(x+.5)/64.,(y+.5)/64.),actual=image.getPixel(x,y)>>>24;
+            require(actual==(alpha<32?0:128),"flat cutout retains the same coating intensity as detailed pixels");
+            empty|=actual==0;visible|=actual>0;
+        }
+        require(empty && visible,"flat alpha texture includes transparent and coated pixels");
+        MFQM.LOGGER.info("MFQM_COATING_FLAT_LOD_COMPLETE outerFaces=6 pixelCache=true alphaCutouts=true");
     }
     @SuppressWarnings("unchecked") private static void verifyCloseFit(Minecraft game) {
         var renderer=(AvatarRenderer<AbstractClientPlayer>)game.getEntityRenderDispatcher().getRenderer(AVATARS.get(1));
         var model=renderer.getModel();var outer=model.jacket;boolean visible=outer.visible;
         try {
             outer.visible=false;
-            require(Math.abs(SkinLayerClearance.padding("body",false,outer)-.02)<1e-6,"actual hidden jacket does not inflate the coating shell");
+            require(NativeSkinSurface.capture(outer,AVATARS.get(1).getSkin().body().texturePath()).isEmpty(),"hidden jacket does not create any outer coating shell");
         }finally{outer.visible=visible;}
-        require(SkinLayerClearance.padding("body",false,outer)>.25,"visible outer layer remains clear of coating");
-        MFQM.LOGGER.info("MFQM_COATING_CLOSE_FIT_COMPLETE hiddenPadding=.02 flatPadding=.27 defaultReliefMax=.12 anatomicalCoverageUnchanged=true");
+        var coat=new MuddyPlayerLayer.Coating(10,1200,"glue");
+        var film=GlueCoatingRenderer.mesh(coat.texture(),"body",false,false);
+        require(film.quads().stream().flatMap(q->java.util.List.of(q.a(),q.b(),q.c(),q.d()).stream()).allMatch(p->Math.abs(p.x())<=4.031 && Math.abs(p.z())<=2.031),
+                "body film follows the base skin within .031 pixels, regardless of clothing voxel size");
+        MFQM.LOGGER.info("MFQM_COATING_CLOSE_FIT_COMPLETE basePadding=.012 defaultReliefMax=.018 nativeOuter=true anatomicalCoverageUnchanged=true");
     }
     private static void screenshot(Minecraft game,String name) {
         if(!Boolean.getBoolean("mfqm.coatingVisual"))return;

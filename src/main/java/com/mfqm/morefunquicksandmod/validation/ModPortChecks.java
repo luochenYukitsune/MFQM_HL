@@ -45,6 +45,7 @@ public final class ModPortChecks {
                 // Empty height, away from spawn protection; no normal player world invokes this runner.
                 for (int x = 4; x <= 10; x++) for (int z = 4; z <= 7; z++) level.getChunk(x, z);
                 var results = new ArrayList<String>();
+                results.addAll(AuditPortChecks.verify(level, new BlockPos(104, 240, 104)));
                 results.addAll(PhysicsPortChecks.verify(level, new BlockPos(80, 240, 80)));
                 results.addAll(com.mfqm.morefunquicksandmod.gameplay.CoatingPortChecks.verify(level,new BlockPos(84,240,84)));
                 results.addAll(com.mfqm.morefunquicksandmod.gameplay.ViscosityPortChecks.verify(level, new BlockPos(140, 240, 80)));
