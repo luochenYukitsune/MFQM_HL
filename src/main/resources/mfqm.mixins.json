@@ -4,6 +4,6 @@
   "package": "com.mfqm.morefunquicksandmod.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": ["GlueJumpMixin", "CaptureTeleportMixin", "CaptureEntityTeleportMixin"],
-  "client": ["IrisIdMapMixin", "IrisWaterProgramMixin"],
+  "client": ["IrisIdMapMixin", "IrisWaterProgramMixin", "OptionalStruggleMenuMixin", "OptionalStruggleConflictMixin"],
   "injectors": {"defaultRequire": 1}
 }

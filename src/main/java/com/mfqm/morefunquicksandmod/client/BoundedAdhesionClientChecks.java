@@ -37,7 +37,7 @@ public final class BoundedAdhesionClientChecks {
     private record Sample(Vec3 position,Vec3 origin,double strength,double effort,int bonds,boolean released){}
     private static final BlockPos BOARD=new BlockPos(160,253,0),EMPTY=new BlockPos(164,253,0);
     private static final KeyEvent F=new KeyEvent(GLFW.GLFW_KEY_F,0,0);
-    private static boolean running,pending,oldCreativeGround;
+    private static boolean running,pending,oldCreativeGround,oldStruggleKey;
     private static volatile boolean ready;
     private static Sample sample,baseline;
     private static int phase,ticks,presses,fov;
@@ -47,6 +47,7 @@ public final class BoundedAdhesionClientChecks {
     public static void start(Minecraft game) {
         if(!Boolean.getBoolean("mfqm.viscosityChecks") || running)return;
         oldInput=game.player.input;oldCreativeGround=ModConfig.SERVER.creativeGroundPhysics.get();
+        oldStruggleKey=ModConfig.CLIENT.enableStruggleKey.get();ModConfig.CLIENT.enableStruggleKey.set(true);
         ModConfig.SERVER.creativeGroundPhysics.set(true);
         running=true;ready=false;pending=false;phase=0;ticks=0;presses=0;
         fov=game.options.fov().get();game.player.input=input(false,false,false);
@@ -187,7 +188,7 @@ public final class BoundedAdhesionClientChecks {
     private static void close(double actual,double expected,double tolerance,String message){require(Math.abs(actual-expected)<=tolerance,message+" expected="+expected+" actual="+actual);}
     private static void complete(Minecraft game){MFQM.LOGGER.info("MFQM_BOUNDED_ADHESION_CHECKS_COMPLETE creativeCoatedPlacement=true emptyPlacement=true unchangedFov=true walking=true running=true shortHop=true heldJumpFinite=true realFRelease=true screenshots={}",Boolean.getBoolean("mfqm.boardVisual")?1:0);finish(game);}
     private static void fail(Minecraft game,Throwable failure){MFQM.LOGGER.error("MFQM_CLIENT_CHECKS_FAILED bounded adhesion: "+failure.getMessage(),failure);finish(game);}
-    private static void finish(Minecraft game){if(!running)return;running=false;pending=false;if(game.player!=null)game.player.input=oldInput;oldInput=null;ModConfig.SERVER.creativeGroundPhysics.set(oldCreativeGround);game.stop();}
+    private static void finish(Minecraft game){if(!running)return;running=false;pending=false;if(game.player!=null)game.player.input=oldInput;oldInput=null;ModConfig.SERVER.creativeGroundPhysics.set(oldCreativeGround);ModConfig.CLIENT.enableStruggleKey.set(oldStruggleKey);MfqmClient.takeStrugglePress();game.stop();}
     private static void require(boolean value,String message){if(!value)throw new IllegalStateException("Bounded adhesion check failed: "+message);}
     private BoundedAdhesionClientChecks(){}
 }

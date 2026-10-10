@@ -81,7 +81,6 @@ WORDS = {
     "No glue: this base cannot trap targets. Apply a glue bucket.": "尚未涂胶，不能困住目标；用胶水桶右键补胶。",
     "Struggling weakens bonds but deepens sinking. Rest to hold your depth.": "挣扎会削弱黏连，也会加深下陷；停止挣扎可保持深度。",
     "Reusable base. Coat with a glue bucket; repeated struggle wears out the glue.": "底板可回收重复使用；用胶水桶补胶，挣扎会消耗涂层。",
-    "Press %s to struggle. Seek an edge or rescue; beware of sinking.": "按 %s 挣扎；靠近边缘或使用救援工具脱困。深处挣扎会加深下陷。",
 }
 DEATHS = {
     "quicksand_suffocation": "%1$s 在沉陷介质中窒息了", "tar_burn": "%1$s 被滚烫的焦油灼伤了",
@@ -127,6 +126,7 @@ CONFIG = {
     "damageMultiplier": "模组伤害倍率", "forceFirstPerson": "深陷时强制第一人称", "coverPlayerWithMud": "显示玩家介质覆盖层",
     "customAirHud": "显示沉陷空气量", "quicksandOpacity": "深陷时遮挡第一人称视野", "bubbleEffects": "显示表面气泡",
     "tarTreadsEffect": "显示焦油附着效果", "struggleAnimation": "显示挣扎动作", "struggleCamera": "挣扎时镜头轻微起伏",
+    "enableStruggleKey": "启用专用挣扎键（默认关闭）",
     "adhesiveTethers": "显示腿脚黏膜与拉丝", "biomesOPlenty": "超多生物群系兼容生成", "defaultWorld": "原版世界生成",
     "twilightForest": "暮色森林兼容生成", "betweenlands": "交错次元兼容生成", "abyssalcraft": "深渊国度兼容生成",
     "wildycraft": "荒野模组兼容生成", "adventOfAscension": "虚无世界兼容生成", "extraUtilities": "额外实用设备兼容生成",
@@ -146,7 +146,8 @@ def build():
         elif key in previous:
             result[key] = previous[key]
         elif key in ("container.mfqm.honey_chest", "tooltip.mfqm.life_jacket", "tooltip.mfqm.wading_boots",
-                     "mfqm.configuration.strandDensity", "mfqm.configuration.strandDensity.tooltip"):
+                     "mfqm.configuration.strandDensity", "mfqm.configuration.strandDensity.tooltip",
+                     "mfqm.configuration.controls", "mfqm.configuration.enableStruggleKey", "mfqm.configuration.enableStruggleKey.tooltip"):
             continue  # Explicit translations below.
         else:
             result[key] = WORDS[value]  # Fail explicitly on a newly introduced untranslated value.
@@ -160,7 +161,8 @@ def build():
         result["mfqm.configuration." + key + ".tooltip"] = label + "。服务器设置由服务器决定；世界生成设置仅影响新区块。"
     result.update({"mfqm.configuration.title": "更多趣味流沙设置",
         **{"mfqm.configuration." + k: v for k, v in {"adhesive": "黏连与胶水", "worldgen": "世界生成", "mobs": "生物生成",
-            "items": "工具获取", "options": "玩法与物理", "hud": "界面与视角", "rendering": "画面显示", "compat": "模组兼容"}.items()},
+            "items": "工具获取", "options": "玩法与物理", "hud": "界面与视角", "rendering": "画面显示", "compat": "模组兼容", "controls": "操作设置"}.items()},
+        "mfqm.configuration.enableStruggleKey.tooltip": "仅影响本机。手动开启后可使用专用挣扎键，默认 F，可在按键设置中修改；关闭时隐藏该按键项，F 正常换手。立即生效，不显示自动操作提示。",
         "mfqm.configuration.creativeGroundPhysics.tooltip": "开启后，关闭飞行的创造玩家也会黏住、下陷并需要挣扎。飞行和旁观始终免疫；创造模式仍免受伤害。",
         "mfqm.configuration.glueCoating3d.tooltip": "将胶水、焦油、蜂蜜、黏液及泥沙等残留显示为贴合实际皮肤和衣物的薄膜，沿用 3D Skin Layers 的凹凸表面。关闭后取消微起伏，仍保留贴肤覆盖，不影响黏力和水洗。",
         "mfqm.configuration.gluePoolChance.tooltip": "适宜新区块平均每此数量尝试一个胶水池候选；值越小，候选越多，地形不适宜时仍不会生成。",
@@ -172,12 +174,12 @@ def build():
         "tooltip.mfqm.life_jacket": "在支持的沉陷介质中提供浮力；潜行时关闭，胶水中无效。",
         "tooltip.mfqm.wading_boots": "支撑浅层部分沉陷介质；深处、胶水及涂胶板中无效。胶水中拔脚可能留下靴子。",
         "itemGrapplingHook.instruction3": "不能挂在沙子、砂砾或树叶上",
-        "itemGrapplingHook.instruction10": "放绳；默认 X 断开；默认 F 挣扎",
-        "itemRope.instruction10": "放绳；默认 X 断开；默认 F 挣扎",
+        "itemGrapplingHook.instruction10": "放绳；默认 X 断开",
+        "itemRope.instruction10": "放绳；默认 X 断开",
         "item.mfqm.sand_bucket": "沙子桶", "item.BucketOfSand.name": "沙子桶",
         "item.mfqm.quicksand_bucket": "丛林流沙桶", "item.BucketOfQuicksand.name": "丛林流沙桶",
     })
-    for kind, label in (("server", "服务器玩法"), ("common", "通用设置"), ("client", "客户端显示")):
+    for kind, label in (("server", "服务器玩法"), ("common", "通用设置"), ("client", "客户端设置")):
         prefix = "mfqm.configuration.section.mfqm." + kind + ".toml"
         result[prefix] = label
         result[prefix + ".title"] = label

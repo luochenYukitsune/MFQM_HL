@@ -36,7 +36,7 @@ public final class AdhesiveClientScene {
     private static final String[] SCREENSHOTS={"mfqm-adhesive-glue.png","mfqm-adhesive-deep.png","mfqm-adhesive-board.png","mfqm-adhesive-hand.png"};
     private record Observation(double effort,long animation,int connections,String material,double depth,
                                ItemStack main,ItemStack off,ItemStack boots,double y) {}
-    private static boolean running,oldFirstPerson,oldCreativeGroundPhysics;
+    private static boolean running,oldFirstPerson,oldCreativeGroundPhysics,oldStruggleKey;
     private static double oldBootChance;
     private static volatile double restingY;
     private static int sample,phase,ticks,acceptedPresses,boardPressRequests;
@@ -50,6 +50,7 @@ public final class AdhesiveClientScene {
     public static void start(Minecraft game) {
         if(!Boolean.getBoolean("mfqm.clientChecks") || !Boolean.getBoolean("mfqm.textureChecks") || running)return;
         require(game.getSingleplayerServer()!=null && game.player!=null,"requires copied singleplayer save");
+        oldStruggleKey=ModConfig.CLIENT.enableStruggleKey.get();ModConfig.CLIENT.enableStruggleKey.set(true);
         running=true;sample=0;acceptedPresses=0;
         oldFirstPerson=ModConfig.CLIENT.forceFirstPerson.get();oldBootChance=ModConfig.SERVER.bootLossChance.get();
         oldCreativeGroundPhysics=ModConfig.SERVER.creativeGroundPhysics.get();
@@ -373,7 +374,7 @@ public final class AdhesiveClientScene {
     private static void fail(Minecraft game,Throwable failure){MFQM.LOGGER.error("MFQM_CLIENT_CHECKS_FAILED adhesive scene: "+failure.getMessage(),failure);finish(game);}
     private static void finish(Minecraft game){
         restoreInput(game);
-        if(running){running=false;ModConfig.CLIENT.forceFirstPerson.set(oldFirstPerson);ModConfig.SERVER.bootLossChance.set(oldBootChance);ModConfig.SERVER.creativeGroundPhysics.set(oldCreativeGroundPhysics);}
+        if(running){running=false;ModConfig.CLIENT.forceFirstPerson.set(oldFirstPerson);ModConfig.SERVER.bootLossChance.set(oldBootChance);ModConfig.SERVER.creativeGroundPhysics.set(oldCreativeGroundPhysics);ModConfig.CLIENT.enableStruggleKey.set(oldStruggleKey);MfqmClient.takeStrugglePress();}
         game.stop();
     }
     private static void restoreInput(Minecraft game){if(previousInput!=null && game.player!=null){game.player.input=previousInput;previousInput=null;}}

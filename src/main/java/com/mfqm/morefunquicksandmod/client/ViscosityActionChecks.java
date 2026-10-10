@@ -35,7 +35,7 @@ public final class ViscosityActionChecks {
                                Vec3 velocity,boolean onGround,long externalSequence,int externalTicks) {}
     private static final KeyEvent F=new KeyEvent(GLFW.GLFW_KEY_F,0,0);
     private static final double GLUE_Y=252.5;
-    private static boolean running,probing,oldCreativeGround,oldHotTar,oldMudTentacles,oldFleshTentacles;
+    private static boolean running,probing,oldCreativeGround,oldHotTar,oldMudTentacles,oldFleshTentacles,oldStruggleKey;
     private static volatile boolean serverReady;
     private static Observation observation,baseline,afterStruggle,rescueBaseline,afterRescue,dryBaseline;
     private static ClientInput previousInput;
@@ -55,10 +55,12 @@ public final class ViscosityActionChecks {
         if(!Boolean.getBoolean("mfqm.viscosityChecks") || running)return;
         require(game.player!=null && game.getSingleplayerServer()!=null,"requires isolated installed singleplayer save");
         previousInput=game.player.input;
+        oldStruggleKey=ModConfig.CLIENT.enableStruggleKey.get();
         oldCreativeGround=ModConfig.SERVER.creativeGroundPhysics.get();oldHotTar=ModConfig.SERVER.hotTar.get();
         oldMudTentacles=ModConfig.SERVER.mudTentacles.get();oldFleshTentacles=ModConfig.SERVER.tentaclesInFlesh.get();
         ModConfig.SERVER.creativeGroundPhysics.set(false);ModConfig.SERVER.hotTar.set(false);
         ModConfig.SERVER.mudTentacles.set(false);ModConfig.SERVER.tentaclesInFlesh.set(false);
+        ModConfig.CLIENT.enableStruggleKey.set(false);
         running=true;rangeMeasured=false;phase=0;ticks=0;acceptedPresses=0;serverReady=false;observation=null;game.player.input=input(false,false);
         playerId=game.player.getUUID();serverFlightViolation=false;
         MFQM.LOGGER.info("MFQM_VISCOSITY_ACTION_CHECKS_START screenshots=0 realF=true suspendedGlue=true rescueOnce=true");
@@ -146,7 +148,17 @@ public final class ViscosityActionChecks {
                     close(observation.totalSink(),baseline.totalSink(),.000001,"rest does not create sink cost");
                     MFQM.LOGGER.info("MFQM_VISCOSITY_GLUE_REST_COMPLETE ticks=30 floorGap={} serverY={} clientY={} depth={}",
                             observation.position().y-249,observation.position().y,game.player.getY(),observation.depth());
-                    lastAcceptedAnimation=observation.animation();pressF();phase=5;ticks=0;observation=null;
+                    lastAcceptedAnimation=observation.animation();pressF();phase=34;ticks=0;observation=null;
+                }
+                case 34->{
+                    if(ticks<20)return;probe(game);if(observation==null)return;
+                    close(observation.effort(),baseline.effort(),.000001,"disabled F never reaches server effort");
+                    close(observation.totalSink(),baseline.totalSink(),.000001,"disabled F cannot deepen glue");
+                    require(observation.animation()==lastAcceptedAnimation,"disabled F cannot animate on server");
+                    MFQM.LOGGER.info("MFQM_DISABLED_STRUGGLE_NETWORK_COMPLETE ticks=20 effortUnchanged=true sinkUnchanged=true animationUnchanged=true");
+                    ModConfig.CLIENT.enableStruggleKey.set(true);
+                    require(!MfqmClient.takeStrugglePress(),"enabling after disabled input has no queued replay");
+                    pressF();phase=5;ticks=0;observation=null;
                 }
                 case 5->{
                     probe(game);
@@ -374,6 +386,7 @@ public final class ViscosityActionChecks {
         if(game.player!=null && previousInput!=null)game.player.input=previousInput;previousInput=null;
         ModConfig.SERVER.creativeGroundPhysics.set(oldCreativeGround);ModConfig.SERVER.hotTar.set(oldHotTar);
         ModConfig.SERVER.mudTentacles.set(oldMudTentacles);ModConfig.SERVER.tentaclesInFlesh.set(oldFleshTentacles);
+        ModConfig.CLIENT.enableStruggleKey.set(oldStruggleKey);MfqmClient.takeStrugglePress();
     }
     private static void require(boolean value,String message){if(!value)throw new IllegalStateException("Viscosity action check failed: "+message);}
     private ViscosityActionChecks(){}

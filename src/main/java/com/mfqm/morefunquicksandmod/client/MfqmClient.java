@@ -43,9 +43,8 @@ public final class MfqmClient {
     private static final KeyMapping REEL=new KeyMapping("key.mfqm.reel_in",org.lwjgl.glfw.GLFW.GLFW_KEY_R,CONTROLS);
     private static final KeyMapping STRUGGLE=new KeyMapping("key.mfqm.struggle",org.lwjgl.glfw.GLFW.GLFW_KEY_F,CONTROLS);
     private static final KeyMapping RELEASE=new KeyMapping("key.mfqm.release",org.lwjgl.glfw.GLFW.GLFW_KEY_X,CONTROLS);
-    private static boolean previousJump,previousSneak,previousMoving,pendingStruggle;
+    private static boolean previousJump,previousSneak,previousMoving,pendingStruggle,pendingSwapSuppression;
     private static int inputTicks;
-    private static boolean trappingHintShown;
     private static final LegacyCoatingModel WIDE_COATING=new LegacyCoatingModel(false);
     private static final LegacyCoatingModel SLIM_COATING=new LegacyCoatingModel(true);
     @SubscribeEvent public static void setup(net.neoforged.fml.event.lifecycle.FMLClientSetupEvent event) {
@@ -125,7 +124,8 @@ public final class MfqmClient {
     }
     @SubscribeEvent public static void beforeTick(ClientTickEvent.Pre event){
         var game=Minecraft.getInstance();
-        if(game.player!=null && game.screen==null && !com.mfqm.morefunquicksandmod.gameplay.AdhesionController.exempt(game.player)
+        boolean suppress=pendingSwapSuppression;pendingSwapSuppression=false;
+        if(ModConfig.CLIENT.enableStruggleKey.get() && suppress && game.player!=null && game.screen==null && !com.mfqm.morefunquicksandmod.gameplay.AdhesionController.exempt(game.player)
                 && (!QuicksandPhysics.state(game.player).material.isEmpty() || QuicksandPhysics.state(game.player).adhesiveConnections>0)
                 && STRUGGLE.getKey().equals(game.options.keySwapOffhand.getKey())) {
             while(game.options.keySwapOffhand.consumeClick()) {} // F is reserved for struggle only while trapped.
@@ -139,16 +139,21 @@ public final class MfqmClient {
     }
     private static void recordPress(com.mojang.blaze3d.platform.InputConstants.Key key,int action){
         var game=Minecraft.getInstance();
-        if(game.screen==null && game.player!=null && action==org.lwjgl.glfw.GLFW.GLFW_PRESS && STRUGGLE.isActiveAndMatches(key))pendingStruggle=true;
+        if(ModConfig.CLIENT.enableStruggleKey.get() && game.screen==null && game.player!=null
+                && STRUGGLE.isActiveAndMatches(key)) {
+            if(action==org.lwjgl.glfw.GLFW.GLFW_PRESS)pendingStruggle=true;
+            // Vanilla also queues offhand swaps on REPEAT. Suppress those without repeating a struggle.
+            if(action==org.lwjgl.glfw.GLFW.GLFW_PRESS || action==org.lwjgl.glfw.GLFW.GLFW_REPEAT)pendingSwapSuppression=true;
+        }
     }
-    static boolean takeStrugglePress(){boolean press=pendingStruggle;pendingStruggle=false;return press;}
+    static boolean takeStrugglePress(){boolean press=pendingStruggle;pendingStruggle=false;pendingSwapSuppression=false;return ModConfig.CLIENT.enableStruggleKey.get() && press;}
+    /** Filter only menu reads: Options retains every binding for saving and resetting custom keys. */
+    public static KeyMapping[] visibleKeyMappings(KeyMapping[] mappings) {
+        return ModConfig.CLIENT.enableStruggleKey.get()?mappings:
+                java.util.Arrays.stream(mappings).filter(mapping->!mapping.getName().equals("key.mfqm.struggle")).toArray(KeyMapping[]::new);
+    }
     @SubscribeEvent public static void tick(ClientTickEvent.Post event){
-        Minecraft minecraft=Minecraft.getInstance();if(minecraft.player==null){inputTicks=0;previousJump=false;previousSneak=false;previousMoving=false;pendingStruggle=false;trappingHintShown=false;return;}
-        var trappedState=QuicksandPhysics.state(minecraft.player);
-        boolean trapped=!com.mfqm.morefunquicksandmod.gameplay.AdhesionController.exempt(minecraft.player)
-                && (!trappedState.material.isEmpty() || trappedState.adhesiveConnections>0);
-        if(trapped && !trappingHintShown)minecraft.player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.mfqm.trapped",STRUGGLE.getTranslatedKeyMessage()),true);
-        trappingHintShown=trapped;
+        Minecraft minecraft=Minecraft.getInstance();if(minecraft.player==null){inputTicks=0;previousJump=false;previousSneak=false;previousMoving=false;pendingStruggle=false;pendingSwapSuppression=false;return;}
         boolean jump=minecraft.screen==null && minecraft.player.input.keyPresses.jump();
         boolean sneak=minecraft.screen==null && minecraft.player.input.keyPresses.shift();
         var keys=minecraft.player.input.keyPresses;

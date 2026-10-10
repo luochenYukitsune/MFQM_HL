@@ -1,0 +1,30 @@
+{
+  "version": "0.7.5-inside",
+  "jar_sha256": "adfcf14b45560a5830b91463886dcdc950a76828b1fe3c4db9fbd4622af4e9e6",
+  "jar_bytes": 2617167,
+  "unit_checks": 65636,
+  "screenshots": 0,
+  "scope": "actions-only, packaged JAR, ground physics",
+  "markers": [
+    "[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_CREATIVE_BOARD_VARIANTS_COMPLETE coated=粘鼠板（已涂胶） empty=粘鼠板底板（未涂胶） adjacent=true",
+    "[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_VISUAL_CHECKS_COMPLETE modelCases=60",
+    "[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_INPUT_CHECKS_COMPLETE defaultOff=true vanillaSwap=true noHints=true hiddenMenu=true noHiddenConflict=true customBindingRetained=true modifierMismatchSwap=true shortTap=true repeat=false heldRepeatSwap=false enabledTetherSwap=false menuLeak=false queuedReplay=false",
+    "[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_CHINESE_CHECKS_COMPLETE englishKeys=574 chineseKeys=830 active=true configScreen=true formats=true registeredNames=true",
+    "[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_CLIENT_CHECKS_COMPLETE items=180 visible=165 blocks=51 fluids=14 entities=18",
+    "[03:13:06] [Render thread/INFO] [MFQM/]: MFQM_GLUE_ACTIVITY_RANGE_COMPLETE movementTicks=120 distance=1.2467315819699334 connections=30 clientFlying=false serverFlying=false",
+    "[03:13:11] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_REST_COMPLETE ticks=30 floorGap=3.5 serverY=252.5 clientY=252.5 depth=1.3888888955116272",
+    "[03:13:12] [Render thread/INFO] [MFQM/]: MFQM_DISABLED_STRUGGLE_NETWORK_COMPLETE ticks=20 effortUnchanged=true sinkUnchanged=true animationUnchanged=true",
+    "[03:13:17] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_F_SINK_COMPLETE realF=5 effort=5.0 serverSink=0.05000000000001137 clientSink=0.05000000000001137 totalSinkDelta=0.05",
+    "[03:13:20] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_NO_REPLAY_COMPLETE ticks=60 serverY=252.45 clientY=252.45 depth=1.4388888955116386 totalSink=0.05",
+    "[03:13:22] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESCUE_COMPLETE strength=.08 calls=1 heldJump=true serverRise=0.42510986998723865 clientRise=0.42510986998723865 maxClientY=253.08092123931064 rescueSequence=1 rescueTicks=0",
+    "[03:13:25] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESCUE_REST_COMPLETE ticks=60 serverY=252.86510986998724 clientY=252.86510986998724 sequence=1 expired=true",
+    "[03:13:32] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_DRY_WALK_COMPLETE ticks=60 serverWalk=12.947788705790742 clientWalk=12.947788705790742 serverEnd=(115.44778870579074, 253.0, -3.5) clientEnd=(115.44778870579074, 253.0, -3.5) speed=0.10000000149011612 gravity=0.08",
+    "[03:13:37] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_KNOCKBACK_ARC_COMPLETE ticks=30 strength=.4 attacks=1 realDamage=true clientFlying=false serverFlying=false groundedNaturally=true serverRise=0.7049478117560852 clientRise=0.7049478117560852 serverEnd=(103.81333204973653, 251.45494781175637, 8.5) clientEnd=(103.81333204973653, 251.4349478117564, 8.5) serverVelocity=(0.0, -0.01, 0.0) clientVelocity=(-6.717041850873426E-14, -0.01, 0.0) externalSequence=1 externalTicks=0",
+    "[03:13:40] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_KNOCKBACK_EXPIRED_COMPLETE idleTicks=60 serverEnd=(103.81333204973653, 251.0, 8.5) clientEnd=(103.81333204973653, 251.0, 8.5) maxClientRise=0.7049478117560852 externalSequence=1 externalTicks=0",
+    "[03:13:40] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_ACTION_CHECKS_COMPLETE suspendedRest=true realF=5 sinkOnce=true noReplay=true rescueOnce=true heldJump=true rescueExpires=true dryWalk=true externalKnockback=true externalExpires=true screenshots=0",
+    "[03:13:48] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_BOARD_WALK_COMPLETE ticks=60 distance=0.7088941176470588 maxDistance=0.7088941176470588 clientFlying=false serverFlying=false unchangedFov=1.0",
+    "[03:13:51] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_BOARD_RUN_JUMP_COMPLETE ticks=60 peakRise=0.2599999999999909 maxDistance=0.7230691176470588 serverEnd=(160.50032523353352, 253.0625, 1.2230690445026982) clientEnd=(160.50032523353352, 253.0625, 1.2230690445026982) heldJump=true",
+    "[03:14:16] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_BOARD_STRUGGLE_ESCAPE_COMPLETE realF=33 effort=0.0 walkAfterRelease=12.476083534970487 bonds=0",
+    "[03:14:20] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_ADHESION_CHECKS_COMPLETE creativeCoatedPlacement=true emptyPlacement=true unchangedFov=true walking=true running=true shortHop=true heldJumpFinite=true realFRelease=true screenshots=0"
+  ]
+}

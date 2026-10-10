@@ -226,6 +226,7 @@ public final class ModConfig {
         public final ModConfigSpec.BooleanValue bubbleEffects;
         public final ModConfigSpec.BooleanValue tarTreadsEffect;
         public final ModConfigSpec.BooleanValue struggleAnimation, struggleCamera, adhesiveTethers;
+        public final ModConfigSpec.BooleanValue enableStruggleKey;
         public final ModConfigSpec.BooleanValue glueCoating3d;
         public final ModConfigSpec.DoubleValue coatingOpacity,coatingThickness;
         public final ModConfigSpec.IntValue strandDisplayLimit,strandDensity;
@@ -234,6 +235,10 @@ public final class ModConfig {
         public MaterialVisuals visuals(String family){return materialVisuals.get(family);}
 
         ClientConfig(ModConfigSpec.Builder builder) {
+            builder.push("controls");
+            enableStruggleKey = builder.comment("Opt in to the dedicated struggle key (default F); no automatic hints")
+                    .define("enableStruggleKey", false);
+            builder.pop();
             builder.push("hud");
             forceFirstPerson = builder.comment("Force first-person camera in deep quicksand").define("forceFirstPerson", true);
             coverPlayerWithMud = builder.comment("Cover player model with mud texture").define("coverPlayerWithMud", true);

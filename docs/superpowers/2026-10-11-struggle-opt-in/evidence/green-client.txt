@@ -1,0 +1,151 @@
+INSTALLED_ARTIFACT=C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\viscosity-client\mods\MFQM-neoforge-1.21.11-0.7.5-inside.jar
+SHA256=adfcf14b45560a5830b91463886dcdc950a76828b1fe3c4db9fbd4622af4e9e6
+SCREENSHOTS=0
+2026-10-10T19:12:29.813044500Z main WARN Advanced terminal features are not available in this environment
+[03:12:29] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 266ms
+[03:12:29] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 10.0.36 (CLIENT in DEV)
+[03:12:30] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\viscosity-client
+[03:12:30] [main/WARN] [ne.ne.fm.lo.FMLConfig/CORE]: Configuration file C:\Users\Administrator\.codex\worktrees\2d32\MFQM-NeoForge-26.2\run\1.21.11\viscosity-client\config\fml.toml is not correct. Correcting
+[03:12:30] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 104) in 34ms
+[03:12:30] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[03:12:30] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/10.0.36/dbd0e11d545443f602addede111c39d9639708f9/earlydisplay-10.0.36.jar
+[03:12:30] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/10.0.36/f72ab4d3e755fe736829883d90430a281527aca/loader-10.0.36.jar
+[03:12:30] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because splash screen is disabled
+[03:12:30] [ForkJoinPool.commonPool-worker-7/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[03:12:30] [ForkJoinPool.commonPool-worker-7/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[03:12:30] [ForkJoinPool.commonPool-worker-7/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Minecraft 1.21.11 (minecraft)
+		NeoForge 21.11.45 (neoforge)
+		更多趣味流沙（MFQM） 0.7.5-inside (mfqm)
+[03:12:30] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.16.5+mixin.0.8.7/80fc3a9f592673cea87f4cd702f87991c6c9fe4d/sponge-mixin-0.16.5+mixin.0.8.7.jar Service=FML Env=CLIENT
+[03:12:30] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[03:12:30] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > net.neoforged.neoforge-coremods-21.11.45.jar
+[03:12:30] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - mfqm (jar(mods/MFQM-neoforge-1.21.11-0.7.5-inside.jar))
+ - minecraft (composite(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45-client-extra-aka-minecraft-resources.jar), filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - mixinextras.neoforge (jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar > mixinextras-neoforge-0.5.3.jar))
+ - neoforge (composite(filtered(jar(C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/build/moddev/artifacts/neoforge-21.11.45.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+[03:12:30] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 30ms
+[03:12:31] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/shaderpack/IdMap (java.lang.ClassNotFoundException: net.irisshaders.iris.shaderpack.IdMap)
+[03:12:31] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/shaderpack/programs/ProgramSource (java.lang.ClassNotFoundException: net.irisshaders.iris.shaderpack.programs.ProgramSource)
+[03:12:32] [Datafixer Bootstrap/INFO] [mojang/DataFixerBuilder]: 290 Datafixer optimizations took 557 milliseconds
+[03:12:33] [pool-8-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[03:12:39] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[03:12:39] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[03:12:39] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[03:12:39] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[03:12:39] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[03:12:39] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[03:12:39] [modloading-worker-0/INFO] [MFQM/]: MFQM initializing...
+[03:12:39] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.11.45, for MC 1.21.11
+[03:12:39] [modloading-worker-0/INFO] [MFQM/]: MFQM initialized.
+[03:12:39] [Render thread/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[03:12:39] [Render thread/INFO] [minecraft/Minecraft]: Setting user: Dev
+[03:12:39] [Render thread/INFO] [minecraft/Minecraft]: Backend library: LWJGL version 3.3.3+5
+[03:12:40] [Render thread/INFO] [minecraft/Minecraft]: Using optional rendering extensions: GL_ARB_buffer_storage, GL_KHR_debug, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
+[03:12:41] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources, mod/mfqm, mod/neoforge
+[03:12:42] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
+[03:12:42] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
+[03:12:42] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
+[03:12:43] [Render thread/INFO] [mojang/Library]: OpenAL initialized on device OpenAL Soft on 扬声器 (Realtek(R) Audio)
+[03:12:43] [Render thread/INFO] [minecraft/SoundEngine]: Sound engine started
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/beds.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/items.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[03:12:43] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[03:12:44] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/signs.png-atlas
+[03:12:44] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
+[03:12:44] [Render thread/INFO] [ne.ne.ne.cl.en.an.js.AnimationLoader/]: Loaded 0 entity animations
+[03:12:46] [Render thread/INFO] [minecraft/RecipeManager]: Loaded 1677 recipes
+[03:12:46] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 1584 advancements
+[03:12:46] [Render thread/INFO] [ne.ne.ne.co.cr.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[03:12:47] [Server thread/INFO] [minecraft/IntegratedServer]: Starting integrated minecraft server version 1.21.11
+[03:12:47] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[03:12:47] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[03:12:47] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[03:12:47] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[03:12:48] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 48 chunks for player spawn...
+[03:12:48] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[03:12:48] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[03:12:49] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[03:12:49] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[03:12:50] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：16%
+[03:12:50] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：30%
+[03:12:51] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[03:12:51] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[03:12:52] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[03:12:52] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：58%
+[03:12:53] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: 准备生成区域中：60%
+[03:12:53] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 5921 ms
+[03:12:53] [Server thread/INFO] [minecraft/PlayerList]: Dev[local:E:15ef8515] logged in with entity id 26 at (-54.5, 79.0, 99.5)
+[03:12:53] [Server thread/INFO] [minecraft/MinecraftServer]: Dev加入了游戏
+[03:12:53] [Render thread/WARN] [minecraft/ClientPacketListener]: Ignoring chat session from Dev due to missing Services public key
+[03:12:53] [Server thread/INFO] [minecraft/IntegratedServer]: Changing view distance to 12, from 10
+[03:12:53] [Server thread/INFO] [minecraft/IntegratedServer]: Changing simulation distance to 12, from 0
+[03:12:54] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[03:12:54] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 2 advancements
+[03:12:54] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[03:12:54] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 2 reached during a single frame. New capacity will be 8.
+[03:12:54] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
+[03:12:54] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 16 reached during a single frame. New capacity will be 32.
+[03:12:55] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 32 reached during a single frame. New capacity will be 64.
+[03:12:55] [Render thread/INFO] [MFQM/]: MFQM_INSTALLED_JAR_LOADED file:/C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2/run/1.21.11/viscosity-client/mods/MFQM-neoforge-1.21.11-0.7.5-inside.jar
+[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_CREATIVE_BOARD_VARIANTS_COMPLETE coated=粘鼠板（已涂胶） empty=粘鼠板底板（未涂胶） adjacent=true
+[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_VISUAL_CHECKS_COMPLETE modelCases=60
+[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_STRUGGLE_INPUT_CHECKS_COMPLETE defaultOff=true vanillaSwap=true noHints=true hiddenMenu=true noHiddenConflict=true customBindingRetained=true modifierMismatchSwap=true shortTap=true repeat=false heldRepeatSwap=false enabledTetherSwap=false menuLeak=false queuedReplay=false
+[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_CHINESE_CHECKS_COMPLETE englishKeys=574 chineseKeys=830 active=true configScreen=true formats=true registeredNames=true
+[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_CLIENT_CHECKS_COMPLETE items=180 visible=165 blocks=51 fluids=14 entities=18
+[03:12:56] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_ACTION_CHECKS_START screenshots=0 realF=true suspendedGlue=true rescueOnce=true
+[03:12:58] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2546ms or 50 ticks behind
+[03:12:59] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_ACTION_FIXTURE_READY ticks=70 clientY=253.0 clientVelocity=(0.0, -0.0784000015258789, 0.0) glueColumn=true
+[03:13:00] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_ACTION_BASELINE server=Observation[position=(104.5, 252.5, 8.5), material=glue, depth=1.3888888955116272, effort=0.0, totalSink=0.0, animation=-9223372036854775808, rescueSequence=0, rescueTicks=0, connections=2, jumping=false, inputTick=2000, time=2001, speed=0.10000000149011612, gravity=0.0, velocity=(0.0, 0.0, 0.0), onGround=false, externalSequence=0, externalTicks=0] clientY=252.5 clientContact=Contact[material=GLUE, pos=BlockPos{x=104, y=252, z=8}, block=Block{mfqm:glue}[level=0], surface=253.88888889551163, depth=1.3888888955116272, eyesCovered=false, airImmersion=false] clientGravity=0.0
+[03:13:06] [Render thread/INFO] [MFQM/]: MFQM_GLUE_ACTIVITY_RANGE_COMPLETE movementTicks=120 distance=1.2467315819699334 connections=30 clientFlying=false serverFlying=false
+[03:13:10] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_ACTION_BASELINE server=Observation[position=(104.5, 252.5, 8.5), material=glue, depth=1.3888888955116272, effort=0.0, totalSink=0.0, animation=-9223372036854775808, rescueSequence=0, rescueTicks=0, connections=2, jumping=false, inputTick=2200, time=2201, speed=0.10000000149011612, gravity=0.0, velocity=(0.0, 0.0, 0.0), onGround=false, externalSequence=0, externalTicks=0] clientY=252.5 clientContact=Contact[material=GLUE, pos=BlockPos{x=104, y=252, z=8}, block=Block{mfqm:glue}[level=0], surface=253.88888889551163, depth=1.3888888955116272, eyesCovered=false, airImmersion=false] clientGravity=0.0
+[03:13:11] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_REST_COMPLETE ticks=30 floorGap=3.5 serverY=252.5 clientY=252.5 depth=1.3888888955116272
+[03:13:12] [Render thread/INFO] [MFQM/]: MFQM_DISABLED_STRUGGLE_NETWORK_COMPLETE ticks=20 effortUnchanged=true sinkUnchanged=true animationUnchanged=true
+[03:13:12] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=1 effort=1.0 totalSink=0.0 serverY=252.5 clientY=252.5
+[03:13:13] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=2 effort=2.0 totalSink=0.0 serverY=252.5 clientY=252.5
+[03:13:14] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=3 effort=3.0 totalSink=0.0 serverY=252.5 clientY=252.5
+[03:13:15] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=4 effort=4.0 totalSink=0.025 serverY=252.5 clientY=252.475
+[03:13:16] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_REAL_F_ACCEPTED count=5 effort=5.0 totalSink=0.05 serverY=252.475 clientY=252.45
+[03:13:17] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_F_SINK_COMPLETE realF=5 effort=5.0 serverSink=0.05000000000001137 clientSink=0.05000000000001137 totalSinkDelta=0.05
+[03:13:20] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_GLUE_NO_REPLAY_COMPLETE ticks=60 serverY=252.45 clientY=252.45 depth=1.4388888955116386 totalSink=0.05
+[03:13:22] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESCUE_COMPLETE strength=.08 calls=1 heldJump=true serverRise=0.42510986998723865 clientRise=0.42510986998723865 maxClientY=253.08092123931064 rescueSequence=1 rescueTicks=0
+[03:13:25] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_RESCUE_REST_COMPLETE ticks=60 serverY=252.86510986998724 clientY=252.86510986998724 sequence=1 expired=true
+[03:13:32] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_DRY_WALK_COMPLETE ticks=60 serverWalk=12.947788705790742 clientWalk=12.947788705790742 serverEnd=(115.44778870579074, 253.0, -3.5) clientEnd=(115.44778870579074, 253.0, -3.5) speed=0.10000000149011612 gravity=0.08
+[03:13:36] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_KNOCKBACK_READY serverY=251.00000000000006 clientY=251.00000000000006 serverGround=true clientGround=true depth=0.8888888955115704
+[03:13:37] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_KNOCKBACK_ARC_COMPLETE ticks=30 strength=.4 attacks=1 realDamage=true clientFlying=false serverFlying=false groundedNaturally=true serverRise=0.7049478117560852 clientRise=0.7049478117560852 serverEnd=(103.81333204973653, 251.45494781175637, 8.5) clientEnd=(103.81333204973653, 251.4349478117564, 8.5) serverVelocity=(0.0, -0.01, 0.0) clientVelocity=(-6.717041850873426E-14, -0.01, 0.0) externalSequence=1 externalTicks=0
+[03:13:40] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_KNOCKBACK_EXPIRED_COMPLETE idleTicks=60 serverEnd=(103.81333204973653, 251.0, 8.5) clientEnd=(103.81333204973653, 251.0, 8.5) maxClientRise=0.7049478117560852 externalSequence=1 externalTicks=0
+[03:13:40] [Render thread/INFO] [MFQM/]: MFQM_VISCOSITY_ACTION_CHECKS_COMPLETE suspendedRest=true realF=5 sinkOnce=true noReplay=true rescueOnce=true heldJump=true rescueExpires=true dryWalk=true externalKnockback=true externalExpires=true screenshots=0
+[03:13:40] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_ADHESION_START creativeGround=true flight=false actualPlacement=true
+[03:13:48] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_BOARD_WALK_COMPLETE ticks=60 distance=0.7088941176470588 maxDistance=0.7088941176470588 clientFlying=false serverFlying=false unchangedFov=1.0
+[03:13:51] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_BOARD_RUN_JUMP_COMPLETE ticks=60 peakRise=0.2599999999999909 maxDistance=0.7230691176470588 serverEnd=(160.50032523353352, 253.0625, 1.2230690445026982) clientEnd=(160.50032523353352, 253.0625, 1.2230690445026982) heldJump=true
+[03:14:16] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_BOARD_STRUGGLE_ESCAPE_COMPLETE realF=33 effort=0.0 walkAfterRelease=12.476083534970487 bonds=0
+[03:14:20] [Render thread/INFO] [MFQM/]: MFQM_BOUNDED_ADHESION_CHECKS_COMPLETE creativeCoatedPlacement=true emptyPlacement=true unchangedFov=true walking=true running=true shortHop=true heldJumpFinite=true realFRelease=true screenshots=0
+[03:14:20] [Render thread/INFO] [minecraft/Minecraft]: Stopping!
+[03:14:20] [Server thread/INFO] [minecraft/ServerGamePacketListenerImpl]: Dev lost connection: 连接中断
+[03:14:20] [Server thread/INFO] [minecraft/MinecraftServer]: Dev退出了游戏
+[03:14:20] [Server thread/INFO] [minecraft/ServerCommonPacketListenerImpl]: Stopping singleplayer server as player logged out
+[03:14:20] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[03:14:20] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[03:14:20] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[03:14:21] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:overworld
+[03:14:22] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_end
+[03:14:22] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[smoke-world]'/minecraft:the_nether
+[03:14:22] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (mfqm-port-checks): All chunks are saved
+[03:14:22] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:14:22] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:14:22] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
