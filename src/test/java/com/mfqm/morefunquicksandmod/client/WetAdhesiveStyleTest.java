@@ -122,7 +122,33 @@ public final class WetAdhesiveStyleTest {
             check(before.subtract(after).length()<1e-7,"turning past a leg corner must not teleport the random attachment");
         }
         check(WetAdhesiveStyle.tube(new Vec(0,0,0),new Vec(0,0,0),6,.02,.008).isEmpty(),"fully retracted strands cannot create NaN geometry");
+        for(int i=0;i<1024;i++) {
+            long seed=CompactStrandStyle.seed(i,i%128);
+            double angle=CompactStrandStyle.variation(seed)*Math.PI*2;
+            var root=new Vec(.4*Math.cos(angle),-.15,.4*Math.sin(angle));
+            var end=WetAdhesiveStyle.endpoint(skinFrame,.6,seed,root);
+            var normal=new Vec(end.x(),0,end.z()).unit();
+            var hit=new SkinSurfaceContact.Hit(end,normal);
+            double width=.02+.025*CompactStrandStyle.variation(seed^37);
+            int segments=i%2==0?3:6;
+            check(WetAdhesiveStyle.attachedTube(root,hit,skinFrame,segments,width,width,seed)
+                    .equals(referenceAttached(root,hit,skinFrame,segments,width,width,seed)),"shared clipped ring vertices preserve every face, normal, color and winding "+i);
+        }
         System.out.println("WetAdhesiveStyle: "+checks+" behavioral checks passed");
+    }
+    static List<CoatingVoxels.Quad> referenceAttached(Vec start,SkinSurfaceContact.Hit end,WetAdhesiveStyle.Frame leg,int segments,double startRadius,double endRadius,long seed) {
+        var result=new java.util.ArrayList<CoatingVoxels.Quad>();
+        for(var q:WetAdhesiveStyle.tube(start,end.point(),segments,startRadius,endRadius,seed)) {
+            var a=referenceOutside(q.a(),start,end,leg,startRadius);var b=referenceOutside(q.b(),start,end,leg,startRadius);
+            var c=referenceOutside(q.c(),start,end,leg,startRadius);var d=referenceOutside(q.d(),start,end,leg,startRadius);
+            var normal=b.subtract(a).cross(c.subtract(a));if(normal.length()<1e-12)continue;
+            result.add(new CoatingVoxels.Quad(a,b,c,d,normal.unit(),q.color()));
+        }
+        return List.copyOf(result);
+    }
+    private static Vec referenceOutside(Vec p,Vec root,SkinSurfaceContact.Hit skin,WetAdhesiveStyle.Frame leg,double rootRadius) {
+        if(p.subtract(root).length()<=rootRadius*1.00001 || p.subtract(leg.center()).dot(leg.up())<-.035)return p;
+        return SkinSurfaceContact.outside(p,skin);
     }
     private static void closed(List<CoatingVoxels.Quad> mesh,String message) {
         var edges=new java.util.HashMap<String,Integer>();

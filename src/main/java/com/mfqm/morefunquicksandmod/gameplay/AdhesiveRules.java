@@ -46,6 +46,9 @@ public final class AdhesiveRules {
     }
     public static Result evaluate(List<Bond> bonds) { return evaluate(bonds, MAX_TOTAL_FORCE); }
 
+    /** Single-connection lifecycle check without allocating an aggregation buffer. */
+    public static boolean isActive(Bond bond) { return forceFor(bond) != null; }
+
     /**
      * Keeps up to 64 valid connections in list order. The controller replaces oldest contacts before adding.
      * The caller owns anchor existence, lifetime and dimension checks and supplies them through Bond.valid.

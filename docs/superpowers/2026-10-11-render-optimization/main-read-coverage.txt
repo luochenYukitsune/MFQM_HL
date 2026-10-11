@@ -1,0 +1,70 @@
+Main reviewer actual-read coverage, 2026-10-11
+All 50 client Java files read, with truncated ranges reread.
+Auxiliary reviewer covers all 95 other main Java, 14 tests, 27 tools.
+See auxiliary-read-coverage.txt for that independent inventory.
+Resource JSON is parsed/validated by existing validators, not classified as Java code.
+Excluded: ignored caches, generated dependency sources, archived previous exports.
+
+CLIENT MAIN JAVA: 50
+src/main/java/com/mfqm/morefunquicksandmod/client/AdhesiveClientScene.java
+src/main/java/com/mfqm/morefunquicksandmod/client/AdhesiveDisplayBudget.java
+src/main/java/com/mfqm/morefunquicksandmod/client/AdhesiveFeetSampler.java
+src/main/java/com/mfqm/morefunquicksandmod/client/AdhesiveTetherRenderer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/AdhesiveVisualClientChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/BlobRenderer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/BlobRenderState.java
+src/main/java/com/mfqm/morefunquicksandmod/client/BoundedAdhesionClientChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/ChineseLanguageChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/ClientNetworking.java
+src/main/java/com/mfqm/morefunquicksandmod/client/ClientPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/CoatingAppearance.java
+src/main/java/com/mfqm/morefunquicksandmod/client/CoatingClientChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/CoatingVoxels.java
+src/main/java/com/mfqm/morefunquicksandmod/client/CompactStrandStyle.java
+src/main/java/com/mfqm/morefunquicksandmod/client/DynamicAdhesionClientChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/FirstPersonCompatibility.java
+src/main/java/com/mfqm/morefunquicksandmod/client/FirstPersonTetherProof.java
+src/main/java/com/mfqm/morefunquicksandmod/client/FlatCoatingTextures.java
+src/main/java/com/mfqm/morefunquicksandmod/client/GlueCoatingRenderer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/HelperRenderer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/HelperRenderState.java
+src/main/java/com/mfqm/morefunquicksandmod/client/IterationFluidCompatibility.java
+src/main/java/com/mfqm/morefunquicksandmod/client/IterationShaderBridge.java
+src/main/java/com/mfqm/morefunquicksandmod/client/IterationShaderContracts.java
+src/main/java/com/mfqm/morefunquicksandmod/client/LegacyBeeModel.java
+src/main/java/com/mfqm/morefunquicksandmod/client/LegacyBlobModel.java
+src/main/java/com/mfqm/morefunquicksandmod/client/LegacyCoatingModel.java
+src/main/java/com/mfqm/morefunquicksandmod/client/LegacyFluidRendering.java
+src/main/java/com/mfqm/morefunquicksandmod/client/MechanismRenderer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/MfqmBeeRenderer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/MfqmClient.java
+src/main/java/com/mfqm/morefunquicksandmod/client/MudBubbleParticle.java
+src/main/java/com/mfqm/morefunquicksandmod/client/MuddyPlayerLayer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/NativeSkinSurface.java
+src/main/java/com/mfqm/morefunquicksandmod/client/RenderedAdhesiveSurface.java
+src/main/java/com/mfqm/morefunquicksandmod/client/ShaderClientChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/ShaderCompatibility.java
+src/main/java/com/mfqm/morefunquicksandmod/client/SkinLayerClearance.java
+src/main/java/com/mfqm/morefunquicksandmod/client/SkinSurfaceContact.java
+src/main/java/com/mfqm/morefunquicksandmod/client/StruggleClient.java
+src/main/java/com/mfqm/morefunquicksandmod/client/StruggleEnumParams.java
+src/main/java/com/mfqm/morefunquicksandmod/client/StrugglePose.java
+src/main/java/com/mfqm/morefunquicksandmod/client/StruggleVisualChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/StuckBootsRenderer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/SurfaceBubbleStyle.java
+src/main/java/com/mfqm/morefunquicksandmod/client/TranslucentGeometry.java
+src/main/java/com/mfqm/morefunquicksandmod/client/ViscosityActionChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/ViscosityClientChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/client/WetAdhesiveStyle.java
+
+BUILD / METADATA / WRAPPERS
+build.gradle
+settings.gradle
+gradle.properties
+gradle/wrapper/gradle-wrapper.properties
+gradlew
+gradlew.bat
+src/main/resources/META-INF/accesstransformer.cfg
+src/main/resources/META-INF/neoforge.mods.toml
+
+Also read and reviewed actual diffs, changed tests, benchmark and artifact verifier.

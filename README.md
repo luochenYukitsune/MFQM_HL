@@ -1,6 +1,8 @@
 # More Fun Quicksand Mod — Minecraft 1.21.11 / NeoForge
 
-当前版本为 **0.7.5-inside 预发布版（Pre-release）**，见 [0.7.5 中文更新日志](release-notes-0.7.5.zh-CN.md)和[贴肤渲染验收](docs/superpowers/2026-10-10-skin-film/final_report.md)。本版整合此前全项目审查修复，并让随机黏丝只附着到实际腿面、全部身体残留变为贴肤薄膜。当前及后续开发构建统一采用 `-inside` 后缀；下一版随版本号递增，例如 `0.7.6-inside`。
+当前版本为 **0.7.6-inside 预发布版（Pre-release）**，见 [0.7.6 中文更新日志](release-notes-0.7.6.zh-CN.md)和[渲染优化验收](docs/superpowers/2026-10-11-render-optimization/final_report.md)。本版减少黏丝生成的重复裁剪和临时对象，并新增方形像素风模组图标；延续 0.7.5 的贴肤胶层、真实腿面附着及审查修复。当前及后续开发构建统一采用 `-inside` 后缀；下一版随版本号递增，例如 `0.7.7-inside`。
+
+黏丝几何与内存分配的小优化保持原有外观、密度和束缚规则；已打包新的 256×256 像素风图标。测量与兼容验证见[渲染优化记录](docs/superpowers/2026-10-11-render-optimization/final_report.md)。游戏内模组列表使用新图标；PCL2 模组管理列表使用匹配到的 Modrinth／CurseForge 项目图标，单独更换 JAR 图标不能改变未匹配项目的默认图标。
 
 已发布的 [0.7.3-dev 预发布版（Pre-release）](release-notes-0.7.3.zh-CN.md)将默认黏丝上限设为约 512 根，可调上限扩展到 8192 根；初次接触更浓密，附着位置、宽厚和轻微弯曲稳定随机，并修复介质表面的巨型方形气泡。这些改进继续保留。
 
@@ -47,7 +49,7 @@
 
 macOS / Linux 使用 `sh ./gradlew`。首次构建需要下载官方依赖。
 
-开发版产物：`build/libs/MFQM-neoforge-1.21.11-0.7.5-inside.jar`，替换实例 `mods` 中旧版 MFQM，避免同时保留多个版本。本次修复延续同步协议 7；客户端与服务端建议使用同版。世界生成在新生成区块生效。
+开发版产物：`build/libs/MFQM-neoforge-1.21.11-0.7.6-inside.jar`，替换实例 `mods` 中旧版 MFQM，避免同时保留多个版本。本次修复延续同步协议 7；客户端与服务端建议使用同版。世界生成在新生成区块生效。
 
 配置包含原有玩法以及黏连距离、留靴概率、胶水池／板生成和动作显示开关，可从模组列表打开中文配置界面。`creativeGroundPhysics` 默认开启，控制关闭飞行的创造玩家是否受困；服务器决定玩法设置。获取工具的开关控制配方，注册保持稳定；配方设置修改后可通过 `/reload` 重载，世界生成设置仅影响新区块。旧数字 DataWatcher 槽位由现代附件替代。
 
@@ -55,8 +57,8 @@ macOS / Linux 使用 `sh ./gradlew`。首次构建需要下载官方依赖。
 
 ```powershell
 .\gradlew.bat runData build
-python tools/verify_jar.py build/libs/MFQM-neoforge-1.21.11-0.7.5-inside.jar
-python tools/verify_port.py build/libs/MFQM-neoforge-1.21.11-0.7.5-inside.jar
+python tools/verify_jar.py build/libs/MFQM-neoforge-1.21.11-0.7.6-inside.jar
+python tools/verify_port.py build/libs/MFQM-neoforge-1.21.11-0.7.6-inside.jar
 python tools/connected_boards.py --verify
 python -m unittest discover -s tools -p test_coating_height.py
 python tools/coating_height.py --verify
@@ -86,7 +88,7 @@ python tools/smoke_viscosity_client.py --visual-only
 
 Python 工具需要 Python 3.11+。服务器检查只允许绑定本机、随机端口和独立的 `smoke-world`；客户端检查使用复制的测试存档。测试工具为该独立测试服务器写入 EULA 接受值，正式实例由使用者阅读并决定接受。开发数据位于忽略的 `run/1.21.11/`。
 
-`build` 包含 13 个独立 Java 检查程序，共 65636 项断言／样本／运动组检查：运动 35 组、阻力 35 个边界、覆盖高度 23 个边界，以及黏连 241 项、接触/根部 78 项、范围/短跳 112 项、覆盖颜色/贴肤间隙 22 项、像素胶膜 389 项、短密黏丝 9742 项、湿黏薄壳与立体胶带 7032 项、气泡 41665 项、脱困规则 739 项、动作姿态 378 项、光影源契约 23 项和真实表面投射 5122 项检查。服务器检查覆盖配方、束缚、救援、留靴、换维度与地形保护，并通过真实存档重启验证留靴。0.7.4-dev 补充真实伤害／死亡／和平移除、卸载后旧引用与读档、最终取消传送、玩家和普通生物传送、剪刀交互及未加载邻区块回归。安装检查通过代码来源断言排除直接加载开发类。黏度工具默认不截图，主套件使用生存及关闭飞行的创造模式、真实 W 与跳跃输入，测量期间检查两端 `flying=false`，随后验证胶水持续移动、救援、受击和已涂胶板。`--bounded-only` 仅运行粘鼠板、FOV 与范围走跳检查；`--board-visual` 显式增加一张必要的空板/胶板模型截图。飞行对照需单独使用 `--flight-controls`，不进入主验收。自然生成检查保持默认概率，扫描未生成过的地表森林候选区块。旧玩法结果见[验收报告](docs/superpowers/2026-10-06-adhesive-gameplay/final_report.md)，此前黏度记录见[黏度修复](docs/superpowers/2026-10-07-viscosity-fix.md)。
+`build` 包含 13 个独立 Java 检查程序，共 74834 项断言／样本／运动组检查：运动 35 组、阻力 35 个边界、覆盖高度 23 个边界，以及黏连 8415 项、接触/根部 78 项、范围/短跳 112 项、覆盖颜色/贴肤间隙 22 项、像素胶膜 389 项、短密黏丝 9742 项、湿黏薄壳与立体胶带 8056 项、气泡 41665 项、脱困规则 739 项、动作姿态 378 项、光影源契约 23 项和真实表面投射 5122 项检查。服务器检查覆盖配方、束缚、救援、留靴、换维度与地形保护，并通过真实存档重启验证留靴。0.7.4-dev 补充真实伤害／死亡／和平移除、卸载后旧引用与读档、最终取消传送、玩家和普通生物传送、剪刀交互及未加载邻区块回归。安装检查通过代码来源断言排除直接加载开发类。黏度工具默认不截图，主套件使用生存及关闭飞行的创造模式、真实 W 与跳跃输入，测量期间检查两端 `flying=false`，随后验证胶水持续移动、救援、受击和已涂胶板。`--bounded-only` 仅运行粘鼠板、FOV 与范围走跳检查；`--board-visual` 显式增加一张必要的空板/胶板模型截图。飞行对照需单独使用 `--flight-controls`，不进入主验收。自然生成检查保持默认概率，扫描未生成过的地表森林候选区块。旧玩法结果见[验收报告](docs/superpowers/2026-10-06-adhesive-gameplay/final_report.md)，此前黏度记录见[黏度修复](docs/superpowers/2026-10-07-viscosity-fix.md)。
 
 0.7.0 发布时按用户要求仅编译、打包并运行轻量几何及 JAR 资源检查；未启动游戏。0.7.1-dev 恢复简化的真实游戏验证，`--visual-only` 只运行跨区块 2×2 板实际放置、拆除、旧状态修复及黏丝两场景，保存两张必要截图；不代表重跑完整玩法或兼容矩阵。拼接工具增加实际纹理透明度检查，需安装 Pillow，避免几何已连通但接缝仍透出木色。详见[本次修正记录](docs/superpowers/2026-10-09-adhesive-visual-fix/final_report.md)。
 
@@ -100,6 +102,8 @@ Python 工具需要 Python 3.11+。服务器检查只允许绑定本机、随机
 
 ## 记录
 
+- [0.7.6-inside 中文更新日志](release-notes-0.7.6.zh-CN.md)
+- [黏丝渲染小优化、图标与全代码评估](docs/superpowers/2026-10-11-render-optimization/final_report.md)
 - [0.7.5-inside 贴肤胶层与黏丝表面附着](docs/superpowers/2026-10-10-skin-film/final_report.md)
 - [0.7.4-dev 全项目审查与修复](docs/superpowers/2026-10-10-full-audit/final_report.md)
 - [0.6.11-dev 相邻粘鼠板拼接](docs/superpowers/2026-10-09-connected-boards/final_report.md)

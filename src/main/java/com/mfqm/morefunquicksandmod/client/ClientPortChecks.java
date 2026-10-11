@@ -58,6 +58,12 @@ public final class ClientPortChecks {
             if(Boolean.getBoolean("mfqm.installedChecks")) {
                 require(codeSource.getPath().endsWith(".jar"),"installed validation must load the packaged JAR: "+codeSource);
                 MFQM.LOGGER.info("MFQM_INSTALLED_JAR_LOADED {}",codeSource);
+                try(var jar=new java.util.zip.ZipFile(java.nio.file.Path.of(codeSource).toFile());
+                    var stream=jar.getInputStream(jar.getEntry("icon.png"));
+                    var icon=com.mojang.blaze3d.platform.NativeImage.read(stream)) {
+                    require(icon.getWidth()==256 && icon.getHeight()==256,"packaged icon is actually decoded by the game");
+                    MFQM.LOGGER.info("MFQM_MOD_ICON_VERIFIED pngDecoded=true width=256 height=256");
+                }
             }
             CreativeModeTabs.tryRebuildTabContents(game.level.enabledFeatures(), true, game.level.registryAccess());
             int visible = ModCreativeTabs.MFQM_TAB.get().getDisplayItems().size();

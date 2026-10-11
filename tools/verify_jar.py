@@ -32,6 +32,11 @@ def verify(jar_path: Path) -> list[str]:
         mod = next(entry for entry in metadata["mods"] if entry["modId"] == "mfqm")
         require("${" not in str(metadata), "Unexpanded mod metadata")
         require(mod.get("logoFile") in entries, "Missing logoFile resource")
+        require(mod.get("logoBlur") is False, "Pixel-art logo must use nearest-neighbor scaling")
+        if mod.get("logoFile") in entries:
+            image = jar.read(mod["logoFile"])
+            require(len(image) >= 24 and image[:8] == b'\x89PNG\r\n\x1a\n'
+                    and struct.unpack('>II', image[16:24]) == (256, 256), "Mod icon must be a square 256x256 PNG")
         require("META-INF/accesstransformer.cfg" in entries, "Missing recipe manager access transformer")
         if "META-INF/accesstransformer.cfg" in entries:
             require("public net.minecraft.world.item.crafting.RecipeManager recipes" in jar.read("META-INF/accesstransformer.cfg").decode("utf-8"), "Missing acquisition/compatibility recipe access")

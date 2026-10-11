@@ -203,8 +203,7 @@ public final class AdhesionController {
             var p=profile(anchor.material());Vec3 foot=foot(entity,anchor.side());
             double strength=state.struggle.adhesionScale(medium(anchor.material()));
             var bond=new AdhesiveRules.Bond(point(anchor.point()),point(foot),p,strength,valid);
-            var evaluated=AdhesiveRules.evaluate(java.util.List.of(bond));
-            if(evaluated.activeBonds()>0) {
+            if(AdhesiveRules.isActive(bond)) {
                 bonds.add(bond);retained.add(anchor);
                 if(anchor.visual()!=null && level.getEntity(anchor.visual()) instanceof AdhesiveTetherEntity visual)visual.configure(entity,anchor.point(),anchor.material(),anchor.side(),(float)strength);
             } else {

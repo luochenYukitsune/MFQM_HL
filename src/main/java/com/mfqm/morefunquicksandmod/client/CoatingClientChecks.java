@@ -37,6 +37,7 @@ public final class CoatingClientChecks {
     private static double oldOpacity,oldThickness;
     private static int visibleBundles,visibleFilaments;
     private static double glueRestY;
+    private static boolean hopChecked;
     private static int oldFov;
     private static net.minecraft.client.player.ClientInput oldInput;
     public static void start(Minecraft game) {
@@ -53,7 +54,7 @@ public final class CoatingClientChecks {
         }catch(ReflectiveOperationException e){throw new IllegalStateException(e);}
         ModConfig.CLIENT.coatingOpacity.set(1.);ModConfig.CLIENT.coatingThickness.set(1.);
         ModConfig.CLIENT.forceFirstPerson.set(false);ModConfig.CLIENT.coverPlayerWithMud.set(true);ModConfig.CLIENT.glueCoating3d.set(true);
-        verifyMasks();running=true;ready=false;ticks=0;phase=0;
+        verifyMasks();running=true;ready=false;hopChecked=false;ticks=0;phase=0;
         MFQM.LOGGER.info("MFQM_COATING_CHECKS_START skinLayers={} actualModVersion={} groundCamera=true",SkinLayerClearance.present(),
                 net.neoforged.fml.ModList.get().getModContainerById("skinlayers3d").map(c->c.getModInfo().getVersion().toString()).orElse("absent"));
         var id=game.player.getUUID();game.getSingleplayerServer().execute(()->{
@@ -220,20 +221,24 @@ public final class CoatingClientChecks {
                     game.player.input=trappedInput(0,false);FirstPersonTetherProof.reset();phase=16;ticks=0;
                 }
                 case 16->{
-                    if(ticks<30)return;aligned("glue64");verifyCompactBundles(game);
+                    if(ticks<30 || !verifyCompactBundles(game))return;aligned("glue64");
                     screenshot(game,"mfqm-firstperson-tethers.png");
                     game.options.setCameraType(CameraType.THIRD_PERSON_BACK);game.player.setYRot(145);game.player.setXRot(32);phase=17;ticks=0;
                 }
                 case 17->{
                     if(ticks<35)return;require(!FirstPersonCompatibility.hasCameraFeet(),"dense third-person scene has no stale first-person offset");
-                    verifyCompactBundles(game);glueRestY=game.player.getY();
+                    if(!verifyCompactBundles(game))return;glueRestY=game.player.getY();
                     // Zoom only this isolated visual fixture to inspect tube cross-sections and shell rims.
                     if(Boolean.getBoolean("mfqm.coatingVisual")){game.options.fov().set(35);game.player.setXRot(55);}
-                    game.player.input=trappedInput(0,false,true);phase=18;ticks=0;
+                    game.player.input=trappedInput(0,false,true);hopChecked=false;phase=18;ticks=0;
                 }
                 case 18->{
-                    if(ticks<6)return;require(game.player.getY()>glueRestY+.12 && game.player.getY()<glueRestY+.31,"actual finite short hop exposes dense strands near the ankles");
-                    verifyCompactBundles(game);screenshot(game,"mfqm-close-strands.png");
+                    if(ticks<6)return;
+                    if(!hopChecked) {
+                        require(game.player.getY()>glueRestY+.12 && game.player.getY()<glueRestY+.31,"actual finite short hop exposes dense strands near the ankles");
+                        hopChecked=true;game.player.input=trappedInput(0,false);
+                    }
+                    if(!verifyCompactBundles(game))return;screenshot(game,"mfqm-close-strands.png");
                     MFQM.LOGGER.info("MFQM_FIRSTPERSON_TETHERS_COMPLETE standing=true crouching=true turned=true toggled=true glue64=true maxErrorBelow=.012 flight=false");
                     MFQM.LOGGER.info("MFQM_COMPACT_STRANDS_COMPLETE bundles={} filaments={} physical64=true horizontalNear=true rootsInside=true animations={}",visibleBundles,visibleFilaments,Boolean.getBoolean("mfqm.coatingAnimationsExpected"));complete(game);
                 }
@@ -256,17 +261,24 @@ public final class CoatingClientChecks {
         require(FirstPersonTetherProof.error()<.012,"native first-person foot and tether alignment "+stage+" error="+FirstPersonTetherProof.error());
         MFQM.LOGGER.info("MFQM_FIRSTPERSON_TETHER_ALIGNMENT stage={} samples={} maxError={}",stage,FirstPersonTetherProof.samples(),FirstPersonTetherProof.error());
     }
-    private static void verifyCompactBundles(Minecraft game) {
+    private static boolean verifyCompactBundles(Minecraft game) {
         var helpers=game.level.getEntitiesOfClass(com.mfqm.morefunquicksandmod.entity.AdhesiveTetherEntity.class,game.player.getBoundingBox().inflate(12),e->e.target()==game.player && !e.breaking());
-        if(helpers.size()!=64) {
+        int synchronizedCount=QuicksandPhysics.state(game.player).adhesiveConnections;
+        if((helpers.size()!=64 || synchronizedCount!=64) && ticks%10==0) {
             var id=game.player.getUUID();
             int serverCount=game.getSingleplayerServer().submit(()->QuicksandPhysics.state(game.getSingleplayerServer().getPlayerList().getPlayer(id)).anchors.size()).orTimeout(2,java.util.concurrent.TimeUnit.SECONDS).join();
             require(serverCount==64,"server retains exactly 64 physical anchors while entity updates are in flight");
-            MFQM.LOGGER.info("MFQM_WET_CONTACT_SYNC live={} synced={} authoritative={} phase={} y={}",helpers.size(),QuicksandPhysics.state(game.player).adhesiveConnections,serverCount,phase,game.player.getY());
+            MFQM.LOGGER.info("MFQM_WET_CONTACT_SYNC live={} synced={} authoritative={} phase={} y={}",helpers.size(),synchronizedCount,serverCount,phase,game.player.getY());
         }
-        // Spawn and beginBreak arrive as separate packets. Transient client entity
-        // counts may differ; physical anchors and the actual display budget may not.
-        require(QuicksandPhysics.state(game.player).adhesiveConnections==64,"dense trap synchronizes its 64 physical contacts");visibleBundles=0;visibleFilaments=0;int membranes=0;
+        // Spawn, cuff reassignment and beginBreak arrive as separate packets.
+        // Wait for the complete synchronized snapshot before asserting exactly two films.
+        // The phase timeout above still fails if the two feet never settle.
+        require(synchronizedCount>=0 && synchronizedCount<=64,"dense trap never synchronizes more than 64 physical contacts");
+        long cuffs=helpers.stream().filter(com.mfqm.morefunquicksandmod.entity.AdhesiveTetherEntity::cuff).count();
+        long rightCuffs=helpers.stream().filter(e->e.cuff() && e.side()==0).count();
+        long leftCuffs=helpers.stream().filter(e->e.cuff() && e.side()==1).count();
+        if(helpers.size()!=64 || synchronizedCount!=64 || cuffs!=2 || rightCuffs!=1 || leftCuffs!=1)return false;
+        visibleBundles=0;visibleFilaments=0;int membranes=0;
         for(var helper:helpers) {
             var renderer=(AdhesiveTetherRenderer)game.getEntityRenderDispatcher().getRenderer(helper);var state=renderer.createRenderState(helper,1);
             if(!state.visible)continue;visibleBundles++;visibleFilaments+=state.filaments.size();
@@ -315,6 +327,7 @@ public final class CoatingClientChecks {
         require(visibleBundles<=64 && visibleFilaments<=64*ModConfig.CLIENT.strandDensity.get() && visibleFilaments>=16,"nearby scene has bounded independent strands without branching");
         require(membranes==2,"dense scene renders exactly one film on each foot");
         MFQM.LOGGER.info("MFQM_WET_ADHESIVE_COMPLETE film2=true closedShell=true independentStrands=true noBranches=true hexagonalTubes=true nativeFootBounds=true depthHeight=true rootsInside=true translucent=true");
+        return true;
     }
     private static void verifyMasks() {
         int cases=0;

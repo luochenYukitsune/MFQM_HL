@@ -15,6 +15,7 @@ public final class AdhesiveRulesTest {
         lifecycleAndLimits();
         invalidAndExtremeInputs();
         independentVerticalDistance();
+        singleBondLifecycleEquivalence();
         System.out.println("AdhesiveRules: " + checks + " behavioral checks passed");
     }
 
@@ -194,6 +195,42 @@ public final class AdhesiveRulesTest {
         var profile = AdhesiveRules.profileFor(id);
         check(profile != null, "missing material profile: " + id);
         return profile;
+    }
+
+    /** Lifecycle checks may skip aggregation, including slack and zero-force live bonds. */
+    private static void singleBondLifecycleEquivalence() {
+        var profiles = Arrays.asList(profile("glue"), profile("sticky_board"), profile("honey"),
+                profile("tar"), profile("mucus"), new AdhesiveRules.Profile(2.5, .032, .2, 4),
+                new AdhesiveRules.Profile(2, 0, .2), new AdhesiveRules.Profile(0, .03, 0),
+                new AdhesiveRules.Profile(2, -.03, .2), new AdhesiveRules.Profile(2, .03, 3),
+                new AdhesiveRules.Profile(2, Double.NaN, .2),
+                new AdhesiveRules.Profile(2, .03, .2, Double.POSITIVE_INFINITY),
+                new AdhesiveRules.Profile(Double.MAX_VALUE, Double.MAX_VALUE, 0),
+                new AdhesiveRules.Profile(2, Double.MAX_VALUE / 2, 0), null);
+        double[] separations = {0, Double.MIN_VALUE, .1, .2, 1, 1.1, Math.nextUp(1.1),
+                1.2, 1.8, 2.5, Math.nextUp(2.5), 4, Math.nextUp(4.), Double.MAX_VALUE,
+                Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
+        for (var physical : profiles) for (double separation : separations)
+            for (double strength : new double[]{-1, 0, Double.MIN_VALUE, .5, 1, 20, Double.NaN, Double.POSITIVE_INFINITY})
+                for (boolean valid : new boolean[]{false, true}) {
+                    sameLifecycle(new AdhesiveRules.Bond(AdhesiveRules.Point.ZERO,
+                            new AdhesiveRules.Point(separation, 0, 0), physical, strength, valid));
+                    sameLifecycle(new AdhesiveRules.Bond(AdhesiveRules.Point.ZERO,
+                            new AdhesiveRules.Point(0, separation, 0), physical, strength, valid));
+                }
+        sameLifecycle(null);
+        sameLifecycle(new AdhesiveRules.Bond(null, AdhesiveRules.Point.ZERO, profile("glue"), 1));
+        sameLifecycle(new AdhesiveRules.Bond(AdhesiveRules.Point.ZERO, null, profile("glue"), 1));
+        sameLifecycle(new AdhesiveRules.Bond(new AdhesiveRules.Point(-Double.MAX_VALUE, 0, 0),
+                new AdhesiveRules.Point(Double.MAX_VALUE, 0, 0), profile("glue"), 1));
+        sameLifecycle(new AdhesiveRules.Bond(new AdhesiveRules.Point(1e300, 1e300, 1e300),
+                new AdhesiveRules.Point(1e300, 1e300, 1e300), profile("glue"), 1));
+    }
+
+    private static void sameLifecycle(AdhesiveRules.Bond bond) {
+        var original = AdhesiveRules.evaluate(Arrays.asList(bond));
+        check(AdhesiveRules.isActive(bond) == (original.activeBonds() == 1),
+                "single-bond lifecycle must match aggregation for " + bond);
     }
 
     private static AdhesiveRules.Bond bond(double footX, AdhesiveRules.Profile profile) {

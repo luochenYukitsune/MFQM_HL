@@ -50,12 +50,13 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
                 Math.max(net.minecraft.client.renderer.LightTexture.block(state.lightCoords),net.minecraft.client.renderer.LightTexture.block(targetLight)),
                 Math.max(net.minecraft.client.renderer.LightTexture.sky(state.lightCoords),net.minecraft.client.renderer.LightTexture.sky(targetLight)));
         var sampled=feet.sample(target,entity.side(),tick);
+        var targetPosition=target.getPosition(tick);
         // Do not interpolate a sinking/flowing root above the newly lowered liquid surface.
         state.x=base.x;state.y=base.y;state.z=base.z;Vec3 origin=base;
-        state.foot=target.getPosition(tick).add(sampled.ankle()).subtract(origin);
-        state.shin=target.getPosition(tick).add(sampled.shin()).subtract(origin);
+        state.foot=targetPosition.add(sampled.ankle()).subtract(origin);
+        state.shin=targetPosition.add(sampled.shin()).subtract(origin);
         // Submerged length must not consume the existing visible reach above the medium.
-        double opacity=CompactStrandStyle.opacity(state.foot.horizontalDistance(),target.getPosition(tick).y+sampled.ankle().y-(cell.getY()+surfaceHeight));
+        double opacity=CompactStrandStyle.opacity(state.foot.horizontalDistance(),targetPosition.y+sampled.ankle().y-(cell.getY()+surfaceHeight));
         if(opacity<=0)return;
         double recoil=entity.breakProgress(tick),remaining=entity.breaking()?WetAdhesiveStyle.contraction(recoil):1;
         Vec3 endpointFoot=state.foot;
@@ -77,11 +78,11 @@ public final class AdhesiveTetherRenderer extends EntityRenderer<AdhesiveTetherE
             var anchor=RenderedAdhesiveSurface.root(cell,surfaceHeight,original,WetAdhesiveStyle.width(0,widthSeed,entity.material()),entity.getId(),i,density);
             if(anchor==null)continue;
             var localRoot=anchor.point().subtract(origin);
-            var suggested=WetAdhesiveStyle.endpoint(sampled.surface(),depth,seed,vector(anchor.point().subtract(target.getPosition(tick))));
+            var suggested=WetAdhesiveStyle.endpoint(sampled.surface(),depth,seed,vector(anchor.point().subtract(targetPosition)));
             var rayOrigin=sampled.surface().center().add(sampled.surface().up().scale(WetAdhesiveStyle.attachmentHeight(sampled.surface(),depth,seed)));
             var skin=SkinSurfaceContact.project(rayOrigin.subtract(vector(sampled.skinOffset())),suggested.subtract(rayOrigin),sampled.skin());
             CoatingVoxels.Vec attachedPoint=skin==null?suggested:skin.point().add(vector(sampled.skinOffset())).add(skin.normal().scale(.012/16));
-            var attached=entity.breaking()?point(WetAdhesiveStyle.endpoint(state.surface,depth,seed,vector(localRoot))):target.getPosition(tick).add(point(attachedPoint)).subtract(origin);
+            var attached=entity.breaking()?point(WetAdhesiveStyle.endpoint(state.surface,depth,seed,vector(localRoot))):targetPosition.add(point(attachedPoint)).subtract(origin);
             var end=localRoot.add(attached.subtract(localRoot).scale(remaining));
             var delta=end.subtract(localRoot);double fade=CompactStrandStyle.opacity(delta.horizontalDistance(),end.y+origin.y-(cell.getY()+surfaceHeight));
             if(fade<=0)continue;

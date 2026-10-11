@@ -1,0 +1,183 @@
+Auxiliary actual-read coverage, 2026-10-11 render optimization
+Reviewer role: auxiliary code review
+Scope: actual complete reads in this review, not search-result-only coverage.
+Truncated output sections were reread before inclusion. Some earlier batches omitted imports and blank lines only; executable bodies were read.
+All repository paths below are relative to C:/Users/Administrator/.codex/worktrees/2d32/MFQM-NeoForge-26.2.
+
+NON-CLIENT MAIN JAVA: 95
+src/main/java/com/mfqm/morefunquicksandmod/block/LegacyStateBlock.java
+src/main/java/com/mfqm/morefunquicksandmod/block/MechanismBlock.java
+src/main/java/com/mfqm/morefunquicksandmod/block/StickyBoardBlock.java
+src/main/java/com/mfqm/morefunquicksandmod/block/StickyBoardConnections.java
+src/main/java/com/mfqm/morefunquicksandmod/block/StickyBoardPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/blockentity/MechanismBlockEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/compat/CompatRecipeChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/compat/CompatRecipes.java
+src/main/java/com/mfqm/morefunquicksandmod/data/DataGenerators.java
+src/main/java/com/mfqm/morefunquicksandmod/data/ModBiomeTagProvider.java
+src/main/java/com/mfqm/morefunquicksandmod/data/ModDamageTypeBootstrap.java
+src/main/java/com/mfqm/morefunquicksandmod/data/ModDamageTypeTagProvider.java
+src/main/java/com/mfqm/morefunquicksandmod/data/ModFluidTagProvider.java
+src/main/java/com/mfqm/morefunquicksandmod/data/ModTagProvider.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/AdhesiveTetherEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/BlobEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/BootPersistenceChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/BootsPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/CaptureEvents.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/ConnectorEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/EntityPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/LiquidProjectileEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/MfqmBeeEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/StuckBootsEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/SurfaceEffectEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/entity/TentacleEntity.java
+src/main/java/com/mfqm/morefunquicksandmod/fluid/SinkingLiquidBlock.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/AdhesionController.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/AdhesionPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/AdhesiveContact.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/AdhesiveMotion.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/AdhesiveRules.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/AdhesiveSurface.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/CoatingPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/LegacyResistance.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/MediumReactions.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/PhysicsPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/QuicksandPhysics.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/SinkingMaterial.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/SinkingMotion.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/SinkingState.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/StruggleRules.java
+src/main/java/com/mfqm/morefunquicksandmod/gameplay/ViscosityPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/item/ConnectorItem.java
+src/main/java/com/mfqm/morefunquicksandmod/item/FertilizerItem.java
+src/main/java/com/mfqm/morefunquicksandmod/item/GlueBucketRecipe.java
+src/main/java/com/mfqm/morefunquicksandmod/item/ItemGameplayHooks.java
+src/main/java/com/mfqm/morefunquicksandmod/item/ItemPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/item/ItemRecipeCondition.java
+src/main/java/com/mfqm/morefunquicksandmod/item/LegacyBlockItem.java
+src/main/java/com/mfqm/morefunquicksandmod/item/LegacyBucketItem.java
+src/main/java/com/mfqm/morefunquicksandmod/item/LegacyFuelItem.java
+src/main/java/com/mfqm/morefunquicksandmod/item/LiquidGunItem.java
+src/main/java/com/mfqm/morefunquicksandmod/item/SinkingDrinkItem.java
+src/main/java/com/mfqm/morefunquicksandmod/item/SplashSinkingPotionItem.java
+src/main/java/com/mfqm/morefunquicksandmod/item/StickyBoardItem.java
+src/main/java/com/mfqm/morefunquicksandmod/MFQM.java
+src/main/java/com/mfqm/morefunquicksandmod/mixin/CaptureEntityTeleportMixin.java
+src/main/java/com/mfqm/morefunquicksandmod/mixin/CaptureTeleportMixin.java
+src/main/java/com/mfqm/morefunquicksandmod/mixin/GlueJumpMixin.java
+src/main/java/com/mfqm/morefunquicksandmod/mixin/IrisIdMapMixin.java
+src/main/java/com/mfqm/morefunquicksandmod/mixin/IrisWaterProgramMixin.java
+src/main/java/com/mfqm/morefunquicksandmod/mixin/OptionalStruggleConflictMixin.java
+src/main/java/com/mfqm/morefunquicksandmod/mixin/OptionalStruggleMenuMixin.java
+src/main/java/com/mfqm/morefunquicksandmod/ModConfig.java
+src/main/java/com/mfqm/morefunquicksandmod/network/ModNetworking.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModAttachmentTypes.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModBlockEntities.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModBlocks.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModCreativeTabs.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModDamageTypes.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModDataComponents.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModEntities.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModFluids.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModItems.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModMobEffects.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModParticles.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModRecipes.java
+src/main/java/com/mfqm/morefunquicksandmod/registry/ModSounds.java
+src/main/java/com/mfqm/morefunquicksandmod/tags/MfqmTags.java
+src/main/java/com/mfqm/morefunquicksandmod/validation/AuditPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/validation/ModPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/DesertTombPiece.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/DesertTombStructure.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/GluePoolFeature.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/GlueWorldgenPortChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/LegacyChunkConversions.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/LegacyStructures.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/LegacyTerrainFeature.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/ModWorldgen.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/MucusBlossomLayout.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/NaturalGlueChecks.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/RegistryBonusLootEntry.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/SwampColorModifier.java
+src/main/java/com/mfqm/morefunquicksandmod/worldgen/TerrainBiomeModifier.java
+
+ALL CURRENT TEST JAVA: 14
+src/test/java/com/mfqm/morefunquicksandmod/client/CoatingAppearanceTest.java
+src/test/java/com/mfqm/morefunquicksandmod/client/CoatingVoxelsTest.java
+src/test/java/com/mfqm/morefunquicksandmod/client/CompactStrandStyleTest.java
+src/test/java/com/mfqm/morefunquicksandmod/client/IterationFluidCompatibilityTest.java
+src/test/java/com/mfqm/morefunquicksandmod/client/SkinSurfaceContactTest.java
+src/test/java/com/mfqm/morefunquicksandmod/client/StrugglePoseTest.java
+src/test/java/com/mfqm/morefunquicksandmod/client/SurfaceBubbleStyleTest.java
+src/test/java/com/mfqm/morefunquicksandmod/client/WetAdhesiveBenchmark.java
+src/test/java/com/mfqm/morefunquicksandmod/client/WetAdhesiveStyleTest.java
+src/test/java/com/mfqm/morefunquicksandmod/gameplay/AdhesiveContactTest.java
+src/test/java/com/mfqm/morefunquicksandmod/gameplay/AdhesiveMotionTest.java
+src/test/java/com/mfqm/morefunquicksandmod/gameplay/AdhesiveRulesTest.java
+src/test/java/com/mfqm/morefunquicksandmod/gameplay/SinkingMotionTest.java
+src/test/java/com/mfqm/morefunquicksandmod/gameplay/StruggleRulesTest.java
+
+ALL SELF-AUTHORED PYTHON/POWERSHELL TOOLS: 27
+tools/coating_height.py
+tools/connected_boards.py
+tools/convert_legacy_tomb.py
+tools/fluid_alpha.py
+tools/generate_worldgen_resources.py
+tools/localize_zh_cn.py
+tools/refresh_adhesive_textures.py
+tools/refresh_textures.py
+tools/restore_legacy_resources.py
+tools/smoke_client_port.py
+tools/smoke_installed_client.py
+tools/smoke_port.py
+tools/smoke_shader_client.py
+tools/smoke_viscosity_client.py
+tools/test_coating_height.py
+tools/test_fluid_alpha.py
+tools/test_smoke_installed_client.py
+tools/test_smoke_port.py
+tools/test_smoke_viscosity_client.py
+tools/translucent_palette.py
+tools/update_adhesive_translations.py
+tools/verify_adhesive_rules.ps1
+tools/verify_jar.py
+tools/verify_port.py
+tools/verify_sinking_motion.ps1
+tools/verify_struggle_pose.ps1
+tools/verify_struggle_rules.ps1
+
+ADDITIONAL COMPLETE CLIENT SOURCE READS FOR CURRENT DIFF REVIEW
+src/main/java/com/mfqm/morefunquicksandmod/client/SkinSurfaceContact.java
+src/main/java/com/mfqm/morefunquicksandmod/client/AdhesiveFeetSampler.java
+src/main/java/com/mfqm/morefunquicksandmod/client/AdhesiveTetherRenderer.java
+src/main/java/com/mfqm/morefunquicksandmod/client/WetAdhesiveStyle.java
+src/main/java/com/mfqm/morefunquicksandmod/client/TranslucentGeometry.java
+src/main/java/com/mfqm/morefunquicksandmod/client/FirstPersonCompatibility.java
+
+ADDITIONAL SCOPED READS (NOT CLAIMED AS COMPLETE CLIENT SOURCE READS)
+ClientPortChecks.java: new NativeImage validation diff and containing installed-check lifecycle
+StruggleVisualChecks.java: new translated-foot assertion diff
+CoatingVoxels.java: immutable Vec/Quad/Mesh declarations, lines 1-26
+src/main/resources/META-INF/neoforge.mods.toml: current diff
+docs/superpowers/2026-10-11-render-optimization/evidence/geometry-benchmark.csv
+
+NON-EXECUTABLE / THIRD-PARTY EXCLUSIONS
+tools/chest_base_entries.json and tools/legacy_item_map.json are data, not executable source.
+Gradle wrapper/generated dependency sources are toolchain code, not self-authored source.
+The root reviewer owns remaining client Java, build metadata, and launcher-icon assessment.
+
+IMPLEMENTED AUXILIARY CHANGE
+AdhesiveRules.isActive delegates to unchanged forceFor; only singleton lifecycle evaluate was replaced.
+Final multibond evaluate and all prepare/prediction/motion lifecycles remain unchanged.
+Tests added first: missing isActive compile red observed; minimal implementation then rules suite green.
+tools/verify_adhesive_rules.ps1: 8415 behavioral checks passed.
+Parent additionally reported final complete Gradle build passed.
+
+REVIEW BOUNDARIES
+Microbenchmarks measure CPU/allocation for synthetic geometry, not in-game FPS.
+Read coverage does not imply every gameplay/performance case was exercised.
+
+REMOVED EXPERIMENT ALSO READ BEFORE REMOVAL
+SkinSurfaceBenchmark.java and Prepared-specific SkinSurfaceContactTest additions were read fully, then removed by root after unfavorable low-density measurements.
+AdhesiveFeetSampler Prepared/translated changes were reviewed fully and removed; final delivered Foot API/cache is unchanged.
+The missing-isActive red diagnostic was observed in tool output. No adhesive-red.txt file is claimed to exist.

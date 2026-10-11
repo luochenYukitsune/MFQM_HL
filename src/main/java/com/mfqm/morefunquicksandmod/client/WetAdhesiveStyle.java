@@ -104,22 +104,17 @@ public final class WetAdhesiveStyle {
         return tubeShape(start,end,segments,startRadius,endRadius,.30,0,1);
     }
     public static List<Quad> tube(Vec start,Vec end,int segments,double startRadius,double endRadius,long seed) {
+        return seededTube(start,end,segments,startRadius,endRadius,seed,null,null);
+    }
+    private static List<Quad> seededTube(Vec start,Vec end,int segments,double startRadius,double endRadius,long seed,SkinSurfaceContact.Hit skin,Frame leg) {
         double thickness=.23+.15*CompactStrandStyle.variation(seed^0xDB4F0B9175AE2165L);
         double bend=(CompactStrandStyle.variation(seed^0xBBE0563303A4615FL)-.5)*Math.min(.004,Math.min(startRadius,endRadius)*.18);
         double droop=.6+.8*CompactStrandStyle.variation(seed^0xA0F2EC75A1FE1575L);
-        return tubeShape(start,end,segments,startRadius,endRadius,thickness,bend,droop);
+        return tubeShape(start,end,segments,startRadius,endRadius,thickness,bend,droop,skin,leg);
     }
     /** The entire thick body end stays outside its real skin face, not just its center. */
     public static List<Quad> attachedTube(Vec start,SkinSurfaceContact.Hit end,Frame leg,int segments,double startRadius,double endRadius,long seed) {
-        var result=new ArrayList<Quad>();
-        for(var q:tube(start,end.point(),segments,startRadius,endRadius,seed)) {
-            var a=outside(q.a(),start,end,leg,startRadius);var b=outside(q.b(),start,end,leg,startRadius);
-            var c=outside(q.c(),start,end,leg,startRadius);var d=outside(q.d(),start,end,leg,startRadius);
-            var normal=b.subtract(a).cross(c.subtract(a));
-            if(normal.length()<1e-12)continue;
-            result.add(new Quad(a,b,c,d,normal.unit(),q.color()));
-        }
-        return List.copyOf(result);
+        return seededTube(start,end.point(),segments,startRadius,endRadius,seed,end,leg);
     }
     private static Vec outside(Vec p,Vec root,SkinSurfaceContact.Hit skin,Frame leg,double rootRadius) {
         // Keep the medium cap exactly where its submerged-root validation put it.
@@ -127,6 +122,9 @@ public final class WetAdhesiveStyle {
         return SkinSurfaceContact.outside(p,skin);
     }
     private static List<Quad> tubeShape(Vec start,Vec end,int segments,double startRadius,double endRadius,double thickness,double bend,double droop) {
+        return tubeShape(start,end,segments,startRadius,endRadius,thickness,bend,droop,null,null);
+    }
+    private static List<Quad> tubeShape(Vec start,Vec end,int segments,double startRadius,double endRadius,double thickness,double bend,double droop,SkinSurfaceContact.Hit skin,Frame leg) {
         Vec delta=end.subtract(start);double length=delta.length();
         if(!Double.isFinite(length) || length<1e-7)return List.of();
         if(segments<1 || segments>6 || !Double.isFinite(startRadius+endRadius) || startRadius<=0 || endRadius<=0)
@@ -143,18 +141,40 @@ public final class WetAdhesiveStyle {
                 rings[segment][side]=centers[segment].add(right.scale(radius*Math.cos(angle))).add(up.scale(radius*thickness*Math.sin(angle)));
             }
         }
+        // Adjacent faces share vertices. Project each ring vertex once, rather than four times per quad.
+        // Keep the original ring for winding tests; the final clipped face must match the old two-pass mesh.
+        var clipped=rings;
+        if(skin!=null) {
+            clipped=new Vec[segments+1][6];
+            for(int segment=0;segment<=segments;segment++)for(int side=0;side<6;side++)
+                clipped[segment][side]=outside(rings[segment][side],start,skin,leg,startRadius);
+        }
         var quads=new ArrayList<Quad>(segments*6+12);
         for(int segment=0;segment<segments;segment++)for(int side=0;side<6;side++) {
             int next=(side+1)%6;Vec a=rings[segment][side],b=rings[segment+1][side],c=rings[segment+1][next],d=rings[segment][next];
             Vec outward=a.subtract(centers[segment]).add(d.subtract(centers[segment])).unit();
-            add(quads,a,b,c,d,outward,side==0?0xefffffff:0xd8ffffff);
+            int color=side==0?0xefffffff:0xd8ffffff;
+            if(skin==null)add(quads,a,b,c,d,outward,color);
+            else addClipped(quads,a,b,c,outward,clipped[segment][side],clipped[segment+1][side],clipped[segment+1][next],clipped[segment][next],color);
         }
         for(int side=0;side<6;side++) {
             int next=(side+1)%6;
-            add(quads,start,rings[0][side],rings[0][next],start,axis.scale(-1),0xd8ffffff);
-            add(quads,end,rings[segments][side],rings[segments][next],end,axis,0xd8ffffff);
+            if(skin==null) {
+                add(quads,start,rings[0][side],rings[0][next],start,axis.scale(-1),0xd8ffffff);
+                add(quads,end,rings[segments][side],rings[segments][next],end,axis,0xd8ffffff);
+            } else {
+                addClipped(quads,start,rings[0][side],rings[0][next],axis.scale(-1),start,clipped[0][side],clipped[0][next],start,0xd8ffffff);
+                addClipped(quads,end,rings[segments][side],rings[segments][next],axis,end,clipped[segments][side],clipped[segments][next],end,0xd8ffffff);
+            }
         }
         return List.copyOf(quads);
+    }
+    private static void addClipped(List<Quad> list,Vec originalA,Vec originalB,Vec originalC,Vec outward,Vec a,Vec b,Vec c,Vec d,int color) {
+        if(originalB.subtract(originalA).cross(originalC.subtract(originalA)).unit().dot(outward)<0) {
+            Vec previousA=a,previousB=b;a=d;b=c;c=previousB;d=previousA;
+        }
+        var normal=b.subtract(a).cross(c.subtract(a));if(normal.length()<1e-12)return;
+        list.add(new Quad(a,b,c,d,normal.unit(),color));
     }
     private static double edgeHeight(long seed,int i){return .82+.06*Math.floorMod(seed+i*17,4);}
     private static Vec edge(Frame f,int i,double y,double extra) {return f.center.add(f.right.scale(EDGE[i][0]*(f.halfWidth+extra))).add(f.front.scale(EDGE[i][1]*(f.halfDepth+extra))).add(f.up.scale(y));}

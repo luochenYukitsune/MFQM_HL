@@ -1,0 +1,3 @@
+segments,strandsPerFoot,legacyMedianMs,optimizedMedianMs,legacyBytes,optimizedBytes
+3,256,1.167890,1.057040,4083733,3004437
+6,256,1.491040,1.182170,4034581,2344981
